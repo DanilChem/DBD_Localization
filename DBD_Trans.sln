@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37012.4 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBD_Trans", "DBD_Trans\DBD_Trans.csproj", "{156E19F2-E7A8-4644-8C3B-F651A6597449}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{156E19F2-E7A8-4644-8C3B-F651A6597449}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{156E19F2-E7A8-4644-8C3B-F651A6597449}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{156E19F2-E7A8-4644-8C3B-F651A6597449}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{156E19F2-E7A8-4644-8C3B-F651A6597449}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {907FA9C9-9EDB-446A-9B74-5A2CD15FAC6B}
+	EndGlobalSection
+EndGlobal

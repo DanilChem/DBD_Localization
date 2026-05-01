@@ -1,0 +1,4559 @@
+﻿===== DBD_Trans\Base\ObservableObject.cs =====
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+namespace DBD_Trans.Base
+{
+    public class ObservableObject : INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        protected bool Set<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (Equals(field, value)) return false;
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        }
+    }
+}
+
+===== DBD_Trans\Base\RelayCommand.cs =====
+using System;
+using System.Windows.Input;
+
+namespace DBD_Trans.Base
+{
+    public class RelayCommand : ICommand
+    {
+        private readonly Action<object> _execute;
+        private readonly Predicate<object> _canExecute;
+
+        public RelayCommand(Action<object> execute, Predicate<object> canExecute = null)
+        {
+            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
+            _canExecute = canExecute;
+        }
+
+        public bool CanExecute(object parameter) => _canExecute?.Invoke(parameter) ?? true;
+
+        public void Execute(object parameter) => _execute(parameter);
+
+        public event EventHandler CanExecuteChanged
+        {
+            add => CommandManager.RequerySuggested += value;
+            remove => CommandManager.RequerySuggested -= value;
+        }
+    }
+
+    public class RelayCommand<T> : ICommand
+    {
+        private readonly Action<T> _execute;
+        private readonly Predicate<T> _canExecute;
+
+        public RelayCommand(Action<T> execute, Predicate<T> canExecute = null)
+        {
+            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
+            _canExecute = canExecute;
+        }
+
+        public bool CanExecute(object parameter) => _canExecute?.Invoke((T)parameter) ?? true;
+
+        public void Execute(object parameter) => _execute((T)parameter);
+
+        public event EventHandler CanExecuteChanged
+        {
+            add => CommandManager.RequerySuggested += value;
+            remove => CommandManager.RequerySuggested -= value;
+        }
+    }
+}
+
+===== DBD_Trans\bin\Debug\DBD_Trans.exe.config =====
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <configSections>
+        <sectionGroup name="userSettings" type="System.Configuration.UserSettingsGroup, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" >
+            <section name="DBD_Trans.Properties.Settings" type="System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" allowExeDefinition="MachineToLocalUser" requirePermission="false" />
+        </sectionGroup>
+    </configSections>
+    <startup> 
+        <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.8" />
+    </startup>
+    <userSettings>
+        <DBD_Trans.Properties.Settings>
+            <setting name="AnalysisFontSize" serializeAs="String">
+                <value>14</value>
+            </setting>
+        </DBD_Trans.Properties.Settings>
+    </userSettings>
+</configuration>
+
+===== DBD_Trans\bin\Release\DBD_Trans.exe.config =====
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <configSections>
+        <sectionGroup name="userSettings" type="System.Configuration.UserSettingsGroup, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" >
+            <section name="DBD_Trans.Properties.Settings" type="System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" allowExeDefinition="MachineToLocalUser" requirePermission="false" />
+        </sectionGroup>
+    </configSections>
+    <startup> 
+        <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.8" />
+    </startup>
+    <userSettings>
+        <DBD_Trans.Properties.Settings>
+            <setting name="AnalysisFontSize" serializeAs="String">
+                <value>14</value>
+            </setting>
+        </DBD_Trans.Properties.Settings>
+    </userSettings>
+</configuration>
+
+===== DBD_Trans\Converters\BoolInverseConverter.cs =====
+using System;
+using System.Globalization;
+using System.Windows.Data;
+
+namespace DBD_Trans.Converters
+{
+    public class BoolInverseConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return !(value is bool b && b);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return !(value is bool b && b);
+        }
+    }
+}
+
+===== DBD_Trans\Converters\BoolToBrushConverter.cs =====
+using System;
+using System.Globalization;
+using System.Windows.Data;
+using System.Windows.Media;
+
+namespace DBD_Trans.Converters
+{
+    public class BoolToBrushConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is bool b && b)
+            {
+                var colorString = parameter?.ToString() ?? "#CA5100";
+                return new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorString));
+            }
+            return new SolidColorBrush(Colors.Transparent);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}
+
+===== DBD_Trans\Converters\BoolToVisibilityConverter.cs =====
+using System;
+using System.Globalization;
+using System.Windows;
+using System.Windows.Data;
+
+namespace DBD_Trans.Converters
+{
+    public class BoolToVisibilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return (value is bool b && b) ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value is Visibility v && v == Visibility.Visible;
+        }
+    }
+}
+
+===== DBD_Trans\Helpers\DarkTitleBarHelper.cs =====
+using System;
+using System.Runtime.InteropServices;
+using System.Windows;
+using System.Windows.Interop;
+
+namespace DBD_Trans.Helpers
+{
+    public static class DarkTitleBarHelper
+    {
+        [DllImport("dwmapi.dll", PreserveSig = true)]
+        private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
+
+        private const int DWMWA_USE_IMMERSIVE_DARK_MODE = 20;
+
+        public static void ApplyDarkTitleBar(Window window)
+        {
+            if (window == null) return;
+
+            window.SourceInitialized += (s, e) =>
+            {
+                var handle = new WindowInteropHelper(window).Handle;
+                int useDarkMode = 1;
+                DwmSetWindowAttribute(handle, DWMWA_USE_IMMERSIVE_DARK_MODE, ref useDarkMode, sizeof(int));
+            };
+        }
+    }
+}
+
+===== DBD_Trans\Helpers\HtmlStripper.cs =====
+using System.Text.RegularExpressions;
+
+namespace DBD_Trans.Helpers
+{
+    public static class HtmlStripper
+    {
+        public static string StripHtmlTags(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+                return input;
+
+            // 1. <br> → \n
+            string result = Regex.Replace(input, @"<br\s*/?>", "\n", RegexOptions.IgnoreCase);
+
+            // 2. <li> → \n• 
+            result = Regex.Replace(result, @"<li[^>]*>", "\n• ", RegexOptions.IgnoreCase);
+
+            // 3. Remove </li>
+            result = Regex.Replace(result, @"</li>", "", RegexOptions.IgnoreCase);
+
+            // 4. <ul>/<ol> → \n
+            result = Regex.Replace(result, @"<ul[^>]*>", "\n", RegexOptions.IgnoreCase);
+            result = Regex.Replace(result, @"<ol[^>]*>", "\n", RegexOptions.IgnoreCase);
+
+            // 5. Remove </ul>, </ol>
+            result = Regex.Replace(result, @"</ul>", "", RegexOptions.IgnoreCase);
+            result = Regex.Replace(result, @"</ol>", "", RegexOptions.IgnoreCase);
+
+            // 6. Remove any other tags
+            result = Regex.Replace(result, "<.*?>", string.Empty);
+
+            // 7. Normalize newlines
+            result = Regex.Replace(result, @"\n{3,}", "\n\n");
+
+            return result.Trim();
+        }
+    }
+}
+
+===== DBD_Trans\Helpers\JsonFlattener.cs =====
+using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+
+namespace DBD_Trans.Helpers
+{
+    public static class JsonFlattener
+    {
+        public static List<KeyValuePair<string, string>> FlattenToOrderedList(JObject root)
+        {
+            var result = new List<KeyValuePair<string, string>>();
+            Traverse(root, "", (key, value) => result.Add(new KeyValuePair<string, string>(key, value)));
+            return result;
+        }
+
+        public static Dictionary<string, string> FlattenToDictionary(JObject root)
+        {
+            var dict = new Dictionary<string, string>();
+            Traverse(root, "", (key, value) => dict[key] = value);
+            return dict;
+        }
+
+        private static void Traverse(JToken token, string currentPath, Action<string, string> onStringValue)
+        {
+            switch (token)
+            {
+                case JObject obj:
+                    foreach (var prop in obj.Properties())
+                    {
+                        string newPath = string.IsNullOrEmpty(currentPath)
+                            ? prop.Name
+                            : $"{currentPath}.{prop.Name}";
+                        Traverse(prop.Value, newPath, onStringValue);
+                    }
+                    break;
+                case JArray arr:
+                    for (int i = 0; i < arr.Count; i++)
+                    {
+                        string arrayPath = $"{currentPath}[{i}]";
+                        Traverse(arr[i], arrayPath, onStringValue);
+                    }
+                    break;
+                case JValue val when val.Type == JTokenType.String:
+                    onStringValue(currentPath, val.Value<string>());
+                    break;
+                    // Игнорируем остальные типы (числа, булевы и т.д.)
+            }
+        }
+    }
+}
+
+===== DBD_Trans\Models\AppSettings.cs =====
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DBD_Trans.Models
+{
+    public class AppSettings : IAppSettings
+    {
+        public double AnalysisFontSize
+        {
+            get => Properties.Settings.Default.AnalysisFontSize;
+            set => Properties.Settings.Default.AnalysisFontSize = value;
+        }
+
+        public void Save()
+        {
+            Properties.Settings.Default.Save();
+        }
+    }
+}
+
+
+===== DBD_Trans\Models\ErrorItem.cs =====
+using DBD_Trans.Base;
+using System.Collections.Generic;
+
+namespace DBD_Trans.Models
+{
+    public class ErrorItem : ObservableObject
+    {
+        private string _text;
+        public string Text
+        {
+            get => _text;
+            set => Set(ref _text, value);
+        }
+
+        private bool _isEditing;
+        public bool IsEditing
+        {
+            get => _isEditing;
+            set => Set(ref _isEditing, value);
+        }
+
+        public List<TextRangeInfo> EnglishHighlights { get; set; } = new List<TextRangeInfo>();
+        public List<TextRangeInfo> RussianHighlights { get; set; } = new List<TextRangeInfo>();
+    }
+
+    public class TextRangeInfo
+    {
+        public int StartIndex { get; set; }
+        public int Length { get; set; }
+    }
+}
+
+===== DBD_Trans\Models\IAppSettings.cs =====
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DBD_Trans.Models
+{
+    public interface IAppSettings
+    {
+        double AnalysisFontSize { get; set; }
+        void Save();
+    }
+}
+
+
+===== DBD_Trans\Models\ItemStatus.cs =====
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DBD_Trans.Models
+{
+    public enum ItemStatus
+    {
+        InProgress,
+        Completed
+    }
+}
+
+===== DBD_Trans\Models\LocalizationEntry.cs =====
+using DBD_Trans.Base;
+
+namespace DBD_Trans.Models
+{
+    public class LocalizationEntry : ObservableObject
+    {
+        private int _index;
+        public int Index
+        {
+            get => _index;
+            set => Set(ref _index, value);
+        }
+
+        private string _key;
+        public string Key
+        {
+            get => _key;
+            set => Set(ref _key, value);
+        }
+
+        private string _english;
+        public string English
+        {
+            get => _english;
+            set => Set(ref _english, value);
+        }
+
+        private string _russian;
+        public string Russian
+        {
+            get => _russian;
+            set => Set(ref _russian, value);
+        }
+
+        private bool _hasTranslation;
+        public bool HasTranslation
+        {
+            get => _hasTranslation;
+            set => Set(ref _hasTranslation, value);
+        }
+
+        private ItemStatus _status = ItemStatus.InProgress;
+        public ItemStatus Status
+        {
+            get => _status;
+            set => Set(ref _status, value);
+        }
+
+        private bool _hasErrors;
+        public bool HasErrors
+        {
+            get => _hasErrors;
+            set => Set(ref _hasErrors, value);
+        }
+
+        private int _errorCount;
+        public int ErrorCount
+        {
+            get => _errorCount;
+            set => Set(ref _errorCount, value);
+        }
+    }
+}
+
+===== DBD_Trans\obj\Debug\Views\AnalysisWindow.g.cs =====
+#pragma checksum "..\..\..\Views\AnalysisWindow.xaml" "{8829d00f-11b8-4213-878b-770e8597ac16}" "CE28391F0BC78D6451A16666F86161075C70BA9AA64EB17AB20D103A6063D156"
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     Этот код создан программой.
+//     Исполняемая версия:4.0.30319.42000
+//
+//     Изменения в этом файле могут привести к неправильной работе и будут потеряны в случае
+//     повторной генерации кода.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+using DBD_Trans.Converters;
+using DBD_Trans.Models;
+using DBD_Trans.ViewModels;
+using DBD_Trans.Views;
+using System;
+using System.Diagnostics;
+using System.Windows;
+using System.Windows.Automation;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Ink;
+using System.Windows.Input;
+using System.Windows.Markup;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
+using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
+using System.Windows.Media.TextFormatting;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Windows.Shell;
+
+
+namespace DBD_Trans.Views {
+    
+    
+    /// <summary>
+    /// AnalysisWindow
+    /// </summary>
+    public partial class AnalysisWindow : System.Windows.Window, System.Windows.Markup.IComponentConnector, System.Windows.Markup.IStyleConnector {
+        
+        
+        #line 224 "..\..\..\Views\AnalysisWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.RichTextBox EnglishRichTextBox;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 252 "..\..\..\Views\AnalysisWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.RichTextBox RussianRichTextBox;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 293 "..\..\..\Views\AnalysisWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.ListBox ErrorsListBox;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 369 "..\..\..\Views\AnalysisWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.TextBox NewErrorTextBox;
+        
+        #line default
+        #line hidden
+        
+        private bool _contentLoaded;
+        
+        /// <summary>
+        /// InitializeComponent
+        /// </summary>
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        public void InitializeComponent() {
+            if (_contentLoaded) {
+                return;
+            }
+            _contentLoaded = true;
+            System.Uri resourceLocater = new System.Uri("/DBD_Trans;component/views/analysiswindow.xaml", System.UriKind.Relative);
+            
+            #line 1 "..\..\..\Views\AnalysisWindow.xaml"
+            System.Windows.Application.LoadComponent(this, resourceLocater);
+            
+            #line default
+            #line hidden
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
+        void System.Windows.Markup.IComponentConnector.Connect(int connectionId, object target) {
+            switch (connectionId)
+            {
+            case 1:
+            this.EnglishRichTextBox = ((System.Windows.Controls.RichTextBox)(target));
+            
+            #line 234 "..\..\..\Views\AnalysisWindow.xaml"
+            this.EnglishRichTextBox.LostFocus += new System.Windows.RoutedEventHandler(this.RichTextBox_LostFocus);
+            
+            #line default
+            #line hidden
+            
+            #line 235 "..\..\..\Views\AnalysisWindow.xaml"
+            this.EnglishRichTextBox.PreviewMouseLeftButtonDown += new System.Windows.Input.MouseButtonEventHandler(this.RichTextBox_PreviewMouseLeftButtonDown);
+            
+            #line default
+            #line hidden
+            
+            #line 236 "..\..\..\Views\AnalysisWindow.xaml"
+            this.EnglishRichTextBox.PreviewMouseLeftButtonUp += new System.Windows.Input.MouseButtonEventHandler(this.RichTextBox_PreviewMouseLeftButtonUp);
+            
+            #line default
+            #line hidden
+            return;
+            case 2:
+            this.RussianRichTextBox = ((System.Windows.Controls.RichTextBox)(target));
+            
+            #line 262 "..\..\..\Views\AnalysisWindow.xaml"
+            this.RussianRichTextBox.LostFocus += new System.Windows.RoutedEventHandler(this.RichTextBox_LostFocus);
+            
+            #line default
+            #line hidden
+            
+            #line 263 "..\..\..\Views\AnalysisWindow.xaml"
+            this.RussianRichTextBox.PreviewMouseLeftButtonDown += new System.Windows.Input.MouseButtonEventHandler(this.RichTextBox_PreviewMouseLeftButtonDown);
+            
+            #line default
+            #line hidden
+            
+            #line 264 "..\..\..\Views\AnalysisWindow.xaml"
+            this.RussianRichTextBox.PreviewMouseLeftButtonUp += new System.Windows.Input.MouseButtonEventHandler(this.RichTextBox_PreviewMouseLeftButtonUp);
+            
+            #line default
+            #line hidden
+            return;
+            case 3:
+            this.ErrorsListBox = ((System.Windows.Controls.ListBox)(target));
+            return;
+            case 6:
+            this.NewErrorTextBox = ((System.Windows.Controls.TextBox)(target));
+            
+            #line 372 "..\..\..\Views\AnalysisWindow.xaml"
+            this.NewErrorTextBox.KeyDown += new System.Windows.Input.KeyEventHandler(this.NewErrorTextBox_KeyDown);
+            
+            #line default
+            #line hidden
+            return;
+            }
+            this._contentLoaded = true;
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        void System.Windows.Markup.IStyleConnector.Connect(int connectionId, object target) {
+            System.Windows.EventSetter eventSetter;
+            switch (connectionId)
+            {
+            case 4:
+            
+            #line 317 "..\..\..\Views\AnalysisWindow.xaml"
+            ((System.Windows.Controls.TextBox)(target)).LostFocus += new System.Windows.RoutedEventHandler(this.EditBox_LostFocus);
+            
+            #line default
+            #line hidden
+            
+            #line 317 "..\..\..\Views\AnalysisWindow.xaml"
+            ((System.Windows.Controls.TextBox)(target)).KeyDown += new System.Windows.Input.KeyEventHandler(this.EditBox_KeyDown);
+            
+            #line default
+            #line hidden
+            break;
+            case 5:
+            eventSetter = new System.Windows.EventSetter();
+            eventSetter.Event = System.Windows.Controls.Control.MouseDoubleClickEvent;
+            
+            #line 331 "..\..\..\Views\AnalysisWindow.xaml"
+            eventSetter.Handler = new System.Windows.Input.MouseButtonEventHandler(this.ErrorsListBoxItem_MouseDoubleClick);
+            
+            #line default
+            #line hidden
+            ((System.Windows.Style)(target)).Setters.Add(eventSetter);
+            break;
+            }
+        }
+    }
+}
+
+
+
+===== DBD_Trans\obj\Debug\Views\AnalysisWindow.g.i.cs =====
+#pragma checksum "..\..\..\Views\AnalysisWindow.xaml" "{8829d00f-11b8-4213-878b-770e8597ac16}" "CE28391F0BC78D6451A16666F86161075C70BA9AA64EB17AB20D103A6063D156"
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     Этот код создан программой.
+//     Исполняемая версия:4.0.30319.42000
+//
+//     Изменения в этом файле могут привести к неправильной работе и будут потеряны в случае
+//     повторной генерации кода.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+using DBD_Trans.Converters;
+using DBD_Trans.Models;
+using DBD_Trans.ViewModels;
+using DBD_Trans.Views;
+using System;
+using System.Diagnostics;
+using System.Windows;
+using System.Windows.Automation;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Ink;
+using System.Windows.Input;
+using System.Windows.Markup;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
+using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
+using System.Windows.Media.TextFormatting;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Windows.Shell;
+
+
+namespace DBD_Trans.Views {
+    
+    
+    /// <summary>
+    /// AnalysisWindow
+    /// </summary>
+    public partial class AnalysisWindow : System.Windows.Window, System.Windows.Markup.IComponentConnector, System.Windows.Markup.IStyleConnector {
+        
+        
+        #line 224 "..\..\..\Views\AnalysisWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.RichTextBox EnglishRichTextBox;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 252 "..\..\..\Views\AnalysisWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.RichTextBox RussianRichTextBox;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 293 "..\..\..\Views\AnalysisWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.ListBox ErrorsListBox;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 369 "..\..\..\Views\AnalysisWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.TextBox NewErrorTextBox;
+        
+        #line default
+        #line hidden
+        
+        private bool _contentLoaded;
+        
+        /// <summary>
+        /// InitializeComponent
+        /// </summary>
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        public void InitializeComponent() {
+            if (_contentLoaded) {
+                return;
+            }
+            _contentLoaded = true;
+            System.Uri resourceLocater = new System.Uri("/DBD_Trans;component/views/analysiswindow.xaml", System.UriKind.Relative);
+            
+            #line 1 "..\..\..\Views\AnalysisWindow.xaml"
+            System.Windows.Application.LoadComponent(this, resourceLocater);
+            
+            #line default
+            #line hidden
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
+        void System.Windows.Markup.IComponentConnector.Connect(int connectionId, object target) {
+            switch (connectionId)
+            {
+            case 1:
+            this.EnglishRichTextBox = ((System.Windows.Controls.RichTextBox)(target));
+            
+            #line 234 "..\..\..\Views\AnalysisWindow.xaml"
+            this.EnglishRichTextBox.LostFocus += new System.Windows.RoutedEventHandler(this.RichTextBox_LostFocus);
+            
+            #line default
+            #line hidden
+            
+            #line 235 "..\..\..\Views\AnalysisWindow.xaml"
+            this.EnglishRichTextBox.PreviewMouseLeftButtonDown += new System.Windows.Input.MouseButtonEventHandler(this.RichTextBox_PreviewMouseLeftButtonDown);
+            
+            #line default
+            #line hidden
+            
+            #line 236 "..\..\..\Views\AnalysisWindow.xaml"
+            this.EnglishRichTextBox.PreviewMouseLeftButtonUp += new System.Windows.Input.MouseButtonEventHandler(this.RichTextBox_PreviewMouseLeftButtonUp);
+            
+            #line default
+            #line hidden
+            return;
+            case 2:
+            this.RussianRichTextBox = ((System.Windows.Controls.RichTextBox)(target));
+            
+            #line 262 "..\..\..\Views\AnalysisWindow.xaml"
+            this.RussianRichTextBox.LostFocus += new System.Windows.RoutedEventHandler(this.RichTextBox_LostFocus);
+            
+            #line default
+            #line hidden
+            
+            #line 263 "..\..\..\Views\AnalysisWindow.xaml"
+            this.RussianRichTextBox.PreviewMouseLeftButtonDown += new System.Windows.Input.MouseButtonEventHandler(this.RichTextBox_PreviewMouseLeftButtonDown);
+            
+            #line default
+            #line hidden
+            
+            #line 264 "..\..\..\Views\AnalysisWindow.xaml"
+            this.RussianRichTextBox.PreviewMouseLeftButtonUp += new System.Windows.Input.MouseButtonEventHandler(this.RichTextBox_PreviewMouseLeftButtonUp);
+            
+            #line default
+            #line hidden
+            return;
+            case 3:
+            this.ErrorsListBox = ((System.Windows.Controls.ListBox)(target));
+            return;
+            case 6:
+            this.NewErrorTextBox = ((System.Windows.Controls.TextBox)(target));
+            
+            #line 372 "..\..\..\Views\AnalysisWindow.xaml"
+            this.NewErrorTextBox.KeyDown += new System.Windows.Input.KeyEventHandler(this.NewErrorTextBox_KeyDown);
+            
+            #line default
+            #line hidden
+            return;
+            }
+            this._contentLoaded = true;
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        void System.Windows.Markup.IStyleConnector.Connect(int connectionId, object target) {
+            System.Windows.EventSetter eventSetter;
+            switch (connectionId)
+            {
+            case 4:
+            
+            #line 317 "..\..\..\Views\AnalysisWindow.xaml"
+            ((System.Windows.Controls.TextBox)(target)).LostFocus += new System.Windows.RoutedEventHandler(this.EditBox_LostFocus);
+            
+            #line default
+            #line hidden
+            
+            #line 317 "..\..\..\Views\AnalysisWindow.xaml"
+            ((System.Windows.Controls.TextBox)(target)).KeyDown += new System.Windows.Input.KeyEventHandler(this.EditBox_KeyDown);
+            
+            #line default
+            #line hidden
+            break;
+            case 5:
+            eventSetter = new System.Windows.EventSetter();
+            eventSetter.Event = System.Windows.Controls.Control.MouseDoubleClickEvent;
+            
+            #line 331 "..\..\..\Views\AnalysisWindow.xaml"
+            eventSetter.Handler = new System.Windows.Input.MouseButtonEventHandler(this.ErrorsListBoxItem_MouseDoubleClick);
+            
+            #line default
+            #line hidden
+            ((System.Windows.Style)(target)).Setters.Add(eventSetter);
+            break;
+            }
+        }
+    }
+}
+
+
+
+===== DBD_Trans\obj\Debug\Views\MainWindow.g.cs =====
+#pragma checksum "..\..\..\Views\MainWindow.xaml" "{8829d00f-11b8-4213-878b-770e8597ac16}" "C25ABFC0D58A638E6307D95508C14D1AF0C25BE3F01678A46E3E9FADD358B1FD"
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     Этот код создан программой.
+//     Исполняемая версия:4.0.30319.42000
+//
+//     Изменения в этом файле могут привести к неправильной работе и будут потеряны в случае
+//     повторной генерации кода.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+using DBD_Trans.Converters;
+using DBD_Trans.ViewModels;
+using DBD_Trans.Views;
+using System;
+using System.Diagnostics;
+using System.Windows;
+using System.Windows.Automation;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Ink;
+using System.Windows.Input;
+using System.Windows.Markup;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
+using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
+using System.Windows.Media.TextFormatting;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Windows.Shell;
+
+
+namespace DBD_Trans.Views {
+    
+    
+    /// <summary>
+    /// MainWindow
+    /// </summary>
+    public partial class MainWindow : System.Windows.Window, System.Windows.Markup.IComponentConnector {
+        
+        
+        #line 382 "..\..\..\Views\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.TextBox SearchBox;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 390 "..\..\..\Views\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.DataGrid LocalizationGrid;
+        
+        #line default
+        #line hidden
+        
+        private bool _contentLoaded;
+        
+        /// <summary>
+        /// InitializeComponent
+        /// </summary>
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        public void InitializeComponent() {
+            if (_contentLoaded) {
+                return;
+            }
+            _contentLoaded = true;
+            System.Uri resourceLocater = new System.Uri("/DBD_Trans;component/views/mainwindow.xaml", System.UriKind.Relative);
+            
+            #line 1 "..\..\..\Views\MainWindow.xaml"
+            System.Windows.Application.LoadComponent(this, resourceLocater);
+            
+            #line default
+            #line hidden
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
+        void System.Windows.Markup.IComponentConnector.Connect(int connectionId, object target) {
+            switch (connectionId)
+            {
+            case 1:
+            this.SearchBox = ((System.Windows.Controls.TextBox)(target));
+            return;
+            case 2:
+            this.LocalizationGrid = ((System.Windows.Controls.DataGrid)(target));
+            return;
+            }
+            this._contentLoaded = true;
+        }
+    }
+}
+
+
+
+===== DBD_Trans\obj\Debug\Views\MainWindow.g.i.cs =====
+#pragma checksum "..\..\..\Views\MainWindow.xaml" "{8829d00f-11b8-4213-878b-770e8597ac16}" "C25ABFC0D58A638E6307D95508C14D1AF0C25BE3F01678A46E3E9FADD358B1FD"
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     Этот код создан программой.
+//     Исполняемая версия:4.0.30319.42000
+//
+//     Изменения в этом файле могут привести к неправильной работе и будут потеряны в случае
+//     повторной генерации кода.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+using DBD_Trans.Converters;
+using DBD_Trans.ViewModels;
+using DBD_Trans.Views;
+using System;
+using System.Diagnostics;
+using System.Windows;
+using System.Windows.Automation;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Ink;
+using System.Windows.Input;
+using System.Windows.Markup;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
+using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
+using System.Windows.Media.TextFormatting;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Windows.Shell;
+
+
+namespace DBD_Trans.Views {
+    
+    
+    /// <summary>
+    /// MainWindow
+    /// </summary>
+    public partial class MainWindow : System.Windows.Window, System.Windows.Markup.IComponentConnector {
+        
+        
+        #line 382 "..\..\..\Views\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.TextBox SearchBox;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 390 "..\..\..\Views\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.DataGrid LocalizationGrid;
+        
+        #line default
+        #line hidden
+        
+        private bool _contentLoaded;
+        
+        /// <summary>
+        /// InitializeComponent
+        /// </summary>
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        public void InitializeComponent() {
+            if (_contentLoaded) {
+                return;
+            }
+            _contentLoaded = true;
+            System.Uri resourceLocater = new System.Uri("/DBD_Trans;component/views/mainwindow.xaml", System.UriKind.Relative);
+            
+            #line 1 "..\..\..\Views\MainWindow.xaml"
+            System.Windows.Application.LoadComponent(this, resourceLocater);
+            
+            #line default
+            #line hidden
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
+        void System.Windows.Markup.IComponentConnector.Connect(int connectionId, object target) {
+            switch (connectionId)
+            {
+            case 1:
+            this.SearchBox = ((System.Windows.Controls.TextBox)(target));
+            return;
+            case 2:
+            this.LocalizationGrid = ((System.Windows.Controls.DataGrid)(target));
+            return;
+            }
+            this._contentLoaded = true;
+        }
+    }
+}
+
+
+
+===== DBD_Trans\obj\Debug\.NETFramework,Version=v4.8.AssemblyAttributes.cs =====
+// <autogenerated />
+using System;
+using System.Reflection;
+[assembly: global::System.Runtime.Versioning.TargetFrameworkAttribute(".NETFramework,Version=v4.8", FrameworkDisplayName = ".NET Framework 4.8")]
+
+
+===== DBD_Trans\obj\Debug\App.g.cs =====
+#pragma checksum "..\..\App.xaml" "{8829d00f-11b8-4213-878b-770e8597ac16}" "21AE1F5F5A989EC4013546CB94A8C214089CC715205538CABACE5EBE0E75F83D"
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     Этот код создан программой.
+//     Исполняемая версия:4.0.30319.42000
+//
+//     Изменения в этом файле могут привести к неправильной работе и будут потеряны в случае
+//     повторной генерации кода.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+using DBD_Trans;
+using System;
+using System.Diagnostics;
+using System.Windows;
+using System.Windows.Automation;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Ink;
+using System.Windows.Input;
+using System.Windows.Markup;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
+using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
+using System.Windows.Media.TextFormatting;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Windows.Shell;
+
+
+namespace DBD_Trans {
+    
+    
+    /// <summary>
+    /// App
+    /// </summary>
+    public partial class App : System.Windows.Application {
+        
+        private bool _contentLoaded;
+        
+        /// <summary>
+        /// InitializeComponent
+        /// </summary>
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        public void InitializeComponent() {
+            if (_contentLoaded) {
+                return;
+            }
+            _contentLoaded = true;
+            System.Uri resourceLocater = new System.Uri("/DBD_Trans;component/app.xaml", System.UriKind.Relative);
+            
+            #line 1 "..\..\App.xaml"
+            System.Windows.Application.LoadComponent(this, resourceLocater);
+            
+            #line default
+            #line hidden
+        }
+        
+        /// <summary>
+        /// Application Entry Point.
+        /// </summary>
+        [System.STAThreadAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        public static void Main() {
+            DBD_Trans.App app = new DBD_Trans.App();
+            app.InitializeComponent();
+            app.Run();
+        }
+    }
+}
+
+
+
+===== DBD_Trans\obj\Debug\App.g.i.cs =====
+#pragma checksum "..\..\App.xaml" "{8829d00f-11b8-4213-878b-770e8597ac16}" "21AE1F5F5A989EC4013546CB94A8C214089CC715205538CABACE5EBE0E75F83D"
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     Этот код создан программой.
+//     Исполняемая версия:4.0.30319.42000
+//
+//     Изменения в этом файле могут привести к неправильной работе и будут потеряны в случае
+//     повторной генерации кода.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+using DBD_Trans;
+using System;
+using System.Diagnostics;
+using System.Windows;
+using System.Windows.Automation;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Ink;
+using System.Windows.Input;
+using System.Windows.Markup;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
+using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
+using System.Windows.Media.TextFormatting;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Windows.Shell;
+
+
+namespace DBD_Trans {
+    
+    
+    /// <summary>
+    /// App
+    /// </summary>
+    public partial class App : System.Windows.Application {
+        
+        private bool _contentLoaded;
+        
+        /// <summary>
+        /// InitializeComponent
+        /// </summary>
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        public void InitializeComponent() {
+            if (_contentLoaded) {
+                return;
+            }
+            _contentLoaded = true;
+            System.Uri resourceLocater = new System.Uri("/DBD_Trans;component/app.xaml", System.UriKind.Relative);
+            
+            #line 1 "..\..\App.xaml"
+            System.Windows.Application.LoadComponent(this, resourceLocater);
+            
+            #line default
+            #line hidden
+        }
+        
+        /// <summary>
+        /// Application Entry Point.
+        /// </summary>
+        [System.STAThreadAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        public static void Main() {
+            DBD_Trans.App app = new DBD_Trans.App();
+            app.InitializeComponent();
+            app.Run();
+        }
+    }
+}
+
+
+
+===== DBD_Trans\obj\Debug\DBD_Trans.exe.config =====
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <configSections>
+        <sectionGroup name="userSettings" type="System.Configuration.UserSettingsGroup, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" >
+            <section name="DBD_Trans.Properties.Settings" type="System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" allowExeDefinition="MachineToLocalUser" requirePermission="false" />
+        </sectionGroup>
+    </configSections>
+    <startup> 
+        <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.8" />
+    </startup>
+    <userSettings>
+        <DBD_Trans.Properties.Settings>
+            <setting name="AnalysisFontSize" serializeAs="String">
+                <value>14</value>
+            </setting>
+        </DBD_Trans.Properties.Settings>
+    </userSettings>
+</configuration>
+
+===== DBD_Trans\obj\Debug\GeneratedInternalTypeHelper.g.cs =====
+
+
+
+
+===== DBD_Trans\obj\Debug\GeneratedInternalTypeHelper.g.i.cs =====
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     Этот код создан программой.
+//     Исполняемая версия:4.0.30319.42000
+//
+//     Изменения в этом файле могут привести к неправильной работе и будут потеряны в случае
+//     повторной генерации кода.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+namespace XamlGeneratedNamespace {
+    
+    
+    /// <summary>
+    /// GeneratedInternalTypeHelper
+    /// </summary>
+    [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
+    public sealed class GeneratedInternalTypeHelper : System.Windows.Markup.InternalTypeHelper {
+        
+        /// <summary>
+        /// CreateInstance
+        /// </summary>
+        protected override object CreateInstance(System.Type type, System.Globalization.CultureInfo culture) {
+            return System.Activator.CreateInstance(type, ((System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic) 
+                            | (System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.CreateInstance)), null, null, culture);
+        }
+        
+        /// <summary>
+        /// GetPropertyValue
+        /// </summary>
+        protected override object GetPropertyValue(System.Reflection.PropertyInfo propertyInfo, object target, System.Globalization.CultureInfo culture) {
+            return propertyInfo.GetValue(target, System.Reflection.BindingFlags.Default, null, null, culture);
+        }
+        
+        /// <summary>
+        /// SetPropertyValue
+        /// </summary>
+        protected override void SetPropertyValue(System.Reflection.PropertyInfo propertyInfo, object target, object value, System.Globalization.CultureInfo culture) {
+            propertyInfo.SetValue(target, value, System.Reflection.BindingFlags.Default, null, null, culture);
+        }
+        
+        /// <summary>
+        /// CreateDelegate
+        /// </summary>
+        protected override System.Delegate CreateDelegate(System.Type delegateType, object target, string handler) {
+            return ((System.Delegate)(target.GetType().InvokeMember("_CreateDelegate", (System.Reflection.BindingFlags.InvokeMethod 
+                            | (System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)), null, target, new object[] {
+                        delegateType,
+                        handler}, null)));
+        }
+        
+        /// <summary>
+        /// AddEventHandler
+        /// </summary>
+        protected override void AddEventHandler(System.Reflection.EventInfo eventInfo, object target, System.Delegate handler) {
+            eventInfo.AddEventHandler(target, handler);
+        }
+    }
+}
+
+
+
+===== DBD_Trans\obj\Release\Views\AnalysisWindow.g.cs =====
+#pragma checksum "..\..\..\Views\AnalysisWindow.xaml" "{8829d00f-11b8-4213-878b-770e8597ac16}" "CE28391F0BC78D6451A16666F86161075C70BA9AA64EB17AB20D103A6063D156"
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     Этот код создан программой.
+//     Исполняемая версия:4.0.30319.42000
+//
+//     Изменения в этом файле могут привести к неправильной работе и будут потеряны в случае
+//     повторной генерации кода.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+using DBD_Trans.Converters;
+using DBD_Trans.Models;
+using DBD_Trans.ViewModels;
+using DBD_Trans.Views;
+using System;
+using System.Diagnostics;
+using System.Windows;
+using System.Windows.Automation;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Ink;
+using System.Windows.Input;
+using System.Windows.Markup;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
+using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
+using System.Windows.Media.TextFormatting;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Windows.Shell;
+
+
+namespace DBD_Trans.Views {
+    
+    
+    /// <summary>
+    /// AnalysisWindow
+    /// </summary>
+    public partial class AnalysisWindow : System.Windows.Window, System.Windows.Markup.IComponentConnector, System.Windows.Markup.IStyleConnector {
+        
+        
+        #line 224 "..\..\..\Views\AnalysisWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.RichTextBox EnglishRichTextBox;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 252 "..\..\..\Views\AnalysisWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.RichTextBox RussianRichTextBox;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 293 "..\..\..\Views\AnalysisWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.ListBox ErrorsListBox;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 369 "..\..\..\Views\AnalysisWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.TextBox NewErrorTextBox;
+        
+        #line default
+        #line hidden
+        
+        private bool _contentLoaded;
+        
+        /// <summary>
+        /// InitializeComponent
+        /// </summary>
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        public void InitializeComponent() {
+            if (_contentLoaded) {
+                return;
+            }
+            _contentLoaded = true;
+            System.Uri resourceLocater = new System.Uri("/DBD_Trans;component/views/analysiswindow.xaml", System.UriKind.Relative);
+            
+            #line 1 "..\..\..\Views\AnalysisWindow.xaml"
+            System.Windows.Application.LoadComponent(this, resourceLocater);
+            
+            #line default
+            #line hidden
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
+        void System.Windows.Markup.IComponentConnector.Connect(int connectionId, object target) {
+            switch (connectionId)
+            {
+            case 1:
+            this.EnglishRichTextBox = ((System.Windows.Controls.RichTextBox)(target));
+            
+            #line 234 "..\..\..\Views\AnalysisWindow.xaml"
+            this.EnglishRichTextBox.LostFocus += new System.Windows.RoutedEventHandler(this.RichTextBox_LostFocus);
+            
+            #line default
+            #line hidden
+            
+            #line 235 "..\..\..\Views\AnalysisWindow.xaml"
+            this.EnglishRichTextBox.PreviewMouseLeftButtonDown += new System.Windows.Input.MouseButtonEventHandler(this.RichTextBox_PreviewMouseLeftButtonDown);
+            
+            #line default
+            #line hidden
+            
+            #line 236 "..\..\..\Views\AnalysisWindow.xaml"
+            this.EnglishRichTextBox.PreviewMouseLeftButtonUp += new System.Windows.Input.MouseButtonEventHandler(this.RichTextBox_PreviewMouseLeftButtonUp);
+            
+            #line default
+            #line hidden
+            return;
+            case 2:
+            this.RussianRichTextBox = ((System.Windows.Controls.RichTextBox)(target));
+            
+            #line 262 "..\..\..\Views\AnalysisWindow.xaml"
+            this.RussianRichTextBox.LostFocus += new System.Windows.RoutedEventHandler(this.RichTextBox_LostFocus);
+            
+            #line default
+            #line hidden
+            
+            #line 263 "..\..\..\Views\AnalysisWindow.xaml"
+            this.RussianRichTextBox.PreviewMouseLeftButtonDown += new System.Windows.Input.MouseButtonEventHandler(this.RichTextBox_PreviewMouseLeftButtonDown);
+            
+            #line default
+            #line hidden
+            
+            #line 264 "..\..\..\Views\AnalysisWindow.xaml"
+            this.RussianRichTextBox.PreviewMouseLeftButtonUp += new System.Windows.Input.MouseButtonEventHandler(this.RichTextBox_PreviewMouseLeftButtonUp);
+            
+            #line default
+            #line hidden
+            return;
+            case 3:
+            this.ErrorsListBox = ((System.Windows.Controls.ListBox)(target));
+            return;
+            case 6:
+            this.NewErrorTextBox = ((System.Windows.Controls.TextBox)(target));
+            
+            #line 372 "..\..\..\Views\AnalysisWindow.xaml"
+            this.NewErrorTextBox.KeyDown += new System.Windows.Input.KeyEventHandler(this.NewErrorTextBox_KeyDown);
+            
+            #line default
+            #line hidden
+            return;
+            }
+            this._contentLoaded = true;
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        void System.Windows.Markup.IStyleConnector.Connect(int connectionId, object target) {
+            System.Windows.EventSetter eventSetter;
+            switch (connectionId)
+            {
+            case 4:
+            
+            #line 317 "..\..\..\Views\AnalysisWindow.xaml"
+            ((System.Windows.Controls.TextBox)(target)).LostFocus += new System.Windows.RoutedEventHandler(this.EditBox_LostFocus);
+            
+            #line default
+            #line hidden
+            
+            #line 317 "..\..\..\Views\AnalysisWindow.xaml"
+            ((System.Windows.Controls.TextBox)(target)).KeyDown += new System.Windows.Input.KeyEventHandler(this.EditBox_KeyDown);
+            
+            #line default
+            #line hidden
+            break;
+            case 5:
+            eventSetter = new System.Windows.EventSetter();
+            eventSetter.Event = System.Windows.Controls.Control.MouseDoubleClickEvent;
+            
+            #line 331 "..\..\..\Views\AnalysisWindow.xaml"
+            eventSetter.Handler = new System.Windows.Input.MouseButtonEventHandler(this.ErrorsListBoxItem_MouseDoubleClick);
+            
+            #line default
+            #line hidden
+            ((System.Windows.Style)(target)).Setters.Add(eventSetter);
+            break;
+            }
+        }
+    }
+}
+
+
+
+===== DBD_Trans\obj\Release\Views\AnalysisWindow.g.i.cs =====
+#pragma checksum "..\..\..\Views\AnalysisWindow.xaml" "{8829d00f-11b8-4213-878b-770e8597ac16}" "CE28391F0BC78D6451A16666F86161075C70BA9AA64EB17AB20D103A6063D156"
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     Этот код создан программой.
+//     Исполняемая версия:4.0.30319.42000
+//
+//     Изменения в этом файле могут привести к неправильной работе и будут потеряны в случае
+//     повторной генерации кода.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+using DBD_Trans.Converters;
+using DBD_Trans.Models;
+using DBD_Trans.ViewModels;
+using DBD_Trans.Views;
+using System;
+using System.Diagnostics;
+using System.Windows;
+using System.Windows.Automation;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Ink;
+using System.Windows.Input;
+using System.Windows.Markup;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
+using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
+using System.Windows.Media.TextFormatting;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Windows.Shell;
+
+
+namespace DBD_Trans.Views {
+    
+    
+    /// <summary>
+    /// AnalysisWindow
+    /// </summary>
+    public partial class AnalysisWindow : System.Windows.Window, System.Windows.Markup.IComponentConnector, System.Windows.Markup.IStyleConnector {
+        
+        
+        #line 224 "..\..\..\Views\AnalysisWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.RichTextBox EnglishRichTextBox;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 252 "..\..\..\Views\AnalysisWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.RichTextBox RussianRichTextBox;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 293 "..\..\..\Views\AnalysisWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.ListBox ErrorsListBox;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 369 "..\..\..\Views\AnalysisWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.TextBox NewErrorTextBox;
+        
+        #line default
+        #line hidden
+        
+        private bool _contentLoaded;
+        
+        /// <summary>
+        /// InitializeComponent
+        /// </summary>
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        public void InitializeComponent() {
+            if (_contentLoaded) {
+                return;
+            }
+            _contentLoaded = true;
+            System.Uri resourceLocater = new System.Uri("/DBD_Trans;component/views/analysiswindow.xaml", System.UriKind.Relative);
+            
+            #line 1 "..\..\..\Views\AnalysisWindow.xaml"
+            System.Windows.Application.LoadComponent(this, resourceLocater);
+            
+            #line default
+            #line hidden
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
+        void System.Windows.Markup.IComponentConnector.Connect(int connectionId, object target) {
+            switch (connectionId)
+            {
+            case 1:
+            this.EnglishRichTextBox = ((System.Windows.Controls.RichTextBox)(target));
+            
+            #line 234 "..\..\..\Views\AnalysisWindow.xaml"
+            this.EnglishRichTextBox.LostFocus += new System.Windows.RoutedEventHandler(this.RichTextBox_LostFocus);
+            
+            #line default
+            #line hidden
+            
+            #line 235 "..\..\..\Views\AnalysisWindow.xaml"
+            this.EnglishRichTextBox.PreviewMouseLeftButtonDown += new System.Windows.Input.MouseButtonEventHandler(this.RichTextBox_PreviewMouseLeftButtonDown);
+            
+            #line default
+            #line hidden
+            
+            #line 236 "..\..\..\Views\AnalysisWindow.xaml"
+            this.EnglishRichTextBox.PreviewMouseLeftButtonUp += new System.Windows.Input.MouseButtonEventHandler(this.RichTextBox_PreviewMouseLeftButtonUp);
+            
+            #line default
+            #line hidden
+            return;
+            case 2:
+            this.RussianRichTextBox = ((System.Windows.Controls.RichTextBox)(target));
+            
+            #line 262 "..\..\..\Views\AnalysisWindow.xaml"
+            this.RussianRichTextBox.LostFocus += new System.Windows.RoutedEventHandler(this.RichTextBox_LostFocus);
+            
+            #line default
+            #line hidden
+            
+            #line 263 "..\..\..\Views\AnalysisWindow.xaml"
+            this.RussianRichTextBox.PreviewMouseLeftButtonDown += new System.Windows.Input.MouseButtonEventHandler(this.RichTextBox_PreviewMouseLeftButtonDown);
+            
+            #line default
+            #line hidden
+            
+            #line 264 "..\..\..\Views\AnalysisWindow.xaml"
+            this.RussianRichTextBox.PreviewMouseLeftButtonUp += new System.Windows.Input.MouseButtonEventHandler(this.RichTextBox_PreviewMouseLeftButtonUp);
+            
+            #line default
+            #line hidden
+            return;
+            case 3:
+            this.ErrorsListBox = ((System.Windows.Controls.ListBox)(target));
+            return;
+            case 6:
+            this.NewErrorTextBox = ((System.Windows.Controls.TextBox)(target));
+            
+            #line 372 "..\..\..\Views\AnalysisWindow.xaml"
+            this.NewErrorTextBox.KeyDown += new System.Windows.Input.KeyEventHandler(this.NewErrorTextBox_KeyDown);
+            
+            #line default
+            #line hidden
+            return;
+            }
+            this._contentLoaded = true;
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        void System.Windows.Markup.IStyleConnector.Connect(int connectionId, object target) {
+            System.Windows.EventSetter eventSetter;
+            switch (connectionId)
+            {
+            case 4:
+            
+            #line 317 "..\..\..\Views\AnalysisWindow.xaml"
+            ((System.Windows.Controls.TextBox)(target)).LostFocus += new System.Windows.RoutedEventHandler(this.EditBox_LostFocus);
+            
+            #line default
+            #line hidden
+            
+            #line 317 "..\..\..\Views\AnalysisWindow.xaml"
+            ((System.Windows.Controls.TextBox)(target)).KeyDown += new System.Windows.Input.KeyEventHandler(this.EditBox_KeyDown);
+            
+            #line default
+            #line hidden
+            break;
+            case 5:
+            eventSetter = new System.Windows.EventSetter();
+            eventSetter.Event = System.Windows.Controls.Control.MouseDoubleClickEvent;
+            
+            #line 331 "..\..\..\Views\AnalysisWindow.xaml"
+            eventSetter.Handler = new System.Windows.Input.MouseButtonEventHandler(this.ErrorsListBoxItem_MouseDoubleClick);
+            
+            #line default
+            #line hidden
+            ((System.Windows.Style)(target)).Setters.Add(eventSetter);
+            break;
+            }
+        }
+    }
+}
+
+
+
+===== DBD_Trans\obj\Release\Views\MainWindow.g.cs =====
+#pragma checksum "..\..\..\Views\MainWindow.xaml" "{8829d00f-11b8-4213-878b-770e8597ac16}" "C25ABFC0D58A638E6307D95508C14D1AF0C25BE3F01678A46E3E9FADD358B1FD"
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     Этот код создан программой.
+//     Исполняемая версия:4.0.30319.42000
+//
+//     Изменения в этом файле могут привести к неправильной работе и будут потеряны в случае
+//     повторной генерации кода.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+using DBD_Trans.Converters;
+using DBD_Trans.ViewModels;
+using DBD_Trans.Views;
+using System;
+using System.Diagnostics;
+using System.Windows;
+using System.Windows.Automation;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Ink;
+using System.Windows.Input;
+using System.Windows.Markup;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
+using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
+using System.Windows.Media.TextFormatting;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Windows.Shell;
+
+
+namespace DBD_Trans.Views {
+    
+    
+    /// <summary>
+    /// MainWindow
+    /// </summary>
+    public partial class MainWindow : System.Windows.Window, System.Windows.Markup.IComponentConnector {
+        
+        
+        #line 382 "..\..\..\Views\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.TextBox SearchBox;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 390 "..\..\..\Views\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.DataGrid LocalizationGrid;
+        
+        #line default
+        #line hidden
+        
+        private bool _contentLoaded;
+        
+        /// <summary>
+        /// InitializeComponent
+        /// </summary>
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        public void InitializeComponent() {
+            if (_contentLoaded) {
+                return;
+            }
+            _contentLoaded = true;
+            System.Uri resourceLocater = new System.Uri("/DBD_Trans;component/views/mainwindow.xaml", System.UriKind.Relative);
+            
+            #line 1 "..\..\..\Views\MainWindow.xaml"
+            System.Windows.Application.LoadComponent(this, resourceLocater);
+            
+            #line default
+            #line hidden
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
+        void System.Windows.Markup.IComponentConnector.Connect(int connectionId, object target) {
+            switch (connectionId)
+            {
+            case 1:
+            this.SearchBox = ((System.Windows.Controls.TextBox)(target));
+            return;
+            case 2:
+            this.LocalizationGrid = ((System.Windows.Controls.DataGrid)(target));
+            return;
+            }
+            this._contentLoaded = true;
+        }
+    }
+}
+
+
+
+===== DBD_Trans\obj\Release\Views\MainWindow.g.i.cs =====
+#pragma checksum "..\..\..\Views\MainWindow.xaml" "{8829d00f-11b8-4213-878b-770e8597ac16}" "C25ABFC0D58A638E6307D95508C14D1AF0C25BE3F01678A46E3E9FADD358B1FD"
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     Этот код создан программой.
+//     Исполняемая версия:4.0.30319.42000
+//
+//     Изменения в этом файле могут привести к неправильной работе и будут потеряны в случае
+//     повторной генерации кода.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+using DBD_Trans.Converters;
+using DBD_Trans.ViewModels;
+using DBD_Trans.Views;
+using System;
+using System.Diagnostics;
+using System.Windows;
+using System.Windows.Automation;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Ink;
+using System.Windows.Input;
+using System.Windows.Markup;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
+using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
+using System.Windows.Media.TextFormatting;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Windows.Shell;
+
+
+namespace DBD_Trans.Views {
+    
+    
+    /// <summary>
+    /// MainWindow
+    /// </summary>
+    public partial class MainWindow : System.Windows.Window, System.Windows.Markup.IComponentConnector {
+        
+        
+        #line 382 "..\..\..\Views\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.TextBox SearchBox;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 390 "..\..\..\Views\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.DataGrid LocalizationGrid;
+        
+        #line default
+        #line hidden
+        
+        private bool _contentLoaded;
+        
+        /// <summary>
+        /// InitializeComponent
+        /// </summary>
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        public void InitializeComponent() {
+            if (_contentLoaded) {
+                return;
+            }
+            _contentLoaded = true;
+            System.Uri resourceLocater = new System.Uri("/DBD_Trans;component/views/mainwindow.xaml", System.UriKind.Relative);
+            
+            #line 1 "..\..\..\Views\MainWindow.xaml"
+            System.Windows.Application.LoadComponent(this, resourceLocater);
+            
+            #line default
+            #line hidden
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
+        void System.Windows.Markup.IComponentConnector.Connect(int connectionId, object target) {
+            switch (connectionId)
+            {
+            case 1:
+            this.SearchBox = ((System.Windows.Controls.TextBox)(target));
+            return;
+            case 2:
+            this.LocalizationGrid = ((System.Windows.Controls.DataGrid)(target));
+            return;
+            }
+            this._contentLoaded = true;
+        }
+    }
+}
+
+
+
+===== DBD_Trans\obj\Release\.NETFramework,Version=v4.8.AssemblyAttributes.cs =====
+// <autogenerated />
+using System;
+using System.Reflection;
+[assembly: global::System.Runtime.Versioning.TargetFrameworkAttribute(".NETFramework,Version=v4.8", FrameworkDisplayName = ".NET Framework 4.8")]
+
+
+===== DBD_Trans\obj\Release\App.g.cs =====
+#pragma checksum "..\..\App.xaml" "{8829d00f-11b8-4213-878b-770e8597ac16}" "21AE1F5F5A989EC4013546CB94A8C214089CC715205538CABACE5EBE0E75F83D"
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     Этот код создан программой.
+//     Исполняемая версия:4.0.30319.42000
+//
+//     Изменения в этом файле могут привести к неправильной работе и будут потеряны в случае
+//     повторной генерации кода.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+using DBD_Trans;
+using System;
+using System.Diagnostics;
+using System.Windows;
+using System.Windows.Automation;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Ink;
+using System.Windows.Input;
+using System.Windows.Markup;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
+using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
+using System.Windows.Media.TextFormatting;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Windows.Shell;
+
+
+namespace DBD_Trans {
+    
+    
+    /// <summary>
+    /// App
+    /// </summary>
+    public partial class App : System.Windows.Application {
+        
+        private bool _contentLoaded;
+        
+        /// <summary>
+        /// InitializeComponent
+        /// </summary>
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        public void InitializeComponent() {
+            if (_contentLoaded) {
+                return;
+            }
+            _contentLoaded = true;
+            System.Uri resourceLocater = new System.Uri("/DBD_Trans;component/app.xaml", System.UriKind.Relative);
+            
+            #line 1 "..\..\App.xaml"
+            System.Windows.Application.LoadComponent(this, resourceLocater);
+            
+            #line default
+            #line hidden
+        }
+        
+        /// <summary>
+        /// Application Entry Point.
+        /// </summary>
+        [System.STAThreadAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        public static void Main() {
+            DBD_Trans.App app = new DBD_Trans.App();
+            app.InitializeComponent();
+            app.Run();
+        }
+    }
+}
+
+
+
+===== DBD_Trans\obj\Release\App.g.i.cs =====
+#pragma checksum "..\..\App.xaml" "{8829d00f-11b8-4213-878b-770e8597ac16}" "21AE1F5F5A989EC4013546CB94A8C214089CC715205538CABACE5EBE0E75F83D"
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     Этот код создан программой.
+//     Исполняемая версия:4.0.30319.42000
+//
+//     Изменения в этом файле могут привести к неправильной работе и будут потеряны в случае
+//     повторной генерации кода.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+using DBD_Trans;
+using System;
+using System.Diagnostics;
+using System.Windows;
+using System.Windows.Automation;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Ink;
+using System.Windows.Input;
+using System.Windows.Markup;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
+using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
+using System.Windows.Media.TextFormatting;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Windows.Shell;
+
+
+namespace DBD_Trans {
+    
+    
+    /// <summary>
+    /// App
+    /// </summary>
+    public partial class App : System.Windows.Application {
+        
+        private bool _contentLoaded;
+        
+        /// <summary>
+        /// InitializeComponent
+        /// </summary>
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        public void InitializeComponent() {
+            if (_contentLoaded) {
+                return;
+            }
+            _contentLoaded = true;
+            System.Uri resourceLocater = new System.Uri("/DBD_Trans;component/app.xaml", System.UriKind.Relative);
+            
+            #line 1 "..\..\App.xaml"
+            System.Windows.Application.LoadComponent(this, resourceLocater);
+            
+            #line default
+            #line hidden
+        }
+        
+        /// <summary>
+        /// Application Entry Point.
+        /// </summary>
+        [System.STAThreadAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        public static void Main() {
+            DBD_Trans.App app = new DBD_Trans.App();
+            app.InitializeComponent();
+            app.Run();
+        }
+    }
+}
+
+
+
+===== DBD_Trans\obj\Release\GeneratedInternalTypeHelper.g.cs =====
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     Этот код создан программой.
+//     Исполняемая версия:4.0.30319.42000
+//
+//     Изменения в этом файле могут привести к неправильной работе и будут потеряны в случае
+//     повторной генерации кода.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+namespace XamlGeneratedNamespace {
+    
+    
+    /// <summary>
+    /// GeneratedInternalTypeHelper
+    /// </summary>
+    [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
+    public sealed class GeneratedInternalTypeHelper : System.Windows.Markup.InternalTypeHelper {
+        
+        /// <summary>
+        /// CreateInstance
+        /// </summary>
+        protected override object CreateInstance(System.Type type, System.Globalization.CultureInfo culture) {
+            return System.Activator.CreateInstance(type, ((System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic) 
+                            | (System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.CreateInstance)), null, null, culture);
+        }
+        
+        /// <summary>
+        /// GetPropertyValue
+        /// </summary>
+        protected override object GetPropertyValue(System.Reflection.PropertyInfo propertyInfo, object target, System.Globalization.CultureInfo culture) {
+            return propertyInfo.GetValue(target, System.Reflection.BindingFlags.Default, null, null, culture);
+        }
+        
+        /// <summary>
+        /// SetPropertyValue
+        /// </summary>
+        protected override void SetPropertyValue(System.Reflection.PropertyInfo propertyInfo, object target, object value, System.Globalization.CultureInfo culture) {
+            propertyInfo.SetValue(target, value, System.Reflection.BindingFlags.Default, null, null, culture);
+        }
+        
+        /// <summary>
+        /// CreateDelegate
+        /// </summary>
+        protected override System.Delegate CreateDelegate(System.Type delegateType, object target, string handler) {
+            return ((System.Delegate)(target.GetType().InvokeMember("_CreateDelegate", (System.Reflection.BindingFlags.InvokeMethod 
+                            | (System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)), null, target, new object[] {
+                        delegateType,
+                        handler}, null)));
+        }
+        
+        /// <summary>
+        /// AddEventHandler
+        /// </summary>
+        protected override void AddEventHandler(System.Reflection.EventInfo eventInfo, object target, System.Delegate handler) {
+            eventInfo.AddEventHandler(target, handler);
+        }
+    }
+}
+
+
+
+===== DBD_Trans\obj\Release\GeneratedInternalTypeHelper.g.i.cs =====
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     Этот код создан программой.
+//     Исполняемая версия:4.0.30319.42000
+//
+//     Изменения в этом файле могут привести к неправильной работе и будут потеряны в случае
+//     повторной генерации кода.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+namespace XamlGeneratedNamespace {
+    
+    
+    /// <summary>
+    /// GeneratedInternalTypeHelper
+    /// </summary>
+    [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
+    public sealed class GeneratedInternalTypeHelper : System.Windows.Markup.InternalTypeHelper {
+        
+        /// <summary>
+        /// CreateInstance
+        /// </summary>
+        protected override object CreateInstance(System.Type type, System.Globalization.CultureInfo culture) {
+            return System.Activator.CreateInstance(type, ((System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic) 
+                            | (System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.CreateInstance)), null, null, culture);
+        }
+        
+        /// <summary>
+        /// GetPropertyValue
+        /// </summary>
+        protected override object GetPropertyValue(System.Reflection.PropertyInfo propertyInfo, object target, System.Globalization.CultureInfo culture) {
+            return propertyInfo.GetValue(target, System.Reflection.BindingFlags.Default, null, null, culture);
+        }
+        
+        /// <summary>
+        /// SetPropertyValue
+        /// </summary>
+        protected override void SetPropertyValue(System.Reflection.PropertyInfo propertyInfo, object target, object value, System.Globalization.CultureInfo culture) {
+            propertyInfo.SetValue(target, value, System.Reflection.BindingFlags.Default, null, null, culture);
+        }
+        
+        /// <summary>
+        /// CreateDelegate
+        /// </summary>
+        protected override System.Delegate CreateDelegate(System.Type delegateType, object target, string handler) {
+            return ((System.Delegate)(target.GetType().InvokeMember("_CreateDelegate", (System.Reflection.BindingFlags.InvokeMethod 
+                            | (System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)), null, target, new object[] {
+                        delegateType,
+                        handler}, null)));
+        }
+        
+        /// <summary>
+        /// AddEventHandler
+        /// </summary>
+        protected override void AddEventHandler(System.Reflection.EventInfo eventInfo, object target, System.Delegate handler) {
+            eventInfo.AddEventHandler(target, handler);
+        }
+    }
+}
+
+
+
+===== DBD_Trans\Properties\AssemblyInfo.cs =====
+using System.Reflection;
+using System.Resources;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Windows;
+
+// Общие сведения об этой сборке предоставляются следующим набором
+// набор атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
+// связанные со сборкой.
+[assembly: AssemblyTitle("DBD_Trans")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("DBD_Trans")]
+[assembly: AssemblyCopyright("Copyright ©  2026")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+
+// Установка значения False для параметра ComVisible делает типы в этой сборке невидимыми
+// для компонентов COM. Если необходимо обратиться к типу в этой сборке через
+// из модели COM, установите атрибут ComVisible для этого типа в значение true.
+[assembly: ComVisible(false)]
+
+//Чтобы начать создание локализуемых приложений, задайте
+//<UICulture>CultureYouAreCodingWith</UICulture> в файле .csproj
+//в <PropertyGroup>. Например, при использовании английского (США)
+//в своих исходных файлах установите <UICulture> в en-US.  Затем отмените преобразование в комментарий
+//атрибута NeutralResourceLanguage ниже.  Обновите "en-US" в
+//строка внизу для обеспечения соответствия настройки UICulture в файле проекта.
+
+//[assembly: NeutralResourcesLanguage("en-US", UltimateResourceFallbackLocation.Satellite)]
+
+
+[assembly: ThemeInfo(
+    ResourceDictionaryLocation.None, //где расположены словари ресурсов по конкретным тематикам
+                                     //(используется, если ресурс не найден на странице,
+                                     // или в словарях ресурсов приложения)
+    ResourceDictionaryLocation.SourceAssembly //где расположен словарь универсальных ресурсов
+                                              //(используется, если ресурс не найден на странице,
+                                              // в приложении или в каких-либо словарях ресурсов для конкретной темы)
+)]
+
+
+// Сведения о версии для сборки включают четыре следующих значения:
+//
+//      Основной номер версии
+//      Дополнительный номер версии
+//      Номер сборки
+//      Номер редакции
+//
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
+
+
+===== DBD_Trans\Properties\Resources.Designer.cs =====
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     Этот код был создан программным средством.
+//     Версия среды выполнения: 4.0.30319.42000
+//
+//     Изменения в этом файле могут привести к неправильному поведению и будут утрачены, если
+//     код создан повторно.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+namespace DBD_Trans.Properties
+{
+
+
+    /// <summary>
+    ///   Класс ресурсов со строгим типом для поиска локализованных строк и пр.
+    /// </summary>
+    // Этот класс был автоматически создан при помощи StronglyTypedResourceBuilder
+    // класс с помощью таких средств, как ResGen или Visual Studio.
+    // Для добавления или удаления члена измените файл .ResX, а затем перезапустите ResGen
+    // с параметром /str или заново постройте свой VS-проект.
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+    internal class Resources
+    {
+
+        private static global::System.Resources.ResourceManager resourceMan;
+
+        private static global::System.Globalization.CultureInfo resourceCulture;
+
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        internal Resources()
+        {
+        }
+
+        /// <summary>
+        ///   Возврат кэшированного экземпляра ResourceManager, используемого этим классом.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Resources.ResourceManager ResourceManager
+        {
+            get
+            {
+                if ((resourceMan == null))
+                {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DBD_Trans.Properties.Resources", typeof(Resources).Assembly);
+                    resourceMan = temp;
+                }
+                return resourceMan;
+            }
+        }
+
+        /// <summary>
+        ///   Переопределяет свойство CurrentUICulture текущего потока для всех
+        ///   подстановки ресурсов с помощью этого класса ресурсов со строгим типом.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Globalization.CultureInfo Culture
+        {
+            get
+            {
+                return resourceCulture;
+            }
+            set
+            {
+                resourceCulture = value;
+            }
+        }
+    }
+}
+
+
+===== DBD_Trans\Properties\Settings.Designer.cs =====
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     Этот код создан программой.
+//     Исполняемая версия:4.0.30319.42000
+//
+//     Изменения в этом файле могут привести к неправильной работе и будут потеряны в случае
+//     повторной генерации кода.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+namespace DBD_Trans.Properties {
+    
+    
+    [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.14.0.0")]
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
+        private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
+        
+        public static Settings Default {
+            get {
+                return defaultInstance;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("14")]
+        public double AnalysisFontSize {
+            get {
+                return ((double)(this["AnalysisFontSize"]));
+            }
+            set {
+                this["AnalysisFontSize"] = value;
+            }
+        }
+    }
+}
+
+
+===== DBD_Trans\Services\IErrorStorage.cs =====
+using System.Collections.Generic;
+using DBD_Trans.Models;
+
+namespace DBD_Trans.Services
+{
+    public interface IErrorStorage
+    {
+        List<ErrorItem> GetErrors(string key);
+        void UpdateErrors(string key, List<ErrorItem> errors);
+        void Save();
+    }
+}
+
+===== DBD_Trans\Services\IFileService.cs =====
+using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DBD_Trans.Services
+{
+    public interface IFileService
+    {
+        JObject LoadJson(string filePath);
+        void SaveJson(string filePath, object data);
+    }
+}
+
+
+===== DBD_Trans\Services\IStatusStorage.cs =====
+using DBD_Trans.Models;
+
+namespace DBD_Trans.Services
+{
+    public interface IStatusStorage
+    {
+        ItemStatus GetStatus(string key);
+        void SetStatus(string key, ItemStatus status);
+        void Save();
+    }
+}
+
+===== DBD_Trans\Services\JsonErrorStorage.cs =====
+using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.IO;
+using DBD_Trans.Models;
+
+namespace DBD_Trans.Services
+{
+    public class JsonErrorStorage : IErrorStorage
+    {
+        private readonly IFileService _fileService;
+        private readonly string _filePath;
+        private Dictionary<string, List<ErrorItem>> _errors;
+
+        public JsonErrorStorage(IFileService fileService, string baseDirectory)
+        {
+            _fileService = fileService;
+            _filePath = Path.Combine(baseDirectory, "Errors.json");
+            Load();
+        }
+
+        private void Load()
+        {
+            if (File.Exists(_filePath))
+            {
+                var json = File.ReadAllText(_filePath);
+                _errors = JsonConvert.DeserializeObject<Dictionary<string, List<ErrorItem>>>(json)
+                          ?? new Dictionary<string, List<ErrorItem>>();
+            }
+            else
+            {
+                _errors = new Dictionary<string, List<ErrorItem>>();
+            }
+        }
+
+        public List<ErrorItem> GetErrors(string key)
+        {
+            return _errors.TryGetValue(key, out var list) ? list : new List<ErrorItem>();
+        }
+
+        public void UpdateErrors(string key, List<ErrorItem> errors)
+        {
+            if (errors == null || errors.Count == 0)
+            {
+                if (_errors.ContainsKey(key))
+                    _errors.Remove(key);
+            }
+            else
+            {
+                _errors[key] = errors;
+            }
+            Save();
+        }
+
+        public void Save()
+        {
+            _fileService.SaveJson(_filePath, _errors);
+        }
+    }
+}
+
+===== DBD_Trans\Services\JsonFileService.cs =====
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DBD_Trans.Services
+{
+    public class JsonFileService : IFileService
+    {
+        public JObject LoadJson(string filePath)
+        {
+            if (!File.Exists(filePath))
+                return null;
+
+            var json = File.ReadAllText(filePath);
+            return JObject.Parse(json);
+        }
+
+        public void SaveJson(string filePath, object data)
+        {
+            var json = JsonConvert.SerializeObject(data, Formatting.Indented);
+            File.WriteAllText(filePath, json);
+        }
+    }
+}
+
+
+===== DBD_Trans\Services\JsonStatusStorage.cs =====
+using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.IO;
+using DBD_Trans.Models;
+
+namespace DBD_Trans.Services
+{
+    public class JsonStatusStorage : IStatusStorage
+    {
+        private readonly string _filePath;
+        private Dictionary<string, ItemStatus> _statuses;
+
+        public JsonStatusStorage(string baseDirectory)
+        {
+            _filePath = Path.Combine(baseDirectory, "Statuses.json");
+            Load();
+        }
+
+        private void Load()
+        {
+            if (File.Exists(_filePath))
+            {
+                var json = File.ReadAllText(_filePath);
+                _statuses = JsonConvert.DeserializeObject<Dictionary<string, ItemStatus>>(json)
+                           ?? new Dictionary<string, ItemStatus>();
+            }
+            else
+            {
+                _statuses = new Dictionary<string, ItemStatus>();
+            }
+        }
+
+        public ItemStatus GetStatus(string key)
+        {
+            return _statuses.TryGetValue(key, out var status) ? status : ItemStatus.InProgress;
+        }
+
+        public void SetStatus(string key, ItemStatus status)
+        {
+            _statuses[key] = status;
+            Save();
+        }
+
+        public void Save()
+        {
+            var json = JsonConvert.SerializeObject(_statuses, Formatting.Indented);
+            File.WriteAllText(_filePath, json);
+        }
+    }
+}
+
+===== DBD_Trans\ViewModels\AnalysisViewModel.cs =====
+using DBD_Trans.Base;
+using DBD_Trans.Models;
+using DBD_Trans.Services;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+
+namespace DBD_Trans.ViewModels
+{
+    public class AnalysisViewModel : ObservableObject
+    {
+        private readonly IErrorStorage _errorStorage;
+        private readonly IAppSettings _appSettings;
+        private readonly string _key;
+        private readonly IStatusStorage _statusStorage;
+        private readonly LocalizationEntry _entry;
+
+        public bool IsCompleted
+        {
+            get => _entry.Status == ItemStatus.Completed;
+            set
+            {
+                if (_entry.Status == ItemStatus.Completed != value)
+                {
+                    _entry.Status = value ? ItemStatus.Completed : ItemStatus.InProgress;
+                    _statusStorage.SetStatus(_key, _entry.Status);
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(CompletedButtonBrush));
+                }
+            }
+        }
+
+        public bool HasErrors => Errors.Count > 0;
+
+        public Brush CompletedButtonBrush
+        {
+            get
+            {
+                if (IsCompleted && HasErrors)
+                    return new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF750000")); // красный
+                if (IsCompleted && !HasErrors)
+                    return new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF004A7C")); // синий
+                return new SolidColorBrush(Colors.Transparent);
+            }
+        }
+        public ICommand ToggleCompletedCommand { get; }
+
+        public IEnumerable<ItemStatus> StatusOptions { get; }
+        = Enum.GetValues(typeof(ItemStatus)).Cast<ItemStatus>();
+
+        private static readonly SolidColorBrush TemporaryHighlightBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFCA5100"));
+        private static readonly SolidColorBrush PermanentHighlightBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#33CA5100"));
+        private static readonly SolidColorBrush SelectedPermanentHighlightBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFCA5100"));
+
+        public string EnglishText { get; }
+        public string RussianText { get; }
+        public string Title { get; }
+
+        public ObservableCollection<ErrorItem> Errors { get; } = new ObservableCollection<ErrorItem>();
+
+        private string _newErrorText;
+        public string NewErrorText
+        {
+            get => _newErrorText;
+            set => Set(ref _newErrorText, value);
+        }
+
+        private ErrorItem _selectedError;
+        public ErrorItem SelectedError
+        {
+            get => _selectedError;
+            set
+            {
+                if (Set(ref _selectedError, value))
+                {
+                    UpdateHighlightsForSelection();
+                }
+            }
+        }
+
+        private bool _isMarkerActive;
+        public bool IsMarkerActive
+        {
+            get => _isMarkerActive;
+            set => Set(ref _isMarkerActive, value);
+        }
+
+        public double FontSize
+        {
+            get => _appSettings.AnalysisFontSize;
+            set
+            {
+                _appSettings.AnalysisFontSize = value;
+                OnPropertyChanged();
+                _appSettings.Save();
+            }
+        }
+
+        public ICommand IncreaseFontCommand { get; }
+        public ICommand DecreaseFontCommand { get; }
+        public ICommand AddErrorCommand { get; }
+        public ICommand DeleteErrorCommand { get; }
+        public ICommand EditErrorCommand { get; }
+        public ICommand SaveCommand { get; }
+        public ICommand ToggleMarkerCommand { get; }
+
+        public RichTextBox EnglishRichTextBox { get; set; }
+        public RichTextBox RussianRichTextBox { get; set; }
+
+        public AnalysisViewModel(LocalizationEntry entry, System.Collections.Generic.List<ErrorItem> existingErrors,
+                                 IErrorStorage errorStorage, IStatusStorage statusStorage, IAppSettings appSettings)
+        {
+            _key = entry.Key;
+            EnglishText = entry.English;
+            RussianText = entry.Russian;
+            Title = $"Анализ строки: {_key}";
+            _errorStorage = errorStorage;
+            _appSettings = appSettings;
+            _entry = entry;
+            _key = entry.Key;
+            _statusStorage = statusStorage;
+
+            Errors.CollectionChanged += (s, e) =>
+            {
+                OnPropertyChanged(nameof(HasErrors));
+                OnPropertyChanged(nameof(CompletedButtonBrush));
+                _entry.HasErrors = HasErrors;
+                _entry.ErrorCount = Errors.Count;   // ← добавить
+            };
+
+            foreach (var err in existingErrors)
+                Errors.Add(err);
+
+            IncreaseFontCommand = new RelayCommand(_ => FontSize += 1);
+            DecreaseFontCommand = new RelayCommand(_ => FontSize -= 1, _ => FontSize > 8);
+            AddErrorCommand = new RelayCommand(AddError, _ => !string.IsNullOrWhiteSpace(NewErrorText));
+            DeleteErrorCommand = new RelayCommand<ErrorItem>(DeleteError, item => item != null);
+            EditErrorCommand = new RelayCommand<ErrorItem>(EditError);
+            SaveCommand = new RelayCommand(_ => SaveChanges());
+            ToggleMarkerCommand = new RelayCommand(_ => ToggleMarker());
+            ToggleCompletedCommand = new RelayCommand(_ => IsCompleted = !IsCompleted);
+        }
+
+        public void InitializeDocuments()
+        {
+            BuildDocumentsWithAllPermanentHighlights();
+        }
+
+        private void BuildDocumentsWithAllPermanentHighlights()
+        {
+            var allEngHighlights = Errors.SelectMany(e => e.EnglishHighlights).ToList();
+            var allRusHighlights = Errors.SelectMany(e => e.RussianHighlights).ToList();
+
+            EnglishRichTextBox.Document = BuildDocumentWithHighlights(EnglishText, allEngHighlights, PermanentHighlightBrush);
+            RussianRichTextBox.Document = BuildDocumentWithHighlights(RussianText, allRusHighlights, PermanentHighlightBrush);
+        }
+
+        private FlowDocument BuildDocumentWithHighlights(string text, System.Collections.Generic.List<TextRangeInfo> highlights, Brush highlightBrush)
+        {
+            var doc = new FlowDocument();
+            var para = new Paragraph();
+            int lastPos = 0;
+            foreach (var range in highlights.OrderBy(r => r.StartIndex))
+            {
+                if (range.StartIndex > lastPos)
+                {
+                    para.Inlines.Add(new Run(text.Substring(lastPos, range.StartIndex - lastPos)));
+                }
+                var highlightedRun = new Run(text.Substring(range.StartIndex, range.Length));
+                highlightedRun.Background = highlightBrush;
+                para.Inlines.Add(highlightedRun);
+                lastPos = range.StartIndex + range.Length;
+            }
+            if (lastPos < text.Length)
+            {
+                para.Inlines.Add(new Run(text.Substring(lastPos)));
+            }
+            doc.Blocks.Add(para);
+            return doc;
+        }
+
+        private void UpdateHighlightsForSelection()
+        {
+            if (EnglishRichTextBox == null || RussianRichTextBox == null) return;
+
+            // Все постоянные выделения (от всех ошибок)
+            var allEngHighlights = Errors.SelectMany(e => e.EnglishHighlights).ToList();
+            var allRusHighlights = Errors.SelectMany(e => e.RussianHighlights).ToList();
+
+            // Выделения выбранной ошибки
+            var selectedEng = SelectedError?.EnglishHighlights;
+            var selectedRus = SelectedError?.RussianHighlights;
+
+            // Если есть выбранные, удаляем их из постоянных, чтобы они не рисовались дважды
+            if (selectedEng != null && selectedEng.Any())
+            {
+                allEngHighlights = allEngHighlights
+                    .Where(h => !selectedEng.Any(s => s.StartIndex == h.StartIndex && s.Length == h.Length))
+                    .ToList();
+            }
+            if (selectedRus != null && selectedRus.Any())
+            {
+                allRusHighlights = allRusHighlights
+                    .Where(h => !selectedRus.Any(s => s.StartIndex == h.StartIndex && s.Length == h.Length))
+                    .ToList();
+            }
+
+            EnglishRichTextBox.Document = BuildDocumentWithHighlights(EnglishText, allEngHighlights, PermanentHighlightBrush, selectedEng, SelectedPermanentHighlightBrush);
+            RussianRichTextBox.Document = BuildDocumentWithHighlights(RussianText, allRusHighlights, PermanentHighlightBrush, selectedRus, SelectedPermanentHighlightBrush);
+        }
+
+
+        private void ToggleMarker()
+        {
+            IsMarkerActive = !IsMarkerActive;
+        }
+
+        public void ApplyMarkerToSelection(RichTextBox rtb)
+        {
+            if (rtb == null || rtb.Selection.IsEmpty || !IsMarkerActive) return;
+
+            var range = new TextRange(rtb.Selection.Start, rtb.Selection.End);
+            range.ApplyPropertyValue(TextElement.BackgroundProperty, TemporaryHighlightBrush);
+            rtb.Selection.Select(rtb.Selection.Start, rtb.Selection.Start);
+        }
+
+        public void RemoveHighlightAtPosition(RichTextBox rtb, TextPointer position)
+        {
+            if (rtb == null || position == null || !IsMarkerActive) return;
+
+            var start = position.GetPositionAtOffset(-1);
+            var end = position.GetPositionAtOffset(1);
+            if (start != null && end != null)
+            {
+                var checkRange = new TextRange(start, end);
+                var bg = checkRange.GetPropertyValue(TextElement.BackgroundProperty);
+                if (bg is SolidColorBrush brush && brush.Color == TemporaryHighlightBrush.Color)
+                {
+                    var redStart = FindBoundary(start, LogicalDirection.Backward, TemporaryHighlightBrush.Color);
+                    var redEnd = FindBoundary(end, LogicalDirection.Forward, TemporaryHighlightBrush.Color);
+                    if (redStart != null && redEnd != null)
+                    {
+                        var redRange = new TextRange(redStart, redEnd);
+                        redRange.ClearAllProperties();
+                    }
+                }
+            }
+        }
+
+        private TextPointer FindBoundary(TextPointer pointer, LogicalDirection direction, Color targetColor)
+        {
+            var current = pointer;
+            while (current != null)
+            {
+                var context = current.GetPointerContext(direction);
+                if (context == TextPointerContext.Text)
+                {
+                    var next = current.GetNextContextPosition(direction);
+                    if (next == null) break;
+                    var range = new TextRange(current, next);
+                    var bg = range.GetPropertyValue(TextElement.BackgroundProperty);
+                    if (bg is SolidColorBrush brush && brush.Color == targetColor)
+                        current = next;
+                    else
+                        break;
+                }
+                else
+                {
+                    current = current.GetNextContextPosition(direction);
+                }
+            }
+            return current;
+        }
+
+        private void AddError(object _)
+        {
+            if (string.IsNullOrWhiteSpace(NewErrorText)) return;
+
+            var engHighlights = ExtractHighlightsFromDocument(EnglishRichTextBox.Document, TemporaryHighlightBrush.Color);
+            var rusHighlights = ExtractHighlightsFromDocument(RussianRichTextBox.Document, TemporaryHighlightBrush.Color);
+
+            var errorItem = new ErrorItem
+            {
+                Text = NewErrorText.Trim(),
+                EnglishHighlights = engHighlights,
+                RussianHighlights = rusHighlights
+            };
+
+            Errors.Add(errorItem);
+            NewErrorText = string.Empty;
+            SelectedError = errorItem;
+
+            BuildDocumentsWithAllPermanentHighlights();
+            UpdateHighlightsForSelection();
+            IsMarkerActive = false;
+
+            SaveChanges();
+        }
+
+        private List<TextRangeInfo> ExtractHighlightsFromDocument(FlowDocument doc, Color targetColor)
+        {
+            var highlights = new List<TextRangeInfo>();
+            int currentPos = 0;
+            var navigator = doc.ContentStart;
+
+            while (navigator != null)
+            {
+                if (navigator.GetPointerContext(LogicalDirection.Forward) == TextPointerContext.Text)
+                {
+                    var next = navigator.GetNextContextPosition(LogicalDirection.Forward);
+                    if (next != null)
+                    {
+                        var textRange = new TextRange(navigator, next);
+                        var bg = textRange.GetPropertyValue(TextElement.BackgroundProperty);
+                        int length = textRange.Text.Length;
+
+                        if (bg is SolidColorBrush brush && brush.Color == targetColor)
+                        {
+                            highlights.Add(new TextRangeInfo { StartIndex = currentPos, Length = length });
+                        }
+                        currentPos += length;
+                        navigator = next;
+                        continue;
+                    }
+                }
+                navigator = navigator.GetNextContextPosition(LogicalDirection.Forward);
+            }
+            return highlights;
+        }
+
+        private void DeleteError(ErrorItem item)
+        {
+            if (item == null || !Errors.Contains(item)) return;
+
+            int index = Errors.IndexOf(item);
+            Errors.Remove(item);
+
+            if (SelectedError == item)
+            {
+                SelectedError = Errors.Count > 0 ? Errors[Math.Min(index, Errors.Count - 1)] : null;
+            }
+
+            BuildDocumentsWithAllPermanentHighlights();
+            UpdateHighlightsForSelection();
+            SaveChanges();
+        }
+
+        private void EditError(ErrorItem item)
+        {
+            if (item != null)
+                item.IsEditing = true;
+        }
+
+        public void SaveChanges()
+        {
+            var errorList = Errors.Where(e => !string.IsNullOrWhiteSpace(e.Text)).ToList();
+            _errorStorage.UpdateErrors(_key, errorList);
+        }
+
+        public void OnClosing()
+        {
+            SaveChanges();
+        }
+
+        public void SaveDocumentsToSelectedError()
+        {
+
+        }
+
+        private FlowDocument BuildDocumentWithHighlights(string text,
+    List<TextRangeInfo> permanentHighlights,
+    Brush permanentBrush,
+    List<TextRangeInfo> selectedHighlights = null,
+    Brush selectedBrush = null)
+        {
+            var doc = new FlowDocument();
+            var para = new Paragraph();
+            int lastPos = 0;
+
+            // Собираем все диапазоны с их кистями (приоритет у selected)
+            var ranges = new Dictionary<int, (int length, Brush brush)>();
+
+            if (permanentHighlights != null)
+            {
+                foreach (var h in permanentHighlights)
+                    ranges[h.StartIndex] = (h.Length, permanentBrush);
+            }
+
+            if (selectedHighlights != null && selectedBrush != null)
+            {
+                foreach (var h in selectedHighlights)
+                    ranges[h.StartIndex] = (h.Length, selectedBrush); // перезаписывает постоянный, если ключ совпадает
+            }
+
+            foreach (var range in ranges.OrderBy(x => x.Key))
+            {
+                int start = range.Key;
+                int length = range.Value.length;
+                Brush brush = range.Value.brush;
+
+                if (start > lastPos)
+                    para.Inlines.Add(new Run(text.Substring(lastPos, start - lastPos)));
+
+                var run = new Run(text.Substring(start, length));
+                run.Background = brush;
+                para.Inlines.Add(run);
+                lastPos = start + length;
+            }
+
+            if (lastPos < text.Length)
+                para.Inlines.Add(new Run(text.Substring(lastPos)));
+
+            doc.Blocks.Add(para);
+            return doc;
+        }
+    }
+}
+
+===== DBD_Trans\ViewModels\MainViewModel.cs =====
+using DBD_Trans.Base;
+using DBD_Trans.Helpers;
+using DBD_Trans.Models;
+using DBD_Trans.Services;
+using DBD_Trans.Views;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Data;
+using System.Windows.Input;
+using System.Windows;
+
+namespace DBD_Trans.ViewModels
+{
+    public class MainViewModel : ObservableObject
+    {
+        private readonly IFileService _fileService;
+        private readonly IErrorStorage _errorStorage;
+        private readonly IAppSettings _appSettings;
+        private readonly IStatusStorage _statusStorage;
+        private readonly string _dataDirectory;
+
+        public ObservableCollection<LocalizationEntry> AllEntries { get; } = new ObservableCollection<LocalizationEntry>();
+        public ICollectionView FilteredEntries { get; }
+
+        private string _searchText = string.Empty;
+        public string SearchText
+        {
+            get => _searchText;
+            set
+            {
+                if (Set(ref _searchText, value))
+                {
+                    FilteredEntries.Refresh();
+                    UpdateStatistics();
+                }
+            }
+        }
+
+        private LocalizationEntry _selectedEntry;
+        public LocalizationEntry SelectedEntry
+        {
+            get => _selectedEntry;
+            set => Set(ref _selectedEntry, value);
+        }
+
+        private int _totalCount;
+        public int TotalCount
+        {
+            get => _totalCount;
+            set => Set(ref _totalCount, value);
+        }
+
+        private int _displayedCount;
+        public int DisplayedCount
+        {
+            get => _displayedCount;
+            set => Set(ref _displayedCount, value);
+        }
+
+        private int _missingCount;
+        public int MissingCount
+        {
+            get => _missingCount;
+            set => Set(ref _missingCount, value);
+        }
+
+        private string _resultCountText;
+        public string ResultCountText
+        {
+            get => _resultCountText;
+            set => Set(ref _resultCountText, value);
+        }
+
+        private int _completedCount;
+        public int CompletedCount
+        {
+            get => _completedCount;
+            set => Set(ref _completedCount, value);
+        }
+
+        private int _totalErrorCount;
+        public int TotalErrorCount
+        {
+            get => _totalErrorCount;
+            set => Set(ref _totalErrorCount, value);
+        }
+
+        public ICommand AnalyzeCommand { get; }
+        public ICommand GoToCommand { get; }
+        public ICommand ClearSelectionCommand { get; }
+
+        private bool _isLoading;
+        public bool IsLoading
+        {
+            get => _isLoading;
+            set => Set(ref _isLoading, value);
+        }
+
+
+        public MainViewModel(IFileService fileService, IErrorStorage errorStorage, IStatusStorage statusStorage, IAppSettings appSettings, string dataDirectory)
+        {
+            _fileService = fileService;
+            _errorStorage = errorStorage;
+            _appSettings = appSettings;
+            _statusStorage = statusStorage;
+            _dataDirectory = dataDirectory;
+
+            FilteredEntries = CollectionViewSource.GetDefaultView(AllEntries);
+            FilteredEntries.Filter = FilterEntry;
+
+            AnalyzeCommand = new RelayCommand<LocalizationEntry>(AnalyzeEntry, CanAnalyze);
+            GoToCommand = new RelayCommand<LocalizationEntry>(GoToEntry, CanGoTo);
+            ClearSelectionCommand = new RelayCommand(_ => SelectedEntry = null);
+
+            BindingOperations.EnableCollectionSynchronization(AllEntries, new object());
+
+            IsLoading = true;
+            Task.Run(() =>
+            {
+                LoadData();
+                Application.Current.Dispatcher.Invoke(() => IsLoading = false);
+            });
+
+        }
+
+        private void LoadData()
+        {
+            string basePath = AppDomain.CurrentDomain.BaseDirectory;
+            string enPath = Path.Combine(_dataDirectory, "Dbd-En.json");
+            string ruPath = Path.Combine(_dataDirectory, "Dbd-Ru.json");
+
+            var enJson = _fileService.LoadJson(enPath);
+            var ruJson = _fileService.LoadJson(ruPath);
+
+            if (enJson == null)
+            {
+                Application.Current.Dispatcher.Invoke(() => IsLoading = false);
+                return;
+            }
+
+            var enEntries = JsonFlattener.FlattenToOrderedList(enJson);
+            var ruDict = ruJson != null ? JsonFlattener.FlattenToDictionary(ruJson) : new Dictionary<string, string>();
+
+            int index = 1;
+            var tempEntries = new List<LocalizationEntry>();
+
+            foreach (var en in enEntries)
+            {
+                string key = en.Key;
+                string english = HtmlStripper.StripHtmlTags(en.Value);
+                string russian = ruDict.TryGetValue(key, out var ruValue)
+                    ? HtmlStripper.StripHtmlTags(ruValue)
+                    : "[нет перевода]";
+
+                // Создаём запись, потом задаём статус
+                var entry = new LocalizationEntry
+                {
+                    Index = index++,
+                    Key = key,
+                    English = english,
+                    Russian = russian,
+                    HasTranslation = ruDict.ContainsKey(key)
+                };
+                var errors = _errorStorage.GetErrors(entry.Key);
+                entry.HasErrors = errors.Count > 0;
+                entry.ErrorCount = errors.Count;
+                entry.Status = _statusStorage.GetStatus(entry.Key);
+                tempEntries.Add(entry);
+            }
+
+            var onlyRussian = ruDict.Keys.Except(enEntries.Select(e => e.Key));
+            foreach (var key in onlyRussian)
+            {
+                var entry = new LocalizationEntry
+                {
+                    Index = index++,
+                    Key = key,
+                    English = "[нет перевода]",
+                    Russian = HtmlStripper.StripHtmlTags(ruDict[key]),
+                    HasTranslation = false
+                };
+                var errors = _errorStorage.GetErrors(entry.Key);
+                entry.HasErrors = errors.Count > 0;
+                entry.ErrorCount = errors.Count;
+                entry.Status = _statusStorage.GetStatus(entry.Key);
+                tempEntries.Add(entry);
+            }
+
+            foreach (var entry in tempEntries)
+                AllEntries.Add(entry);
+
+            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                FilteredEntries.Refresh();
+                UpdateStatistics();
+                IsLoading = false;
+            }), System.Windows.Threading.DispatcherPriority.Background);
+        }
+
+        private bool FilterEntry(object obj)
+        {
+            if (!(obj is LocalizationEntry entry)) return false;
+            if (string.IsNullOrWhiteSpace(SearchText)) return true;
+
+            var filter = SearchText.Trim();
+            return (entry.Key?.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                   (entry.English?.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                   (entry.Russian?.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0);
+        }
+
+        private void UpdateStatistics()
+        {
+            TotalCount = AllEntries.Count;
+            var displayed = FilteredEntries.Cast<LocalizationEntry>().ToList();
+            DisplayedCount = displayed.Count;
+            MissingCount = AllEntries.Count(e => !e.HasTranslation);
+            CompletedCount = AllEntries.Count(e => e.Status == ItemStatus.Completed);
+            TotalErrorCount = AllEntries.Sum(e => e.ErrorCount);
+            ResultCountText = DisplayedCount != TotalCount ? $"(найдено: {DisplayedCount})" : "";
+        }
+
+        private bool CanAnalyze(LocalizationEntry entry) => entry != null;
+        private bool CanGoTo(LocalizationEntry entry) => entry != null;
+
+        private void AnalyzeEntry(LocalizationEntry entry)
+        {
+            var errors = _errorStorage.GetErrors(entry.Key);
+            var vm = new AnalysisViewModel(entry, errors, _errorStorage, _statusStorage, _appSettings);
+            var window = new AnalysisWindow();
+            window.DataContext = vm;
+            window.Owner = App.Current.MainWindow;
+            window.ShowDialog();
+
+            UpdateStatistics();               // обновить все счётчики
+            FilteredEntries.Refresh();        // перерисовать цвета строк
+        }
+
+        private void GoToEntry(LocalizationEntry entry)
+        {
+            SearchText = string.Empty;
+
+            var target = AllEntries.FirstOrDefault(e => e.Key == entry.Key);
+            if (target != null)
+            {
+                SelectedEntry = target;
+                ScrollToItemRequested?.Invoke(target);
+            }
+        }
+
+        public event Action<LocalizationEntry> ScrollToItemRequested;
+    }
+}
+
+===== DBD_Trans\Views\AnalysisWindow.xaml =====
+<Window x:Class="DBD_Trans.Views.AnalysisWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:DBD_Trans.Views"
+        xmlns:viewModels="clr-namespace:DBD_Trans.ViewModels"
+        xmlns:models="clr-namespace:DBD_Trans.Models"
+        xmlns:converters="clr-namespace:DBD_Trans.Converters"
+        Title="{Binding Title}" Height="600" Width="900"
+        WindowStartupLocation="CenterOwner"
+        WindowState="Maximized"
+        Background="#FF1E1E1E"
+        ResizeMode="CanResizeWithGrip"
+        FocusVisualStyle="{x:Null}">
+    <Window.Resources>
+        <converters:BoolToBrushConverter x:Key="BoolToBrushConverter"/>
+        
+        <SolidColorBrush x:Key="BackgroundDark" Color="#FF171717"/>
+        <SolidColorBrush x:Key="BackgroundMedium" Color="#FF1E1E1E"/>
+        <SolidColorBrush x:Key="BackgroundLight" Color="#FF212121"/>
+        <SolidColorBrush x:Key="ForegroundPrimary" Color="#FFE0E0E0"/>
+        <SolidColorBrush x:Key="ForegroundSecondary" Color="#FFA0A0A0"/>
+        <SolidColorBrush x:Key="BorderDark" Color="#FF333333"/>
+        <SolidColorBrush x:Key="ErrorRed" Color="#FF3D1C1C"/>
+        <SolidColorBrush x:Key="CompletedBlue" Color="#FF232E48"/>
+
+        <Style x:Key="CompletedToggleButtonStyle" TargetType="ToggleButton">
+            <Setter Property="Background" Value="{StaticResource BackgroundLight}"/>
+            <Setter Property="Foreground" Value="{StaticResource ForegroundPrimary}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" 
+                        CornerRadius="3"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource CompletedBlue}"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="AddButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource WarningOrange}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="3"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="DeleteButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource BackgroundLight}"/>
+            <Setter Property="Foreground" Value="{StaticResource ForegroundPrimary}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderDark}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="3"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Стили для ScrollBar -->
+        <Style x:Key="ScrollBarButtonStyle" TargetType="RepeatButton">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border Background="Transparent"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ScrollBarThumbStyle" TargetType="Thumb">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Thumb">
+                        <Border Background="{StaticResource BorderDark}" CornerRadius="6" Margin="2,0"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SmoothScrollTextBox" TargetType="TextBox">
+            <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalOnly"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="3">
+                            <ScrollViewer x:Name="PART_ContentHost" 
+                                      Margin="2" 
+                                      CanContentScroll="False"
+                                      PanningMode="VerticalOnly"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="ScrollBar">
+            <Setter Property="Background" Value="{StaticResource BackgroundMedium}"/>
+            <Setter Property="Width" Value="12"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ScrollBar">
+                        <Grid>
+                            <Border Background="{TemplateBinding Background}" CornerRadius="6"/>
+                            <Track x:Name="PART_Track" IsDirectionReversed="True">
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Command="ScrollBar.PageUpCommand" Style="{StaticResource ScrollBarButtonStyle}"/>
+                                </Track.DecreaseRepeatButton>
+                                <Track.Thumb>
+                                    <Thumb Style="{StaticResource ScrollBarThumbStyle}"/>
+                                </Track.Thumb>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Command="ScrollBar.PageDownCommand" Style="{StaticResource ScrollBarButtonStyle}"/>
+                                </Track.IncreaseRepeatButton>
+                            </Track>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="8*" MinHeight="150"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="0.18*" MinHeight="20"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Панель инструментов (размер шрифта) -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+            <TextBlock Text="🔤 Размер шрифта:" Foreground="{StaticResource ForegroundSecondary}" 
+               VerticalAlignment="Center" Margin="0,0,10,0"/>
+            <Button Content="+" Width="25" Height="25" Command="{Binding IncreaseFontCommand}"
+            ToolTip="Увеличить шрифт" Cursor="Hand"
+            Background="{StaticResource BackgroundLight}" Foreground="{StaticResource ForegroundPrimary}" 
+            BorderBrush="{StaticResource BorderDark}" BorderThickness="1"/>
+            <Button Content="−" Width="25" Height="25" Command="{Binding DecreaseFontCommand}"
+            ToolTip="Уменьшить шрифт" Cursor="Hand" Margin="5,0,0,0"
+            Background="{StaticResource BackgroundLight}" Foreground="{StaticResource ForegroundPrimary}" 
+            BorderBrush="{StaticResource BorderDark}" BorderThickness="1"/>
+            <TextBlock Text="{Binding FontSize, StringFormat={}{0:F0} pt}" Foreground="{StaticResource ForegroundSecondary}" 
+               VerticalAlignment="Center" Margin="10,0,0,0"/>
+
+            <!-- Кнопка маркера -->
+            <Button Content="🖍️ Маркер" Width="80" Margin="20,0,0,0"
+        Command="{Binding ToggleMarkerCommand}"
+        Background="{Binding IsMarkerActive, Converter={StaticResource BoolToBrushConverter}, ConverterParameter=#CA5100}"
+        Foreground="White" BorderThickness="0" Cursor="Hand">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="3"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <!-- Кнопка "Выполнено" (работает как Маркер, но переключает IsCompleted) -->
+            <Button Content="✔️ Выполнено" Width="90" Margin="20,0,0,0"
+        Command="{Binding ToggleCompletedCommand}"
+        Background="{Binding CompletedButtonBrush}"
+        Foreground="White" BorderThickness="0" Cursor="Hand"
+        ToolTip="Отметить как завершённое">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="3"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </StackPanel>
+
+        <!-- Тексты -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Column="2" Grid.Row="0" Text="Английский:" Foreground="{StaticResource ForegroundSecondary}" Margin="5,0,0,3"/>
+            <!-- Английский -->
+            <Border Grid.Column="2" Grid.Row="1" Background="{StaticResource BackgroundLight}" BorderBrush="{StaticResource BorderDark}" 
+        BorderThickness="1" CornerRadius="3" Margin="5,0,0,0">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <RichTextBox x:Name="EnglishRichTextBox" 
+                             AutoWordSelection="False"
+             IsReadOnly="True"
+             BorderThickness="0"
+             Background="Transparent"
+             Foreground="{StaticResource ForegroundPrimary}"
+             FontSize="{Binding FontSize}"
+             AcceptsReturn="True"
+             VerticalScrollBarVisibility="Hidden"
+             HorizontalScrollBarVisibility="Hidden"
+             LostFocus="RichTextBox_LostFocus"
+             PreviewMouseLeftButtonDown="RichTextBox_PreviewMouseLeftButtonDown"
+             PreviewMouseLeftButtonUp="RichTextBox_PreviewMouseLeftButtonUp">
+                        
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Text="{Binding EnglishText, Mode=OneWay}"/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                </ScrollViewer>
+            </Border>
+
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="Русский:" Foreground="{StaticResource ForegroundSecondary}" Margin="0,0,0,3"/>
+            <!-- Русский RichTextBox -->
+            <Border Grid.Column="0" Grid.Row="1" Background="{StaticResource BackgroundLight}" BorderBrush="{StaticResource BorderDark}" 
+        BorderThickness="1" CornerRadius="3" Margin="0,0,5,0">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <RichTextBox x:Name="RussianRichTextBox" 
+                                 AutoWordSelection="False"
+             IsReadOnly="True"
+             BorderThickness="0"
+             Background="Transparent"
+             Foreground="{StaticResource ForegroundPrimary}"
+             FontSize="{Binding FontSize}"
+             AcceptsReturn="True"
+             VerticalScrollBarVisibility="Hidden"
+             HorizontalScrollBarVisibility="Hidden"
+             LostFocus="RichTextBox_LostFocus"
+             PreviewMouseLeftButtonDown="RichTextBox_PreviewMouseLeftButtonDown"
+             PreviewMouseLeftButtonUp="RichTextBox_PreviewMouseLeftButtonUp">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Text="{Binding RussianText, Mode=OneWay}"/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                </ScrollViewer>
+            </Border>
+        </Grid>
+
+        <GridSplitter Grid.Row="2" Height="5" HorizontalAlignment="Stretch" 
+                      Background="{StaticResource BorderDark}" ResizeBehavior="PreviousAndNext" 
+                      ResizeDirection="Rows" ShowsPreview="True" Margin="0,5,0,5"/>
+
+        <!-- Список ошибок -->
+        <Grid Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,5">
+                <TextBlock Text="⚠ Замечания к переводу:" Foreground="{StaticResource WarningOrange}" FontWeight="SemiBold"/>
+                <TextBlock Text="{Binding Errors.Count, StringFormat='({0})'}" Foreground="{StaticResource ForegroundSecondary}" Margin="5,0,0,0"/>
+            </StackPanel>
+
+            <Border Grid.Row="1" Background="{StaticResource BackgroundLight}" BorderBrush="{StaticResource BorderDark}" 
+                    BorderThickness="1" CornerRadius="3">
+                <ListBox x:Name="ErrorsListBox" ItemsSource="{Binding Errors}" SelectedItem="{Binding SelectedError}"
+                         Background="Transparent" Foreground="{StaticResource ForegroundPrimary}"
+                         BorderThickness="0" SelectionMode="Single"
+                         VirtualizingPanel.ScrollUnit="Pixel"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type models:ErrorItem}">
+                            <!-- Аналогично исходному шаблону, но с командами -->
+                            <Grid Margin="0,2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0" Text="•" Foreground="{StaticResource WarningOrange}" 
+                                           FontSize="14" VerticalAlignment="Top" Margin="0,-1,6,0"/>
+
+                                <Grid Grid.Column="1" VerticalAlignment="Top">
+                                    <TextBlock x:Name="DisplayText" Text="{Binding Text}" TextWrapping="Wrap"
+                                               VerticalAlignment="Top"/>
+                                    <TextBox x:Name="EditBox" Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}"
+                                             Visibility="Collapsed" TextWrapping="Wrap" AcceptsReturn="False"
+                                             Background="{StaticResource BackgroundLight}" Foreground="{StaticResource ForegroundPrimary}"
+                                             BorderBrush="{StaticResource WarningOrange}" BorderThickness="1" Padding="2"
+                                             LostFocus="EditBox_LostFocus" KeyDown="EditBox_KeyDown"
+                                             VerticalAlignment="Top"/>
+                                </Grid>
+                            </Grid>
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding IsEditing}" Value="True">
+                                    <Setter TargetName="DisplayText" Property="Visibility" Value="Collapsed"/>
+                                    <Setter TargetName="EditBox" Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <EventSetter Event="MouseDoubleClick" Handler="ErrorsListBoxItem_MouseDoubleClick" />
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Padding" Value="8,6"/>
+                            <Setter Property="Margin" Value="0"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListBoxItem">
+                                        <Border Background="{TemplateBinding Background}" 
+                        BorderBrush="Transparent" BorderThickness="0"
+                        Padding="{TemplateBinding Padding}">
+                                            <ContentPresenter/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <!-- Сначала наведение -->
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#1ACA5100"/>
+                                            </Trigger>
+                                            <!-- Затем выделение (перекроет наведение) -->
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="Background" Value="#2ACA5100"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+            </Border>
+        </Grid>
+
+        <!-- Добавление новой ошибки -->
+        <Grid Grid.Row="4" Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="NewErrorTextBox" Grid.Column="0" Text="{Binding NewErrorText, UpdateSourceTrigger=PropertyChanged}"
+                     Background="{StaticResource BackgroundLight}" Foreground="{StaticResource ForegroundPrimary}" 
+                     BorderBrush="{StaticResource BorderDark}" Padding="6" VerticalContentAlignment="Center"
+                     KeyDown="NewErrorTextBox_KeyDown"/>
+            <Button Grid.Column="1" Content="Добавить" Width="80" Margin="10,0,0,0" Command="{Binding AddErrorCommand}"
+                    Style="{StaticResource AddButtonStyle}">
+            </Button>
+            <Button Grid.Column="2" Content="Удалить" Width="80" Margin="5,0,0,0" Command="{Binding DeleteErrorCommand}"
+                    CommandParameter="{Binding SelectedError}"
+                    Style="{StaticResource DeleteButtonStyle}">
+            </Button>
+        </Grid>
+    </Grid>
+</Window>
+
+===== DBD_Trans\Views\AnalysisWindow.xaml.cs =====
+using DBD_Trans.Helpers;
+using DBD_Trans.Models;
+using DBD_Trans.ViewModels;
+using System.ComponentModel;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Media3D;
+
+namespace DBD_Trans.Views
+{
+    public partial class AnalysisWindow : Window
+    {
+        private AnalysisViewModel ViewModel => (AnalysisViewModel)DataContext;
+
+        public AnalysisWindow()
+        {
+            InitializeComponent();
+            Loaded += AnalysisWindow_Loaded;
+            PreviewMouseLeftButtonDown += OnWindowPreviewMouseLeftButtonDown;
+            DarkTitleBarHelper.ApplyDarkTitleBar(this);
+        }
+
+        private void AnalysisWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            ViewModel.EnglishRichTextBox = EnglishRichTextBox;
+            ViewModel.RussianRichTextBox = RussianRichTextBox;
+            ViewModel.InitializeDocuments();
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            ViewModel.OnClosing();
+            base.OnClosing(e);
+        }
+
+        private void OnWindowPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var source = e.OriginalSource as DependencyObject;
+            if (FindParentOfType<ListBox>(source) == ErrorsListBox)
+                return;
+            if (FindParentOfType<Button>(source) != null ||
+                FindParentOfType<TextBox>(source) != null ||
+                FindParentOfType<RichTextBox>(source) != null ||
+                FindParentOfType<ScrollBar>(source) != null ||
+                FindParentOfType<Thumb>(source) != null)
+                return;
+
+            ViewModel.SelectedError = null;
+            e.Handled = true;
+        }
+
+        private static T FindParentOfType<T>(DependencyObject child) where T : DependencyObject
+        {
+            while (child != null)
+            {
+                DependencyObject parent = LogicalTreeHelper.GetParent(child);
+                if (parent == null)
+                {
+                    if (child is Visual || child is Visual3D)
+                        parent = VisualTreeHelper.GetParent(child);
+                    else
+                        break;
+                }
+                if (parent is T typedParent)
+                    return typedParent;
+                child = parent;
+            }
+            return null;
+        }
+
+        private void ErrorsListBox_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var hit = VisualTreeHelper.HitTest(ErrorsListBox, e.GetPosition(ErrorsListBox));
+            if (hit?.VisualHit is FrameworkElement element)
+            {
+                var item = FindParentOfType<ListBoxItem>(element);
+                if (item == null)
+                    ViewModel.SelectedError = null;
+            }
+        }
+
+        private void ErrorsListBoxItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is ListBoxItem item && item.DataContext is ErrorItem errorItem)
+            {
+                ViewModel.EditErrorCommand.Execute(errorItem);
+                Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Background,
+                    new System.Action(() =>
+                    {
+                        var textBox = FindVisualChild<TextBox>(item);
+                        textBox?.Focus();
+                        textBox?.SelectAll();
+                    }));
+                e.Handled = true;
+            }
+        }
+
+        private T FindVisualChild<T>(DependencyObject parent) where T : DependencyObject
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i);
+                if (child is T found) return found;
+                var result = FindVisualChild<T>(child);
+                if (result != null) return result;
+            }
+            return null;
+        }
+
+        private void EditBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (sender is TextBox textBox && textBox.DataContext is ErrorItem errorItem)
+            {
+                errorItem.IsEditing = false;
+                if (string.IsNullOrWhiteSpace(errorItem.Text))
+                    ViewModel.DeleteErrorCommand.Execute(errorItem);
+                else
+                    ViewModel.SaveChanges();
+            }
+        }
+
+        private void EditBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                if (sender is TextBox textBox && textBox.DataContext is ErrorItem errorItem)
+                {
+                    errorItem.IsEditing = false;
+                    if (string.IsNullOrWhiteSpace(errorItem.Text))
+                        ViewModel.DeleteErrorCommand.Execute(errorItem);
+                }
+                e.Handled = true;
+            }
+            else if (e.Key == Key.Escape)
+            {
+                if (sender is TextBox textBox && textBox.DataContext is ErrorItem errorItem)
+                    errorItem.IsEditing = false;
+                e.Handled = true;
+            }
+        }
+
+        private void NewErrorTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                ViewModel.AddErrorCommand.Execute(null);
+                e.Handled = true;
+            }
+        }
+
+        private void RichTextBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var rtb = sender as RichTextBox;
+            if (rtb == null || !ViewModel.IsMarkerActive) return;
+
+            if (Keyboard.Modifiers == ModifierKeys.Control)
+            {
+                TextPointer pos = rtb.GetPositionFromPoint(e.GetPosition(rtb), true);
+                if (pos != null)
+                {
+                    ViewModel.RemoveHighlightAtPosition(rtb, pos);
+                    e.Handled = true;
+                }
+            }
+        }
+
+        private void RichTextBox_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var rtb = sender as RichTextBox;
+            if (rtb == null || !ViewModel.IsMarkerActive) return;
+            
+            if (!rtb.Selection.IsEmpty)
+            {
+                ViewModel.ApplyMarkerToSelection(rtb);
+                Mouse.Capture(null);
+                e.Handled = true;
+                rtb.Selection.Select(rtb.Selection.Start, rtb.Selection.Start);
+            }
+        }
+
+        private void RichTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+        }
+    }
+}
+
+===== DBD_Trans\Views\MainWindow.xaml =====
+<Window x:Class="DBD_Trans.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:DBD_Trans.Views"
+        xmlns:viewModels="clr-namespace:DBD_Trans.ViewModels"
+        xmlns:converters="clr-namespace:DBD_Trans.Converters"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        Title="Локализация DBD" Height="600" Width="950"
+        WindowState="Maximized"
+        Background="#FF171717"
+        FocusVisualStyle="{x:Null}">
+    <Window.Resources>
+        
+        <converters:BoolInverseConverter x:Key="BoolInverseConverter" />
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+
+        <!-- Цветовая палитра -->
+        <SolidColorBrush x:Key="BackgroundDark" Color="#FF171717"/>
+        <SolidColorBrush x:Key="BackgroundMedium" Color="#FF1E1E1E"/>
+        <SolidColorBrush x:Key="BackgroundLight" Color="#FF212121"/>
+        <SolidColorBrush x:Key="ForegroundPrimary" Color="#FFE0E0E0"/>
+        <SolidColorBrush x:Key="ForegroundSecondary" Color="#FFA0A0A0"/>
+        <SolidColorBrush x:Key="WarningOrange" Color="#FFCA5100"/>
+        <SolidColorBrush x:Key="WarningOrangeLight" Color="#33CA5100"/>
+        <SolidColorBrush x:Key="BorderDark" Color="#FF333333"/>
+        <SolidColorBrush x:Key="CompletedRowBackground" Color="#FF232E48"/>
+        <SolidColorBrush x:Key="ErrorRed" Color="#FF3D1C1C"/>
+        <SolidColorBrush x:Key="WarningYellowLight" Color="#FF504A28"/>
+        <!-- полупрозрачный -->
+
+        <!-- В Window.Resources добавить: -->
+        <Style x:Key="ThreeDotsLoading" TargetType="ItemsControl">
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Ellipse Width="35" Height="35" Fill="{StaticResource WarningOrange}" Margin="8.5,0">
+                            <Ellipse.Triggers>
+                                <EventTrigger RoutedEvent="Loaded">
+                                    <BeginStoryboard>
+                                        <Storyboard RepeatBehavior="Forever">
+                                            <DoubleAnimation 
+                                        Storyboard.TargetProperty="Opacity"
+                                        From="0.3" To="1.0" Duration="0:0:0.6"
+                                        AutoReverse="True"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Ellipse.Triggers>
+                        </Ellipse>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+        <!-- Стиль для TextBox поиска -->
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="{StaticResource BackgroundMedium}"/>
+            <Setter Property="Foreground" Value="{StaticResource ForegroundPrimary}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderDark}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="6,4"/>
+            <Setter Property="CaretBrush" Value="{StaticResource ForegroundPrimary}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="3">
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="2"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Стили для ScrollBar -->
+        <Style x:Key="ScrollBarButtonStyle" TargetType="RepeatButton">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border Background="Transparent"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ScrollBarThumbStyle" TargetType="Thumb">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Thumb">
+                        <Border Background="{StaticResource WarningOrange}" CornerRadius="6" Margin="2,0"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="ScrollBar">
+            <Setter Property="Background" Value="{StaticResource BackgroundMedium}"/>
+            <Setter Property="Width" Value="12"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ScrollBar">
+                        <Grid>
+                            <Border Background="{TemplateBinding Background}" CornerRadius="6"/>
+                            <Track x:Name="PART_Track" IsDirectionReversed="True">
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Command="ScrollBar.PageUpCommand" Style="{StaticResource ScrollBarButtonStyle}"/>
+                                </Track.DecreaseRepeatButton>
+                                <Track.Thumb>
+                                    <Thumb Style="{StaticResource ScrollBarThumbStyle}"/>
+                                </Track.Thumb>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Command="ScrollBar.PageDownCommand" Style="{StaticResource ScrollBarButtonStyle}"/>
+                                </Track.IncreaseRepeatButton>
+                            </Track>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Стиль DataGrid (без рамок фокуса и внешних обводок) -->
+        <Style TargetType="DataGrid">
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Background" Value="{StaticResource BackgroundMedium}"/>
+            <Setter Property="Foreground" Value="{StaticResource ForegroundPrimary}"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="RowBackground" Value="{StaticResource BackgroundMedium}"/>
+            <Setter Property="AlternatingRowBackground" Value="{StaticResource BackgroundLight}"/>
+            <Setter Property="AlternationCount" Value="2"/>
+            <Setter Property="HeadersVisibility" Value="Column"/>
+            <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+            <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource BorderDark}"/>
+            <Setter Property="VerticalGridLinesBrush" Value="Transparent"/>
+            <Setter Property="RowHeaderWidth" Value="0"/>
+            <Setter Property="SelectionUnit" Value="FullRow"/>
+            <Setter Property="SelectionMode" Value="Single"/>
+            <Setter Property="CanUserResizeColumns" Value="True"/>
+            <Setter Property="CanUserReorderColumns" Value="False"/>
+            <Setter Property="AutoGenerateColumns" Value="False"/>
+            <Setter Property="CanUserAddRows" Value="False"/>
+            <Setter Property="CanUserDeleteRows" Value="False"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="CanUserSortColumns" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="DataGrid">
+                        <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="DG_ScrollViewer" Focusable="False">
+                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            </ScrollViewer>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+        </Style>
+
+        <!-- Заголовки столбцов -->
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Background" Value="{StaticResource BackgroundDark}"/>
+            <Setter Property="Foreground" Value="{StaticResource ForegroundPrimary}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderDark}"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            <Setter Property="Padding" Value="8,6"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="DataGridColumnHeader">
+                        <Border Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                            <Grid>
+                                <ContentPresenter Margin="{TemplateBinding Padding}" 
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                              RecognizesAccessKey="True"/>
+                                <Thumb x:Name="PART_RightHeaderGripper" HorizontalAlignment="Right" 
+                                   Width="2" Background="Transparent" Cursor="SizeWE"/>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Ячейки -->
+        <Style TargetType="DataGridCell">
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource ForegroundPrimary}"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="8,4"/>
+            <Setter Property="VerticalContentAlignment" Value="Top"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="DataGridCell">
+                        <Border Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Padding="{TemplateBinding Padding}">
+                            <ContentPresenter/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <!-- Завершено БЕЗ ошибок -->
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding Status}" Value="Completed"/>
+                        <Condition Binding="{Binding HasErrors}" Value="False"/>
+                    </MultiDataTrigger.Conditions>
+                    <Setter Property="Background" Value="{StaticResource CompletedRowBackground}"/>
+                </MultiDataTrigger>
+
+                <!-- Завершено С ошибками -->
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding Status}" Value="Completed"/>
+                        <Condition Binding="{Binding HasErrors}" Value="True"/>
+                    </MultiDataTrigger.Conditions>
+                    <Setter Property="Background" Value="{StaticResource ErrorRed}"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </MultiDataTrigger>
+
+                <!-- Есть замечания, но НЕ завершено → жёлтый -->
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding Status}" Value="InProgress"/>
+                        <Condition Binding="{Binding HasErrors}" Value="True"/>
+                    </MultiDataTrigger.Conditions>
+                    <Setter Property="Background" Value="{StaticResource WarningYellowLight}"/>
+                    <Setter Property="Foreground" Value="{StaticResource ForegroundPrimary}"/>
+                </MultiDataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Стиль для контекстного меню -->
+        <Style TargetType="ContextMenu">
+            <Setter Property="Background" Value="{StaticResource BackgroundMedium}"/>
+            <Setter Property="Foreground" Value="{StaticResource ForegroundPrimary}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderDark}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="2"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ContextMenu">
+                        <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="4"
+                    Padding="{TemplateBinding Padding}">
+                            <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Стиль для пунктов меню -->
+        <Style TargetType="MenuItem">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource ForegroundPrimary}"/>
+            <Setter Property="Padding" Value="12,6"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="MenuItem">
+                        <Border x:Name="Border" 
+                    Background="{TemplateBinding Background}" 
+                    BorderBrush="Transparent" 
+                    BorderThickness="0"
+                    CornerRadius="3"
+                    Margin="2,1">
+                            <Grid>
+                                <ContentPresenter x:Name="ContentPresenter"
+                                      Content="{TemplateBinding Header}"
+                                      RecognizesAccessKey="True"
+                                      Margin="{TemplateBinding Padding}"
+                                      HorizontalAlignment="Left"
+                                      VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="{StaticResource WarningOrange}"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="{StaticResource ForegroundSecondary}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Стиль для разделителя (опционально) -->
+        <Style TargetType="Separator">
+            <Setter Property="Height" Value="1"/>
+            <Setter Property="Background" Value="{StaticResource BorderDark}"/>
+            <Setter Property="Margin" Value="4,2"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Separator">
+                        <Border Background="{TemplateBinding Background}" Height="{TemplateBinding Height}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Строки -->
+        <Style TargetType="DataGridRow">
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Style.Triggers>
+                <!-- Чередование строк -->
+                <Trigger Property="AlternationIndex" Value="1">
+                    <Setter Property="Background" Value="{StaticResource BackgroundLight}"/>
+                </Trigger>
+
+                <DataTrigger Binding="{Binding Status}" Value="Completed">
+                    <Setter Property="Background" Value="#B0E0E6"/>
+                    <!-- светло-голубой -->
+                    <Setter Property="Foreground" Value="#000000"/>
+                    <!-- чёрный текст для контраста (опционально) -->
+                </DataTrigger>
+
+
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#2A0f0600"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource WarningOrange}"/>
+                    <Setter Property="BorderThickness" Value="3,0,0,0"/>
+                </Trigger>
+
+
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#2A0f0600"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource WarningOrange}"/>
+                    <Setter Property="BorderThickness" Value="3,0,0,0"/>
+                </Trigger>
+
+                <DataTrigger Binding="{Binding HasTranslation}" Value="False">
+                    <Setter Property="Background" Value="{StaticResource WarningOrangeLight}"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource WarningOrange}"/>
+                    <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid Margin="15" IsEnabled="{Binding IsLoading, Converter={StaticResource BoolInverseConverter}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Панель поиска -->
+            <Border Grid.Row="0" Background="{StaticResource BackgroundMedium}" CornerRadius="4" Padding="10" Margin="0,0,0,15">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="🔍" Foreground="{StaticResource ForegroundSecondary}" VerticalAlignment="Center" Margin="0,0,8,0" FontSize="14"/>
+                    <TextBlock Text="Поиск:" Foreground="{StaticResource ForegroundSecondary}" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                    <TextBox x:Name="SearchBox" Width="350" VerticalAlignment="Center" 
+                         Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock Text="{Binding ResultCountText}" Foreground="{StaticResource ForegroundSecondary}" 
+                           VerticalAlignment="Center" Margin="15,0,0,0" FontSize="12"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Таблица -->
+            <DataGrid x:Name="LocalizationGrid" Grid.Row="1" 
+                  AlternationCount="2"
+                  ItemsSource="{Binding FilteredEntries}"
+                  SelectedItem="{Binding SelectedEntry}"
+                  VirtualizingPanel.ScrollUnit="Pixel"
+                  VirtualizingPanel.VirtualizationMode="Recycling"
+                  VirtualizingPanel.CacheLengthUnit="Page"
+                  VirtualizingPanel.CacheLength="1">
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Анализ" Command="{Binding AnalyzeCommand}"
+                              CommandParameter="{Binding SelectedEntry}">
+                            <MenuItem.Icon>
+                                <Path Data="M0,0 L10,10 M10,0 L0,10" Stroke="{StaticResource ForegroundPrimary}" StrokeThickness="2"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Перейти" Command="{Binding GoToCommand}"
+                              CommandParameter="{Binding SelectedEntry}">
+                            <MenuItem.Icon>
+                                <Path Data="M0,0 L8,5 L0,10 Z" Fill="{StaticResource ForegroundPrimary}" 
+                                  Width="12" Height="12" Stretch="Uniform" Margin="0,0,4,0"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="№" Binding="{Binding Index}" Width="60">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextAlignment" Value="Right"/>
+                                <Setter Property="Foreground" Value="{StaticResource ForegroundSecondary}"/>
+                                <Setter Property="Margin" Value="0,0,5,0"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Код строки" Binding="{Binding Key}" Width="260">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="FontFamily" Value="Consolas, Courier New"/>
+                                <Setter Property="FontSize" Value="12"/>
+                                <Setter Property="TextWrapping" Value="NoWrap"/>
+                                <Setter Property="ToolTip" Value="{Binding Key}"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Русский" Binding="{Binding Russian}" Width="*">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Setter Property="LineHeight" Value="20"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Английский" Binding="{Binding English}" Width="*">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Setter Property="LineHeight" Value="20"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <!-- Статусная строка -->
+            <Border Grid.Row="2" Background="{StaticResource BackgroundMedium}" CornerRadius="4" Padding="10,6" Margin="0,10,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Всего строк: " Foreground="{StaticResource ForegroundSecondary}"/>
+                    <TextBlock Text="{Binding TotalCount}" Foreground="{StaticResource ForegroundPrimary}" FontWeight="Bold"/>
+                    <TextBlock Text=" | Отображено: " Foreground="{StaticResource ForegroundSecondary}" Margin="10,0,0,0"/>
+                    <TextBlock Text="{Binding DisplayedCount}" Foreground="{StaticResource ForegroundPrimary}" FontWeight="Bold"/>
+                    <TextBlock Text=" | Без перевода: " Foreground="{StaticResource ForegroundSecondary}" Margin="10,0,0,0"/>
+                    <TextBlock Text="{Binding MissingCount}" Foreground="{StaticResource ForegroundSecondary}" FontWeight="Bold"/>
+                    <TextBlock Text=" | Завершено: " Foreground="{StaticResource ForegroundSecondary}" Margin="10,0,0,0"/>
+                    <TextBlock Text="{Binding CompletedCount}" Foreground="{StaticResource ForegroundSecondary}" FontWeight="Bold"/>
+                    <TextBlock Text=" | Замечаний: " Foreground="{StaticResource ForegroundSecondary}" Margin="10,0,0,0"/>
+                    <TextBlock Text="{Binding TotalErrorCount}" Foreground="{StaticResource ForegroundSecondary}" FontWeight="Bold"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+        <Border Background="#CC1E1E1E" Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}">
+            <Grid>
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <!-- Три точки -->
+                    <ItemsControl Style="{StaticResource ThreeDotsLoading}">
+                        <sys:Int32>1</sys:Int32>
+                        <sys:Int32>2</sys:Int32>
+                        <sys:Int32>3</sys:Int32>
+                    </ItemsControl>
+                    <TextBlock Text="Загрузка данных..." 
+                       Foreground="#FFE0E0E0" 
+                       FontSize="14" 
+                       FontWeight="SemiBold"
+                       Margin="0,20,0,0"
+                       HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
+
+===== DBD_Trans\Views\MainWindow.xaml.cs =====
+using DBD_Trans.Helpers;
+using DBD_Trans.Models;
+using DBD_Trans.ViewModels;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
+
+namespace DBD_Trans.Views
+{
+    public partial class MainWindow : Window
+    {
+        private MainViewModel ViewModel => DataContext as MainViewModel;
+
+        public MainWindow()
+        {
+            InitializeComponent();
+
+            DarkTitleBarHelper.ApplyDarkTitleBar(this);
+            // Подписка на события после полной загрузки окна (DataContext уже будет установлен)
+            this.Loaded += (s, e) =>
+            {
+                var vm = DataContext as MainViewModel;
+                if (vm != null)
+                {
+                    vm.ScrollToItemRequested += OnScrollToItem;
+                }
+            };
+
+            // Снятие выделения при клике вне DataGrid
+            this.PreviewMouseLeftButtonDown += OnWindowPreviewMouseLeftButtonDown;
+
+            // Снятие выделения при повторном клике по строке
+            LocalizationGrid.MouseLeftButtonDown += (s, e) =>
+            {
+                var dep = (DependencyObject)e.OriginalSource;
+                while (dep != null && !(dep is DataGridRow))
+                    dep = VisualTreeHelper.GetParent(dep);
+
+                if (dep is DataGridRow row && row.IsSelected)
+                {
+                    var vm = DataContext as MainViewModel;
+                    if (vm != null)
+                        vm.SelectedEntry = null;
+                    e.Handled = true;
+                }
+            };
+
+            // Выделение строки перед правым кликом для контекстного меню
+            LocalizationGrid.PreviewMouseRightButtonDown += (s, e) =>
+            {
+                var dep = (DependencyObject)e.OriginalSource;
+                while (dep != null && !(dep is DataGridRow))
+                    dep = VisualTreeHelper.GetParent(dep);
+
+                if (dep is DataGridRow row && row.Item is LocalizationEntry entry)
+                {
+                    var vm = DataContext as MainViewModel;
+                    if (vm != null)
+                        vm.SelectedEntry = entry;
+                }
+            };
+        }
+
+        private void OnScrollToItem(LocalizationEntry entry)
+        {
+            LocalizationGrid.ScrollIntoView(entry);
+            Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Background,
+                new System.Action(() =>
+                {
+                    if (LocalizationGrid.ItemContainerGenerator.ContainerFromItem(entry) is DataGridRow row)
+                        row.BringIntoView();
+                }));
+        }
+
+        private void OnWindowPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (FindParentOfType<DataGrid>(e.OriginalSource as DependencyObject) == LocalizationGrid)
+                return;
+
+            var vm = DataContext as MainViewModel;
+            if (vm != null)
+                vm.SelectedEntry = null;
+        }
+
+        private static T FindParentOfType<T>(DependencyObject child) where T : DependencyObject
+        {
+            DependencyObject parent = VisualTreeHelper.GetParent(child);
+            while (parent != null && !(parent is T))
+                parent = VisualTreeHelper.GetParent(parent);
+            return parent as T;
+        }
+    }
+}
+
+===== DBD_Trans\App.config =====
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <configSections>
+        <sectionGroup name="userSettings" type="System.Configuration.UserSettingsGroup, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" >
+            <section name="DBD_Trans.Properties.Settings" type="System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" allowExeDefinition="MachineToLocalUser" requirePermission="false" />
+        </sectionGroup>
+    </configSections>
+    <startup> 
+        <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.8" />
+    </startup>
+    <userSettings>
+        <DBD_Trans.Properties.Settings>
+            <setting name="AnalysisFontSize" serializeAs="String">
+                <value>14</value>
+            </setting>
+        </DBD_Trans.Properties.Settings>
+    </userSettings>
+</configuration>
+
+===== DBD_Trans\App.xaml =====
+<Application x:Class="DBD_Trans.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:DBD_Trans">
+    <Application.Resources>
+        <!-- Основные цвета приложения -->
+        <SolidColorBrush x:Key="WarningOrange" Color="#FFCA5100"/>
+        <SolidColorBrush x:Key="PermanentHighlightBrush" Color="#33CA5100"/>
+    </Application.Resources>
+</Application>
+
+===== DBD_Trans\App.xaml.cs =====
+using DBD_Trans.Models;
+using DBD_Trans.Services;
+using DBD_Trans.ViewModels;
+using DBD_Trans.Views;
+using System;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Windows;
+using System.Windows.Data;
+
+namespace DBD_Trans
+{
+    public partial class App : Application
+    {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            // Папка, где лежит .sln (и наши JSON-файлы)
+            string dataDir = GetSolutionDirectory();
+
+            var fileService = new JsonFileService();
+            var errorStorage = new JsonErrorStorage(fileService, dataDir);      // вместо BaseDirectory
+            var statusStorage = new JsonStatusStorage(dataDir);                 // вместо BaseDirectory
+            var appSettings = new AppSettings();
+
+            var mainVM = new MainViewModel(fileService, errorStorage, statusStorage, appSettings, dataDir);
+            var mainWindow = new MainWindow();
+            mainWindow.DataContext = mainVM;
+            mainWindow.Show();
+        }
+        private static string GetSolutionDirectory()
+        {
+            string dir = AppDomain.CurrentDomain.BaseDirectory;
+            while (dir != null && !Directory.GetFiles(dir, "*.sln").Any())
+            {
+                dir = Directory.GetParent(dir)?.FullName;
+            }
+            // Если папка решения не найдена (например, после публикации) – fallback на папку с exe
+            return dir ?? AppDomain.CurrentDomain.BaseDirectory;
+        }
+    }
+}
+
+===== DBD_Trans\packages.config =====
+<?xml version="1.0" encoding="utf-8"?>
+<packages>
+  <package id="Newtonsoft.Json" version="13.0.4" targetFramework="net48" />
+</packages>
+

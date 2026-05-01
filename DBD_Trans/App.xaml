@@ -1,0 +1,10 @@
+﻿<Application x:Class="DBD_Trans.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:DBD_Trans">
+    <Application.Resources>
+        <!-- Основные цвета приложения -->
+        <SolidColorBrush x:Key="WarningOrange" Color="#FFCA5100"/>
+        <SolidColorBrush x:Key="PermanentHighlightBrush" Color="#33CA5100"/>
+    </Application.Resources>
+</Application>

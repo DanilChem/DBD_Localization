@@ -1,0 +1,382 @@
+﻿<Window x:Class="DBD_Trans.Views.AnalysisWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:DBD_Trans.Views"
+        xmlns:viewModels="clr-namespace:DBD_Trans.ViewModels"
+        xmlns:models="clr-namespace:DBD_Trans.Models"
+        xmlns:converters="clr-namespace:DBD_Trans.Converters"
+        Title="{Binding Title}" Height="600" Width="900"
+        WindowStartupLocation="CenterOwner"
+        WindowState="Maximized"
+        Background="#FF1E1E1E"
+        ResizeMode="CanResizeWithGrip"
+        FocusVisualStyle="{x:Null}">
+    <Window.Resources>
+        <converters:BoolToBrushConverter x:Key="BoolToBrushConverter"/>
+        
+        <SolidColorBrush x:Key="BackgroundDark" Color="#FF171717"/>
+        <SolidColorBrush x:Key="BackgroundMedium" Color="#FF1E1E1E"/>
+        <SolidColorBrush x:Key="BackgroundLight" Color="#FF212121"/>
+        <SolidColorBrush x:Key="ForegroundPrimary" Color="#FFE0E0E0"/>
+        <SolidColorBrush x:Key="ForegroundSecondary" Color="#FFA0A0A0"/>
+        <SolidColorBrush x:Key="BorderDark" Color="#FF333333"/>
+        <SolidColorBrush x:Key="ErrorRed" Color="#FF3D1C1C"/>
+        <SolidColorBrush x:Key="CompletedBlue" Color="#FF232E48"/>
+
+        <Style x:Key="CompletedToggleButtonStyle" TargetType="ToggleButton">
+            <Setter Property="Background" Value="{StaticResource BackgroundLight}"/>
+            <Setter Property="Foreground" Value="{StaticResource ForegroundPrimary}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" 
+                        CornerRadius="3"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource CompletedBlue}"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="AddButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource WarningOrange}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="3"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="DeleteButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource BackgroundLight}"/>
+            <Setter Property="Foreground" Value="{StaticResource ForegroundPrimary}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderDark}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="3"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Стили для ScrollBar -->
+        <Style x:Key="ScrollBarButtonStyle" TargetType="RepeatButton">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border Background="Transparent"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ScrollBarThumbStyle" TargetType="Thumb">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Thumb">
+                        <Border Background="{StaticResource BorderDark}" CornerRadius="6" Margin="2,0"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SmoothScrollTextBox" TargetType="TextBox">
+            <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalOnly"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="3">
+                            <ScrollViewer x:Name="PART_ContentHost" 
+                                      Margin="2" 
+                                      CanContentScroll="False"
+                                      PanningMode="VerticalOnly"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="ScrollBar">
+            <Setter Property="Background" Value="{StaticResource BackgroundMedium}"/>
+            <Setter Property="Width" Value="12"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ScrollBar">
+                        <Grid>
+                            <Border Background="{TemplateBinding Background}" CornerRadius="6"/>
+                            <Track x:Name="PART_Track" IsDirectionReversed="True">
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Command="ScrollBar.PageUpCommand" Style="{StaticResource ScrollBarButtonStyle}"/>
+                                </Track.DecreaseRepeatButton>
+                                <Track.Thumb>
+                                    <Thumb Style="{StaticResource ScrollBarThumbStyle}"/>
+                                </Track.Thumb>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Command="ScrollBar.PageDownCommand" Style="{StaticResource ScrollBarButtonStyle}"/>
+                                </Track.IncreaseRepeatButton>
+                            </Track>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="8*" MinHeight="150"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="0.18*" MinHeight="20"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Панель инструментов (размер шрифта) -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+            <TextBlock Text="🔤 Размер шрифта:" Foreground="{StaticResource ForegroundSecondary}" 
+               VerticalAlignment="Center" Margin="0,0,10,0"/>
+            <Button Content="+" Width="25" Height="25" Command="{Binding IncreaseFontCommand}"
+            ToolTip="Увеличить шрифт" Cursor="Hand"
+            Background="{StaticResource BackgroundLight}" Foreground="{StaticResource ForegroundPrimary}" 
+            BorderBrush="{StaticResource BorderDark}" BorderThickness="1"/>
+            <Button Content="−" Width="25" Height="25" Command="{Binding DecreaseFontCommand}"
+            ToolTip="Уменьшить шрифт" Cursor="Hand" Margin="5,0,0,0"
+            Background="{StaticResource BackgroundLight}" Foreground="{StaticResource ForegroundPrimary}" 
+            BorderBrush="{StaticResource BorderDark}" BorderThickness="1"/>
+            <TextBlock Text="{Binding FontSize, StringFormat={}{0:F0} pt}" Foreground="{StaticResource ForegroundSecondary}" 
+               VerticalAlignment="Center" Margin="10,0,0,0"/>
+
+            <!-- Кнопка маркера -->
+            <Button Content="🖍️ Маркер" Width="80" Margin="20,0,0,0"
+        Command="{Binding ToggleMarkerCommand}"
+        Background="{Binding IsMarkerActive, Converter={StaticResource BoolToBrushConverter}, ConverterParameter=#CA5100}"
+        Foreground="White" BorderThickness="0" Cursor="Hand">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="3"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <!-- Кнопка "Выполнено" (работает как Маркер, но переключает IsCompleted) -->
+            <Button Content="✔️ Выполнено" Width="90" Margin="20,0,0,0"
+        Command="{Binding ToggleCompletedCommand}"
+        Background="{Binding CompletedButtonBrush}"
+        Foreground="White" BorderThickness="0" Cursor="Hand"
+        ToolTip="Отметить как завершённое">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="3"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </StackPanel>
+
+        <!-- Тексты -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Column="2" Grid.Row="0" Text="Английский:" Foreground="{StaticResource ForegroundSecondary}" Margin="5,0,0,3"/>
+            <!-- Английский -->
+            <Border Grid.Column="2" Grid.Row="1" Background="{StaticResource BackgroundLight}" BorderBrush="{StaticResource BorderDark}" 
+        BorderThickness="1" CornerRadius="3" Margin="5,0,0,0">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <RichTextBox x:Name="EnglishRichTextBox" 
+                             AutoWordSelection="False"
+             IsReadOnly="True"
+             BorderThickness="0"
+             Background="Transparent"
+             Foreground="{StaticResource ForegroundPrimary}"
+             FontSize="{Binding FontSize}"
+             AcceptsReturn="True"
+             VerticalScrollBarVisibility="Hidden"
+             HorizontalScrollBarVisibility="Hidden"
+             LostFocus="RichTextBox_LostFocus"
+             PreviewMouseLeftButtonDown="RichTextBox_PreviewMouseLeftButtonDown"
+             PreviewMouseLeftButtonUp="RichTextBox_PreviewMouseLeftButtonUp">
+                        
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Text="{Binding EnglishText, Mode=OneWay}"/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                </ScrollViewer>
+            </Border>
+
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="Русский:" Foreground="{StaticResource ForegroundSecondary}" Margin="0,0,0,3"/>
+            <!-- Русский RichTextBox -->
+            <Border Grid.Column="0" Grid.Row="1" Background="{StaticResource BackgroundLight}" BorderBrush="{StaticResource BorderDark}" 
+        BorderThickness="1" CornerRadius="3" Margin="0,0,5,0">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <RichTextBox x:Name="RussianRichTextBox" 
+                                 AutoWordSelection="False"
+             IsReadOnly="True"
+             BorderThickness="0"
+             Background="Transparent"
+             Foreground="{StaticResource ForegroundPrimary}"
+             FontSize="{Binding FontSize}"
+             AcceptsReturn="True"
+             VerticalScrollBarVisibility="Hidden"
+             HorizontalScrollBarVisibility="Hidden"
+             LostFocus="RichTextBox_LostFocus"
+             PreviewMouseLeftButtonDown="RichTextBox_PreviewMouseLeftButtonDown"
+             PreviewMouseLeftButtonUp="RichTextBox_PreviewMouseLeftButtonUp">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run Text="{Binding RussianText, Mode=OneWay}"/>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
+                </ScrollViewer>
+            </Border>
+        </Grid>
+
+        <GridSplitter Grid.Row="2" Height="5" HorizontalAlignment="Stretch" 
+                      Background="{StaticResource BorderDark}" ResizeBehavior="PreviousAndNext" 
+                      ResizeDirection="Rows" ShowsPreview="True" Margin="0,5,0,5"/>
+
+        <!-- Список ошибок -->
+        <Grid Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,5">
+                <TextBlock Text="⚠ Замечания к переводу:" Foreground="{StaticResource WarningOrange}" FontWeight="SemiBold"/>
+                <TextBlock Text="{Binding Errors.Count, StringFormat='({0})'}" Foreground="{StaticResource ForegroundSecondary}" Margin="5,0,0,0"/>
+            </StackPanel>
+
+            <Border Grid.Row="1" Background="{StaticResource BackgroundLight}" BorderBrush="{StaticResource BorderDark}" 
+                    BorderThickness="1" CornerRadius="3">
+                <ListBox x:Name="ErrorsListBox" ItemsSource="{Binding Errors}" SelectedItem="{Binding SelectedError}"
+                         Background="Transparent" Foreground="{StaticResource ForegroundPrimary}"
+                         BorderThickness="0" SelectionMode="Single"
+                         VirtualizingPanel.ScrollUnit="Pixel"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type models:ErrorItem}">
+                            <!-- Аналогично исходному шаблону, но с командами -->
+                            <Grid Margin="0,2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0" Text="•" Foreground="{StaticResource WarningOrange}" 
+                                           FontSize="14" VerticalAlignment="Top" Margin="0,-1,6,0"/>
+
+                                <Grid Grid.Column="1" VerticalAlignment="Top">
+                                    <TextBlock x:Name="DisplayText" Text="{Binding Text}" TextWrapping="Wrap"
+                                               VerticalAlignment="Top"/>
+                                    <TextBox x:Name="EditBox" Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}"
+                                             Visibility="Collapsed" TextWrapping="Wrap" AcceptsReturn="False"
+                                             Background="{StaticResource BackgroundLight}" Foreground="{StaticResource ForegroundPrimary}"
+                                             BorderBrush="{StaticResource WarningOrange}" BorderThickness="1" Padding="2"
+                                             LostFocus="EditBox_LostFocus" KeyDown="EditBox_KeyDown"
+                                             VerticalAlignment="Top"/>
+                                </Grid>
+                            </Grid>
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding IsEditing}" Value="True">
+                                    <Setter TargetName="DisplayText" Property="Visibility" Value="Collapsed"/>
+                                    <Setter TargetName="EditBox" Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <EventSetter Event="MouseDoubleClick" Handler="ErrorsListBoxItem_MouseDoubleClick" />
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Padding" Value="8,6"/>
+                            <Setter Property="Margin" Value="0"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListBoxItem">
+                                        <Border Background="{TemplateBinding Background}" 
+                        BorderBrush="Transparent" BorderThickness="0"
+                        Padding="{TemplateBinding Padding}">
+                                            <ContentPresenter/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <!-- Сначала наведение -->
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#1ACA5100"/>
+                                            </Trigger>
+                                            <!-- Затем выделение (перекроет наведение) -->
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="Background" Value="#2ACA5100"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+            </Border>
+        </Grid>
+
+        <!-- Добавление новой ошибки -->
+        <Grid Grid.Row="4" Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="NewErrorTextBox" Grid.Column="0" Text="{Binding NewErrorText, UpdateSourceTrigger=PropertyChanged}"
+                     Background="{StaticResource BackgroundLight}" Foreground="{StaticResource ForegroundPrimary}" 
+                     BorderBrush="{StaticResource BorderDark}" Padding="6" VerticalContentAlignment="Center"
+                     KeyDown="NewErrorTextBox_KeyDown"/>
+            <Button Grid.Column="1" Content="Добавить" Width="80" Margin="10,0,0,0" Command="{Binding AddErrorCommand}"
+                    Style="{StaticResource AddButtonStyle}">
+            </Button>
+            <Button Grid.Column="2" Content="Удалить" Width="80" Margin="5,0,0,0" Command="{Binding DeleteErrorCommand}"
+                    CommandParameter="{Binding SelectedError}"
+                    Style="{StaticResource DeleteButtonStyle}">
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

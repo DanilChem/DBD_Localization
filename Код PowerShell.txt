@@ -1,0 +1,9 @@
+$outputPath = Join-Path (Get-Location) "project_dump.txt"
+$ignore = @('bin', 'obj', '.git', '.vs', 'node_modules', 'packages', '*.user', '*.suo', '*.dll', '*.exe', '*.pdb')
+$files = Get-ChildItem -Recurse -File -Include '*.cs', '*.cshtml', '*.xaml', '*.config' -Exclude $ignore
+$content = foreach ($f in $files) {
+    $relativePath = $f.FullName.Substring((Get-Location).Path.Length + 1)
+    "===== $relativePath =====" + "`n" + (Get-Content $f.FullName -Raw) + "`n"
+}
+$content | Out-File -FilePath $outputPath -Encoding UTF8
+Write-Host "Готово! Файл сохранён: $outputPath"
