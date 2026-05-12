@@ -2807,5 +2807,685 @@
         }
       ]
     }
+  ],
+  "D592F3D24ED47082F309A1930086F447": [
+    {
+      "Text": "Опущено, что у Уильяма костюм был beloved",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 126,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено слово heinous",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 199,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Пошёл != Marched. Корректнее было бы перевести зашагал или быстро пошёл, но не критично",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1132,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1075,
+          "Length": 5
+        }
+      ]
+    },
+    {
+      "Text": "Грамматическая ошибка в слове прекратиться",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1536,
+          "Length": 12
+        }
+      ]
+    },
+    {
+      "Text": "Опущено слово swirling по отношению к чёрным клубам тумана",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1315,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Неведомая сила подсказывала != Somehow, he knew",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1588,
+          "Length": 16
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1486,
+          "Length": 27
+        }
+      ]
+    }
+  ],
+  "DCCEAA7E4B0FC21421AA40B179F3B445": [
+    {
+      "Text": "Отсутствует слово food, но не критично, так как относиться к аддону гнилой пиццы",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "5F56F71A401CDED80BF2308169150C5E": [
+    {
+      "Text": "Пещера пиратов != Pirates Cove. Перевели cove как cave, т.е. пещеру, а не как бухту",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 11,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 11,
+          "Length": 14
+        }
+      ]
+    }
+  ],
+  "232439E7453C6F999568329F1921338A": [
+    {
+      "Text": "Одноразовая != Paper",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 7,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 7,
+          "Length": 11
+        }
+      ]
+    }
+  ],
+  "948F1E964B4B2BD3E7AA0DADC023CB0B": [
+    {
+      "Text": "Cлюнявчик должен останавливать кекс от совершения беспорядка, так как он хуйни натворил в фильме",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 11,
+          "Length": 38
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 15,
+          "Length": 33
+        }
+      ]
+    }
+  ],
+  "06E052BE4D7921B9F71E0BB5B6BA78B4": [
+    {
+      "Text": "Радиус увеличивается до 250%, а не на 250%",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 135,
+          "Length": 2
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 136,
+          "Length": 2
+        }
+      ]
+    }
+  ],
+  "B68281EC4A4418A32142B391C3CC3C18": [
+    {
+      "Text": "Опущено слово guy, man был бы расстроен",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 18
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 19
+        }
+      ]
+    }
+  ],
+  "96BF39ED4A30274BE3CE938D2C4FE65A": [
+    {
+      "Text": "Неправильно переведено слово to draw. Есть два значения: приближаться и рисовать, угадайте какое значение было подобрано к, мать твою, РИСУНКУ",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 25,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 6,
+          "Length": 7
+        }
+      ]
+    }
+  ],
+  "EDA7D2EF4D7D9A2244C3D4A8E526980F": [
+    {
+      "Text": "Странное описание \"не может использовать ворота\" не проще ли ворота для всех выживших будут заблокированы?",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 98,
+          "Length": 26
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 126,
+          "Length": 19
+        }
+      ]
+    }
+  ],
+  "9DDBDA2F494723C1645B68BE7D7216E6": [
+    {
+      "Text": "Опущено to getting the job done",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 47,
+          "Length": 23
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "979E937C4C6F2D9787EE76BAC7C09F94": [
+    {
+      "Text": "Придётся заплатить != Comes with a price. Корретный перевод: за сбор этих жетонов полагается приз",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 24,
+          "Length": 18
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 21,
+          "Length": 18
+        }
+      ]
+    }
+  ],
+  "4ACDFEC3451E4B26FE5257807FB7AF71": [
+    {
+      "Text": "Фамилии Сакапат не существует, должна быть Сукапат. Если кто-то скажет про мат, то просто скинуть воис лайн косметики Братьев Пидорасов",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 7,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 25,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Средний талант != Understudy. Буронг была дублёром основной певицы и не была в центре внимания",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 146,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 147,
+          "Length": 16
+        }
+      ]
+    },
+    {
+      "Text": "В переводе уменьшена роль Джанджиры, так как та в оригинале была её самым большим поклонником и помогала всегда, а не всячески, хоть и предоставляла только плечо для поплакушек",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 267,
+          "Length": 25
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 260,
+          "Length": 24
+        }
+      ]
+    },
+    {
+      "Text": "Опущено в переводе, что Малай сама нашла Буронг",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 440,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено advised her to drink it перед мегакрутой фразой Малай",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 558,
+          "Length": 23
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Буронг оценила стеклянный пузырёк и слова Малай как своебразную игру, сделку или ритуал, а не странный подарок",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 725,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 654,
+          "Length": 16
+        }
+      ]
+    },
+    {
+      "Text": "Опущено she grabbed the bottle",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 801,
+          "Length": 22
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Гладкий != Soft",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 893,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 855,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Опущено rang through the theater",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1046,
+          "Length": 24
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "В оригинале, когда Буронг кашлянула кровью, она сознательно проигнорировала это, в переводе сказано, что она не подала виду, то есть не поняла серьёзность внутренней Красу.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1194,
+          "Length": 18
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1085,
+          "Length": 14
+        }
+      ]
+    },
+    {
+      "Text": "Потянулась вверх != Bolted upright. В оригинале Буронг, после омегамесячных резко выпрямилась в поисках лампы",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1360,
+          "Length": 14
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1276,
+          "Length": 16
+        }
+      ]
+    },
+    {
+      "Text": "В оригинале после резкого пробуждения Буронг искала рукой на ощупь лампу. Перевод же опускает поиск, а лампу заменяет на выключатель",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1376,
+          "Length": 24
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1294,
+          "Length": 13
+        }
+      ]
+    },
+    {
+      "Text": "Буронг в оригинале пробудилась в разрушенном курятнике, в котором перья и внутренности покрывали землю, в оригинале вместо курятника и его описания, присутствует единичная курица.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1492,
+          "Length": 61
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1397,
+          "Length": 59
+        }
+      ]
+    },
+    {
+      "Text": "Страдает лунатизмом != Restlessly sleepwalking. Корректно было бы перевести как: постоянно ходит во сне",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1921,
+          "Length": 23
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1854,
+          "Length": 19
+        }
+      ]
+    },
+    {
+      "Text": "Опущено слово to coax. В оригинале Джанджира бы вернула в постель Буронг нежно уговаривая её пойти обратно",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1975,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "В оригинале Малай верит, что желание славы сделает Буронг достаточно сильной, чтобы вынести мучения. В русском же звучит, будто «жажда славы» — активный помощник в преодолении, что искажает причинно-следственную связь.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2760,
+          "Length": 47
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2665,
+          "Length": 37
+        }
+      ]
+    },
+    {
+      "Text": "В оригинале разрывала плоть от нестерпимой боли, в переводе она рвёт плоть в состоянии ярости.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3018,
+          "Length": 20
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2927,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "При возвращении домой в оригинале Буронг позволила мыслям кружится в голове, в переводе же она позволила мыслям течь спокойно.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3496,
+          "Length": 30
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3414,
+          "Length": 30
+        }
+      ]
+    },
+    {
+      "Text": "В оригинале Буронг приняла Красу и вместе они процветали в мире голода и песен, в переводе же их общий мир был полон песен и голода bruh.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3869,
+          "Length": 55
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3782,
+          "Length": 39
+        }
+      ]
+    }
+  ],
+  "F8899D694FF48FA14A1B39B1113CBF2C": [
+    {
+      "Text": "Собеседование != Audition в контексте оперной певицы",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 63,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 80,
+          "Length": 15
+        }
+      ]
+    }
+  ],
+  "DAE756BA483A9BFCEEF4539D2BA2CE3E": [
+    {
+      "Text": "Идиома \"walk on the air\" переводится как \"парила от счастья\".",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 19,
+          "Length": 21
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 53,
+          "Length": 24
+        }
+      ]
+    }
+  ],
+  "10782AC54733ED32444F3383DFEB3D3F": [
+    {
+      "Text": "Опущено, что метроном искрит только на высоких значениям BPM",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 38,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "F1A1D981450653971202379FD1AA0020": [
+    {
+      "Text": "В оригинале рука - это одна из немногих различивым частей, которые остались от её подруги, в переводе какая-то херня.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 15,
+          "Length": 15
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 19,
+          "Length": 8
+        }
+      ]
+    }
+  ],
+  "39D404FA4A9274345C73988637A66AC3": [
+    {
+      "Text": "Опущено, что эта птичка принадлежала Буронг",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5,
+          "Length": 3
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "F3218C3C42C22E02E4DE50AD13B4A6DA": [
+    {
+      "Text": "Предвестие != Overture. Увертюра - это интро к опере в театре. Ладно бы если переводили везде overture как предвестие, но в косметике это переведено как увертюра",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 7,
+          "Length": 10
+        }
+      ]
+    }
+  ],
+  "85D1D78D49029C325BE37A956F902299": [
+    {
+      "Text": "Опущено plays и others. Если с последним ок, то играет напрямую отсылает к названию перка УВЕРТЮРА",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 11,
+          "Length": 5
+        },
+        {
+          "StartIndex": 36,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "789EDAE24AFE684606D7A3BC9EFA60DB": [
+    {
+      "Text": "когда не хватит и реки != when a river is needed",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 242,
+          "Length": 22
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 246,
+          "Length": 22
+        }
+      ]
+    }
+  ],
+  "PerkDescriptionsNamespace.PERK_K41P02_FlavorText_DESC": [
+    {
+      "Text": "Такая же ошибка, как и в основном перке",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 25,
+          "Length": 22
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 24,
+          "Length": 22
+        }
+      ]
+    }
   ]
 }
