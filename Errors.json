@@ -3487,5 +3487,389 @@
         }
       ]
     }
+  ],
+  "93B6263044A4C854C273F39AC9FC8F5B": [
+    {
+      "Text": "После чего != As. Силы Генри стали сильнее не после убийства семьи, а во время",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 340,
+          "Length": 2
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 353,
+          "Length": 10
+        }
+      ]
+    },
+    {
+      "Text": "Бездна не принадлежит Генри Крилу, однако если речь идёт об Изнанке, то вроде как ок",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1037,
+          "Length": 3
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1096,
+          "Length": 6
+        }
+      ]
+    }
+  ],
+  "C8D426644D0A144630073585BBB8884A": [
+    {
+      "Text": "Портал != Door. Эта фреска Крилов находится и в реальном мире, и в Изнанке, и в сознании Векны и стоит она на двери",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 65,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 79,
+          "Length": 7
+        }
+      ]
+    }
+  ],
+  "35A3E013403B23C0B180639447CD0927": [
+    {
+      "Text": "Лучше бы было уточнение, что это роликовый конёк или просто ролик",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 7,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 14,
+          "Length": 5
+        }
+      ]
+    }
+  ],
+  "61D5A8AC42404D24A18425AA806634D6": [
+    {
+      "Text": "Аддон работает вне Крушителя Миров",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 87,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 132,
+          "Length": 8
+        }
+      ]
+    }
+  ],
+  "7F58607D4512234F65C5F4817DC8861B": [
+    {
+      "Text": "Всё взаимодействие с часами действует Забывчивость, а потом ещё 12 секунд дополнительно",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "B812F0734843365A0582AA83BD6B7721": [
+    {
+      "Text": "Взаимодействие != Competion",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 159,
+          "Length": 43
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 178,
+          "Length": 36
+        }
+      ]
+    }
+  ],
+  "004EBDF841FF7AB6547515A1D02AB05E": [
+    {
+      "Text": "Оригинал в прошедшем времени. Перевод в настоящем",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "773897F44FC57D090B7FF2B805D21E13": [
+    {
+      "Text": "Это лезвие бритвы, а не сама бритва",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 9,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 6
+        }
+      ]
+    }
+  ],
+  "B3D271A64DC8BBDA58123D935FF4057C": [
+    {
+      "Text": "Бритва != Blade",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 43,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 47,
+          "Length": 7
+        }
+      ]
+    }
+  ],
+  "2D05E32648E39A096942B5AEC0463D48": [
+    {
+      "Text": "Наказание != A means of control",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 58,
+          "Length": 18
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 78,
+          "Length": 9
+        }
+      ]
+    }
+  ],
+  "AEA093C7425BB730C2F0868B77E052D8": [
+    {
+      "Text": "Очки буквально сделаны из коробки пиццы, а не пиццерии",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 5,
+          "Length": 11
+        }
+      ]
+    }
+  ],
+  "17BF572B41659AFF9BA93F9A08569832": [
+    {
+      "Text": "Оригинал в настоящем времени. Перевод в прошедшем",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "0E0571CC420C720D6A911BAD69638448": [
+    {
+      "Text": "Фраза была адресована Одиннадцатой через тело Билли",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 401,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 422,
+          "Length": 7
+        }
+      ]
+    }
+  ],
+  "PerkDescriptionsNamespace.PERK_K42P03_FlavorText_DESC": [
+    {
+      "Text": "Фраза адресована Одиннадцатой",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1,
+          "Length": 14
+        }
+      ]
+    }
+  ],
+  "34DE1D354C6DFD01F43179A7A9CA7DBE": [
+    {
+      "Text": "«Сотворить зло» ≠ «or worse»: Оригинал — «или что похуже» (намёк на немедленное появление/месть), русский — общее «сотворить зло».",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 124,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 155,
+          "Length": 13
+        }
+      ]
+    },
+    {
+      "Text": "Опущено wizard",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 153,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено hidden",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1199,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Прерывался != Leave his keep",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1497,
+          "Length": 14
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1534,
+          "Length": 10
+        }
+      ]
+    },
+    {
+      "Text": "«Убийца» ≠ «whatever was killing»: Оригинал — «то, что убивало» (нечеловеческая сила), русский — «убийца» (антропоморфный агент)",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1705,
+          "Length": 20
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1721,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "«Зацепив тьму» ≠ «gazed into the darkness»: Оригинал — «взглянул в тьму», русский — «зацепил»",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2604,
+          "Length": 23
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2594,
+          "Length": 12
+        }
+      ]
+    },
+    {
+      "Text": "«Виновнику» ≠ «they»: Оригинал — «они» (множественное число, неопределённый агент), русский — «виновник» (единственное, персонализированное).",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1977,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1966,
+          "Length": 9
+        }
+      ]
+    }
+  ],
+  "212D30074CE4CCDD09436AAEE8F63153": [
+    {
+      "Text": "Колдун != Spellcaster. Корректный перевод - заклинатель",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 8,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 29,
+          "Length": 9
+        }
+      ]
+    }
+  ],
+  "264CF71C4ADF452BD3E9C3AC58CCFB7A": [
+    {
+      "Text": "Волшебник != Трюкач",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 36,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 33,
+          "Length": 10
+        }
+      ]
+    },
+    {
+      "Text": "Опущено слово arcane",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 29,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": []
+    }
   ]
 }
