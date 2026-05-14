@@ -3871,5 +3871,299 @@
       ],
       "RussianHighlights": []
     }
+  ],
+  "7270960E469D5B36918438B609B12AB4": [
+    {
+      "Text": "Лучше бы перевели как некротическая, а то масло масленное в переводе",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 12
+        }
+      ]
+    }
+  ],
+  "5C305AFF40B2F7DFFEA794B4BF7E5089": [
+    {
+      "Text": "Опущено who hold it",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 36,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "CA35418B4C987CE13C0DB9B5E430C8DA": [
+    {
+      "Text": "Опущено when worn",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "65C365E54D7860FFB49F51912E487C15": [
+    {
+      "Text": "Сумка не является бездонной. И на вики по днд переведена как Сумка Хранения, но адаптация хорошая",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 14
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 15
+        }
+      ]
+    }
+  ],
+  "4F7AA4EB461275F246557E833B022385": [
+    {
+      "Text": "D20 - это не кубик, а многогранник, лучше бы перевели как просто кости",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 148,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 140,
+          "Length": 6
+        }
+      ]
+    }
+  ],
+  "149FF4F74C45E17F44C160A36BD2A529": [
+    {
+      "Text": "В оригинале Векна обращается к кому-то, в переводе он будто бы размышляет о том, какие слабости он может иметь",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 291,
+          "Length": 60
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 277,
+          "Length": 60
+        }
+      ]
+    }
+  ],
+  "58F230CD4FB2FD8374EBA09EAD1CE143": [
+    {
+      "Text": "Текст в оригинале говорит о том, что у Векны такая ужасающая аура, что даже пугающие образы (вороны в матчах) всего лишь утомляют жертву, а не заставляют её бояться. В переводе же аура создаёт пугающие образы, которые изматывают жертву.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 80
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 89
+        }
+      ]
+    }
+  ],
+  "B67CA5B34B297DFD198D999E87951581": [
+    {
+      "Text": "Опущено inescapable",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 43,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "34C1939A4E70CE4F49D650A83BECCFD4": [
+    {
+      "Text": "Бескрайний != Cold",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 672,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 664,
+          "Length": 10
+        }
+      ]
+    }
+  ],
+  "1A14F90A4C9E65BA872BB08E521B1DF6": [
+    {
+      "Text": "В оригинале описывается предмет, в переводе процесс",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 7,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 7
+        }
+      ]
+    }
+  ],
+  "9B6B56DF41BCAA1C2CA62D8D5D2BDC58": [
+    {
+      "Text": "«A bit of whimsy in an otherwise sterile environment» — констатация контраста: кругом холодная чистота, а тут — маленький островок чудаковатости. Никакой прямой оценки «уместно/неуместно» оригинал не даёт.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 71,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 90,
+          "Length": 16
+        }
+      ]
+    }
+  ],
+  "734DE0FD44614D6E8D3AEB89EAEC3D1E": [
+    {
+      "Text": "В оригинале болтовня позволяет быстрее легче обнаружить экипаж. В переводе же болтовня экипажа позволяет быстрее обнаружить КСЕНОМОРФА))))",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 64,
+          "Length": 29
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 65,
+          "Length": 33
+        }
+      ]
+    }
+  ],
+  "5DF65F0141510C65C5572380180C723C": [
+    {
+      "Text": "Устройства != Beings",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 26,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 37,
+          "Length": 10
+        }
+      ]
+    }
+  ],
+  "69F1403049BC245CFD3164B8CD4E88C1": [
+    {
+      "Text": "Линька и растекание - два разных процесса",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 11
+        }
+      ]
+    }
+  ],
+  "F4B63F1F4272252CE7DE798BCFFE0F02": [
+    {
+      "Text": "Опущено Vertical, хотя из контекста понятно",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 64,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "250F08424B5EBF8E919504941B6B45F0": [
+    {
+      "Text": "Легендарный перевод. В оригинале к универсальным символам на клавиатуре требуется некоторое время, чтобы привыкнуть. В переводе же символы должны быть понятны всем живым организмам, но все слишком ПРИВЫКЛИ К НИМЮ АААА+АХАХАХАХАХ",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 57,
+          "Length": 34
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 65,
+          "Length": 29
+        }
+      ]
+    }
+  ],
+  "07D9CE9B458DFAE80BDA089A7BEAA6F1": [
+    {
+      "Text": "Нет сравнения коровы с силами Чужого",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "PerkDescriptionsNamespace.PERK_K33P01_FlavorText_DESC": [
+    {
+      "Text": "Было бы прикольно, если Эш сказал такую хуйню в фильме. По сути правильно, но официальный роботизированный тон теряется",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 40,
+          "Length": 30
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 36,
+          "Length": 17
+        }
+      ]
+    }
   ]
 }
