@@ -4165,5 +4165,806 @@
         }
       ]
     }
+  ],
+  "DBCA81F24851C611A9353EA955EF114A": [
+    {
+      "Text": "Отсебятина со словом пластмассовый",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 271,
+          "Length": 13
+        }
+      ]
+    },
+    {
+      "Text": "Опущено before he found Andy again",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 452,
+          "Length": 26
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "когда != and. В оригинале сам ритуал не сработал и Кайл воспользовалась этим. В переводе же из-за Кайл этот ритуал и не сработал",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 860,
+          "Length": 3
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 862,
+          "Length": 5
+        }
+      ]
+    }
+  ],
+  "A96B199C40D5A547DB1B09B56880B700": [
+    {
+      "Text": "Оригинал: убийственное чили, типа игра слов и похвала блюду. Перевод: чили убийцы",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 27,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 30,
+          "Length": 6
+        }
+      ]
+    }
+  ],
+  "0C2EFE6142CE9051EAA5118F17E88211": [
+    {
+      "Text": "Close shave - фразеологизм, означающий «опасную ситуацию, в которой удалось едва избежать беды» (русский аналог — «на волосок от гибели»). Одновременно слово «close» может относиться и к качеству бритья — «гладкое, чистое, максимально близкое к коже».",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 57
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 58
+        }
+      ]
+    }
+  ],
+  "F20A12EA443379023E4A5FBBD4D44079": [
+    {
+      "Text": "Почему не перевели как Каска?",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 13
+        }
+      ]
+    }
+  ],
+  "C15A4639440CD87F2F8065B7A50DD08E": [
+    {
+      "Text": "Не сминается != Keeps the dome intact. В оригинале каска сохраняет голову владельца целой. В переводе каска не сминается",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 21
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 12
+        }
+      ]
+    },
+    {
+      "Text": "активный образ жизни != high-impact activities. В оригинале это действия, связанные с риском ударов или столкновений. Перевод же приплетает сюда спорт",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 39,
+          "Length": 22
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 22,
+          "Length": 21
+        }
+      ]
+    }
+  ],
+  "D2CD58644FB43B89726C1383C83B3986": [
+    {
+      "Text": "Совершенно другая фраза Чаки",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 386,
+          "Length": 34
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 429,
+          "Length": 31
+        }
+      ]
+    },
+    {
+      "Text": "В контексте данного перка был бы предпочтительнее перевод, который бы отражал натуру фонарщиков, любящих ослеплять убийц ценой своей жизни",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 29,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 26,
+          "Length": 21
+        }
+      ]
+    }
+  ],
+  "E518A6C149EA6C84A060C58FF045B707": [
+    {
+      "Text": "Перевод: работа. Оригинал: магистерская диссертация",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 9,
+          "Length": 15
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 8,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Оригинал: stole the voices of those it consumed so as to lure others to their doom. Перевод: похищал голоса своих жертв, чтобы заманивать других. «Поглощённых» заменили на «жертв»",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1470,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1533,
+          "Length": 5
+        }
+      ]
+    },
+    {
+      "Text": "Оригинал - множественное число, перевод - единственное",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1536,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1602,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Ляп в переводе \"ней\" не должно быть",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2572,
+          "Length": 3
+        }
+      ]
+    },
+    {
+      "Text": "Опущено garden variety",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2966,
+          "Length": 14
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "«Define» — это «определить, описать», а не «бороться».",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3871,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3972,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Опущено seemed",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4211,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Сокращено имя, но не критично, наверное",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4457,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4458,
+          "Length": 3
+        }
+      ]
+    },
+    {
+      "Text": "И != As",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4528,
+          "Length": 2
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4513,
+          "Length": 1
+        }
+      ]
+    },
+    {
+      "Text": "Опущено strangely",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5133,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Кто-то != Something, лол XD",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4743,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4730,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "«Unearthly things beyond human experience» сокращено до «непостижимое для человека», потеряна «неземная» природа обещаний.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5827,
+          "Length": 48
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 5753,
+          "Length": 26
+        }
+      ]
+    }
+  ],
+  "127F6FFE4993A8F615C5B18A2EA290DF": [
+    {
+      "Text": "Оригинал: слепок был уже давно разоблачён. Перевод: правда давно всплыла наружу. Если оригинал говорит, что это этот слепок 100% фейк, но на самом деле нет, то перевод подразумевает какую-то абстрактную правду о слепке и не понятно, фейк ли он или нет",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 62,
+          "Length": 32
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 27
+        }
+      ]
+    },
+    {
+      "Text": "Опущено becomes",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 184,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "8C01CE344B6EDE5348295C8C6125D0E5": [
+    {
+      "Text": "Опущено black",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 45,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "2445B4164C6A8BE55C3E519ED4D1F0BE": [
+    {
+      "Text": "Звуки != Known Recording",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5,
+          "Length": 15
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 10,
+          "Length": 5
+        }
+      ]
+    }
+  ],
+  "3CAB0D294B133749CCBAC88534ABC12D": [
+    {
+      "Text": "Оригинал: после починки генератора выживший получает ослабление. Перевод: выживший становится более уязвимым, как при ослаблении. Бьять",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 121,
+          "Length": 15
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 146,
+          "Length": 47
+        }
+      ]
+    }
+  ],
+  "D147273F49186437DFD7C68E70C2B869": [
+    {
+      "Text": "Выгнал != Drove.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 67,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 49,
+          "Length": 6
+        }
+      ]
+    }
+  ],
+  "FFB66F504AFE1495840F51AB4B3673FF": [
+    {
+      "Text": "Оригинал: кино было пропагандой, сделанной специально для так называемого проекта Яблочный Пирог. Перевод: фильм был пропагандой проекта Яблочный Пирог.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 53,
+          "Length": 56
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 28,
+          "Length": 45
+        }
+      ]
+    }
+  ],
+  "CD483E1945D88E866BFE728DED95C6D6": [
+    {
+      "Text": "Назначение != Origin. Оригинал подчёркивает, что непонятно откуда он взялся, перевод же говорит, что непотятно для чего он нужен",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 22,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 24,
+          "Length": 10
+        }
+      ]
+    }
+  ],
+  "33FF5FFA42EACE509310C7BD198C78AA": [
+    {
+      "Text": "Отсебятина с неужели",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 7
+        }
+      ]
+    }
+  ],
+  "652B085F48DA85752B9B50B636F6E95A": [
+    {
+      "Text": "Жуткий != Obscure",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 11,
+          "Length": 6
+        }
+      ]
+    }
+  ],
+  "3B41DF0F4B5E3E248A3DB59782F1D195": [
+    {
+      "Text": "Оригинал: некоторые полагали, что проект Яблочный Пирог со временем развивался, улучшая результаты посредством перехода к новой форме передачи информации",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 95
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 101
+        }
+      ]
+    }
+  ],
+  "97CC0D654F6A22B3EB543EBFF461AAB9": [
+    {
+      "Text": "Пакет != Carton. Лучше бы перевели как упаковка",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 15,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 7,
+          "Length": 5
+        }
+      ]
+    }
+  ],
+  "323BB381489A871AA3075194FFEA8AF4": [
+    {
+      "Text": "Опущено before parting ways, но не критично",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 72,
+          "Length": 19
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "38E311F543CE3300CA4A6BB7FB25CA29": [
+    {
+      "Text": "Почему не перевести как синтезирована?",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 45,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 38,
+          "Length": 9
+        }
+      ]
+    }
+  ],
+  "314D158F4ECC589147D6049B57842745": [
+    {
+      "Text": "Оригинал: прошедшее время. Перевод: настоящее время",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 16,
+          "Length": 9
+        },
+        {
+          "StartIndex": 95,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 21,
+          "Length": 12
+        },
+        {
+          "StartIndex": 134,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Оригинал: зрители покинули кинотеатр с чувством тревоги. Перевод: зрители на плёнке боязливо выходят с сеанса. То есть в оригинале зрители после просмотра фильма о них самих боятся, а в переводе уже зрители в фильме боязливо выходят с сеанса. Это реальный пиздец, искажающий логику и здравый смысл",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 115,
+          "Length": 9
+        }
+      ]
+    }
+  ],
+  "F3828AB440FA0FFEB85E8FAC19A19100": [
+    {
+      "Text": "Оригинал: прошедшее время, перевод: настоящее",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 80,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 83,
+          "Length": 4
+        }
+      ]
+    },
+    {
+      "Text": "Всратая точка",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 173,
+          "Length": 2
+        }
+      ]
+    }
+  ],
+  "200C047E46E140AF0C9A6EAA44262282": [
+    {
+      "Text": "Перевод не соответствует стилю перков Неведомого, начинающихся с un",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 9
+        }
+      ]
+    }
+  ],
+  "95D52B3D417B536E9A870796E1E543DE": [
+    {
+      "Text": "Оригинал: Боль пульсирует в воздухе. Манящий аромат, который вызывает порывы. Перевод: боль в воздухе усиливает манящий аромат. Упущены порывы, плюс переделано описание боли на дополнение к этой боли",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 69
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 67
+        }
+      ]
+    },
+    {
+      "Text": "Оригинал: Я слышал его. Оно бежало. Оно приближалось всё ближе! Перевод: я слышал это - звуки шагов приближались.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 272,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 270,
+          "Length": 25
+        }
+      ]
+    },
+    {
+      "Text": "Записка != Testimony. Это показание или свидетельство. Скорее всего это было в том самом участке, где произошла бойня",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 317,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 327,
+          "Length": 7
+        }
+      ]
+    }
+  ],
+  "3775E629417E7AEE265FEF9382099C0A": [
+    {
+      "Text": "Кошмар != Terror. Это ужас, страх или паника",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Разнообразная != Devastating.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 37,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 74,
+          "Length": 13
+        }
+      ]
+    },
+    {
+      "Text": "Окружать != Transfer, хотя из констекста понятно, так что не супер критично",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 147,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 119,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "Отсебятина с запиской",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 367,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Оригинал: present simple. Перевод: прошедшее время",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 403,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 361,
+          "Length": 5
+        }
+      ]
+    }
+  ],
+  "E94C9E3947A411556B73B4878E9D1695": [
+    {
+      "Text": "Всратый перевод действий перка",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "PerkDescriptionsNamespace.PERK_K35P01_FlavorText_DESC": [
+    {
+      "Text": "Такая же херня, как в оригинале",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "PerkDescriptionsNamespace.PERK_K35P02_FlavorText_DESC": [
+    {
+      "Text": "Как в оригинале",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
   ]
 }
