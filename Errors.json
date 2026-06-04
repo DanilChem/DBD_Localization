@@ -4966,5 +4966,144 @@
       "EnglishHighlights": [],
       "RussianHighlights": []
     }
+  ],
+  "EF2D94C24E77A099DBAC9CBC4675D078": [
+    {
+      "Text": "Винован != Wrong. Нужно было переводить как ошибка или зло, но не как ни вина",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 281,
+          "Length": 5
+        },
+        {
+          "StartIndex": 295,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 273,
+          "Length": 7
+        },
+        {
+          "StartIndex": 282,
+          "Length": 7
+        }
+      ]
+    }
+  ],
+  "PerkDescriptionsNamespace.PERK_K39P03_FlavorText_DESC": [
+    {
+      "Text": "Такая же проблема, как в оригинале",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "9752ED094222F2E22389E98B4DA9059C": [
+    {
+      "Text": "Оригинал: Кеннет был заворожён закономерностью бородок перьев, а также их мягкостью, когда водил ими по губам. Перевод же акцентирует внимание не на закономерности бородок перьев, а на их узорах и разнообразии. Мне нравится русский перевод, но он не является точным",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 739,
+          "Length": 106
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 714,
+          "Length": 93
+        }
+      ]
+    },
+    {
+      "Text": "Опущено of a life at his mercy, что переводится как жизнь в его руках",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1268,
+          "Length": 22
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Можно было бы перевести более литературно: \"Вместо этого, когда глаза птицы вновь обрели оттенки жизни...\"",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1372,
+          "Length": 42
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1320,
+          "Length": 19
+        }
+      ]
+    },
+    {
+      "Text": "Опущено chest feathers",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1533,
+          "Length": 14
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Лишний пробел",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1819,
+          "Length": 2
+        }
+      ]
+    },
+    {
+      "Text": "Пизда, опущено предложение о том, как отец Кеннета нашёл коробку",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2051,
+          "Length": 55
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущена деталь, что отец сломал замок коробки, чтобы её открыть",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2130,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1978,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Опущено leaving the crawlspace",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2274,
+          "Length": 22
+        }
+      ],
+      "RussianHighlights": []
+    }
   ]
 }
