@@ -5342,5 +5342,505 @@
         }
       ]
     }
+  ],
+  "FC7CA1794855A7214EACBBA02DA8C594": [
+    {
+      "Text": "Аккуратный != Small",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 473,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 536,
+          "Length": 10
+        }
+      ]
+    },
+    {
+      "Text": "Опущено just by accident",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 548,
+          "Length": 16
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "В оригинале Ожомо потребовал ответов, а в переводе задал вопрос",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 813,
+          "Length": 25
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено, что копы были подкуплены и из-за этого дополнение к предложению в переводе теряет смысл",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 173,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Ожомо медленно опустил тяжёлый пласт. После того, как пресс был опущен. Зачем повторения",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 173,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1203,
+          "Length": 32
+        }
+      ]
+    }
+  ],
+  "611F39D04F6861878771F9A7830A9626": [
+    {
+      "Text": "Опущно местоположение",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 88,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "CA841FA1456BF8A78958B1B976A52FCA": [
+    {
+      "Text": "Белая краска != Glows ominously",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 65,
+          "Length": 15
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 74,
+          "Length": 13
+        }
+      ]
+    },
+    {
+      "Text": "Опущно местоположение",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 84,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "5F4C15AA4067A2D4A741F6B986171342": [
+    {
+      "Text": "Опущно, что нарисован пальцем",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 51,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущно местоположение",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 51,
+          "Length": 12
+        },
+        {
+          "StartIndex": 74,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "384344664A362EFFAC4C27B186F9E044": [
+    {
+      "Text": "Грязь != White ink",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 67,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 57,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Опущно местоположение",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 80,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "DED52A4E43781C33229B2CA6E551050B": [
+    {
+      "Text": "Опущено, что нарисован пальцем",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 50,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущно местоположение",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 73,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "DDA988524C8D64F24F4FF097664AAFD3": [
+    {
+      "Text": "Опущено, что нарисован пальцем",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 50,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущно местоположение",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 79,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "159448B54BA3B3E32C876DA1A4AD4132": [
+    {
+      "Text": "Опущено highly",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 27,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Оригинал: колокол отдаётся эхом и хаотично искажается. Перевод: колокол звучит крайне странно и путает противника",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 58,
+          "Length": 66
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 54,
+          "Length": 69
+        }
+      ]
+    }
+  ],
+  "02C3B8E0465747A5B21E98B914F9FDF2": [
+    {
+      "Text": "Неправильное называние символа",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 7,
+          "Length": 13
+        }
+      ]
+    },
+    {
+      "Text": "Опущено местоположение",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 71,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "754D064D4DBAED9ACF065080B9C3F305": [
+    {
+      "Text": "Неправильный перевод названия симлова",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 7,
+          "Length": 13
+        }
+      ]
+    },
+    {
+      "Text": "Опущено, что нарисован пальцем",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 51,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено местоположение",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 80,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "A8E53B024B2720DC9CB9AC9027B5F752": [
+    {
+      "Text": "Опущено, что нарисован пальцем",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 65,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено местоположение",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 88,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "A8B2DF3B4D7CE497B0B4A887C3E0576B": [
+    {
+      "Text": "Палец",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 65,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Место",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 94,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "51EA0BAF4F36E9B1F906849B3F0DF1F2": [
+    {
+      "Text": "Палец",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 56,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Место",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 84,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "08A5F88F4335C43B27C7EFA97D91937B": [
+    {
+      "Text": "Какой блять Гоуст Фейс",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1,
+          "Length": 10
+        }
+      ]
+    }
+  ],
+  "7373B88C420B00F02E44D3A65385324D": [
+    {
+      "Text": "Палец",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Место",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "1EC21C92497B4EBB6EAF7CBF84848977": [
+    {
+      "Text": "Палец",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Место",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "1F87F50D4EAEACA951D38187D3AF89CD": [
+    {
+      "Text": "Палец",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Место",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "1F7367F74C0F57B92B98E1802C5C2B54": [
+    {
+      "Text": "Место",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "936212354D05EF231BD34DA3DE19BC0D": [
+    {
+      "Text": "Ярость != Howling storm",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 40,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 36,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Палец",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Место",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "B2F777E041FE535B406BBEA1CD87F272": [
+    {
+      "Text": "Дневник != Notebook",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 274,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 305,
+          "Length": 8
+        }
+      ]
+    }
   ]
 }
