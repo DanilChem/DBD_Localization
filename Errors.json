@@ -5104,6 +5104,243 @@
         }
       ],
       "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено his nomadic existence became a cover",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3075,
+          "Length": 36
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено то, что жертвы приходили в себя уже связанными",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3356,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено mentally and physically torturing them",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3418,
+          "Length": 38
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Когда те вопили в ночи != before being lost in the night. Оригинал подчёркивает тот факт, что крики будут растворены в ночи, как и собственно жертвы Клоуна. Перевод же просто констатирует тот факт, что они вопили в ночи",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3485,
+          "Length": 30
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3183,
+          "Length": 22
+        }
+      ]
+    },
+    {
+      "Text": "Опущено shedding his old personality with it, хотя по контексту понятно",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3999,
+          "Length": 36
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено, что Клоун растворился вместе с караваном",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3999,
+          "Length": 36
+        },
+        {
+          "StartIndex": 4330,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Прибиваясь != A parasite who could always be found",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3999,
+          "Length": 36
+        },
+        {
+          "StartIndex": 4330,
+          "Length": 11
+        },
+        {
+          "StartIndex": 4409,
+          "Length": 36
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3988,
+          "Length": 10
+        }
+      ]
+    },
+    {
+      "Text": "Бродячий цирк != Carnival or circus",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4451,
+          "Length": 18
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4001,
+          "Length": 15
+        }
+      ]
+    },
+    {
+      "Text": "Опущено trapped them",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4573,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "6778325D487BA727B63E09B8B4E8CF50": [
+    {
+      "Text": "Опущено as usual",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 182,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "40AEFDF849F261E9E1B62E81C3FCA279": [
+    {
+      "Text": "Для лучшей хватки != For dexterous manipupations. Тут говорится про ловкость рук, а не про силу хватки",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 58,
+          "Length": 27
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 59,
+          "Length": 17
+        }
+      ]
+    }
+  ],
+  "B59C4F5E4EE5AD497A64AC9C61DC7E27": [
+    {
+      "Text": "Вещество != Compound",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 19,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 17,
+          "Length": 8
+        }
+      ]
+    }
+  ],
+  "15F6BFB64D64B8FD231692AB983A1C0C": [
+    {
+      "Text": "Опущено warm",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "AD3070C041DEA8FB05294E809F17E645": [
+    {
+      "Text": "Татуированный != Tattoo's. Этот палец принадлежит татуированному человеку, а на нём самом нет тату",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 13
+        }
+      ]
+    }
+  ],
+  "19DAAA264EE5F0801D79C088BB27BCB4": [
+    {
+      "Text": "Опущено, что палец средний, но из названия и так понятно",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 11,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "BC95503F42A015C434D587A3C023BA33": [
+    {
+      "Text": "Нет такого термина, как Клоунофобия. Есть только Коурофобия",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 11
+        }
+      ]
     }
   ]
 }
