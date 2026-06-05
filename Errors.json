@@ -5842,5 +5842,410 @@
         }
       ]
     }
+  ],
+  "76830EE142752C6C5B59E3AE349508D0": [
+    {
+      "Text": "Сарай != Warehouse. Арчи был найден на складе, а не в сарае",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1024,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1034,
+          "Length": 5
+        }
+      ]
+    },
+    {
+      "Text": "Опущено abandoned",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1045,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено dark",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 671,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Я бы перевёл фразу sealing them to their fate как приговаривая к их судьбоносной гибели",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 721,
+          "Length": 7
+        },
+        {
+          "StartIndex": 734,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 702,
+          "Length": 7
+        },
+        {
+          "StartIndex": 718,
+          "Length": 18
+        }
+      ]
+    }
+  ],
+  "83247ABF4853F81D481327A23B6FAF3C": [
+    {
+      "Text": "Опущено handling, то есть взаимодействие с капканом",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 51,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "5E29EA0444301F60507C3B8DBA39E273": [
+    {
+      "Text": "Опущено sickly",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 26,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "5C165E1246AC098C018EDEA859BEEE04": [
+    {
+      "Text": "Опущено resplacement",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 6,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Рваные раны != Open Wounds. Открытые раны - общее понятие, в которое могут входить рваные раны",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 72,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 64,
+          "Length": 11
+        }
+      ]
+    },
+    {
+      "Text": "Опущено track",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 383,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "1E1956F148A7B7206CADA28AF5AA553B": [
+    {
+      "Text": "Перенос небольших предметов != Foraging. Foraging - это собирательство пищи, по типу грибов, ягод и так далее",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 34,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 41,
+          "Length": 28
+        }
+      ]
+    }
+  ],
+  "21EB8D1C4A37A3757215B7A9A2DB1DBB": [
+    {
+      "Text": "Опущено worn",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 16,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "4CB2DAC34C3BB45A5AD7D8A135C2804B": [
+    {
+      "Text": "Опущенно matte",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 9,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Появляющиеся != Appearance. Смола затемняет внешний вид капканов",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 127,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 129,
+          "Length": 12
+        }
+      ]
+    }
+  ],
+  "3BE40EA640F67B151F7EB2ABE51EF9DA": [
+    {
+      "Text": "Опущено old",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3,
+          "Length": 3
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "2068C6F5446FC52685F3AB86B79349CD": [
+    {
+      "Text": "Опущено cured",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "89EC240E401644D8AC869EB52BCC6D91": [
+    {
+      "Text": "Опущено padded",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 11,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "C42986D54CF84A534802D9B4FE776B08": [
+    {
+      "Text": "Кусок != Brick",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 5
+        }
+      ]
+    }
+  ],
+  "B74D41C243F10F6ED84B24986AF9F93C": [
+    {
+      "Text": "Кусок != Block",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 5
+        }
+      ]
+    }
+  ],
+  "B0AAB91042F65C2426DBD4BDC0FEE0E3": [
+    {
+      "Text": "Оригинал: ваша великая сила позволяет уничтожать защиту вашей жертвы. Перевод: С такой великой силой вам не страшна никакая преграда",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 20,
+          "Length": 48
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 22,
+          "Length": 31
+        }
+      ]
+    }
+  ],
+  "PerkDescriptionsNamespace.PERK_Agitation_FlavorText_DESC": [
+    {
+      "Text": "Опущено desire",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 84,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "AF985DE64D00D5F6CA9768BDA968F3C8": [
+    {
+      "Text": "Поместили != Bricked. Лучше бы перевели, как замуровали, хотя при добавлении к комнате слова закрытую исправляет данную проблему",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 211,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 229,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "Опущено deranged",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 494,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено that were allowed to run free",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 527,
+          "Length": 29
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Обезображенный != Disemboweled",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 760,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 687,
+          "Length": 14
+        }
+      ]
+    },
+    {
+      "Text": "Оригинал: Ферму Колдвинд быстро привели в порядок, землю поделили и распродали. Однако никто так и не купил фермерский дом. Перевод: Ферма Колдвинд была отделена от основных земель, но нового покупателя так и не нашлось",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 801,
+          "Length": 111
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 725,
+          "Length": 86
+        }
+      ]
+    },
+    {
+      "Text": "Опущено hot",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 990,
+          "Length": 3
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "FD0C6F16449DEA932CD9A3BB186258E5": [
+    {
+      "Text": "Опущено место нанесения меток",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 33,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "54454C6642A086B7E62B13A897FCE26E": [
+    {
+      "Text": "Движок - мужской род, двигатель тоже мужской род. Откуда взялось её - известно только Мэтью Коте",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 19,
+          "Length": 2
+        }
+      ]
+    }
   ]
 }
