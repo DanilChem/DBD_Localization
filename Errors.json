@@ -6247,5 +6247,650 @@
         }
       ]
     }
+  ],
+  "B7AF6D7741A298B73549439615B03833": [
+    {
+      "Text": "Оригинал подчёркивает поиск способа выжить (\"find a way\"), но единственная доступная работа — в лечебнице. Перевод упрощает, игнорируя нюанс \"find a way\" (не обязательно работа).",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 222,
+          "Length": 65
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 284,
+          "Length": 29
+        }
+      ]
+    },
+    {
+      "Text": "В оригинале проходят десятилетия на работе в Кротус Пренн. В переводе только несколько лет и абстрактное 'время'",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 371,
+          "Length": 14
+        },
+        {
+          "StartIndex": 420,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 390,
+          "Length": 20
+        }
+      ]
+    },
+    {
+      "Text": "Пятьдесят != Over fifty",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 625,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 641,
+          "Length": 9
+        }
+      ]
+    }
+  ],
+  "4D989DAC4FF2EE0FE05C58A76928D92C": [
+    {
+      "Text": "Опущено collected from",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 39,
+          "Length": 14
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "\"Тревожно учащается\" слабо передаёт \"Incredibly agitated\" (невероятно взволнованное/бурное)",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 107,
+          "Length": 19
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 106,
+          "Length": 18
+        }
+      ]
+    }
+  ],
+  "93BDC6E24DE241BDA0AD0C84F2FA73EA": [
+    {
+      "Text": "Потертый != Dull. Dull переводится как тусклый, скучный, унылый, пасмурный, монотонный, но не потертый",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 8
+        }
+      ]
+    }
+  ],
+  "6B8D52234BEC7FC94202CDBDE4039209": [
+    {
+      "Text": "Сиплое != Bulging. Лучше бы перевели как: тяжелое, вздымающее грудь",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 13,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 12,
+          "Length": 6
+        }
+      ]
+    }
+  ],
+  "592748544CBCBEB3E9E4639D5525D0BD": [
+    {
+      "Text": "Этот вздох относится к беспокойной девочке, поэтому должен быть Беспокойным",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 9
+        }
+      ]
+    }
+  ],
+  "31C171CC451E76D90C99418270501660": [
+    {
+      "Text": "В названии аддона Кемпбелл, в описании аддона Кэмпбелл",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 16,
+          "Length": 9
+        }
+      ]
+    }
+  ],
+  "9755342C445886CB8CC52694F86C256C": [
+    {
+      "Text": "Rattling может переводится как Хриплое, однако я бы для разнообразия перевёл как дребежащее",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 18,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 12,
+          "Length": 7
+        }
+      ]
+    }
+  ],
+  "FDE7FE1242BBE31275CA8393FD6871DE": [
+    {
+      "Text": "В других аддонах речь идёт о беспокойной девочке, в одних идёт о тревожной. Определитесь плиз",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 92,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 92,
+          "Length": 9
+        }
+      ]
+    }
+  ],
+  "D525A371477F96BD08ED26B5DFBFB605": [
+    {
+      "Text": "Вечеров != Afternoons.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 191,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 210,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "«Опустился» ≠ «slouched»: slouched = сгорбился, обмяк, а не просто «опустился».",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 315,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 321,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "«Усердным» ≠ «enthusiastic»: enthusiastic = энтузиаст, увлечённый, а не просто «усердный». Потеря энергичности образа.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 508,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 508,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "«Добродушным» ≠ «easy-going»: easy-going = непринуждённый, спокойный, легкий на подъём или в общении, а не обязательно «добродушный».",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 633,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 620,
+          "Length": 11
+        }
+      ]
+    },
+    {
+      "Text": "«Выделил» ≠ «spotted»: spotted = заметил, а не «выделил».",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 766,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 768,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "«Беспокойную» ≠ «erratic»: erratic = непредсказуемая, хаотичная, часто с негативным оттенком. «Беспокойная» звучит как нейтральное или даже сочувственное описание. Смягчение, искажающее подозрительность.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 990,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 988,
+          "Length": 11
+        }
+      ]
+    },
+    {
+      "Text": "Roseville Murders - это название убийств в Розвилле, в то время как в переводе просто говорится об убийствах.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1309,
+          "Length": 17
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1334,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "Stab - колотая ножевая рана, так что слово зарезать не подходит",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1361,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1373,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "Отсебятина? В оригинальном тексте такого нет",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1738,
+          "Length": 61
+        }
+      ]
+    },
+    {
+      "Text": "Оригинал: Гоуст Фейс фотографировал жертв в их домах. Перевод: фотографировал их дома",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1939,
+          "Length": 30
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2025,
+          "Length": 22
+        }
+      ]
+    },
+    {
+      "Text": "Изучать != Register",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2053,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2143,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Или != And",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2322,
+          "Length": 3
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2416,
+          "Length": 3
+        }
+      ]
+    },
+    {
+      "Text": "Учитывая, что Гоустфейс читает газету 1993 года, то странно видеть разговорный стиль общения в виде \"накатывало желание\" вместо \"настигало желание\".",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2109,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2194,
+          "Length": 18
+        }
+      ]
+    },
+    {
+      "Text": "Produce - в главную очередь производить, выпускать создавать. В переводе создаётся ощущение, что Олсен лично принёс жителям Розвилля, что не имеет смысла",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2504,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2578,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Появилось на плёнке != Stared at the camera. БЛЯЯЯЯть",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2615,
+          "Length": 20
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2714,
+          "Length": 19
+        }
+      ]
+    },
+    {
+      "Text": "«Снятых скальпов» ≠ «lacerated scalps»: lacerated = разорванные, изрезанные, а не просто «снятые». Упущена деталь насилия.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3595,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3713,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Плотный != Opaque. Opaque переводится как светонепроницаемый, непрозрачный или тёмный",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4104,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4197,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Грамматическая ошибка в то же время",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1688,
+          "Length": 12
+        }
+      ]
+    }
+  ],
+  "0091982847FB96BBB436D28001E6A23C": [
+    {
+      "Text": "«Сделанная Олсеном» ≠ «obtained by Olsen»:",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 8,
+          "Length": 9
+        }
+      ]
+    }
+  ],
+  "67DC97BE4FE92CE6040486A72E39A7EE": [
+    {
+      "Text": "Из газет != Headlines. Вырезаны были заголовки",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 8,
+          "Length": 8
+        }
+      ]
+    }
+  ],
+  "BE25BD45432A9E84D1A698AC74AA799F": [
+    {
+      "Text": "Опущено descreet",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 82,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "92B016A14F0986C37626539C3C8513D0": [
+    {
+      "Text": "Неаккуратные записи != Crabbed writing. Crabbed = мельчайший, неразборчивый, «крабовый» почерк — термин, передающий трудность чтения. «Неаккуратные» — слишком общее.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 22,
+          "Length": 15
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 10,
+          "Length": 22
+        }
+      ]
+    }
+  ],
+  "0CF0724F444F1CD1246970A8FB00D705": [
+    {
+      "Text": "Отсебятина",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 54,
+          "Length": 24
+        }
+      ]
+    }
+  ],
+  "2AD85BD74BA9B4618EE36B9DDB4F4182": [
+    {
+      "Text": "Опущено glimplse",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 172,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "BD7DA31F462FA7E12E82F996268328F0": [
+    {
+      "Text": "ОШИБКА: оригинал — «город продолжает давать (жертв, возможности)», с оттенком хищного потребления. В русском — нейтральный «подарки».",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 207,
+          "Length": 59
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 200,
+          "Length": 43
+        }
+      ]
+    }
+  ],
+  "602611EE4203966A68E365929562AFE4": [
+    {
+      "Text": "Лучше: «Стяжные ремни» или «Фиксирующие ремешки».",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "1E25D90342080A394E2247AEAAAA8C87": [
+    {
+      "Text": "«Спокойного рыскания» ≠ «on the prowl»: on the prowl — охотничий/хищный обход, а не «спокойный». Потеря агрессивного оттенка.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 49,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 49,
+          "Length": 19
+        }
+      ]
+    }
+  ],
+  "5C40B93A47711F63AF424F8CB8F4A9C4": [
+    {
+      "Text": "Опущено detailed",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 9,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "2D09CD164029699B2A4FA08BFECBE540": [
+    {
+      "Text": "«Добычи» — неуместное слово: в русском «добыча» звучит зооморфно (как о животных). Убийца-журналист скорее сказал бы «жертвы» или «цели».",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 96,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 94,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Опущено for a while",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 333,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": []
+    }
   ]
 }
