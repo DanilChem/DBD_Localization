@@ -7749,5 +7749,517 @@
       ],
       "RussianHighlights": []
     }
+  ],
+  "FC1B19BB4D915B12C9E39180E66F0314": [
+    {
+      "Text": "External != Потусторонних. Это просто внешние, в которые могут потенциально входить потусторонние, если у чела беды с башкой",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 122,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 113,
+          "Length": 13
+        }
+      ]
+    },
+    {
+      "Text": "Опущено compustions, которое можно перевести как принуждение, внушение, порыв",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 50,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Nature and nurture - устойчивое выражение, которое переводится как природа и воспитание. Предыдущее предложение задавало вопрос, что засталяет убийц совершать убийства, для КЛ это и природа, так как он всего боится, и воспитание, так как его семья каннибалы. Но это перевели как пропитание",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 196,
+          "Length": 18
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 167,
+          "Length": 20
+        }
+      ]
+    },
+    {
+      "Text": "Его != Their",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 503,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 505,
+          "Length": 3
+        }
+      ]
+    },
+    {
+      "Text": "Учитывая, что это мысли Буббы и его семьи, то вместо жажды бы подошло желание. Также опущено shared из-за того, что переделали акцент с семьи на Бубба",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 509,
+          "Length": 18
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 509,
+          "Length": 5
+        }
+      ]
+    },
+    {
+      "Text": "Опущено and that is all that matters",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 612,
+          "Length": 28
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Маска != Face",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1022,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 969,
+          "Length": 5
+        }
+      ]
+    },
+    {
+      "Text": "Оригинал: но теперь дедушка очень слаб, а она больше не может двигаться, поэтому Кожаному Лицу и его братьям необходимо заботиться о них. Перевод: но теперь дедуля очень слаб и почти не двигается, так что пришла очередь КЛ и его брату заботиться о нём.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1142,
+          "Length": 107
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1097,
+          "Length": 115
+        }
+      ]
+    },
+    {
+      "Text": "Святое != Everything. Опущено to him",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1261,
+          "Length": 17
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1226,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Стремясь != The saw ready. Можно было бы перевести как: КЛ бросился на него, бензопила была наготове отомстить за его семью",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1596,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1554,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "Слово сразил для меня является странным. Лучше бы просто оттолкнул в сторону",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1666,
+          "Length": 7
+        },
+        {
+          "StartIndex": 1686,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1612,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Скрываются != Driving away",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1758,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1740,
+          "Length": 18
+        }
+      ]
+    },
+    {
+      "Text": "Опущено wither",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2024,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Воображаемых врагов != Myriad external threats. Это бесчисленные внешние враги",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2147,
+          "Length": 23
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2042,
+          "Length": 19
+        }
+      ]
+    },
+    {
+      "Text": "Мысли != Feeling",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2206,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2129,
+          "Length": 5
+        }
+      ]
+    },
+    {
+      "Text": "Пришли != Overtook",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2214,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2115,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Оригинал: чувство ползло по всей коже с холодным ужасом. Перевод: впиваясь холодными нитками в его разум. Однако мне нравится перевод",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2261,
+          "Length": 38
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2164,
+          "Length": 38
+        }
+      ]
+    },
+    {
+      "Text": "Ужас != Fear",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2534,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2453,
+          "Length": 4
+        }
+      ]
+    },
+    {
+      "Text": "Ужас != Fear",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2570,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2525,
+          "Length": 4
+        }
+      ]
+    },
+    {
+      "Text": "Состояние != Place",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2619,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2590,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "Опущено blessed",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2932,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "471B63B04C5E210383791EB3AE67E5F9": [
+    {
+      "Text": "Опущено body",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 34,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено dark",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 60,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено violent",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 106,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "4680A8C44643A4F3100E8CAE6D191CB8": [
+    {
+      "Text": "Нацарапанная != Drawn",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 10,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 9,
+          "Length": 12
+        }
+      ]
+    }
+  ],
+  "CD7AA8BE461FBD2A5984369F35B9AE58": [
+    {
+      "Text": "Регулятор глубины пропила",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "1833F9A142E1B5CFB3155E8FADF3DF1A": [
+    {
+      "Text": "Оригинал: увеличивающий угол глубины пропила. Перевод: позволяющий заточить зубья бензопилы",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 10,
+          "Length": 38
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 24,
+          "Length": 24
+        }
+      ]
+    }
+  ],
+  "B396DC9C44C71954760FF5A5E30F5B8E": [
+    {
+      "Text": "Свежего != Young",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 24,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 24,
+          "Length": 7
+        }
+      ]
+    }
+  ],
+  "26DC813F41E372C446438B97C54068AD": [
+    {
+      "Text": "Опущено body",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 31,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "BFE622C34032CFDAE28E8392B42503D3": [
+    {
+      "Text": "Реле != Guide Bar",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 8,
+          "Length": 4
+        }
+      ]
+    }
+  ],
+  "F687F1764542DFA11F256D83A00EE824": [
+    {
+      "Text": "Опущено iron",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 9,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "454BFFF7406D06D34133E2A751837482": [
+    {
+      "Text": "Опущено with crusty and volatile",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 22,
+          "Length": 24
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "B1711FE84816C3A525CD4A9E989542D1": [
+    {
+      "Text": "Оригинал: делают крики о помощи болезненно трудными",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 41,
+          "Length": 41
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 45,
+          "Length": 37
+        }
+      ]
+    }
+  ],
+  "PerkDescriptionsNamespace.PERK_BBQAndChilli_FlavorText_DESC": [
+    {
+      "Text": "В оригинале челу не нравится убивать, в переводе нравится",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1,
+          "Length": 41
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1,
+          "Length": 33
+        }
+      ]
+    }
   ]
 }
