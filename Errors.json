@@ -8261,5 +8261,42 @@
         }
       ]
     }
+  ],
+  "91A10D794FE4CDB53AA74CA72B506DF4": [
+    {
+      "Text": "Опущено fleshed",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 7,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "89B96ABF44275C9337C4739E705DA5A1": [
+    {
+      "Text": "Палец",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 58,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Тело",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 85,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": []
+    }
   ]
 }
