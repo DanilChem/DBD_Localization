@@ -154,12 +154,12 @@
         </Style>
     </Window.Resources>
 
-    <Grid Margin="15">
+    <Grid x:Name="MainGrid" Margin="15">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="8*" MinHeight="150"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="0.18*" MinHeight="20"/>
+            <RowDefinition x:Name="ErrorsRow" Height="0.18*" MinHeight="20"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
@@ -220,7 +220,7 @@
             <!-- Английский -->
             <Border Grid.Column="2" Grid.Row="1" Background="{StaticResource BackgroundLight}" BorderBrush="{StaticResource BorderDark}" 
         BorderThickness="1" CornerRadius="3" Margin="5,0,0,0">
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ScrollViewer x:Name="EnglishScrollViewer" VerticalScrollBarVisibility="Auto">
                     <RichTextBox x:Name="EnglishRichTextBox" 
                              AutoWordSelection="False"
              IsReadOnly="True"
@@ -248,7 +248,7 @@
             <!-- Русский RichTextBox -->
             <Border Grid.Column="0" Grid.Row="1" Background="{StaticResource BackgroundLight}" BorderBrush="{StaticResource BorderDark}" 
         BorderThickness="1" CornerRadius="3" Margin="0,0,5,0">
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ScrollViewer x:Name="RussianScrollViewer" VerticalScrollBarVisibility="Auto">
                     <RichTextBox x:Name="RussianRichTextBox" 
                                  AutoWordSelection="False"
              IsReadOnly="True"
@@ -283,7 +283,9 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,5">
+            <!-- ДОБАВЬ x:Name="ErrorsHeaderPanel" и Background="Transparent" -->
+            <StackPanel x:Name="ErrorsHeaderPanel" Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,5" 
+            Background="Transparent" Cursor="Hand">
                 <TextBlock Text="⚠ Замечания к переводу:" Foreground="{StaticResource WarningOrange}" FontWeight="SemiBold"/>
                 <TextBlock Text="{Binding Errors.Count, StringFormat='({0})'}" Foreground="{StaticResource ForegroundSecondary}" Margin="5,0,0,0"/>
             </StackPanel>

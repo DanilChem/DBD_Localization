@@ -2,6 +2,14 @@
 
 namespace DBD_Trans.Models
 {
+    public enum RowDisplayState
+    {
+        Normal,
+        NoTranslation,
+        CompletedNoErrors,
+        CompletedWithErrors,
+        InProgressWithErrors
+    }
     public class LocalizationEntry : ObservableObject
     {
         private int _index;
@@ -43,14 +51,22 @@ namespace DBD_Trans.Models
         public ItemStatus Status
         {
             get => _status;
-            set => Set(ref _status, value);
+            set
+            {
+                if (Set(ref _status, value))
+                    OnPropertyChanged(nameof(DisplayState));
+            }
         }
 
         private bool _hasErrors;
         public bool HasErrors
         {
             get => _hasErrors;
-            set => Set(ref _hasErrors, value);
+            set
+            {
+                if (Set(ref _hasErrors, value))
+                    OnPropertyChanged(nameof(DisplayState));
+            }
         }
 
         private int _errorCount;
@@ -58,6 +74,18 @@ namespace DBD_Trans.Models
         {
             get => _errorCount;
             set => Set(ref _errorCount, value);
+        }
+
+        public RowDisplayState DisplayState
+        {
+            get
+            {
+                if (!HasTranslation) return RowDisplayState.NoTranslation;
+                if (Status == ItemStatus.Completed && !HasErrors) return RowDisplayState.CompletedNoErrors;
+                if (Status == ItemStatus.Completed && HasErrors) return RowDisplayState.CompletedWithErrors;
+                if (Status == ItemStatus.InProgress && HasErrors) return RowDisplayState.InProgressWithErrors;
+                return RowDisplayState.Normal;
+            }
         }
     }
 }

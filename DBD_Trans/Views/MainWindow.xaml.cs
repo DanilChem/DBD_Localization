@@ -1,16 +1,24 @@
 ﻿using DBD_Trans.Helpers;
 using DBD_Trans.Models;
 using DBD_Trans.ViewModels;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace DBD_Trans.Views
 {
     public partial class MainWindow : Window
     {
         private MainViewModel ViewModel => DataContext as MainViewModel;
+        private bool _isMiddleScrolling = false;
+        private Point _middleScrollOrigin;
+        private ScrollViewer _targetScrollViewer;
+        private DispatcherTimer _scrollTimer;
+        private const double ScrollDeadzone = 15.0; // Мертвая зона в пикселях (чтобы не было рывков)
+        private const double ScrollSpeedMultiplier = 0.3; // Множитель скорости (чем больше, тем быстрее)
 
         public MainWindow()
         {
@@ -60,6 +68,16 @@ namespace DBD_Trans.Views
                         vm.SelectedEntry = entry;
                 }
             };
+
+            _scrollTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromMilliseconds(16)
+            };
+            _scrollTimer.Tick += ScrollTimer_Tick;
+
+            this.PreviewMouseDown += MainWindow_PreviewMouseDown;
+            this.PreviewMouseUp += MainWindow_PreviewMouseUp;
+            this.Deactivated += (s, e) => StopMiddleScroll();
         }
 
         private void OnScrollToItem(LocalizationEntry entry)
@@ -90,5 +108,99 @@ namespace DBD_Trans.Views
                 parent = VisualTreeHelper.GetParent(parent);
             return parent as T;
         }
+
+        // --- ЛОГИКА СКРОЛЛА СРЕДНЕЙ КНОПКОЙ ---
+
+        private void MainWindow_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            // Активируем только если нажата средняя кнопка и клик был внутри DataGrid
+            if (e.ChangedButton == MouseButton.Middle && e.ButtonState == MouseButtonState.Pressed && !_isMiddleScrolling)
+            {
+                var hit = VisualTreeHelper.HitTest(LocalizationGrid, e.GetPosition(LocalizationGrid));
+                if (hit != null)
+                {
+                    _isMiddleScrolling = true;
+                    _middleScrollOrigin = Mouse.GetPosition(this);
+                    _targetScrollViewer = FindVisualChild<ScrollViewer>(LocalizationGrid);
+
+                    if (_targetScrollViewer != null)
+                    {
+                        this.Cursor = Cursors.ScrollAll; // Меняем курсор на "скроллер"
+                        _scrollTimer.Start();
+                        e.Handled = true; // Блокируем стандартное поведение средней кнопки
+                    }
+                }
+            }
+            // Если мы в режиме скролла и нажата ЛЮБАЯ другая кнопка (ЛКМ, ПКМ) - выходим из режима
+            else if (_isMiddleScrolling && e.ChangedButton != MouseButton.Middle)
+            {
+                StopMiddleScroll();
+            }
+        }
+
+        private void MainWindow_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Middle && _isMiddleScrolling)
+            {
+                StopMiddleScroll();
+                e.Handled = true;
+            }
+        }
+
+        private void ScrollTimer_Tick(object sender, EventArgs e)
+        {
+            if (!_isMiddleScrolling || _targetScrollViewer == null) return;
+
+            Point currentPos = Mouse.GetPosition(this);
+            double deltaY = currentPos.Y - _middleScrollOrigin.Y;
+            double deltaX = currentPos.X - _middleScrollOrigin.X;
+
+            // Увеличим мертвую зону до 20 пикселей, чтобы убрать микро-дрожание
+            const double deadzone = 20.0;
+            const double speed = 0.5; // Чуть увеличим скорость, чтобы компенсировать мертвую зону
+
+            double scrollY = 0;
+            if (Math.Abs(deltaY) > deadzone)
+            {
+                double distance = Math.Abs(deltaY) - deadzone;
+                scrollY = (deltaY > 0 ? 1 : -1) * distance * speed;
+            }
+
+            // Применяем ТОЛЬКО если смещение существенное (больше 1 пикселя)
+            if (Math.Abs(scrollY) > 1.0)
+            {
+                double newOffsetY = _targetScrollViewer.VerticalOffset + scrollY;
+                _targetScrollViewer.ScrollToVerticalOffset(newOffsetY);
+            }
+
+            // Если горизонтальный скролл не используется, можно вообще убрать deltaX для экономии CPU
+        }
+
+        private void StopMiddleScroll()
+        {
+            if (_isMiddleScrolling)
+            {
+                _isMiddleScrolling = false;
+                _scrollTimer.Stop();
+                this.Cursor = Cursors.Arrow;
+                Mouse.Capture(null);
+            }
+        }
+
+        // Вспомогательный метод для поиска ScrollViewer внутри DataGrid
+        private T FindVisualChild<T>(DependencyObject parent) where T : DependencyObject
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i);
+                if (child is T found) return found;
+
+                var result = FindVisualChild<T>(child);
+                if (result != null) return result;
+            }
+            return null;
+        }
+
+        // --------------------------------------
     }
 }

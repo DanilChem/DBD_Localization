@@ -9,10 +9,12 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows;
+using System.Windows.Threading;
 
 namespace DBD_Trans.ViewModels
 {
@@ -23,9 +25,31 @@ namespace DBD_Trans.ViewModels
         private readonly IAppSettings _appSettings;
         private readonly IStatusStorage _statusStorage;
         private readonly string _dataDirectory;
+        private readonly DispatcherTimer _searchTimer;
 
-        public ObservableCollection<LocalizationEntry> AllEntries { get; } = new ObservableCollection<LocalizationEntry>();
+        private int _missingCountCache;
+        private int _completedCountCache;
+        private int _totalErrorCountCache;
+
+        public FastObservableCollection<LocalizationEntry> AllEntries { get; } = new FastObservableCollection<LocalizationEntry>();
         public ICollectionView FilteredEntries { get; }
+
+        // --- Новые свойства для фильтра ---
+        public string[] FilterOptions { get; } = { "Все", "Выполненные", "С ошибками (по убыванию)" };
+
+        private string _selectedFilter = "Все";
+        public string SelectedFilter
+        {
+            get => _selectedFilter;
+            set
+            {
+                if (Set(ref _selectedFilter, value))
+                {
+                    ApplyFilterAndSort();
+                }
+            }
+        }
+        // ----------------------------------
 
         private string _searchText = string.Empty;
         public string SearchText
@@ -35,8 +59,11 @@ namespace DBD_Trans.ViewModels
             {
                 if (Set(ref _searchText, value))
                 {
-                    FilteredEntries.Refresh();
-                    UpdateStatistics();
+                    // --- ИЗМЕНЕННАЯ ЛОГИКА ---
+                    // При каждом изменении текста сбрасываем и запускаем таймер заново
+                    _searchTimer.Stop();
+                    _searchTimer.Start();
+                    // -------------------------
                 }
             }
         }
@@ -49,46 +76,22 @@ namespace DBD_Trans.ViewModels
         }
 
         private int _totalCount;
-        public int TotalCount
-        {
-            get => _totalCount;
-            set => Set(ref _totalCount, value);
-        }
+        public int TotalCount { get => _totalCount; set => Set(ref _totalCount, value); }
 
         private int _displayedCount;
-        public int DisplayedCount
-        {
-            get => _displayedCount;
-            set => Set(ref _displayedCount, value);
-        }
+        public int DisplayedCount { get => _displayedCount; set => Set(ref _displayedCount, value); }
 
         private int _missingCount;
-        public int MissingCount
-        {
-            get => _missingCount;
-            set => Set(ref _missingCount, value);
-        }
+        public int MissingCount { get => _missingCount; set => Set(ref _missingCount, value); }
 
         private string _resultCountText;
-        public string ResultCountText
-        {
-            get => _resultCountText;
-            set => Set(ref _resultCountText, value);
-        }
+        public string ResultCountText { get => _resultCountText; set => Set(ref _resultCountText, value); }
 
         private int _completedCount;
-        public int CompletedCount
-        {
-            get => _completedCount;
-            set => Set(ref _completedCount, value);
-        }
+        public int CompletedCount { get => _completedCount; set => Set(ref _completedCount, value); }
 
         private int _totalErrorCount;
-        public int TotalErrorCount
-        {
-            get => _totalErrorCount;
-            set => Set(ref _totalErrorCount, value);
-        }
+        public int TotalErrorCount { get => _totalErrorCount; set => Set(ref _totalErrorCount, value); }
 
         public ICommand AnalyzeCommand { get; }
         public ICommand GoToCommand { get; }
@@ -100,7 +103,6 @@ namespace DBD_Trans.ViewModels
             get => _isLoading;
             set => Set(ref _isLoading, value);
         }
-
 
         public MainViewModel(IFileService fileService, IErrorStorage errorStorage, IStatusStorage statusStorage, IAppSettings appSettings, string dataDirectory)
         {
@@ -119,14 +121,34 @@ namespace DBD_Trans.ViewModels
 
             BindingOperations.EnableCollectionSynchronization(AllEntries, new object());
 
+            _searchTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromMilliseconds(300)
+            };
+            _searchTimer.Tick += SearchTimer_Tick;
+
             IsLoading = true;
             Task.Run(() =>
             {
                 LoadData();
                 Application.Current.Dispatcher.Invoke(() => IsLoading = false);
             });
-
         }
+
+        // --- Логика применения фильтра и сортировки ---
+        private void ApplyFilterAndSort()
+        {
+            FilteredEntries.SortDescriptions.Clear();
+
+            if (_selectedFilter == "С ошибками (по убыванию)")
+            {
+                FilteredEntries.SortDescriptions.Add(new SortDescription("ErrorCount", ListSortDirection.Descending));
+            }
+
+            FilteredEntries.Refresh();
+            UpdateStatistics();
+        }
+        // ------------------------------------------------
 
         private void LoadData()
         {
@@ -157,7 +179,6 @@ namespace DBD_Trans.ViewModels
                     ? HtmlStripper.StripHtmlTags(ruValue)
                     : "[нет перевода]";
 
-                // Создаём запись, потом задаём статус
                 var entry = new LocalizationEntry
                 {
                     Index = index++,
@@ -166,10 +187,12 @@ namespace DBD_Trans.ViewModels
                     Russian = russian,
                     HasTranslation = ruDict.ContainsKey(key)
                 };
+
                 var errors = _errorStorage.GetErrors(entry.Key);
                 entry.HasErrors = errors.Count > 0;
                 entry.ErrorCount = errors.Count;
                 entry.Status = _statusStorage.GetStatus(entry.Key);
+
                 tempEntries.Add(entry);
             }
 
@@ -184,43 +207,55 @@ namespace DBD_Trans.ViewModels
                     Russian = HtmlStripper.StripHtmlTags(ruDict[key]),
                     HasTranslation = false
                 };
+
                 var errors = _errorStorage.GetErrors(entry.Key);
                 entry.HasErrors = errors.Count > 0;
                 entry.ErrorCount = errors.Count;
                 entry.Status = _statusStorage.GetStatus(entry.Key);
+
                 tempEntries.Add(entry);
             }
 
-            foreach (var entry in tempEntries)
-                AllEntries.Add(entry);
-
-            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+            Application.Current.Dispatcher.Invoke(() =>
             {
+                AllEntries.AddRange(tempEntries);
+
                 FilteredEntries.Refresh();
+                CalculateTotalStatistics();
                 UpdateStatistics();
                 IsLoading = false;
-            }), System.Windows.Threading.DispatcherPriority.Background);
+            });
         }
 
         private bool FilterEntry(object obj)
         {
             if (!(obj is LocalizationEntry entry)) return false;
-            if (string.IsNullOrWhiteSpace(SearchText)) return true;
 
-            var filter = SearchText.Trim();
-            return (entry.Key?.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0) ||
-                   (entry.English?.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0) ||
-                   (entry.Russian?.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0);
+            // 1. Быстрый фильтр по статусу
+            if (_selectedFilter == "Выполненные" && entry.Status != ItemStatus.Completed) return false;
+            if (_selectedFilter == "С ошибками (по убыванию)" && !entry.HasErrors) return false;
+
+            // 2. Оптимизированный фильтр по поисковой строке
+            if (!string.IsNullOrWhiteSpace(_searchText))
+            {
+                var s = _searchText.Trim();
+                // IndexOf работает в разы быстрее, чем Contains или Regex
+                bool matches = (entry.Key != null && entry.Key.IndexOf(s, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                               (entry.English != null && entry.English.IndexOf(s, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                               (entry.Russian != null && entry.Russian.IndexOf(s, StringComparison.OrdinalIgnoreCase) >= 0);
+
+                if (!matches) return false;
+            }
+            return true;
         }
 
         private void UpdateStatistics()
         {
             TotalCount = AllEntries.Count;
-            var displayed = FilteredEntries.Cast<LocalizationEntry>().ToList();
-            DisplayedCount = displayed.Count;
-            MissingCount = AllEntries.Count(e => !e.HasTranslation);
-            CompletedCount = AllEntries.Count(e => e.Status == ItemStatus.Completed);
-            TotalErrorCount = AllEntries.Sum(e => e.ErrorCount);
+            DisplayedCount = FilteredEntries.Cast<LocalizationEntry>().Count();
+            MissingCount = _missingCountCache;
+            CompletedCount = _completedCountCache;
+            TotalErrorCount = _totalErrorCountCache;
             ResultCountText = DisplayedCount != TotalCount ? $"(найдено: {DisplayedCount})" : "";
         }
 
@@ -235,14 +270,15 @@ namespace DBD_Trans.ViewModels
             window.DataContext = vm;
             window.Owner = App.Current.MainWindow;
             window.ShowDialog();
-
-            UpdateStatistics();   // обновляем счётчики
-                                  // FilteredEntries.Refresh();  // <-- УДАЛЯЕМ эту строку
+            CalculateTotalStatistics();
+            UpdateStatistics();
         }
 
         private void GoToEntry(LocalizationEntry entry)
         {
+            // Сбрасываем поиск и фильтр, чтобы строка гарантированно появилась в списке
             SearchText = string.Empty;
+            SelectedFilter = "Все"; // <-- Возвращаем ComboBox в начальное состояние
 
             var target = AllEntries.FirstOrDefault(e => e.Key == entry.Key);
             if (target != null)
@@ -251,6 +287,34 @@ namespace DBD_Trans.ViewModels
                 ScrollToItemRequested?.Invoke(target);
             }
         }
+
+        // Добавь поле для отмены предыдущего поиска
+        private CancellationTokenSource _searchCts;
+
+        private void SearchTimer_Tick(object sender, EventArgs e)
+        {
+            _searchTimer.Stop();
+            // Просто обновляем стандартное представление
+            FilteredEntries.Refresh();
+            UpdateStatistics();
+        }
+
+
+        private void CalculateTotalStatistics()
+        {
+            _missingCountCache = 0;
+            _completedCountCache = 0;
+            _totalErrorCountCache = 0;
+            foreach (var entry in AllEntries)
+            {
+                if (!entry.HasTranslation) _missingCountCache++;
+                if (entry.Status == ItemStatus.Completed) _completedCountCache++;
+                _totalErrorCountCache += entry.ErrorCount;
+            }
+        }
+
+
+
 
         public event Action<LocalizationEntry> ScrollToItemRequested;
     }

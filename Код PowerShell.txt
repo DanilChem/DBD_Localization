@@ -1,3 +1,4 @@
+cd "C:\Users\danil\OneDrive\Рабочий стол\СЦЕНАРИИ\Незакончено\DBD_Trans-master"
 $outputPath = Join-Path (Get-Location) "project_dump.txt"
 $ignore = @('bin', 'obj', '.git', '.vs', 'node_modules', 'packages', '*.user', '*.suo', '*.dll', '*.exe', '*.pdb')
 $files = Get-ChildItem -Recurse -File -Include '*.cs', '*.cshtml', '*.xaml', '*.config' -Exclude $ignore
