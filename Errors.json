@@ -8298,5 +8298,576 @@
       ],
       "RussianHighlights": []
     }
+  ],
+  "08BC288A4F6D92C19401FEA91265268C": [
+    {
+      "Text": "Оригинал: настоящее время, перевод: прошедшее",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 55,
+          "Length": 2
+        },
+        {
+          "StartIndex": 122,
+          "Length": 2
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 44,
+          "Length": 4
+        },
+        {
+          "StartIndex": 138,
+          "Length": 6
+        },
+        {
+          "StartIndex": 169,
+          "Length": 14
+        }
+      ]
+    },
+    {
+      "Text": "Опущено usefull",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 324,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Обезображенное != Misshapen. Больше бы подошло как деформированное, искривлённое",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 864,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 851,
+          "Length": 14
+        }
+      ]
+    },
+    {
+      "Text": "вспарывать != stab. Лучше пронзать",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1148,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1155,
+          "Length": 10
+        }
+      ]
+    },
+    {
+      "Text": "Опущено fleshy",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1284,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Грамматическая ошибка",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1592,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Добавлено вновь",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1495,
+          "Length": 5
+        }
+      ]
+    },
+    {
+      "Text": "Оригинал: Слэшер ударяет рукой вперёд, пронзая грудь существа. Перевод: Слэшер тянется рукой, раздирая грудину противника",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1454,
+          "Length": 64
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1541,
+          "Length": 49
+        }
+      ]
+    },
+    {
+      "Text": "Учитывая, что у Неведомого только UVX похож на паука, то я бы обратился к нему не как к созданию, а к нечто, похожее на паука",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1665,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1767,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "Лучше бы перевели как ножовка",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 377,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 375,
+          "Length": 4
+        }
+      ]
+    },
+    {
+      "Text": "Трухлявая != Dry",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1901,
+          "Length": 3
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2078,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "\"wails on him\" означает «молотит/лупит его» (серия ударов), а не просто «накидывается».",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1850,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2012,
+          "Length": 12
+        }
+      ]
+    },
+    {
+      "Text": "Пила != Hacksaw",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1940,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2120,
+          "Length": 4
+        }
+      ]
+    },
+    {
+      "Text": "\"scrapes the blade deeper\" — это «протягивает/скребет лезвием глубже», а не «вонзает».",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2073,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2228,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Опущено it collapses",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2277,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "\"scores of wounds\" означает «множество/десятки ран на теле». Переводчик перепутал существительное \"scores\" (десятки) с глаголом \"score\" (оценивать).",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2334,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2458,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "\"strides into the darkness\" — это «шагает/направляется во тьму», а не «собирается раствориться».",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2372,
+          "Length": 25
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2486,
+          "Length": 37
+        }
+      ]
+    },
+    {
+      "Text": "\"gaping maw\" — это «зияющая пасть» или «зев», а не «зияющая рана».",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2588,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2748,
+          "Length": 12
+        }
+      ]
+    },
+    {
+      "Text": "\"thrusts\" — это резкий толчок/выпад, а не «отмахивается».",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2791,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2962,
+          "Length": 12
+        }
+      ]
+    },
+    {
+      "Text": "\"impaling it on his arms\" — это «нанизывая её на свои руки», а не «раздирая руками».",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2902,
+          "Length": 23
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3101,
+          "Length": 34
+        }
+      ]
+    },
+    {
+      "Text": "\"permeates\" — это «пронизывает/пропитывает», а не «господствует».",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3336,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3559,
+          "Length": 14
+        }
+      ]
+    },
+    {
+      "Text": "\"he glimpses visions\" — он видит/замечает видения, а в переводе потеряно действие Слэшера.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3386,
+          "Length": 19
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3613,
+          "Length": 14
+        }
+      ]
+    },
+    {
+      "Text": "Опущено young",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3514,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "\"is here\" означает «здесь», а не «вернулся» (это было бы \"returned\").",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3754,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4020,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "realm - измерение, мир",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3723,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3967,
+          "Length": 15
+        }
+      ]
+    },
+    {
+      "Text": "\"chokes on the blood\" — она «захлебывается/давится кровью», а не просто кровь «хлещет».",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3643,
+          "Length": 53
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3890,
+          "Length": 41
+        }
+      ]
+    }
+  ],
+  "ST_GP_AddOns.ADDON_K43_01_NAME": [
+    {
+      "Text": "Ручной != Garder",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 6
+        }
+      ]
+    }
+  ],
+  "ST_GP_AddOns.ADDON_K43_01_DESC": [
+    {
+      "Text": "Вспахать землю != Digging up weeds. Это сорняки",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 9,
+          "Length": 16
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 27,
+          "Length": 14
+        }
+      ]
+    },
+    {
+      "Text": "Вспороть != Digging into, это вгрызаться, прокопаться и так далее",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 30,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 44,
+          "Length": 8
+        }
+      ]
+    }
+  ],
+  "ST_GP_AddOns.ADDON_K43_06_DESC": [
+    {
+      "Text": "Приложили звучит менее ужасно, как smashed",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 35,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 32,
+          "Length": 9
+        }
+      ]
+    }
+  ],
+  "ST_GP_AddOns.ADDON_K43_12_DESC": [
+    {
+      "Text": "Чьё лицо образовало это",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 80,
+          "Length": 20
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 67,
+          "Length": 28
+        }
+      ]
+    },
+    {
+      "Text": "Artwork - это в целом исскуство",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 24,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 21,
+          "Length": 7
+        }
+      ]
+    }
+  ],
+  "ST_GP_AddOns.ADDON_K43_16_DESC": [
+    {
+      "Text": "Горелого != Cooked",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 91,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 90,
+          "Length": 8
+        }
+      ]
+    }
+  ],
+  "ST_GP_AddOns.ADDON_K43_17_DESC": [
+    {
+      "Text": "Опущена игра слов с рукой, ведь в 4 части фильма именно штопором проткнули руку",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 44,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "ST_GP_AddOns.ADDON_K43_20_DESC": [
+    {
+      "Text": "Налетели != Cut through",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 49,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 48,
+          "Length": 8
+        }
+      ]
+    }
+  ],
+  "B2AEAC884586471914C0CD8350E594CA": [
+    {
+      "Text": "Оповещение всех подразделений: сообщение, передаваемое из одного полицейского участка во все остальные в данном районе, штате и т. д., например, с указанием арестовать конкретного подозреваемого или подозреваемых.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 44,
+          "Length": 3
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 48,
+          "Length": 12
+        }
+      ]
+    }
   ]
 }
