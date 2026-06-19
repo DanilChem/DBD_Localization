@@ -100,14 +100,32 @@ namespace DBD_Trans.Views
                 ErrorsRow.Height = new GridLength(20);
             }
         }
+              
 
-        // Вспомогательный метод: проверяет, является ли кликнутый элемент дочерним для нашего заголовка
         private bool IsChildOf(DependencyObject child, DependencyObject parent)
         {
             while (child != null)
             {
                 if (child == parent) return true;
-                child = System.Windows.Media.VisualTreeHelper.GetParent(child);
+
+                DependencyObject next = LogicalTreeHelper.GetParent(child);
+                if (next == null)
+                {
+                    if (child is Visual || child is Visual3D)
+                    {
+                        next = VisualTreeHelper.GetParent(child);
+                    }
+                    else if (child is TextElement te)
+                    {
+                        next = te.Parent as DependencyObject;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+
+                child = next;
             }
             return false;
         }

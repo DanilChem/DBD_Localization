@@ -43,20 +43,21 @@ namespace DBD_Trans.ViewModels
             get
             {
                 if (IsCompleted && HasErrors)
-                    return new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF750000")); // красный
+                    return new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF750000"));
                 if (IsCompleted && !HasErrors)
-                    return new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF004A7C")); // синий
+                    return new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF004A7C"));
                 return new SolidColorBrush(Colors.Transparent);
             }
         }
+
         public ICommand ToggleCompletedCommand { get; }
 
-        public IEnumerable<ItemStatus> StatusOptions { get; }
-        = Enum.GetValues(typeof(ItemStatus)).Cast<ItemStatus>();
+        public IEnumerable<ItemStatus> StatusOptions { get; } = Enum.GetValues(typeof(ItemStatus)).Cast<ItemStatus>();
 
         private static readonly SolidColorBrush TemporaryHighlightBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFCA5100"));
         private static readonly SolidColorBrush PermanentHighlightBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#33CA5100"));
         private static readonly SolidColorBrush SelectedPermanentHighlightBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFCA5100"));
+        private static readonly SolidColorBrush SearchHighlightBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF2f9cd6"));
 
         public string EnglishText { get; }
         public string RussianText { get; }
@@ -79,7 +80,7 @@ namespace DBD_Trans.ViewModels
             {
                 if (Set(ref _selectedError, value))
                 {
-                    UpdateHighlightsForSelection();
+                    RebuildDocuments();
                 }
             }
         }
@@ -89,6 +90,19 @@ namespace DBD_Trans.ViewModels
         {
             get => _isMarkerActive;
             set => Set(ref _isMarkerActive, value);
+        }
+
+        private string _searchText;
+        public string SearchText
+        {
+            get => _searchText;
+            set
+            {
+                if (Set(ref _searchText, value))
+                {
+                    RebuildDocuments();
+                }
+            }
         }
 
         public double FontSize
@@ -113,8 +127,8 @@ namespace DBD_Trans.ViewModels
         public RichTextBox EnglishRichTextBox { get; set; }
         public RichTextBox RussianRichTextBox { get; set; }
 
-        public AnalysisViewModel(LocalizationEntry entry, System.Collections.Generic.List<ErrorItem> existingErrors,
-                                 IErrorStorage errorStorage, IStatusStorage statusStorage, IAppSettings appSettings)
+        public AnalysisViewModel(LocalizationEntry entry, List<ErrorItem> existingErrors,
+            IErrorStorage errorStorage, IStatusStorage statusStorage, IAppSettings appSettings)
         {
             _key = entry.Key;
             EnglishText = entry.English;
@@ -123,7 +137,6 @@ namespace DBD_Trans.ViewModels
             _errorStorage = errorStorage;
             _appSettings = appSettings;
             _entry = entry;
-            _key = entry.Key;
             _statusStorage = statusStorage;
 
             Errors.CollectionChanged += (s, e) =>
@@ -131,7 +144,8 @@ namespace DBD_Trans.ViewModels
                 OnPropertyChanged(nameof(HasErrors));
                 OnPropertyChanged(nameof(CompletedButtonBrush));
                 _entry.HasErrors = HasErrors;
-                _entry.ErrorCount = Errors.Count;   // ← добавить
+                _entry.ErrorCount = Errors.Count;
+                RebuildDocuments();
             };
 
             foreach (var err in existingErrors)
@@ -149,72 +163,170 @@ namespace DBD_Trans.ViewModels
 
         public void InitializeDocuments()
         {
-            BuildDocumentsWithAllPermanentHighlights();
+            RebuildDocuments();
         }
 
-        private void BuildDocumentsWithAllPermanentHighlights()
+        private class HighlightSegment
         {
-            var allEngHighlights = Errors.SelectMany(e => e.EnglishHighlights).ToList();
-            var allRusHighlights = Errors.SelectMany(e => e.RussianHighlights).ToList();
-
-            EnglishRichTextBox.Document = BuildDocumentWithHighlights(EnglishText, allEngHighlights, PermanentHighlightBrush);
-            RussianRichTextBox.Document = BuildDocumentWithHighlights(RussianText, allRusHighlights, PermanentHighlightBrush);
+            public int Start { get; set; }
+            public int Length { get; set; }
+            public Brush Brush { get; set; }
+            public int Priority { get; set; }
         }
 
-        private FlowDocument BuildDocumentWithHighlights(string text, System.Collections.Generic.List<TextRangeInfo> highlights, Brush highlightBrush)
+        private void RebuildDocuments()
+        {
+            if (EnglishRichTextBox == null || RussianRichTextBox == null) return;
+
+            var searchHighlightsEng = FindMatches(EnglishText, _searchText);
+            var searchHighlightsRus = FindMatches(RussianText, _searchText);
+
+            var allEngPermanent = Errors.SelectMany(e => e.EnglishHighlights).ToList();
+            var allRusPermanent = Errors.SelectMany(e => e.RussianHighlights).ToList();
+
+            var selectedEng = SelectedError?.EnglishHighlights;
+            var selectedRus = SelectedError?.RussianHighlights;
+
+            var engSegments = BuildSegments(allEngPermanent, selectedEng, searchHighlightsEng);
+            var rusSegments = BuildSegments(allRusPermanent, selectedRus, searchHighlightsRus);
+
+            EnglishRichTextBox.Document = BuildDocument(EnglishText, engSegments);
+            RussianRichTextBox.Document = BuildDocument(RussianText, rusSegments);
+
+            ScrollToFirstMatch(EnglishRichTextBox, searchHighlightsEng);
+            ScrollToFirstMatch(RussianRichTextBox, searchHighlightsRus);
+        }
+
+        private List<HighlightSegment> BuildSegments(List<TextRangeInfo> permanent, List<TextRangeInfo> selected, List<TextRangeInfo> search)
+        {
+            var segments = new List<HighlightSegment>();
+
+            if (permanent != null)
+                foreach (var h in permanent)
+                    segments.Add(new HighlightSegment { Start = h.StartIndex, Length = h.Length, Brush = PermanentHighlightBrush, Priority = 1 });
+
+            if (selected != null)
+                foreach (var h in selected)
+                    segments.Add(new HighlightSegment { Start = h.StartIndex, Length = h.Length, Brush = SelectedPermanentHighlightBrush, Priority = 2 });
+
+            if (search != null)
+                foreach (var h in search)
+                    segments.Add(new HighlightSegment { Start = h.StartIndex, Length = h.Length, Brush = SearchHighlightBrush, Priority = 3 });
+
+            return segments;
+        }
+
+        private FlowDocument BuildDocument(string text, List<HighlightSegment> highlights)
         {
             var doc = new FlowDocument();
             var para = new Paragraph();
-            int lastPos = 0;
-            foreach (var range in highlights.OrderBy(r => r.StartIndex))
+
+            if (string.IsNullOrEmpty(text))
             {
-                if (range.StartIndex > lastPos)
+                doc.Blocks.Add(para);
+                return doc;
+            }
+
+            var brushes = new Brush[text.Length];
+
+            var sorted = highlights.OrderBy(h => h.Priority).ToList();
+            foreach (var h in sorted)
+            {
+                int end = Math.Min(h.Start + h.Length, text.Length);
+                for (int i = h.Start; i < end; i++)
                 {
-                    para.Inlines.Add(new Run(text.Substring(lastPos, range.StartIndex - lastPos)));
+                    brushes[i] = h.Brush;
                 }
-                var highlightedRun = new Run(text.Substring(range.StartIndex, range.Length));
-                highlightedRun.Background = highlightBrush;
-                para.Inlines.Add(highlightedRun);
-                lastPos = range.StartIndex + range.Length;
             }
-            if (lastPos < text.Length)
+
+            int lastPos = 0;
+            Brush currentBrush = brushes.Length > 0 ? brushes[0] : null;
+
+            for (int i = 1; i <= text.Length; i++)
             {
-                para.Inlines.Add(new Run(text.Substring(lastPos)));
+                Brush nextBrush = i < text.Length ? brushes[i] : null;
+
+                if (nextBrush != currentBrush || i == text.Length)
+                {
+                    int length = i - lastPos;
+                    if (length > 0)
+                    {
+                        var run = new Run(text.Substring(lastPos, length));
+                        if (currentBrush != null)
+                        {
+                            run.Background = currentBrush;
+                        }
+                        para.Inlines.Add(run);
+                    }
+
+                    lastPos = i;
+                    currentBrush = nextBrush;
+                }
             }
+
             doc.Blocks.Add(para);
             return doc;
         }
 
-        private void UpdateHighlightsForSelection()
+        private List<TextRangeInfo> FindMatches(string text, string search)
         {
-            if (EnglishRichTextBox == null || RussianRichTextBox == null) return;
+            var matches = new List<TextRangeInfo>();
+            if (string.IsNullOrEmpty(search) || string.IsNullOrEmpty(text)) return matches;
 
-            // Все постоянные выделения (от всех ошибок)
-            var allEngHighlights = Errors.SelectMany(e => e.EnglishHighlights).ToList();
-            var allRusHighlights = Errors.SelectMany(e => e.RussianHighlights).ToList();
-
-            // Выделения выбранной ошибки
-            var selectedEng = SelectedError?.EnglishHighlights;
-            var selectedRus = SelectedError?.RussianHighlights;
-
-            // Если есть выбранные, удаляем их из постоянных, чтобы они не рисовались дважды
-            if (selectedEng != null && selectedEng.Any())
+            int index = 0;
+            while ((index = text.IndexOf(search, index, StringComparison.OrdinalIgnoreCase)) != -1)
             {
-                allEngHighlights = allEngHighlights
-                    .Where(h => !selectedEng.Any(s => s.StartIndex == h.StartIndex && s.Length == h.Length))
-                    .ToList();
+                matches.Add(new TextRangeInfo { StartIndex = index, Length = search.Length });
+                index += search.Length;
             }
-            if (selectedRus != null && selectedRus.Any())
-            {
-                allRusHighlights = allRusHighlights
-                    .Where(h => !selectedRus.Any(s => s.StartIndex == h.StartIndex && s.Length == h.Length))
-                    .ToList();
-            }
-
-            EnglishRichTextBox.Document = BuildDocumentWithHighlights(EnglishText, allEngHighlights, PermanentHighlightBrush, selectedEng, SelectedPermanentHighlightBrush);
-            RussianRichTextBox.Document = BuildDocumentWithHighlights(RussianText, allRusHighlights, PermanentHighlightBrush, selectedRus, SelectedPermanentHighlightBrush);
+            return matches;
         }
 
+        private void ScrollToFirstMatch(RichTextBox rtb, List<TextRangeInfo> matches)
+        {
+            if (matches == null || matches.Count == 0) return;
+
+            var firstMatch = matches[0];
+            var pointer = GetTextPointerByIndex(rtb.Document, firstMatch.StartIndex);
+
+            if (pointer != null)
+            {
+                if (pointer.Parent is FrameworkContentElement element)
+                {
+                    element.BringIntoView();
+                }
+            }
+        }
+
+        private TextPointer GetTextPointerByIndex(FlowDocument doc, int index)
+        {
+            var pointer = doc.ContentStart;
+            int currentIndex = 0;
+            while (pointer != null)
+            {
+                if (pointer.GetPointerContext(LogicalDirection.Forward) == TextPointerContext.Text)
+                {
+                    var next = pointer.GetNextContextPosition(LogicalDirection.Forward);
+                    if (next != null)
+                    {
+                        var range = new TextRange(pointer, next);
+                        int len = range.Text.Length;
+                        if (currentIndex + len > index)
+                        {
+                            return pointer.GetPositionAtOffset(index - currentIndex, LogicalDirection.Forward);
+                        }
+                        currentIndex += len;
+                        pointer = next;
+                    }
+                    else break;
+                }
+                else
+                {
+                    pointer = pointer.GetNextContextPosition(LogicalDirection.Forward);
+                }
+            }
+            return null;
+        }
 
         private void ToggleMarker()
         {
@@ -224,7 +336,6 @@ namespace DBD_Trans.ViewModels
         public void ApplyMarkerToSelection(RichTextBox rtb)
         {
             if (rtb == null || rtb.Selection.IsEmpty || !IsMarkerActive) return;
-
             var range = new TextRange(rtb.Selection.Start, rtb.Selection.End);
             range.ApplyPropertyValue(TextElement.BackgroundProperty, TemporaryHighlightBrush);
             rtb.Selection.Select(rtb.Selection.Start, rtb.Selection.Start);
@@ -233,7 +344,6 @@ namespace DBD_Trans.ViewModels
         public void RemoveHighlightAtPosition(RichTextBox rtb, TextPointer position)
         {
             if (rtb == null || position == null || !IsMarkerActive) return;
-
             var start = position.GetPositionAtOffset(-1);
             var end = position.GetPositionAtOffset(1);
             if (start != null && end != null)
@@ -281,25 +391,18 @@ namespace DBD_Trans.ViewModels
         private void AddError(object _)
         {
             if (string.IsNullOrWhiteSpace(NewErrorText)) return;
-
             var engHighlights = ExtractHighlightsFromDocument(EnglishRichTextBox.Document, TemporaryHighlightBrush.Color);
             var rusHighlights = ExtractHighlightsFromDocument(RussianRichTextBox.Document, TemporaryHighlightBrush.Color);
-
             var errorItem = new ErrorItem
             {
                 Text = NewErrorText.Trim(),
                 EnglishHighlights = engHighlights,
                 RussianHighlights = rusHighlights
             };
-
             Errors.Add(errorItem);
             NewErrorText = string.Empty;
             SelectedError = errorItem;
-
-            BuildDocumentsWithAllPermanentHighlights();
-            UpdateHighlightsForSelection();
             IsMarkerActive = false;
-
             SaveChanges();
         }
 
@@ -308,7 +411,6 @@ namespace DBD_Trans.ViewModels
             var highlights = new List<TextRangeInfo>();
             int currentPos = 0;
             var navigator = doc.ContentStart;
-
             while (navigator != null)
             {
                 if (navigator.GetPointerContext(LogicalDirection.Forward) == TextPointerContext.Text)
@@ -319,7 +421,6 @@ namespace DBD_Trans.ViewModels
                         var textRange = new TextRange(navigator, next);
                         var bg = textRange.GetPropertyValue(TextElement.BackgroundProperty);
                         int length = textRange.Text.Length;
-
                         if (bg is SolidColorBrush brush && brush.Color == targetColor)
                         {
                             highlights.Add(new TextRangeInfo { StartIndex = currentPos, Length = length });
@@ -337,17 +438,12 @@ namespace DBD_Trans.ViewModels
         private void DeleteError(ErrorItem item)
         {
             if (item == null || !Errors.Contains(item)) return;
-
             int index = Errors.IndexOf(item);
             Errors.Remove(item);
-
             if (SelectedError == item)
             {
                 SelectedError = Errors.Count > 0 ? Errors[Math.Min(index, Errors.Count - 1)] : null;
             }
-
-            BuildDocumentsWithAllPermanentHighlights();
-            UpdateHighlightsForSelection();
             SaveChanges();
         }
 
@@ -370,54 +466,6 @@ namespace DBD_Trans.ViewModels
 
         public void SaveDocumentsToSelectedError()
         {
-
-        }
-
-        private FlowDocument BuildDocumentWithHighlights(string text,
-    List<TextRangeInfo> permanentHighlights,
-    Brush permanentBrush,
-    List<TextRangeInfo> selectedHighlights = null,
-    Brush selectedBrush = null)
-        {
-            var doc = new FlowDocument();
-            var para = new Paragraph();
-            int lastPos = 0;
-
-            // Собираем все диапазоны с их кистями (приоритет у selected)
-            var ranges = new Dictionary<int, (int length, Brush brush)>();
-
-            if (permanentHighlights != null)
-            {
-                foreach (var h in permanentHighlights)
-                    ranges[h.StartIndex] = (h.Length, permanentBrush);
-            }
-
-            if (selectedHighlights != null && selectedBrush != null)
-            {
-                foreach (var h in selectedHighlights)
-                    ranges[h.StartIndex] = (h.Length, selectedBrush); // перезаписывает постоянный, если ключ совпадает
-            }
-
-            foreach (var range in ranges.OrderBy(x => x.Key))
-            {
-                int start = range.Key;
-                int length = range.Value.length;
-                Brush brush = range.Value.brush;
-
-                if (start > lastPos)
-                    para.Inlines.Add(new Run(text.Substring(lastPos, start - lastPos)));
-
-                var run = new Run(text.Substring(start, length));
-                run.Background = brush;
-                para.Inlines.Add(run);
-                lastPos = start + length;
-            }
-
-            if (lastPos < text.Length)
-                para.Inlines.Add(new Run(text.Substring(lastPos)));
-
-            doc.Blocks.Add(para);
-            return doc;
         }
     }
 }
