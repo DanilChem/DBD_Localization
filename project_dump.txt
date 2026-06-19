@@ -3052,8 +3052,6 @@ namespace DBD_Trans.ViewModels
         private static readonly SolidColorBrush TemporaryHighlightBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFCA5100"));
         private static readonly SolidColorBrush PermanentHighlightBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#33CA5100"));
         private static readonly SolidColorBrush SelectedPermanentHighlightBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFCA5100"));
-
-        // НОВЫЙ ЦВЕТ ДЛЯ ПОИСКА (Янтарный/Желтый)
         private static readonly SolidColorBrush SearchHighlightBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF2f9cd6"));
 
         public string EnglishText { get; }
@@ -3077,7 +3075,7 @@ namespace DBD_Trans.ViewModels
             {
                 if (Set(ref _selectedError, value))
                 {
-                    RebuildDocuments(); // Перестраиваем документы при смене выбранной ошибки
+                    RebuildDocuments();
                 }
             }
         }
@@ -3089,7 +3087,6 @@ namespace DBD_Trans.ViewModels
             set => Set(ref _isMarkerActive, value);
         }
 
-        // --- НОВОЕ СВОЙСТВО ДЛЯ ПОИСКА ---
         private string _searchText;
         public string SearchText
         {
@@ -3098,11 +3095,10 @@ namespace DBD_Trans.ViewModels
             {
                 if (Set(ref _searchText, value))
                 {
-                    RebuildDocuments(); // Перестраиваем документы при вводе текста в поиск
+                    RebuildDocuments();
                 }
             }
         }
-        // ---------------------------------
 
         public double FontSize
         {
@@ -3144,7 +3140,7 @@ namespace DBD_Trans.ViewModels
                 OnPropertyChanged(nameof(CompletedButtonBrush));
                 _entry.HasErrors = HasErrors;
                 _entry.ErrorCount = Errors.Count;
-                RebuildDocuments(); // Обновляем документы при изменении списка ошибок
+                RebuildDocuments();
             };
 
             foreach (var err in existingErrors)
@@ -3165,43 +3161,33 @@ namespace DBD_Trans.ViewModels
             RebuildDocuments();
         }
 
-        // =====================================================================
-        // ================== ЛОГИКА ПОСТРОЕНИЯ ДОКУМЕНТОВ ===================
-        // =====================================================================
-
         private class HighlightSegment
         {
             public int Start { get; set; }
             public int Length { get; set; }
             public Brush Brush { get; set; }
-            public int Priority { get; set; } // Чем больше число, тем выше приоритет отрисовки
+            public int Priority { get; set; }
         }
 
         private void RebuildDocuments()
         {
             if (EnglishRichTextBox == null || RussianRichTextBox == null) return;
 
-            // 1. Ищем совпадения для поиска
             var searchHighlightsEng = FindMatches(EnglishText, _searchText);
             var searchHighlightsRus = FindMatches(RussianText, _searchText);
 
-            // 2. Собираем все постоянные выделения (от всех ошибок)
             var allEngPermanent = Errors.SelectMany(e => e.EnglishHighlights).ToList();
             var allRusPermanent = Errors.SelectMany(e => e.RussianHighlights).ToList();
 
-            // 3. Выделения конкретно выбранной ошибки
             var selectedEng = SelectedError?.EnglishHighlights;
             var selectedRus = SelectedError?.RussianHighlights;
 
-            // 4. Формируем сегменты с учетом приоритетов
             var engSegments = BuildSegments(allEngPermanent, selectedEng, searchHighlightsEng);
             var rusSegments = BuildSegments(allRusPermanent, selectedRus, searchHighlightsRus);
 
-            // 5. Строим документы
             EnglishRichTextBox.Document = BuildDocument(EnglishText, engSegments);
             RussianRichTextBox.Document = BuildDocument(RussianText, rusSegments);
 
-            // 6. Автоматическая прокрутка к первому найденному слову
             ScrollToFirstMatch(EnglishRichTextBox, searchHighlightsEng);
             ScrollToFirstMatch(RussianRichTextBox, searchHighlightsRus);
         }
@@ -3220,7 +3206,7 @@ namespace DBD_Trans.ViewModels
 
             if (search != null)
                 foreach (var h in search)
-                    segments.Add(new HighlightSegment { Start = h.StartIndex, Length = h.Length, Brush = SearchHighlightBrush, Priority = 3 }); // Приоритет поиска самый высокий
+                    segments.Add(new HighlightSegment { Start = h.StartIndex, Length = h.Length, Brush = SearchHighlightBrush, Priority = 3 });
 
             return segments;
         }
@@ -3236,7 +3222,6 @@ namespace DBD_Trans.ViewModels
                 return doc;
             }
 
-            // Массив кистей для каждого символа. Это идеально решает проблему пересечений и приоритетов
             var brushes = new Brush[text.Length];
 
             var sorted = highlights.OrderBy(h => h.Priority).ToList();
@@ -3245,7 +3230,7 @@ namespace DBD_Trans.ViewModels
                 int end = Math.Min(h.Start + h.Length, text.Length);
                 for (int i = h.Start; i < end; i++)
                 {
-                    brushes[i] = h.Brush; // Если приоритет выше, кисть перезаписывается
+                    brushes[i] = h.Brush;
                 }
             }
 
@@ -3255,14 +3240,19 @@ namespace DBD_Trans.ViewModels
             for (int i = 1; i <= text.Length; i++)
             {
                 Brush nextBrush = i < text.Length ? brushes[i] : null;
-                if (nextBrush != currentBrush)
+
+                if (nextBrush != currentBrush || i == text.Length)
                 {
-                    var run = new Run(text.Substring(lastPos, i - lastPos));
-                    if (currentBrush != null)
+                    int length = i - lastPos;
+                    if (length > 0)
                     {
-                        run.Background = currentBrush;
+                        var run = new Run(text.Substring(lastPos, length));
+                        if (currentBrush != null)
+                        {
+                            run.Background = currentBrush;
+                        }
+                        para.Inlines.Add(run);
                     }
-                    para.Inlines.Add(run);
 
                     lastPos = i;
                     currentBrush = nextBrush;
@@ -3279,7 +3269,6 @@ namespace DBD_Trans.ViewModels
             if (string.IsNullOrEmpty(search) || string.IsNullOrEmpty(text)) return matches;
 
             int index = 0;
-            // Регистронезависимый поиск
             while ((index = text.IndexOf(search, index, StringComparison.OrdinalIgnoreCase)) != -1)
             {
                 matches.Add(new TextRangeInfo { StartIndex = index, Length = search.Length });
@@ -3297,7 +3286,6 @@ namespace DBD_Trans.ViewModels
 
             if (pointer != null)
             {
-                // TextPointer не имеет BringIntoView, но его родитель (обычно Run или Paragraph) имеет.
                 if (pointer.Parent is FrameworkContentElement element)
                 {
                     element.BringIntoView();
@@ -3334,10 +3322,6 @@ namespace DBD_Trans.ViewModels
             }
             return null;
         }
-
-        // =====================================================================
-        // ====================== ОСТАЛЬНАЯ ЛОГИКА ===========================
-        // =====================================================================
 
         private void ToggleMarker()
         {
@@ -3413,7 +3397,6 @@ namespace DBD_Trans.ViewModels
             Errors.Add(errorItem);
             NewErrorText = string.Empty;
             SelectedError = errorItem;
-            // RebuildDocuments вызовется автоматически в событии CollectionChanged
             IsMarkerActive = false;
             SaveChanges();
         }
@@ -3456,7 +3439,6 @@ namespace DBD_Trans.ViewModels
             {
                 SelectedError = Errors.Count > 0 ? Errors[Math.Min(index, Errors.Count - 1)] : null;
             }
-            // RebuildDocuments вызовется автоматически в событии CollectionChanged
             SaveChanges();
         }
 
@@ -3532,6 +3514,7 @@ namespace DBD_Trans.ViewModels
                 if (Set(ref _selectedFilter, value))
                 {
                     ApplyFilterAndSort();
+                    
                 }
             }
         }
@@ -3762,9 +3745,13 @@ namespace DBD_Trans.ViewModels
 
         private void GoToEntry(LocalizationEntry entry)
         {
-            // Сбрасываем поиск и фильтр, чтобы строка гарантированно появилась в списке
+            _searchTimer.Stop();
+
             SearchText = string.Empty;
-            SelectedFilter = "Все"; // <-- Возвращаем ComboBox в начальное состояние
+            SelectedFilter = "Все";
+
+            FilteredEntries.Refresh();
+            UpdateStatistics();
 
             var target = AllEntries.FirstOrDefault(e => e.Key == entry.Key);
             if (target != null)
@@ -3774,7 +3761,6 @@ namespace DBD_Trans.ViewModels
             }
         }
 
-        // Добавь поле для отмены предыдущего поиска
         private CancellationTokenSource _searchCts;
 
         private void SearchTimer_Tick(object sender, EventArgs e)
@@ -5408,13 +5394,28 @@ namespace DBD_Trans.Views
 
         private void OnScrollToItem(LocalizationEntry entry)
         {
+            // 1. Заставляем DataGrid сгенерировать контейнер строки и прокрутить её в видимую зону
             LocalizationGrid.ScrollIntoView(entry);
-            Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Background,
-                new System.Action(() =>
+
+            // 2. Ждем завершения отрисовки (DispatcherPriority.Loaded), чтобы получить реальный DataGridRow
+            Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Loaded, new Action(() =>
+            {
+                if (LocalizationGrid.ItemContainerGenerator.ContainerFromItem(entry) is DataGridRow row)
                 {
-                    if (LocalizationGrid.ItemContainerGenerator.ContainerFromItem(entry) is DataGridRow row)
-                        row.BringIntoView();
-                }));
+                    // 3. Находим ScrollViewer внутри DataGrid
+                    var scrollViewer = FindVisualChild<ScrollViewer>(LocalizationGrid);
+                    if (scrollViewer != null)
+                    {
+                        // 4. Вычисляем реальную Y-координату строки относительно ScrollViewer
+                        var transform = row.TransformToAncestor(scrollViewer);
+                        var position = transform.Transform(new Point(0, 0));
+
+                        // 5. Прокручиваем ScrollViewer так, чтобы строка оказалась строго вверху
+                        double newOffset = scrollViewer.VerticalOffset + position.Y;
+                        scrollViewer.ScrollToVerticalOffset(newOffset);
+                    }
+                }
+            }));
         }
 
         private void OnWindowPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)

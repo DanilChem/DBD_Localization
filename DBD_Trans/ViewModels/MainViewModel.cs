@@ -46,6 +46,7 @@ namespace DBD_Trans.ViewModels
                 if (Set(ref _selectedFilter, value))
                 {
                     ApplyFilterAndSort();
+                    
                 }
             }
         }
@@ -276,19 +277,28 @@ namespace DBD_Trans.ViewModels
 
         private void GoToEntry(LocalizationEntry entry)
         {
-            // Сбрасываем поиск и фильтр, чтобы строка гарантированно появилась в списке
-            SearchText = string.Empty;
-            SelectedFilter = "Все"; // <-- Возвращаем ComboBox в начальное состояние
+            _searchTimer.Stop();
 
-            var target = AllEntries.FirstOrDefault(e => e.Key == entry.Key);
-            if (target != null)
+            // 1. Мгновенно сбрасываем UI-состояния (UI-поток не блокируется)
+            SearchText = string.Empty;
+            SelectedFilter = "Все";
+
+            // 2. Тяжелую операцию (Refresh) и сам переход отправляем в фон очереди отрисовки.
+            // Это позволяет окну сначала перерисовать пустой TextBox и ComboBox, а потом уже грузить таблицу.
+            Application.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Background, new Action(() =>
             {
-                SelectedEntry = target;
-                ScrollToItemRequested?.Invoke(target);
-            }
+                FilteredEntries.Refresh();
+                UpdateStatistics();
+
+                var target = AllEntries.FirstOrDefault(e => e.Key == entry.Key);
+                if (target != null)
+                {
+                    SelectedEntry = target;
+                    ScrollToItemRequested?.Invoke(target);
+                }
+            }));
         }
 
-        // Добавь поле для отмены предыдущего поиска
         private CancellationTokenSource _searchCts;
 
         private void SearchTimer_Tick(object sender, EventArgs e)

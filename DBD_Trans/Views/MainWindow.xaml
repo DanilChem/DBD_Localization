@@ -612,9 +612,10 @@
                     <TextBlock Text="Фильтр:" Foreground="{StaticResource ForegroundSecondary}" VerticalAlignment="Center" Margin="15,0,8,0"/>
 
                     <!-- ДОБАВЛЕНО Height="30" -->
-                    <ComboBox Width="220" Height="30" VerticalAlignment="Center"
+                    <ComboBox x:Name="FilterComboBox" Width="220" Height="30" VerticalAlignment="Center"
                   ItemsSource="{Binding FilterOptions}"
-                  SelectedItem="{Binding SelectedFilter}"/>
+                  SelectedItem="{Binding SelectedFilter}"
+                  SelectionChanged="FilterComboBox_SelectionChanged"/>
 
                     <TextBlock Text="{Binding ResultCountText}" Foreground="{StaticResource ForegroundSecondary}"
                    VerticalAlignment="Center" Margin="15,0,0,0" FontSize="12"/>

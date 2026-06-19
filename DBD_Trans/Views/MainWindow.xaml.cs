@@ -82,13 +82,37 @@ namespace DBD_Trans.Views
 
         private void OnScrollToItem(LocalizationEntry entry)
         {
+            var scrollViewer = FindVisualChild<ScrollViewer>(LocalizationGrid);
+            if (scrollViewer == null) return;
+
+            // 1. Вызываем ScrollIntoView ТОЛЬКО для того, чтобы WPF сгенерировал визуальный контейнер (DataGridRow)
+            // для нашей строки, даже если она сейчас далеко за пределами экрана.
             LocalizationGrid.ScrollIntoView(entry);
-            Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Background,
-                new System.Action(() =>
+
+            // 2. Ждем приоритета Loaded (максимальный приоритет сразу после завершения Measure/Arrange).
+            // В этот момент контейнер уже создан, но WPF ЕЩЁ не успел отрисовать его на экране.
+            Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Loaded, new Action(() =>
+            {
+                var row = LocalizationGrid.ItemContainerGenerator.ContainerFromItem(entry) as DataGridRow;
+                if (row != null)
                 {
-                    if (LocalizationGrid.ItemContainerGenerator.ContainerFromItem(entry) is DataGridRow row)
-                        row.BringIntoView();
-                }));
+                    // 3. Вычисляем ТОЧНУЮ Y-координату строки относительно ScrollViewer
+                    var transform = row.TransformToAncestor(scrollViewer);
+                    var position = transform.Transform(new Point(0, 0));
+
+                    // 4. Считаем идеальное смещение, чтобы строка оказалась СТРОГО вверху DataGrid
+                    double targetOffset = scrollViewer.VerticalOffset + position.Y;
+
+                    // Ограничиваем пределы, чтобы не было ошибок при скролле в самый низ
+                    double maxOffset = Math.Max(0, scrollViewer.ExtentHeight - scrollViewer.ViewportHeight);
+                    targetOffset = Math.Max(0, Math.Min(targetOffset, maxOffset));
+
+                    // 5. Одним действием перекрываем стандартное поведение ScrollIntoView.
+                    // Так как мы делаем это до финального рендера кадра, пользователь увидит 
+                    // мгновенный и идеально точный переход без каких-либо "дёрганий".
+                    scrollViewer.ScrollToVerticalOffset(targetOffset);
+                }
+            }));
         }
 
         private void OnWindowPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -199,6 +223,24 @@ namespace DBD_Trans.Views
                 if (result != null) return result;
             }
             return null;
+        }
+
+        private void FilterComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Игнорируем событие при первоначальной загрузке окна, 
+            // чтобы таблица не дергалась при старте
+            if (!IsLoaded) return;
+
+            // Ждем, пока DataGrid обновит строки после применения фильтра
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                // Ищем внутренний ScrollViewer у DataGrid
+                var scrollViewer = FindVisualChild<ScrollViewer>(LocalizationGrid);
+
+                // Сбрасываем ползунок в самое начало
+                scrollViewer?.ScrollToTop();
+
+            }), System.Windows.Threading.DispatcherPriority.Loaded);
         }
 
         // --------------------------------------
