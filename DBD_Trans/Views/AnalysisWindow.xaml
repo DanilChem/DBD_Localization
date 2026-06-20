@@ -249,8 +249,10 @@ Background="{StaticResource BackgroundLight}" Margin="20,0,0,0" Width="220" Heig
              HorizontalScrollBarVisibility="Hidden"
              LostFocus="RichTextBox_LostFocus"
              PreviewMouseLeftButtonDown="RichTextBox_PreviewMouseLeftButtonDown"
-             PreviewMouseLeftButtonUp="RichTextBox_PreviewMouseLeftButtonUp">
-                        
+             PreviewMouseLeftButtonUp="RichTextBox_PreviewMouseLeftButtonUp"
+                                 PreviewMouseMove="RichTextBox_PreviewMouseMove"
+MouseLeave="RichTextBox_MouseLeave">
+
                         <FlowDocument>
                             <Paragraph>
                                 <Run Text="{Binding EnglishText, Mode=OneWay}"/>
@@ -277,7 +279,9 @@ Background="{StaticResource BackgroundLight}" Margin="20,0,0,0" Width="220" Heig
              HorizontalScrollBarVisibility="Hidden"
              LostFocus="RichTextBox_LostFocus"
              PreviewMouseLeftButtonDown="RichTextBox_PreviewMouseLeftButtonDown"
-             PreviewMouseLeftButtonUp="RichTextBox_PreviewMouseLeftButtonUp">
+             PreviewMouseLeftButtonUp="RichTextBox_PreviewMouseLeftButtonUp"
+              PreviewMouseMove="RichTextBox_PreviewMouseMove"
+MouseLeave="RichTextBox_MouseLeave">
                         <FlowDocument>
                             <Paragraph>
                                 <Run Text="{Binding RussianText, Mode=OneWay}"/>

@@ -17,10 +17,16 @@ namespace DBD_Trans.Views
     public partial class AnalysisWindow : Window
     {
         private AnalysisViewModel ViewModel => (AnalysisViewModel)DataContext;
+
+        // --- Поля для скролла средней кнопкой ---
         private bool _isMiddleScrolling = false;
         private Point _middleScrollOrigin;
         private ScrollViewer _targetScrollViewer;
         private DispatcherTimer _scrollTimer;
+
+        // --- Поля для единого ToolTip ---
+        private ToolTip _sharedToolTip;
+        private TextBlock _toolTipTextBlock;
 
         public AnalysisWindow()
         {
@@ -36,6 +42,34 @@ namespace DBD_Trans.Views
             ViewModel.EnglishRichTextBox = EnglishRichTextBox;
             ViewModel.RussianRichTextBox = RussianRichTextBox;
             ViewModel.InitializeDocuments();
+
+            // Инициализируем единый ToolTip
+            InitSharedToolTip();
+        }
+
+        private void InitSharedToolTip()
+        {
+            _toolTipTextBlock = new TextBlock
+            {
+                TextWrapping = TextWrapping.Wrap,
+                MaxWidth = 300,
+                Foreground = (Brush)FindResource("ForegroundPrimary")
+            };
+
+            _sharedToolTip = new ToolTip
+            {
+                Background = (Brush)FindResource("BackgroundLight"),
+                Foreground = (Brush)FindResource("ForegroundPrimary"),
+                BorderBrush = (Brush)FindResource("BorderDark"),
+                Padding = new Thickness(8, 4, 8, 4),
+                Content = _toolTipTextBlock,
+                // === ИЗМЕНЕНИЕ ЗДЕСЬ ===
+                Placement = PlacementMode.Mouse // Тултип будет следовать за курсором
+            };
+
+            ToolTipService.SetInitialShowDelay(_sharedToolTip, 0);
+            ToolTipService.SetBetweenShowDelay(_sharedToolTip, 0);
+            ToolTipService.SetShowDuration(_sharedToolTip, 10000);
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -48,18 +82,14 @@ namespace DBD_Trans.Views
         {
             var source = e.OriginalSource as DependencyObject;
 
-            // === ПЕРЕХВАТ ДВОЙНОГО КЛИКА ПО ЗАГОЛОВКУ (САМОЕ ВАЖНОЕ) ===
             if (e.ClickCount == 2 && IsChildOf(source, ErrorsHeaderPanel))
             {
                 ToggleErrorsPanel();
-                e.Handled = true; // Помечаем как обработанное
-                return;           // Выходим, чтобы код ниже не снял выделение
+                e.Handled = true;
+                return;
             }
-            // ============================================================
 
-            // Старая логика снятия выделения
             if (FindParentOfType<ListBox>(source) == ErrorsListBox) return;
-
             if (FindParentOfType<Button>(source) != null ||
                 FindParentOfType<TextBox>(source) != null ||
                 FindParentOfType<RichTextBox>(source) != null ||
@@ -71,60 +101,40 @@ namespace DBD_Trans.Views
             e.Handled = true;
         }
 
-        // Логика раскрытия/сворачивания панели
         private void ToggleErrorsPanel()
         {
             if (ErrorsRow == null) return;
 
-            // Если высота задана в звездах (*) или меньше 30 пикселей - считаем, что панель свернута
             bool isCollapsed = ErrorsRow.Height.IsStar || (ErrorsRow.Height.IsAbsolute && ErrorsRow.Height.Value <= 30);
-
             if (isCollapsed)
             {
                 int errorCount = ViewModel.Errors.Count;
-                if (errorCount == 0) return; // Если ошибок нет, не раскрываем
+                if (errorCount == 0) return;
 
-                // Примерная высота одного элемента (с учетом отступов)
                 double itemHeight = 32;
                 double headerHeight = 30;
                 double calculatedHeight = headerHeight + (errorCount * itemHeight);
-
-                // Ограничиваем высоту 40% от окна, но не менее 150px
                 double maxHeight = Math.Max(150, this.ActualHeight * 0.4);
-
                 ErrorsRow.Height = new GridLength(Math.Min(calculatedHeight, maxHeight));
             }
             else
             {
-                // Сворачиваем обратно до минимальной высоты
                 ErrorsRow.Height = new GridLength(20);
             }
         }
-              
 
         private bool IsChildOf(DependencyObject child, DependencyObject parent)
         {
             while (child != null)
             {
                 if (child == parent) return true;
-
                 DependencyObject next = LogicalTreeHelper.GetParent(child);
                 if (next == null)
                 {
-                    if (child is Visual || child is Visual3D)
-                    {
-                        next = VisualTreeHelper.GetParent(child);
-                    }
-                    else if (child is TextElement te)
-                    {
-                        next = te.Parent as DependencyObject;
-                    }
-                    else
-                    {
-                        break;
-                    }
+                    if (child is Visual || child is Visual3D) next = VisualTreeHelper.GetParent(child);
+                    else if (child is TextElement te) next = te.Parent as DependencyObject;
+                    else break;
                 }
-
                 child = next;
             }
             return false;
@@ -137,27 +147,13 @@ namespace DBD_Trans.Views
                 DependencyObject parent = LogicalTreeHelper.GetParent(child);
                 if (parent == null)
                 {
-                    if (child is Visual || child is Visual3D)
-                        parent = VisualTreeHelper.GetParent(child);
-                    else
-                        break;
+                    if (child is Visual || child is Visual3D) parent = VisualTreeHelper.GetParent(child);
+                    else break;
                 }
-                if (parent is T typedParent)
-                    return typedParent;
+                if (parent is T typedParent) return typedParent;
                 child = parent;
             }
             return null;
-        }
-
-        private void ErrorsListBox_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            var hit = VisualTreeHelper.HitTest(ErrorsListBox, e.GetPosition(ErrorsListBox));
-            if (hit?.VisualHit is FrameworkElement element)
-            {
-                var item = FindParentOfType<ListBoxItem>(element);
-                if (item == null)
-                    ViewModel.SelectedError = null;
-            }
         }
 
         private void ErrorsListBoxItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -165,8 +161,8 @@ namespace DBD_Trans.Views
             if (sender is ListBoxItem item && item.DataContext is ErrorItem errorItem)
             {
                 ViewModel.EditErrorCommand.Execute(errorItem);
-                Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Background,
-                    new System.Action(() =>
+                Dispatcher.BeginInvoke(DispatcherPriority.Background,
+                    new Action(() =>
                     {
                         var textBox = FindVisualChild<TextBox>(item);
                         textBox?.Focus();
@@ -249,7 +245,7 @@ namespace DBD_Trans.Views
         {
             var rtb = sender as RichTextBox;
             if (rtb == null || !ViewModel.IsMarkerActive) return;
-            
+
             if (!rtb.Selection.IsEmpty)
             {
                 ViewModel.ApplyMarkerToSelection(rtb);
@@ -259,20 +255,162 @@ namespace DBD_Trans.Views
             }
         }
 
-        private void RichTextBox_LostFocus(object sender, RoutedEventArgs e)
+        private void RichTextBox_LostFocus(object sender, RoutedEventArgs e) { }
+
+        // ==========================================
+        // ЛОГИКА ТУЛТИПОВ (TOOLTIP)
+        // ==========================================
+
+        private void RichTextBox_PreviewMouseMove(object sender, MouseEventArgs e)
         {
+            if (_sharedToolTip == null) return;
+
+            var rtb = sender as RichTextBox;
+            if (rtb == null) return;
+
+            if (ViewModel.IsMarkerActive)
+            {
+                HideToolTip();
+                return;
+            }
+
+            var pos = e.GetPosition(rtb);
+            var pointer = rtb.GetPositionFromPoint(pos, true);
+            var error = GetErrorAtPointer(rtb, pointer);
+
+            if (error != null)
+            {
+                if (_toolTipTextBlock.Text != error.Text)
+                {
+                    _toolTipTextBlock.Text = error.Text;
+                }
+
+                // === ИЗМЕНЕНИЕ ЗДЕСЬ ===
+                // Удаляем привязку к PlacementTarget, в режиме Mouse она не нужна 
+                // и именно она заставляла тултип "уезжать" к краям RichTextBox.
+                /*
+                if (_sharedToolTip.PlacementTarget != rtb)
+                {
+                    _sharedToolTip.PlacementTarget = rtb;
+                }
+                */
+
+                if (!_sharedToolTip.IsOpen)
+                {
+                    _sharedToolTip.IsOpen = true;
+                }
+            }
+            else
+            {
+                HideToolTip();
+            }
         }
 
-        // --- ЛОГИКА СКРОЛЛА СРЕДНЕЙ КНОПКОЙ ---
+        private void RichTextBox_MouseLeave(object sender, MouseEventArgs e)
+        {
+            HideToolTip();
+        }
+
+        private void HideToolTip()
+        {
+            if (_sharedToolTip != null && _sharedToolTip.IsOpen)
+            {
+                _sharedToolTip.IsOpen = false;
+            }
+        }
+
+        private ErrorItem GetErrorAtPointer(RichTextBox rtb, TextPointer pointer)
+        {
+            if (pointer == null) return null;
+
+            var nextContext = pointer.GetNextContextPosition(LogicalDirection.Forward);
+            if (nextContext == null) return null;
+
+            // Создаем микро-диапазон для проверки цвета фона
+            var checkRange = new TextRange(pointer, nextContext);
+            var bg = checkRange.GetPropertyValue(TextElement.BackgroundProperty);
+
+            if (bg is SolidColorBrush brush)
+            {
+                Color permColor = (Color)ColorConverter.ConvertFromString("#33CA5100");
+                Color selColor = (Color)ColorConverter.ConvertFromString("#FFCA5100");
+
+                if (brush.Color == permColor || brush.Color == selColor)
+                {
+                    int index = GetTextIndexFromPointer(rtb.Document, pointer);
+                    if (index >= 0)
+                    {
+                        bool isEnglish = (rtb == EnglishRichTextBox);
+                        var vm = DataContext as AnalysisViewModel;
+                        if (vm == null) return null;
+
+                        foreach (var error in vm.Errors)
+                        {
+                            var highlights = isEnglish ? error.EnglishHighlights : error.RussianHighlights;
+                            if (highlights != null)
+                            {
+                                foreach (var h in highlights)
+                                {
+                                    if (index >= h.StartIndex && index < h.StartIndex + h.Length)
+                                    {
+                                        return error;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
+        private int GetTextIndexFromPointer(FlowDocument doc, TextPointer target)
+        {
+            int index = 0;
+            var pointer = doc.ContentStart;
+
+            while (pointer != null && pointer.CompareTo(target) < 0)
+            {
+                var context = pointer.GetPointerContext(LogicalDirection.Forward);
+                if (context == TextPointerContext.Text)
+                {
+                    var next = pointer.GetNextContextPosition(LogicalDirection.Forward);
+                    if (next != null)
+                    {
+                        if (next.CompareTo(target) > 0)
+                        {
+                            var range = new TextRange(pointer, target);
+                            index += range.Text.Length;
+                            return index;
+                        }
+                        else
+                        {
+                            var range = new TextRange(pointer, next);
+                            index += range.Text.Length;
+                            pointer = next;
+                        }
+                    }
+                    else break;
+                }
+                else
+                {
+                    pointer = pointer.GetNextContextPosition(LogicalDirection.Forward);
+                }
+            }
+            return index;
+        }
+
+        // ==========================================
+        // ЛОГИКА СКРОЛЛА СРЕДНЕЙ КНОПКОЙ
+        // ==========================================
+
         private void InitMiddleScroll()
         {
             _scrollTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(16) };
             _scrollTimer.Tick += ScrollTimer_Tick;
 
-            // Подписываемся на PreviewMouseDown обоих ScrollViewer
             EnglishScrollViewer.PreviewMouseDown += MiddleScroll_PreviewMouseDown;
             RussianScrollViewer.PreviewMouseDown += MiddleScroll_PreviewMouseDown;
-
             this.PreviewMouseUp += MiddleScroll_PreviewMouseUp;
             this.Deactivated += (s, e) => StopMiddleScroll();
         }
@@ -284,9 +422,9 @@ namespace DBD_Trans.Views
                 _isMiddleScrolling = true;
                 _middleScrollOrigin = Mouse.GetPosition(this);
                 _targetScrollViewer = sender as ScrollViewer;
-                this.Cursor = Cursors.ScrollAll; // Меняем курсор
+                this.Cursor = Cursors.ScrollAll;
                 _scrollTimer.Start();
-                e.Handled = true; // Блокируем дальнейшую обработку, чтобы RichTextBox не мешал
+                e.Handled = true;
             }
             else if (_isMiddleScrolling && e.ChangedButton != MouseButton.Middle)
             {
@@ -310,15 +448,13 @@ namespace DBD_Trans.Views
             Point currentPos = Mouse.GetPosition(this);
             double deltaY = currentPos.Y - _middleScrollOrigin.Y;
 
-            const double deadzone = 15.0; // Увеличили мертвую зону (убираем микро-дрожание)
-            const double speed = 0.3;     // Уменьшили множитель (скролл станет плавнее)
+            const double deadzone = 15.0;
+            const double speed = 0.3;
 
             if (Math.Abs(deltaY) > deadzone)
             {
                 double distance = Math.Abs(deltaY) - deadzone;
                 double scrollY = (deltaY > 0 ? 1 : -1) * distance * speed;
-
-                // Ограничиваем максимальную скорость скролла за один тик (не более 4 пикселей)
                 scrollY = Math.Max(-4.0, Math.Min(4.0, scrollY));
 
                 if (Math.Abs(scrollY) > 0.5)
@@ -337,50 +473,6 @@ namespace DBD_Trans.Views
                 _scrollTimer.Stop();
                 this.Cursor = Cursors.Arrow;
                 Mouse.Capture(null);
-            }
-        }
-
-        // --- ЛОГИКА РАСКРЫТИЯ ЗАМЕЧАНИЙ ПО ДВОЙНОМУ КЛИКУ ---
-        private void ErrorsHeader_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            // Реагируем строго на двойной клик
-            if (e.ClickCount == 2)
-            {
-                // Находим родительский MainGrid через дерево визуальных элементов
-                var headerPanel = sender as FrameworkElement;
-                var innerGrid = headerPanel?.Parent as Grid;
-                var mainGrid = innerGrid?.Parent as Grid;
-
-                if (mainGrid == null || mainGrid.RowDefinitions.Count <= 3) return;
-
-                // RowDefinitions[3] - это строка, в которой находится список замечаний
-                var errorsRow = mainGrid.RowDefinitions[3];
-
-                // Проверяем, свернута ли сейчас панель (изначальное состояние Star или ручное <= 30px)
-                bool isCollapsed = errorsRow.Height.IsStar || (errorsRow.Height.IsAbsolute && errorsRow.Height.Value <= 30);
-
-                if (isCollapsed)
-                {
-                    int errorCount = ViewModel.Errors.Count;
-                    if (errorCount == 0) return; // Если замечаний нет, не раскрываем
-
-                    // Примерная высота одного элемента (с учетом отступов)
-                    double itemHeight = 32;
-                    double headerHeight = 30;
-                    double calculatedHeight = headerHeight + (errorCount * itemHeight);
-
-                    // Ограничиваем высоту 40% от окна, но не менее 150px
-                    double maxHeight = Math.Max(150, this.ActualHeight * 0.4);
-
-                    errorsRow.Height = new GridLength(Math.Min(calculatedHeight, maxHeight));
-                }
-                else
-                {
-                    // Сворачиваем обратно до минимальной высоты
-                    errorsRow.Height = new GridLength(20);
-                }
-
-                e.Handled = true; // Помечаем событие как обработанное
             }
         }
     }

@@ -275,27 +275,30 @@ namespace DBD_Trans.ViewModels
             UpdateStatistics();
         }
 
+        // 添加一个属性供 View 层判断当前是否处于代码跳转状态
+        public bool IsNavigating { get; private set; }
+
         private void GoToEntry(LocalizationEntry entry)
         {
-            _searchTimer.Stop();
+            _searchTimer.Stop(); // 1. 立即停止可能正在计时的搜索 Timer
+            IsNavigating = true;
 
-            // 1. Мгновенно сбрасываем UI-состояния (UI-поток не блокируется)
             SearchText = string.Empty;
+            _searchTimer.Stop(); // 2. 【关键】再次停止！因为上面的 setter 会 Start() 它，防止 300ms 后的重复 Refresh
+
             SelectedFilter = "Все";
 
-            // 2. Тяжелую операцию (Refresh) и сам переход отправляем в фон очереди отрисовки.
-            // Это позволяет окну сначала перерисовать пустой TextBox и ComboBox, а потом уже грузить таблицу.
             Application.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Background, new Action(() =>
             {
                 FilteredEntries.Refresh();
                 UpdateStatistics();
-
                 var target = AllEntries.FirstOrDefault(e => e.Key == entry.Key);
                 if (target != null)
                 {
                     SelectedEntry = target;
                     ScrollToItemRequested?.Invoke(target);
                 }
+                IsNavigating = false;
             }));
         }
 

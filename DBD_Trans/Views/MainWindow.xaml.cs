@@ -144,11 +144,13 @@ namespace DBD_Trans.Views
 
             LocalizationGrid.ScrollIntoView(entry);
 
-            Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Loaded, new Action(() =>
+            // 【修改】使用 Render 优先级，确保 DataGrid 在大数据量下完成了虚拟化容器的生成和布局测量
+            Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Render, new Action(() =>
             {
                 var row = LocalizationGrid.ItemContainerGenerator.ContainerFromItem(entry) as DataGridRow;
                 if (row != null)
                 {
+                    row.UpdateLayout(); // 【新增】强制确保布局已更新，获取绝对准确的坐标
                     var transform = row.TransformToAncestor(scrollViewer);
                     var position = transform.Transform(new Point(0, 0));
 
@@ -253,6 +255,27 @@ namespace DBD_Trans.Views
         private void FilterComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (!IsLoaded) return;
+
+            // 如果是代码触发的跳转，跳过 ScrollToTop，防止与自定义滚动逻辑冲突
+            var vm = DataContext as MainViewModel;
+            if (vm != null && vm.IsNavigating) return;
+
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                var scrollViewer = FindVisualChild<ScrollViewer>(LocalizationGrid);
+                scrollViewer?.ScrollToTop();
+            }), System.Windows.Threading.DispatcherPriority.Loaded);
+        }
+
+        // Добавьте этот метод в класс MainWindow
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!IsLoaded) return;
+
+            // Если это программное изменение текста (например, очистка при вызове GoToEntry),
+            // то не скроллим наверх, чтобы не конфликтовать с логикой перехода к целевой строке.
+            var vm = DataContext as MainViewModel;
+            if (vm != null && vm.IsNavigating) return;
 
             Dispatcher.BeginInvoke(new Action(() =>
             {

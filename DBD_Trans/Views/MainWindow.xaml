@@ -606,7 +606,7 @@
                     <TextBlock Text="Поиск:" Foreground="{StaticResource ForegroundSecondary}" VerticalAlignment="Center" Margin="0,0,8,0"/>
 
                     <!-- ДОБАВЛЕНО Height="30" -->
-                    <TextBox x:Name="SearchBox" Width="350" Height="30" VerticalAlignment="Center"
+                    <TextBox x:Name="SearchBox" Width="350" Height="30" VerticalAlignment="Center" TextChanged="SearchBox_TextChanged"
                  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
 
                     <TextBlock Text="Фильтр:" Foreground="{StaticResource ForegroundSecondary}" VerticalAlignment="Center" Margin="15,0,8,0"/>
