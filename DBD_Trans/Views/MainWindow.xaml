@@ -232,7 +232,7 @@
             <Setter Property="VerticalGridLinesBrush" Value="Transparent"/>
             <Setter Property="RowHeaderWidth" Value="0"/>
             <Setter Property="SelectionUnit" Value="FullRow"/>
-            <Setter Property="SelectionMode" Value="Single"/>
+            <Setter Property="SelectionMode" Value="Extended"/>
             <Setter Property="CanUserResizeColumns" Value="True"/>
             <Setter Property="CanUserReorderColumns" Value="False"/>
             <Setter Property="AutoGenerateColumns" Value="False"/>

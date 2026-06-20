@@ -2,6 +2,8 @@
 using DBD_Trans.Models;
 using DBD_Trans.ViewModels;
 using System;
+using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -17,15 +19,14 @@ namespace DBD_Trans.Views
         private Point _middleScrollOrigin;
         private ScrollViewer _targetScrollViewer;
         private DispatcherTimer _scrollTimer;
-        private const double ScrollDeadzone = 15.0; // Мертвая зона в пикселях (чтобы не было рывков)
-        private const double ScrollSpeedMultiplier = 0.3; // Множитель скорости (чем больше, тем быстрее)
+        private const double ScrollDeadzone = 15.0;
+        private const double ScrollSpeedMultiplier = 0.3;
 
         public MainWindow()
         {
             InitializeComponent();
-
             DarkTitleBarHelper.ApplyDarkTitleBar(this);
-            // Подписка на события после полной загрузки окна (DataContext уже будет установлен)
+
             this.Loaded += (s, e) =>
             {
                 var vm = DataContext as MainViewModel;
@@ -38,18 +39,23 @@ namespace DBD_Trans.Views
             // Снятие выделения при клике вне DataGrid
             this.PreviewMouseLeftButtonDown += OnWindowPreviewMouseLeftButtonDown;
 
-            // Снятие выделения при повторном клике по строке
+            // Снятие выделения при повторном клике по строке (ИСПРАВЛЕНО для поддержки Ctrl/Shift)
             LocalizationGrid.MouseLeftButtonDown += (s, e) =>
             {
+                // Если зажаты Ctrl или Shift, НЕ вмешиваемся, даем DataGrid самому обработать множественное выделение
+                if (Keyboard.Modifiers == ModifierKeys.Control || Keyboard.Modifiers == ModifierKeys.Shift)
+                    return;
+
                 var dep = (DependencyObject)e.OriginalSource;
                 while (dep != null && !(dep is DataGridRow))
                     dep = VisualTreeHelper.GetParent(dep);
 
                 if (dep is DataGridRow row && row.IsSelected)
                 {
+                    row.IsSelected = false;
                     var vm = DataContext as MainViewModel;
                     if (vm != null)
-                        vm.SelectedEntry = null;
+                        vm.SelectedEntry = LocalizationGrid.SelectedItem as LocalizationEntry;
                     e.Handled = true;
                 }
             };
@@ -63,11 +69,19 @@ namespace DBD_Trans.Views
 
                 if (dep is DataGridRow row && row.Item is LocalizationEntry entry)
                 {
-                    var vm = DataContext as MainViewModel;
-                    if (vm != null)
-                        vm.SelectedEntry = entry;
+                    // Если клик по невыделенной строке - снимаем все остальные выделения
+                    if (!row.IsSelected)
+                    {
+                        LocalizationGrid.SelectedItems.Clear();
+                        row.IsSelected = true;
+                        var vm = DataContext as MainViewModel;
+                        if (vm != null) vm.SelectedEntry = entry;
+                    }
                 }
             };
+
+            // --- ДОБАВЛЯЕМ ОБРАБОТКУ КОПИРОВАНИЯ (Ctrl+C) ---
+            LocalizationGrid.PreviewKeyDown += LocalizationGrid_PreviewKeyDown;
 
             _scrollTimer = new DispatcherTimer
             {
@@ -80,49 +94,71 @@ namespace DBD_Trans.Views
             this.Deactivated += (s, e) => StopMiddleScroll();
         }
 
-        private void OnScrollToItem(LocalizationEntry entry)
+        // --- НОВЫЕ МЕТОДЫ ДЛЯ КОПИРОВАНИЯ ---
+        private void LocalizationGrid_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            var scrollViewer = FindVisualChild<ScrollViewer>(LocalizationGrid);
-            if (scrollViewer == null) return;
-
-            // 1. Вызываем ScrollIntoView ТОЛЬКО для того, чтобы WPF сгенерировал визуальный контейнер (DataGridRow)
-            // для нашей строки, даже если она сейчас далеко за пределами экрана.
-            LocalizationGrid.ScrollIntoView(entry);
-
-            // 2. Ждем приоритета Loaded (максимальный приоритет сразу после завершения Measure/Arrange).
-            // В этот момент контейнер уже создан, но WPF ЕЩЁ не успел отрисовать его на экране.
-            Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Loaded, new Action(() =>
+            if (e.Key == Key.C && Keyboard.Modifiers == ModifierKeys.Control)
             {
-                var row = LocalizationGrid.ItemContainerGenerator.ContainerFromItem(entry) as DataGridRow;
-                if (row != null)
-                {
-                    // 3. Вычисляем ТОЧНУЮ Y-координату строки относительно ScrollViewer
-                    var transform = row.TransformToAncestor(scrollViewer);
-                    var position = transform.Transform(new Point(0, 0));
-
-                    // 4. Считаем идеальное смещение, чтобы строка оказалась СТРОГО вверху DataGrid
-                    double targetOffset = scrollViewer.VerticalOffset + position.Y;
-
-                    // Ограничиваем пределы, чтобы не было ошибок при скролле в самый низ
-                    double maxOffset = Math.Max(0, scrollViewer.ExtentHeight - scrollViewer.ViewportHeight);
-                    targetOffset = Math.Max(0, Math.Min(targetOffset, maxOffset));
-
-                    // 5. Одним действием перекрываем стандартное поведение ScrollIntoView.
-                    // Так как мы делаем это до финального рендера кадра, пользователь увидит 
-                    // мгновенный и идеально точный переход без каких-либо "дёрганий".
-                    scrollViewer.ScrollToVerticalOffset(targetOffset);
-                }
-            }));
+                CopySelectedRowsToClipboard();
+                e.Handled = true;
+            }
         }
 
+        private void CopySelectedRowsToClipboard()
+        {
+            var selectedItems = LocalizationGrid.SelectedItems.Cast<LocalizationEntry>().ToList();
+            if (selectedItems.Count == 0) return;
+
+            var sb = new StringBuilder();
+            foreach (var item in selectedItems)
+            {
+                // Заменяем переносы строк и табуляции на пробелы, чтобы не ломать таблицу при вставке в Excel
+                string ru = (item.Russian ?? "").Replace("\r", " ").Replace("\n", " ").Replace("\t", " ");
+                string en = (item.English ?? "").Replace("\r", " ").Replace("\n", " ").Replace("\t", " ");
+
+                // Формат: Ключ [TAB] Русский [TAB] Английский
+                sb.AppendLine($"{item.Key}\t{ru}\t{en}");
+            }
+
+            Clipboard.SetText(sb.ToString());
+        }
+
+        // --- ИСПРАВЛЕННЫЙ МЕТОД СНЯТИЯ ВЫДЕЛЕНИЯ ПРИ КЛИКЕ ВНЕ ТАБЛИЦЫ ---
         private void OnWindowPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (FindParentOfType<DataGrid>(e.OriginalSource as DependencyObject) == LocalizationGrid)
                 return;
 
+            // Очищаем ВСЕ выделенные строки
+            LocalizationGrid.SelectedItems.Clear();
+
             var vm = DataContext as MainViewModel;
             if (vm != null)
                 vm.SelectedEntry = null;
+        }
+
+        private void OnScrollToItem(LocalizationEntry entry)
+        {
+            var scrollViewer = FindVisualChild<ScrollViewer>(LocalizationGrid);
+            if (scrollViewer == null) return;
+
+            LocalizationGrid.ScrollIntoView(entry);
+
+            Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Loaded, new Action(() =>
+            {
+                var row = LocalizationGrid.ItemContainerGenerator.ContainerFromItem(entry) as DataGridRow;
+                if (row != null)
+                {
+                    var transform = row.TransformToAncestor(scrollViewer);
+                    var position = transform.Transform(new Point(0, 0));
+
+                    double targetOffset = scrollViewer.VerticalOffset + position.Y;
+                    double maxOffset = Math.Max(0, scrollViewer.ExtentHeight - scrollViewer.ViewportHeight);
+                    targetOffset = Math.Max(0, Math.Min(targetOffset, maxOffset));
+
+                    scrollViewer.ScrollToVerticalOffset(targetOffset);
+                }
+            }));
         }
 
         private static T FindParentOfType<T>(DependencyObject child) where T : DependencyObject
@@ -134,10 +170,8 @@ namespace DBD_Trans.Views
         }
 
         // --- ЛОГИКА СКРОЛЛА СРЕДНЕЙ КНОПКОЙ ---
-
         private void MainWindow_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            // Активируем только если нажата средняя кнопка и клик был внутри DataGrid
             if (e.ChangedButton == MouseButton.Middle && e.ButtonState == MouseButtonState.Pressed && !_isMiddleScrolling)
             {
                 var hit = VisualTreeHelper.HitTest(LocalizationGrid, e.GetPosition(LocalizationGrid));
@@ -146,16 +180,14 @@ namespace DBD_Trans.Views
                     _isMiddleScrolling = true;
                     _middleScrollOrigin = Mouse.GetPosition(this);
                     _targetScrollViewer = FindVisualChild<ScrollViewer>(LocalizationGrid);
-
                     if (_targetScrollViewer != null)
                     {
-                        this.Cursor = Cursors.ScrollAll; // Меняем курсор на "скроллер"
+                        this.Cursor = Cursors.ScrollAll;
                         _scrollTimer.Start();
-                        e.Handled = true; // Блокируем стандартное поведение средней кнопки
+                        e.Handled = true;
                     }
                 }
             }
-            // Если мы в режиме скролла и нажата ЛЮБАЯ другая кнопка (ЛКМ, ПКМ) - выходим из режима
             else if (_isMiddleScrolling && e.ChangedButton != MouseButton.Middle)
             {
                 StopMiddleScroll();
@@ -177,11 +209,9 @@ namespace DBD_Trans.Views
 
             Point currentPos = Mouse.GetPosition(this);
             double deltaY = currentPos.Y - _middleScrollOrigin.Y;
-            double deltaX = currentPos.X - _middleScrollOrigin.X;
 
-            // Увеличим мертвую зону до 20 пикселей, чтобы убрать микро-дрожание
             const double deadzone = 20.0;
-            const double speed = 0.5; // Чуть увеличим скорость, чтобы компенсировать мертвую зону
+            const double speed = 0.5;
 
             double scrollY = 0;
             if (Math.Abs(deltaY) > deadzone)
@@ -190,14 +220,11 @@ namespace DBD_Trans.Views
                 scrollY = (deltaY > 0 ? 1 : -1) * distance * speed;
             }
 
-            // Применяем ТОЛЬКО если смещение существенное (больше 1 пикселя)
             if (Math.Abs(scrollY) > 1.0)
             {
                 double newOffsetY = _targetScrollViewer.VerticalOffset + scrollY;
                 _targetScrollViewer.ScrollToVerticalOffset(newOffsetY);
             }
-
-            // Если горизонтальный скролл не используется, можно вообще убрать deltaX для экономии CPU
         }
 
         private void StopMiddleScroll()
@@ -211,14 +238,12 @@ namespace DBD_Trans.Views
             }
         }
 
-        // Вспомогательный метод для поиска ScrollViewer внутри DataGrid
         private T FindVisualChild<T>(DependencyObject parent) where T : DependencyObject
         {
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
             {
                 var child = VisualTreeHelper.GetChild(parent, i);
                 if (child is T found) return found;
-
                 var result = FindVisualChild<T>(child);
                 if (result != null) return result;
             }
@@ -227,22 +252,13 @@ namespace DBD_Trans.Views
 
         private void FilterComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // Игнорируем событие при первоначальной загрузке окна, 
-            // чтобы таблица не дергалась при старте
             if (!IsLoaded) return;
 
-            // Ждем, пока DataGrid обновит строки после применения фильтра
             Dispatcher.BeginInvoke(new Action(() =>
             {
-                // Ищем внутренний ScrollViewer у DataGrid
                 var scrollViewer = FindVisualChild<ScrollViewer>(LocalizationGrid);
-
-                // Сбрасываем ползунок в самое начало
                 scrollViewer?.ScrollToTop();
-
             }), System.Windows.Threading.DispatcherPriority.Loaded);
         }
-
-        // --------------------------------------
     }
 }
