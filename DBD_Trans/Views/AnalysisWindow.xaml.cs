@@ -23,6 +23,12 @@ namespace DBD_Trans.Views
         private Point _middleScrollOrigin;
         private ScrollViewer _targetScrollViewer;
         private DispatcherTimer _scrollTimer;
+        // Кэшируем текущее замечание, чтобы понимать, когда нужно пересчитать координаты
+        private ErrorItem _currentToolTipError;
+        private DispatcherTimer _cursorHideTimer;
+        private RichTextBox _targetRtbForCursor;
+        // Задержка в миллисекундах перед скрытием курсора (можно настроить под себя)
+        private const int CursorHideDelayMs = 40;
 
         // --- Поля для единого ToolTip ---
         private ToolTip _sharedToolTip;
@@ -35,6 +41,10 @@ namespace DBD_Trans.Views
             PreviewMouseLeftButtonDown += OnWindowPreviewMouseLeftButtonDown;
             DarkTitleBarHelper.ApplyDarkTitleBar(this);
             InitMiddleScroll();
+            // Инициализация таймера для плавного скрытия курсора
+            _cursorHideTimer = new DispatcherTimer();
+            _cursorHideTimer.Interval = TimeSpan.FromMilliseconds(CursorHideDelayMs);
+            _cursorHideTimer.Tick += CursorHideTimer_Tick;
         }
 
         private void AnalysisWindow_Loaded(object sender, RoutedEventArgs e)
@@ -76,6 +86,16 @@ namespace DBD_Trans.Views
         {
             ViewModel.OnClosing();
             base.OnClosing(e);
+        }
+
+        private void CursorHideTimer_Tick(object sender, EventArgs e)
+        {
+            _cursorHideTimer.Stop();
+            // Если мышь всё ещё над тем же RichTextBox, скрываем курсор
+            if (_targetRtbForCursor != null)
+            {
+                _targetRtbForCursor.Cursor = Cursors.None;
+            }
         }
 
         private void OnWindowPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -192,7 +212,10 @@ namespace DBD_Trans.Views
                 if (string.IsNullOrWhiteSpace(errorItem.Text))
                     ViewModel.DeleteErrorCommand.Execute(errorItem);
                 else
+                {
                     ViewModel.SaveChanges();
+                    ViewModel.SelectedError = null;
+                }
             }
         }
 
@@ -204,14 +227,26 @@ namespace DBD_Trans.Views
                 {
                     errorItem.IsEditing = false;
                     if (string.IsNullOrWhiteSpace(errorItem.Text))
+                    {
                         ViewModel.DeleteErrorCommand.Execute(errorItem);
+                    }
+                    else
+                    {
+                        ViewModel.SelectedError = null;
+                        ViewModel.SaveChanges();
+                        Keyboard.ClearFocus();
+                    }
                 }
                 e.Handled = true;
             }
             else if (e.Key == Key.Escape)
             {
                 if (sender is TextBox textBox && textBox.DataContext is ErrorItem errorItem)
+                {
                     errorItem.IsEditing = false;
+                    ViewModel.SelectedError = null;
+                    Keyboard.ClearFocus();
+                }
                 e.Handled = true;
             }
         }
@@ -221,6 +256,7 @@ namespace DBD_Trans.Views
             if (e.Key == Key.Enter)
             {
                 ViewModel.AddErrorCommand.Execute(null);
+                Keyboard.ClearFocus();
                 e.Handled = true;
             }
         }
@@ -264,7 +300,6 @@ namespace DBD_Trans.Views
         private void RichTextBox_PreviewMouseMove(object sender, MouseEventArgs e)
         {
             if (_sharedToolTip == null) return;
-
             var rtb = sender as RichTextBox;
             if (rtb == null) return;
 
@@ -275,37 +310,59 @@ namespace DBD_Trans.Views
             }
 
             var pos = e.GetPosition(rtb);
-            var pointer = rtb.GetPositionFromPoint(pos, true);
+            var pointer = rtb.GetPositionFromPoint(pos, false);
             var error = GetErrorAtPointer(rtb, pointer);
 
             if (error != null)
             {
+                // === ЛОГИКА ЗАДЕРЖКИ СКРЫТИЯ КУРСОРА ===
+                // Если курсор еще виден, запускаем таймер
+                if (rtb.Cursor != Cursors.None)
+                {
+                    // Если мы перешли на новый RichTextBox или только зашли на маркер
+                    if (_targetRtbForCursor != rtb || !_cursorHideTimer.IsEnabled)
+                    {
+                        _targetRtbForCursor = rtb;
+                        _cursorHideTimer.Stop();
+                        _cursorHideTimer.Start(); // Запускаем обратный отсчет
+                    }
+                }
+
                 if (_toolTipTextBlock.Text != error.Text)
                 {
                     _toolTipTextBlock.Text = error.Text;
                 }
 
-                // === ИЗМЕНЕНИЕ ЗДЕСЬ ===
-                // Удаляем привязку к PlacementTarget, в режиме Mouse она не нужна 
-                // и именно она заставляла тултип "уезжать" к краям RichTextBox.
-                /*
-                if (_sharedToolTip.PlacementTarget != rtb)
-                {
-                    _sharedToolTip.PlacementTarget = rtb;
-                }
-                */
+                Rect charRect = pointer.GetCharacterRect(LogicalDirection.Forward);
+                Point bottomLeftInWindow = rtb.TransformToAncestor(this).Transform(new Point(charRect.Left, charRect.Bottom));
 
-                if (!_sharedToolTip.IsOpen)
+                if (!_sharedToolTip.IsOpen || _currentToolTipError != error)
                 {
-                    _sharedToolTip.IsOpen = true;
+                    _sharedToolTip.PlacementTarget = this;
+                    _sharedToolTip.Placement = System.Windows.Controls.Primitives.PlacementMode.Relative;
+                    _sharedToolTip.VerticalOffset = bottomLeftInWindow.Y + 2;
+                    _sharedToolTip.HorizontalOffset = bottomLeftInWindow.X;
+                    _currentToolTipError = error;
+
+                    if (!_sharedToolTip.IsOpen)
+                    {
+                        _sharedToolTip.IsOpen = true;
+                    }
                 }
             }
             else
             {
+                // === МГНОВЕННЫЙ ВОЗВРАТ КУРСОРА ===
+                // Если ушли с маркера, отменяем таймер и сразу возвращаем курсор
+                _cursorHideTimer.Stop();
+                if (rtb.Cursor == Cursors.None)
+                {
+                    rtb.Cursor = Cursors.IBeam;
+                }
+                _targetRtbForCursor = null;
                 HideToolTip();
             }
         }
-
         private void RichTextBox_MouseLeave(object sender, MouseEventArgs e)
         {
             HideToolTip();
@@ -317,19 +374,36 @@ namespace DBD_Trans.Views
             {
                 _sharedToolTip.IsOpen = false;
             }
+            // Сбрасываем кэш, чтобы при следующем наведении координаты пересчитались заново
+            _currentToolTipError = null;
         }
 
         private ErrorItem GetErrorAtPointer(RichTextBox rtb, TextPointer pointer)
         {
             if (pointer == null) return null;
 
+            // === ИСПРАВЛЕНИЕ 1 ===
+            // Проверяем, что указатель находится в контексте реального текста, 
+            // а не на границе элементов (например, в конце абзаца).
+            var context = pointer.GetPointerContext(LogicalDirection.Forward);
+            if (context != TextPointerContext.Text)
+                return null;
+
             var nextContext = pointer.GetNextContextPosition(LogicalDirection.Forward);
             if (nextContext == null) return null;
 
-            // Создаем микро-диапазон для проверки цвета фона
+            // Получаем текст от текущего указателя до следующего контекста
             var checkRange = new TextRange(pointer, nextContext);
-            var bg = checkRange.GetPropertyValue(TextElement.BackgroundProperty);
+            string currentText = checkRange.Text;
 
+            // === ИСПРАВЛЕНИЕ 2 ===
+            // Если это пробел, перенос строки (\r\n) или пустая строка (пустое место в конце абзаца),
+            // то прерываем выполнение. Это полностью уберет "фантомные" тултипы в пустоте.
+            if (string.IsNullOrWhiteSpace(currentText))
+                return null;
+
+            // Проверяем цвет фона
+            var bg = checkRange.GetPropertyValue(TextElement.BackgroundProperty);
             if (bg is SolidColorBrush brush)
             {
                 Color permColor = (Color)ColorConverter.ConvertFromString("#33CA5100");
@@ -351,6 +425,7 @@ namespace DBD_Trans.Views
                             {
                                 foreach (var h in highlights)
                                 {
+                                    // Строгая проверка границ
                                     if (index >= h.StartIndex && index < h.StartIndex + h.Length)
                                     {
                                         return error;
@@ -406,7 +481,14 @@ namespace DBD_Trans.Views
 
         private void InitMiddleScroll()
         {
-            _scrollTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(16) };
+            // === ОПТИМИЗАЦИЯ 1: Приоритет Render ===
+            // Синхронизируем таймер с движком отрисовки WPF. 
+            // Это гарантирует, что скролл происходит ровно перед отрисовкой кадра, 
+            // что полностью убирает микро-фризы и рассинхрон.
+            _scrollTimer = new DispatcherTimer(DispatcherPriority.Render)
+            {
+                Interval = TimeSpan.FromMilliseconds(16)
+            };
             _scrollTimer.Tick += ScrollTimer_Tick;
 
             EnglishScrollViewer.PreviewMouseDown += MiddleScroll_PreviewMouseDown;
@@ -449,22 +531,48 @@ namespace DBD_Trans.Views
             double deltaY = currentPos.Y - _middleScrollOrigin.Y;
 
             const double deadzone = 15.0;
-            const double speed = 0.3;
+            const double speed = 0.8;
+            const double maxScroll = 40.0;
 
             if (Math.Abs(deltaY) > deadzone)
             {
                 double distance = Math.Abs(deltaY) - deadzone;
                 double scrollY = (deltaY > 0 ? 1 : -1) * distance * speed;
-                scrollY = Math.Max(-4.0, Math.Min(4.0, scrollY));
 
-                if (Math.Abs(scrollY) > 0.5)
+                // Ограничиваем максимум (убираем Math.Max/Min для микро-ускорения)
+                if (scrollY > maxScroll) scrollY = maxScroll;
+                else if (scrollY < -maxScroll) scrollY = -maxScroll;
+
+                // === ОПТИМИЗАЦИЯ 2: Сглаживание (Инерция) ===
+                // Умножаем на коэффициент, чтобы сгладить резкие скачки значений.
+                // Это убирает "дрожание" текста при быстром движении мыши.
+                scrollY *= 0.6;
+
+                if (Math.Abs(scrollY) > 0.1)
                 {
-                    double newOffsetY = _targetScrollViewer.VerticalOffset + scrollY;
-                    _targetScrollViewer.ScrollToVerticalOffset(newOffsetY);
+                    double currentOffset = _targetScrollViewer.VerticalOffset;
+                    double newOffsetY = currentOffset + scrollY;
+
+                    // === ОПТИМИЗАЦИЯ 3: Ручное ограничение (Clamping) ===
+                    // ScrollViewer внутри себя тоже ограничивает значения, но если мы передаем 
+                    // "невалидное" значение (больше максимума или меньше 0), WPF тратит время 
+                    // на внутренние пересчеты layout. Мы задаем корректные границы СРАЗУ.
+                    double maxOffset = _targetScrollViewer.ExtentHeight - _targetScrollViewer.ViewportHeight;
+                    if (maxOffset < 0) maxOffset = 0; // Защита от пустого документа
+
+                    if (newOffsetY < 0) newOffsetY = 0;
+                    else if (newOffsetY > maxOffset) newOffsetY = maxOffset;
+
+                    // === ОПТИМИЗАЦИЯ 4: Защита от холостых вызовов ===
+                    // Вызываем ScrollToVerticalOffset ТОЛЬКО если смещение реально изменилось.
+                    // Это спасает UI-поток от лишних перерисовок, когда мышь почти не двигается.
+                    if (Math.Abs(newOffsetY - currentOffset) > 0.01)
+                    {
+                        _targetScrollViewer.ScrollToVerticalOffset(newOffsetY);
+                    }
                 }
             }
         }
-
         private void StopMiddleScroll()
         {
             if (_isMiddleScrolling)
@@ -474,6 +582,41 @@ namespace DBD_Trans.Views
                 this.Cursor = Cursors.Arrow;
                 Mouse.Capture(null);
             }
+        }
+
+        private void NewErrorTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (ViewModel != null)
+            {
+                ViewModel.SelectedError = null;
+            }
+        }
+
+        private void RichTextBox_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            var rtb = sender as RichTextBox;
+            if (rtb == null) return;
+
+            // Определяем, какой именно ScrollViewer нужно крутить
+            ScrollViewer sv = (rtb == EnglishRichTextBox) ? EnglishScrollViewer : RussianScrollViewer;
+            if (sv == null) return;
+
+            // e.Delta обычно равен 120 за один щелчок колёсика.
+            // Делим на 3.0, чтобы получить комфортную скорость (40 пикселей за щелчок).
+            // Если хочешь крутить быстрее/медленнее, измени делитель (например, на 2.0 или 4.0).
+            double scrollAmount = e.Delta / 8.0;
+
+            // Вычисляем новое смещение
+            double newOffset = sv.VerticalOffset - scrollAmount;
+
+            // Применяем попиксельный скролл
+            sv.ScrollToVerticalOffset(newOffset);
+
+            // === САМОЕ ГЛАВНОЕ ===
+            // Помечаем событие как обработанное. 
+            // Это блокирует внутренний движок RichTextBox, который пытался бы 
+            // прокрутить текст на 3 строки вниз/вверх поверх нашего попиксельного скролла.
+            e.Handled = true;
         }
     }
 }

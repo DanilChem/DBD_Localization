@@ -401,7 +401,7 @@ namespace DBD_Trans.ViewModels
             };
             Errors.Add(errorItem);
             NewErrorText = string.Empty;
-            SelectedError = errorItem;
+            SelectedError = null;
             IsMarkerActive = false;
             SaveChanges();
         }

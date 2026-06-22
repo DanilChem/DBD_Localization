@@ -11534,5 +11534,57 @@
         }
       ]
     }
+  ],
+  "B4784C8A4449D92155AE0FB54FE32845": [
+    {
+      "Text": "вывывыв",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4,
+          "Length": 14
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "апапапапаапа",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 21,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 18,
+          "Length": 7
+        }
+      ]
+    }
+  ],
+  "5E536C3C4196F80250C4B1A2ADAE1FC5": [
+    {
+      "Text": "ппрп",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1,
+          "Length": 1
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1,
+          "Length": 1
+        }
+      ]
+    }
   ]
 }
