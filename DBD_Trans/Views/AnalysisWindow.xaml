@@ -236,7 +236,7 @@ Background="{StaticResource BackgroundLight}" Margin="20,0,0,0" Width="220" Heig
             <!-- Английский -->
             <Border Grid.Column="2" Grid.Row="1" Background="{StaticResource BackgroundLight}" BorderBrush="{StaticResource BorderDark}" 
         BorderThickness="1" CornerRadius="3" Margin="5,0,0,0">
-                <ScrollViewer x:Name="EnglishScrollViewer" VerticalScrollBarVisibility="Auto">
+                <ScrollViewer x:Name="EnglishScrollViewer" VerticalScrollBarVisibility="Auto" CanContentScroll="False">
                     <RichTextBox x:Name="EnglishRichTextBox" 
                              AutoWordSelection="False"
              IsReadOnly="True"
@@ -247,7 +247,10 @@ Background="{StaticResource BackgroundLight}" Margin="20,0,0,0" Width="220" Heig
              AcceptsReturn="True"
              VerticalScrollBarVisibility="Hidden"
              HorizontalScrollBarVisibility="Hidden"
+             ScrollViewer.CanContentScroll="False"
              LostFocus="RichTextBox_LostFocus"
+                                     PreviewMouseWheel="RichTextBox_PreviewMouseWheel"
+
              PreviewMouseLeftButtonDown="RichTextBox_PreviewMouseLeftButtonDown"
              PreviewMouseLeftButtonUp="RichTextBox_PreviewMouseLeftButtonUp"
                                  PreviewMouseMove="RichTextBox_PreviewMouseMove"
@@ -266,7 +269,7 @@ MouseLeave="RichTextBox_MouseLeave">
             <!-- Русский RichTextBox -->
             <Border Grid.Column="0" Grid.Row="1" Background="{StaticResource BackgroundLight}" BorderBrush="{StaticResource BorderDark}" 
         BorderThickness="1" CornerRadius="3" Margin="0,0,5,0">
-                <ScrollViewer x:Name="RussianScrollViewer" VerticalScrollBarVisibility="Auto">
+                <ScrollViewer x:Name="RussianScrollViewer" VerticalScrollBarVisibility="Auto" CanContentScroll="False">
                     <RichTextBox x:Name="RussianRichTextBox" 
                                  AutoWordSelection="False"
              IsReadOnly="True"
@@ -279,9 +282,14 @@ MouseLeave="RichTextBox_MouseLeave">
              HorizontalScrollBarVisibility="Hidden"
              LostFocus="RichTextBox_LostFocus"
              PreviewMouseLeftButtonDown="RichTextBox_PreviewMouseLeftButtonDown"
+                                     PreviewMouseWheel="RichTextBox_PreviewMouseWheel"
+
+             ScrollViewer.CanContentScroll="False" 
              PreviewMouseLeftButtonUp="RichTextBox_PreviewMouseLeftButtonUp"
               PreviewMouseMove="RichTextBox_PreviewMouseMove"
-MouseLeave="RichTextBox_MouseLeave">
+                                 
+MouseLeave="RichTextBox_MouseLeave"
+                                 >
                         <FlowDocument>
                             <Paragraph>
                                 <Run Text="{Binding RussianText, Mode=OneWay}"/>
@@ -391,7 +399,7 @@ MouseLeave="RichTextBox_MouseLeave">
             <TextBox x:Name="NewErrorTextBox" Grid.Column="0" Text="{Binding NewErrorText, UpdateSourceTrigger=PropertyChanged}"
                      Background="{StaticResource BackgroundLight}" Foreground="{StaticResource ForegroundPrimary}" 
                      BorderBrush="{StaticResource BorderDark}" Padding="6" VerticalContentAlignment="Center"
-                     KeyDown="NewErrorTextBox_KeyDown"/>
+                     KeyDown="NewErrorTextBox_KeyDown" GotFocus="NewErrorTextBox_GotFocus"/>
             <Button Grid.Column="1" Content="Добавить" Width="80" Margin="10,0,0,0" Command="{Binding AddErrorCommand}"
                     Style="{StaticResource AddButtonStyle}">
             </Button>
