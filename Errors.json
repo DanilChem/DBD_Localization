@@ -10849,5 +10849,690 @@
         }
       ]
     }
+  ],
+  "B963A3AA4CFB6E1C444A73B0223B7AD2": [
+    {
+      "Text": "потеряна характеристика \"harsh, solitary life\" (тяжёлая, одинокая жизнь) — важная тематическая деталь про изоляцию, в переводе осталось только \"глухом\" лесу, сама \"одинокая жизнь\" пропала.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 81,
+          "Length": 22
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 69,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Опущено dangerous",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 166,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "странный переход на \"от тебя\" (2-е лицо) разрывает повествовательный голос истории.",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 147,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "\"would rest\" (отдыхала/нежилась) превратилось в \"играла\" (played) — смена действия.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 405,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 389,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Опущено the few",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 452,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "потеряно действие \"reared\" (встал на задние ноги/поднялся) — в переводе осталось только \"взревел и бросился\".",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 919,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "\"immense beast\" (огромный зверь) переведено как \"поистине адского жителя леса\" — добавлена демоническая/инфернальная коннотация (\"адского\"), которой в оригинале нет вообще. Искажение образа.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1030,
+          "Length": 15
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 990,
+          "Length": 19
+        }
+      ]
+    },
+    {
+      "Text": "\"threw herself in its path\" (бросилась/кинулась наперерез) переведено как \"появилась\" (появилась между ними) — теряется активное, самоотверженное действие матери, заменяется нейтральным глаголом.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1151,
+          "Length": 25
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1115,
+          "Length": 20
+        }
+      ]
+    },
+    {
+      "Text": "ключевой глагол \"impaled\" (пронзил/насадил на рога) пропущен — в переводе осталось только \"поднял... в воздух\", что значительно смягчает жестокость сцены (пронзание рогами ≠ просто поднятие).",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1247,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Добавлено исполинских, но мне нравится перевод",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1191,
+          "Length": 11
+        }
+      ]
+    },
+    {
+      "Text": "потеряно \"with all her strength\" (изо всех сил) — деталь, подчёркивающая отчаянность матери.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1306,
+          "Length": 21
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Как-то странно употреблять слово человек к женщине, лично для меня",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1304,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "В оригинале мать впервые названа \"the huntress\" (\"охотница\") — это ключевая лорная деталь, намёк-предвестник на будущий титул самой Анны (\"The Huntress\"). В переводе слово \"охотница\" заменено на \"матери\" — тематическая связь полностью утрачена.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1745,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1744,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Опущено long и back",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1881,
+          "Length": 4
+        },
+        {
+          "StartIndex": 1891,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "потерян поэтический образ \"half-remembered dream\" (полузабытый сон) — заменён на обобщённое \"угасала с каждым днем\". Стилистическая потеря характерного образа.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2130,
+          "Length": 44
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2105,
+          "Length": 40
+        }
+      ]
+    },
+    {
+      "Text": "Опущено new, но не критично",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2459,
+          "Length": 3
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "\"slaughtered\" (зарезаны/убиты, как скот) переведено как \"сражены\" — более нейтральное и поэтичное слово, теряется акцент на жестокости убийства \"как животного\".",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2536,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2514,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "\"colorful garments\" (яркая одежда) переведено как \"яркие побрякушки\" (цветные безделушки/украшения) — это совершенно другая категория предметов (одежда ≠ побрякушки).",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2617,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2597,
+          "Length": 10
+        }
+      ]
+    },
+    {
+      "Text": "\"could never bring herself to kill\" (не могла заставить себя убить) переведено как \"никогда не трогала\" (never touched) — это создаёт противоречие с дальнейшим текстом, где она явно \"трогает\" девочек (забирает, привязывает их к стене). Нужно было сохранить именно \"не убивала\".",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2675,
+          "Length": 59
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2672,
+          "Length": 50
+        }
+      ]
+    },
+    {
+      "Text": "оригинал описывает внутреннее чувство — тоску/жажду близости (\"craved\" — жаждала), это эмоциональное состояние. Перевод заменяет его на конкретное действие — \"выбрала любимицу и назвала её ребёнком\". Это смысловой сдвиг: внутреннее переживание превращено в сюжетное действие, которого в этой фразе оригинала нет.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2872,
+          "Length": 60
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2862,
+          "Length": 52
+        }
+      ]
+    },
+    {
+      "Text": "\"she couldn't read\" (Анна не умела читать) — важная личная деталь про неграмотность Анны — заменена на безличное \"которые некому было прочесть\" (никому было читать), теряя конкретно её характеристику.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2987,
+          "Length": 17
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2956,
+          "Length": 28
+        }
+      ]
+    },
+    {
+      "Text": "потеряно описание веревки \"rough and chafing\" (грубая, натирающая) — остался просто нейтральный \"веревками\".",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3047,
+          "Length": 24
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3028,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "из трёх причин смерти (cold, starvation, sickness) в переводе осталось только две — пропущено \"starvation\" (голод).",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3220,
+          "Length": 30
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3151,
+          "Length": 23
+        }
+      ]
+    },
+    {
+      "Text": "из трёх состояний (pain, sorrow, madness) пропущено \"sorrow\" (горе/скорбь) — осталось только \"боли и безумия\".",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3292,
+          "Length": 27
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3225,
+          "Length": 14
+        }
+      ]
+    },
+    {
+      "Text": "\"compelled\" (вынуждена/одержима непреодолимым порывом) переведено как \"намеревалась\" (intended/решила) — смягчает психологическую неконтролируемость импульса до обычного намерения.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3329,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3245,
+          "Length": 12
+        }
+      ]
+    },
+    {
+      "Text": "Опущено one of the - одну из...",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3453,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "\"killed men and ate little girls\" (убивала мужчин и поедала маленьких девочек) переведено как \"убивала взрослых и поедала детей\" — обобщённые, гендерно-нейтральные понятия вместо точных. Это особенно важно, так как легенда конкретно завязана на реальных событиях истории (она щадит девочек физически, но легенда гласит, что она их ест) — точность формулировки здесь смыслово значима, и обобщение искажает её.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3647,
+          "Length": 36
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3577,
+          "Length": 33
+        }
+      ]
+    },
+    {
+      "Text": "потеряно \"mysteriously\" (загадочным образом)",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4035,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "3EFDB19D43DDBDD8D3BA3990F48D7F90": [
+    {
+      "Text": "\"first-aid bandages\" (медицинские бинты) переведено как \"лейкопластырь\" (adhesive plaster/band-aid) — это разные предметы, неверный выбор слова.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 18
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 28,
+          "Length": 14
+        }
+      ]
+    }
+  ],
+  "537A16064A17D4916487E38B2F227C78": [
+    {
+      "Text": "wipe the puss away\" (вытирать гной) переведено как \"вытирать лицо\" (wipe face) — совершенно другое слово, искажение смысла и потеря неприглядной детали, важной для образа Охотницы.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 51,
+          "Length": 18
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 70,
+          "Length": 13
+        }
+      ]
+    }
+  ],
+  "2A7D1AC24F7663FF1FEE278616BC773D": [
+    {
+      "Text": "Рваные раны != Open wounds",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 78,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 88,
+          "Length": 11
+        }
+      ]
+    }
+  ],
+  "5F9BBB1B4CEC3126DB16F985EA62DB97": [
+    {
+      "Text": "\"Cured leather\" (выделанная/дублёная кожа) переведено просто как \"кожаных\" — потеряно уточнение про выделку",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "2639490540681273209C7A9B11549A59": [
+    {
+      "Text": "\"a lost little one\" (потерянного ребёнка, в ед.ч.) переведено как \"потере малышей\" (мн.ч.) — небольшое расхождение в числе, может менять оттенок (одна конкретная потеря vs. потери в целом).",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 83,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 68,
+          "Length": 7
+        }
+      ]
+    }
+  ],
+  "77AAFDA245F47E5B323A7C9FDE66F939": [
+    {
+      "Text": "\"otherworldly\" (неземная/потусторонняя) переведено как \"неизвестная\" (unknown) — другое по смыслу слово, теряется мистический оттенок.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 11
+        }
+      ]
+    },
+    {
+      "Text": "Опущено faintly",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 32,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "C2FD763540508B8DFC2B209F8B4497C4": [
+    {
+      "Text": "Разгрузочный != Infantry - Стрелковый, пехотинский",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 13
+        }
+      ]
+    }
+  ],
+  "C2FD9E504673866B5AAC01B7962265C8": [
+    {
+      "Text": "\"pillaged\" (украденный/мародёрски снятый) переведено как \"снятый\" — нейтральное слово вместо подчёркнуто негативного \"разграбленный/украденный у трупа\".",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 22,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 27,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Опущено in combat",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 60,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "65782F1E46D58723FDD6B799BD16DFEB": [
+    {
+      "Text": "аналогично пункту 8 — \"a lost little one\" (ед.ч.) → \"потере малышей\" (мн.ч.).",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 73,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 51,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "\"circular decorative braid\" (круглая декоративная коса/плетёнка) переведено как \"венок\" — допустимая адаптация",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 27
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 5
+        }
+      ]
+    }
+  ],
+  "41A441A44C762F3168356EA791DD2E44": [
+    {
+      "Text": "\"quick and sly\" (быстрая и хитрая/ловкая) переведено как \"искусно\" (skillfully) — обобщение, теряется конкретная пара эпитетов, особенно \"sly\" (хитрая, лукавая), который несёт характерный оттенок.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 35,
+          "Length": 26
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 39,
+          "Length": 7
+        }
+      ]
+    }
+  ],
+  "26482436408F427FFCC7D4A4958B3424": [
+    {
+      "Text": ": \"crusty and volatile\" (покрытая коркой и нестабильная/едкая) переведено как \"старой и легко осыпающейся\" — слово \"volatile\" (нестабильная, нестойкая в химическом смысле — намёк на едкость) заменено на \"легко осыпающейся\", что меняет акцент: теряется намёк на опасную нестабильность ржавчины, остаётся просто физическое осыпание.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 39,
+          "Length": 30
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 28,
+          "Length": 36
+        }
+      ]
+    }
+  ],
+  "C39A9D79416B8B430BF0F8877C7F6B35": [
+    {
+      "Text": "\"Pillaged\" (украдено/награблено) переведено как \"взята\" — нейтральное слово вместо подчёркнуто негативного \"награблено\", как и в случае с Infantry Belt. Также добавлено \"с трупа\" — в оригинале просто \"from prey\" (от добычи), без явного слова \"труп\", хотя это подразумевается контекстом.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 70,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 82,
+          "Length": 5
+        }
+      ]
+    }
+  ],
+  "50C5040842D3347A0C0848B1A65ED69B": [
+    {
+      "Text": "Опущено concoction, но из названия и так понятно",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 8,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено mainly",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 75,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "635122D54EF05CDC160D86800C7B3940": [
+    {
+      "Text": "Мысли != Attention - Внимание",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 105,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 94,
+          "Length": 5
+        }
+      ]
+    }
   ]
 }
