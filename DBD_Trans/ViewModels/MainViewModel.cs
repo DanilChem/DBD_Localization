@@ -269,8 +269,21 @@ namespace DBD_Trans.ViewModels
             var vm = new AnalysisViewModel(entry, errors, _errorStorage, _statusStorage, _appSettings);
             var window = new AnalysisWindow();
             window.DataContext = vm;
-            window.Owner = App.Current.MainWindow;
+
+            var mainWindow = App.Current.MainWindow;
+
+            window.Owner = mainWindow;
+
+            // === ДОБАВЬ ЭТУ СТРОКУ, если Windows всё равно рисует вторую иконку ===
+            // Она уберет окно анализа из панели задач, но оставит его в Alt-Tab.
+            window.ShowInTaskbar = false;
+
             window.ShowDialog();
+
+            // Главное окно было в панели задач всё это время, поэтому оно просто 
+            // вернет фокус без всяких "всплытий" и анимаций.
+            mainWindow.Activate();
+
             CalculateTotalStatistics();
             UpdateStatistics();
         }

@@ -3,6 +3,7 @@ using DBD_Trans.Models;
 using DBD_Trans.ViewModels;
 using System;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,6 +26,12 @@ namespace DBD_Trans.Views
         public MainWindow()
         {
             InitializeComponent();
+            this.SourceInitialized += (s, e) =>
+            {
+                var handle = new System.Windows.Interop.WindowInteropHelper(this).Handle;
+                SendMessage(handle, 0x80, IntPtr.Zero, IntPtr.Zero); // WM_SETICON, ICON_SMALL
+                SendMessage(handle, 0x80, IntPtr.Zero, new IntPtr(1)); // WM_SETICON, ICON_BIG
+            };
             DarkTitleBarHelper.ApplyDarkTitleBar(this);
 
             this.Loaded += (s, e) =>
@@ -93,6 +100,10 @@ namespace DBD_Trans.Views
             this.PreviewMouseUp += MainWindow_PreviewMouseUp;
             this.Deactivated += (s, e) => StopMiddleScroll();
         }
+
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
 
         // --- НОВЫЕ МЕТОДЫ ДЛЯ КОПИРОВАНИЯ ---
         private void LocalizationGrid_PreviewKeyDown(object sender, KeyEventArgs e)

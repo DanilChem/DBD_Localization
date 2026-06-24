@@ -13256,5 +13256,714 @@
       "EnglishHighlights": [],
       "RussianHighlights": []
     }
+  ],
+  "EBD990EF44161072DEC33D9B4EDC0D62": [
+    {
+      "Text": "\"surpass his father's reputation\" (превзойти репутацию/славу отца) переведено как \"превзойти славного отца\" — добавлен эпитет \"славного\", которого не было в этом месте оригинала (хотя по смыслу отец действительно уважаемый, конкретно здесь акцент именно на \"репутации\", а не на личности отца).",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 82,
+          "Length": 23
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 97,
+          "Length": 13
+        }
+      ]
+    },
+    {
+      "Text": "\"the code that had been taught to him\" (кодекс, которому его учили — подчёркивается, что это был усвоенный, переданный ему кодекс) переведено обобщённо как \"о кодексе чести\" — теряется деталь про обучение/передачу кодекса.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 438,
+          "Length": 27
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "\"morbid\" (болезненный/нездоровый, с оттенком одержимости смертью) переведено как \"лихорадочно\" (feverishly) — это разные по смыслу слова: \"morbid\" описывает свойство самих убийств (их зловещую, патологическую природу), а \"лихорадочно\" описывает скорее манеру действия (поспешно, в горячке).",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 592,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 556,
+          "Length": 11
+        }
+      ]
+    },
+    {
+      "Text": "\"yanking off their topknots\" (срывая их пучки волос/топ-кнот — резкое, грубое действие сдирания) переведено как \"отрезая им волосы\" — действие \"срывания\" заменено на \"отрезание\", что меняет характер насилия (рывком vs. целенаправленным отрезанием).",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 642,
+          "Length": 26
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 630,
+          "Length": 17
+        }
+      ]
+    },
+    {
+      "Text": "\"stripping them of their armor\" (сдирая/срывая с них доспехи) переведено как \"заставляя снимать доспехи\" — это меняет субъекта действия: в оригинале Казан сам срывает доспехи, а в переводе он \"заставляет\" жертв снять их самостоятельно — разные динамики унижения.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 673,
+          "Length": 29
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 650,
+          "Length": 25
+        }
+      ]
+    },
+    {
+      "Text": "\"the rageful samurai\" — в оригинале это пояснение/перевод-расшифровка прозвища \"Oni-Yamaoka\" (т.е. \"Они-Ямаока\" буквально и означает \"яростный самурай\" в восприятии лорда). В переводе порядок слов превращён в \"буйный самурай Они Ямаока\"",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 887,
+          "Length": 34
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 879,
+          "Length": 27
+        }
+      ]
+    },
+    {
+      "Text": "\"Oni-Yamaoka\" (полное прозвище) сокращено в переводе до просто \"Они\" — потеря части имени/прозвища, которое в оригинале используется полностью.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1050,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1035,
+          "Length": 3
+        }
+      ]
+    },
+    {
+      "Text": "\"confused him\" (сбивало его с толку/смущало) переведено описательно как \"не понимал, чем заслужил\" — это скорее интерпретация, чем точный перевод эмоции \"confusion\" (растерянности)",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1063,
+          "Length": 23
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1040,
+          "Length": 48
+        }
+      ]
+    },
+    {
+      "Text": "\"ogre\" (огр/великан-людоед — конкретное мифическое существо) переведено как \"безмозглым демоном\" (mindless demon) — добавлено слово \"безмозглым\" (mindless), которого нет в оригинале вообще, и заменено само существо \"ogre\" на \"демона\" — два разных понятия в мифологии, к тому же добавочный эпитет \"безмозглым\" не имеет основания в тексте.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1221,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1241,
+          "Length": 18
+        }
+      ]
+    },
+    {
+      "Text": "\"his need to secure\" (его потребность/нужда добыть — психологическая характеристика, навязчивая необходимость) переведено просто как \"отрезаемые\" — теряется психологический аспект \"потребности\" (need), фраза становится чисто описательной без указания на внутреннюю одержимость этим действием.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1421,
+          "Length": 32
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1391,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "\"desecrated his name\" (осквернил/опозорил его имя — сильное слово \"desecrated\" подразумевает святотатство) переведено как \"позорит его имя\" — слово взято в настоящем времени (позорит, продолжающееся действие) вместо прошедшего завершённого (\"desecrated\" — уже совершённое осквернение)",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1614,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1552,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "\"the lord's town\" (город/посёлок правителя — обычный город, не столица) переведено как \"столицы\" (capital) — необоснованное добавление статуса \"столицы\", которого нет в оригинале. Это меняет географическое/политическое значение места.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1658,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1580,
+          "Length": 15
+        }
+      ]
+    },
+    {
+      "Text": "\"standing on a dirt road\" (стоящий на грунтовой/проселочной дороге — конкретная деталь обстановки) пропущена в переводе.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1725,
+          "Length": 23
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "\"staggered back to his haunches\" (отшатнулся и осел на колени/присел на корточки — конкретная физическая поза) переведено как \"отпрянул и упал на грязную дорогу\" — изменение конкретной позы (на корточках) на простое падение, плюс добавлено \"грязную\", которого в этом месте у оригинала нет (хотя \"dirt road\" было раньше упомянуто в контексте, здесь конкретно не повторяется).",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2036,
+          "Length": 30
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1965,
+          "Length": 36
+        }
+      ]
+    },
+    {
+      "Text": "в оригинале НЕ сказано, что отец что-то \"прошептал\" или произнёс слова о том, что жалеет о рождении сына — в оригинале отец просто умирает молча, после взгляда, полного стыда и сожаления. Фраза \"он прошептал, что жалеет о рождении сына\" — это полностью добавленная переводчиком информация, которой нет в исходном тексте. Это значимое искажение сюжета: в оригинале отец умирает без слов, а перевод добавляет прямую речь/мысль, которой не было.",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2078,
+          "Length": 37
+        }
+      ]
+    },
+    {
+      "Text": "\"mingled shame and regret\" (смешанные стыд и сожаление — две конкретные эмоции) переведено как \"с укором в глазах\" (with reproach) — это другая эмоция (укор/обвинение), не совпадающая с \"shame and regret\" (стыд и сожаление). Существенное эмоциональное искажение взгляда отца.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2095,
+          "Length": 29
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2030,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "\"screamed in agony\" (закричал в агонии/муке) переведено как \"завопил от душевной боли\" — добавлено уточнение \"душевной\", которого нет в оригинале (agony может быть и физической, и душевной, но конкретизация \"душевной\" — это интерпретация переводчика).",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2193,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2147,
+          "Length": 13
+        }
+      ]
+    },
+    {
+      "Text": "\"Bitter, lost and disillusioned\" (озлобленный, потерянный и разочарованный/обманувшийся в иллюзиях) переведено как \"Раздавленный, утративший себя и терзаемый виной\" — все три эпитета заменены другими по смыслу: \"bitter\" (озлобленный/горький) ≠ \"раздавленный\" (crushed), \"disillusioned\" (разочарованный, утративший иллюзии) ≠ \"терзаемый виной\" (guilt-ridden, чего в оригинале здесь вообще не было сказано explicitly). Это значимая смысловая замена эмоционального состояния персонажа — добавлена тема вины, которой не было явно прописано в этом предложении оригинала.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2374,
+          "Length": 30
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2347,
+          "Length": 47
+        }
+      ]
+    },
+    {
+      "Text": "Опущено one day",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2581,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "\"accusing him of being\" (обвиняя его в том, что он сам является) переведено как \"величая... тем самым мнимым самураем\" (называя его тем самым мнимым самураем) — \"accusing\" (обвинение) заменено на более нейтральное \"величая\" (называя/нарекая), теряется обвинительный тон оригинала.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2762,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2781,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "\"half remembered\" (наполовину вспомнил — неполное, частичное воспоминание) переведено как \"словно в забытьи вспомнил\" — это меняет нюанс: \"half remembered\" говорит о неполноте самого воспоминания, а \"в забытьи\" подразумевает состояние самого Казана (как будто он в трансе/беспамятстве), что разные вещи.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2897,
+          "Length": 15
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2934,
+          "Length": 18
+        }
+      ]
+    },
+    {
+      "Text": "Сначала lord переводился как повелитель, потом как правитель",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "оригинал говорит, что ярость сама по себе непостижима (как абсолютная характеристика), а перевод — что люди не могли её постичь (через призму восприятия других).",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3204,
+          "Length": 16
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3280,
+          "Length": 18
+        }
+      ]
+    },
+    {
+      "Text": "\"gore\" (кровавые/растерзанные останки, более общее понятие) переведено конкретно как \"мозгами\" (brains) — сужение значения многозначного слова до одной конкретной детали.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3243,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3340,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "\"battled through the town\" (пробивался с боем через город) переведено как \"прошелся по городу\" (walked through) — теряется элемент борьбы/боя, действие становится более пассивным.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3255,
+          "Length": 15
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3362,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "Нужно было подчеркнуть то, что дом был огромным или красивым",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3316,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3426,
+          "Length": 4
+        }
+      ]
+    },
+    {
+      "Text": "\"out of a cabinet\" (из шкафа/чулана — конкретное место, где прятался лорд) переведено обобщённо как \"наружу\" — потеряна конкретная деталь о месте укрытия (шкаф/чулан), что важно как образ его трусости/унижения.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3334,
+          "Length": 20
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3452,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "\"Satisfied\" (удовлетворённый) переведено расширенно как \"Утолив жажду мести\" — добавление интерпретации, которой не было буквально в коротком оригинальном слове.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3561,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3687,
+          "Length": 18
+        }
+      ]
+    },
+    {
+      "Text": "\"rusted scythes\" (ржавые косы) — потеряно слово \"ржавые\" (rusted), осталось просто \"косами\". \"sharp pitchforks\" (острые вилы) — потеряно \"острые\".",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3652,
+          "Length": 6
+        },
+        {
+          "StartIndex": 3668,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "\"darkening sky\" (темнеющее небо — процесс, небо темнеет в моменте) переведено как \"темное небо\" (dark sky, уже состоявшееся состояние) — теряется динамика происходящего процесса наступления тьмы.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3873,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3998,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "\"took turns stabbing and torturing\" (по очереди закалывали и мучили) переведено как \"продолжали колоть и бить\" — слово \"took turns\" (по очереди, поочерёдно) не передано явно, хотя \"продолжали\" частично покрывает длительность действия.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3898,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4021,
+          "Length": 10
+        }
+      ]
+    },
+    {
+      "Text": "\"fog\" (туман — последовательно используемый в лоре DBD термин для \"Тумана\"/The Fog, в который превращаются убийцы) переведено как \"дым\" (smoke) — это терминологическая ошибка",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4173,
+          "Length": 3
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4373,
+          "Length": 5
+        }
+      ]
+    }
+  ],
+  "0A7CC0F44DA07EE05B21AD8BD6B240E7": [
+    {
+      "Text": "Более правильный перевод цитаты Рендзиро: \"Если отец не делает жертв, ради своих детей, то какой пример он подаёт им?\"",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 189,
+          "Length": 69
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 191,
+          "Length": 62
+        }
+      ]
+    }
+  ],
+  "FD763631470EA5A6801201B440ECE7A6": [
+    {
+      "Text": "Повязка != Sash. Sash - Кушак — это широкий и длинный пояс из ткани, кожи или шнура, предназначенный для стягивания одежды в области талии.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 7,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 14,
+          "Length": 7
+        }
+      ]
+    }
+  ],
+  "1D14C06A46D7ED1B234FBA87FF28E748": [
+    {
+      "Text": "Кушак — это широкий и длинный пояс из ткани, кожи или шнура, предназначенный для стягивания одежды в области талии.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 125,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 119,
+          "Length": 8
+        }
+      ]
+    }
+  ],
+  "F8958C92476AC028F51F4A8F31C0B4AA": [
+    {
+      "Text": "Опущено the story",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 61,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "E99E4206423668FBA0F5CF82169C4E04": [
+    {
+      "Text": "Оберег != Trinket. Это безделушка",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 5,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "подарили или дали Казану, после его рождения, не сделали",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 10,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 12,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Оригинал: силы безделушки предназначены для защиты его семьи от вреда. Перевод: оберег, чтобы защитить семью от опасностей",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 35,
+          "Length": 52
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 41,
+          "Length": 34
+        }
+      ]
+    }
+  ],
+  "DBB196E6426C89BE2B08F69C472B73E4": [
+    {
+      "Text": "Старое описание аддона. Considering his goals pure and just, Kazan carried a trinket to ward off evil that might lead him astray.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 68
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 146
+        }
+      ]
+    }
+  ],
+  "8CB7FBBF4FD067BC5C8EB0A97111A7E0": [
+    {
+      "Text": "Сгнившая != Rotting. Это гниющая",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 8
+        }
+      ]
+    }
+  ],
+  "F3AFD3F342732BBCE6FDF89DDD6288B6": [
+    {
+      "Text": "Оригинал: Это не совпадение, что люди во многом похожи на демонов. Перевод: Люди неспроста так наслышаны о демонах",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 305,
+          "Length": 57
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 377,
+          "Length": 38
+        }
+      ]
+    }
+  ],
+  "B73E9B394FFA28FFE05527A311770D95": [
+    {
+      "Text": "Боль != Agony",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 4
+        }
+      ]
+    },
+    {
+      "Text": "Без промаха != With precision. Это с точностью, очевидно, что промах ничего полезного не принесёт",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 401,
+          "Length": 14
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 400,
+          "Length": 11
+        }
+      ]
+    }
+  ],
+  "5A7D169C4A86E90C679FE2995AA2BFE5": [
+    {
+      "Text": "Опущено mentally",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 8,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "PerkDescriptionsNamespace.PERK_BloodEcho_FlavorText_DESC": [
+    {
+      "Text": "Такая же ошибка, что в оригинале",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
   ]
 }
