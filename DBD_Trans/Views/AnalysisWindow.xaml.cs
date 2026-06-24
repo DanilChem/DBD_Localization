@@ -317,7 +317,7 @@ namespace DBD_Trans.Views
             {
                 // === ЛОГИКА ЗАДЕРЖКИ СКРЫТИЯ КУРСОРА ===
                 // Если курсор еще виден, запускаем таймер
-                if (rtb.Cursor != Cursors.None)
+                if (rtb.Cursor != Cursors.None) 
                 {
                     // Если мы перешли на новый RichTextBox или только зашли на маркер
                     if (_targetRtbForCursor != rtb || !_cursorHideTimer.IsEnabled)

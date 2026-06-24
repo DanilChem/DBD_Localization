@@ -269,8 +269,35 @@ namespace DBD_Trans.ViewModels
             var vm = new AnalysisViewModel(entry, errors, _errorStorage, _statusStorage, _appSettings);
             var window = new AnalysisWindow();
             window.DataContext = vm;
-            window.Owner = App.Current.MainWindow;
+
+            var mainWindow = App.Current.MainWindow;
+
+            // 1. Подписываемся на событие Loaded. 
+            // Оно сработает ТОЛЬКО когда AnalysisWindow уже откроется, отрисует содержимое и получит фокус.
+            window.Loaded += (s, e) =>
+            {
+                // Теперь, когда новое окно уже активно, скрытие старого не заставит Windows 
+                // переключаться на фоновые приложения. Вспышки не будет.
+                mainWindow.ShowInTaskbar = false;
+            };
+
+            window.Owner = mainWindow;
+
+            // 2. Открываем окно. Оно блокирует UI (ShowDialog) и становится активным.
             window.ShowDialog();
+
+            // 3. Как только пользователь закроет окно анализа, ShowDialog() завершится.
+            // Возвращаем главное окно в панель задач и Alt+Tab.
+            window.Loaded += (s, e) =>
+            {
+                // Теперь, когда новое окно уже активно, скрытие старого не заставит Windows 
+                // переключаться на фоновые приложения. Вспышки не будет.
+                mainWindow.ShowInTaskbar = true;
+            };
+
+            // Дополнительно можно вернуть фокус, если он потерялся
+            mainWindow.Activate();
+
             CalculateTotalStatistics();
             UpdateStatistics();
         }
