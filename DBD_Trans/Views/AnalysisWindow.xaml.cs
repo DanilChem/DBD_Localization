@@ -3,6 +3,7 @@ using DBD_Trans.Models;
 using DBD_Trans.ViewModels;
 using System;
 using System.ComponentModel;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -37,6 +38,12 @@ namespace DBD_Trans.Views
         public AnalysisWindow()
         {
             InitializeComponent();
+            this.SourceInitialized += (s, e) =>
+            {
+                var handle = new System.Windows.Interop.WindowInteropHelper(this).Handle;
+                SendMessage(handle, 0x80, IntPtr.Zero, IntPtr.Zero); // WM_SETICON, ICON_SMALL
+                SendMessage(handle, 0x80, IntPtr.Zero, new IntPtr(1)); // WM_SETICON, ICON_BIG
+            };
             Loaded += AnalysisWindow_Loaded;
             PreviewMouseLeftButtonDown += OnWindowPreviewMouseLeftButtonDown;
             DarkTitleBarHelper.ApplyDarkTitleBar(this);
@@ -56,6 +63,10 @@ namespace DBD_Trans.Views
             // Инициализируем единый ToolTip
             InitSharedToolTip();
         }
+
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
 
         private void InitSharedToolTip()
         {
@@ -303,8 +314,15 @@ namespace DBD_Trans.Views
             var rtb = sender as RichTextBox;
             if (rtb == null) return;
 
+            // === ИСПРАВЛЕНИЕ 1: При активном режиме маркера курсор всегда должен быть видимым (IBeam) ===
             if (ViewModel.IsMarkerActive)
             {
+                if (rtb.Cursor == Cursors.None)
+                {
+                    rtb.Cursor = Cursors.IBeam;
+                }
+                _cursorHideTimer.Stop();
+                _targetRtbForCursor = null;
                 HideToolTip();
                 return;
             }
@@ -316,16 +334,11 @@ namespace DBD_Trans.Views
             if (error != null)
             {
                 // === ЛОГИКА ЗАДЕРЖКИ СКРЫТИЯ КУРСОРА ===
-                // Если курсор еще виден, запускаем таймер
-                if (rtb.Cursor != Cursors.None) 
+                if (_targetRtbForCursor != rtb || !_cursorHideTimer.IsEnabled)
                 {
-                    // Если мы перешли на новый RichTextBox или только зашли на маркер
-                    if (_targetRtbForCursor != rtb || !_cursorHideTimer.IsEnabled)
-                    {
-                        _targetRtbForCursor = rtb;
-                        _cursorHideTimer.Stop();
-                        _cursorHideTimer.Start(); // Запускаем обратный отсчет
-                    }
+                    _targetRtbForCursor = rtb;
+                    _cursorHideTimer.Stop();
+                    _cursorHideTimer.Start();
                 }
 
                 if (_toolTipTextBlock.Text != error.Text)
@@ -353,18 +366,28 @@ namespace DBD_Trans.Views
             else
             {
                 // === МГНОВЕННЫЙ ВОЗВРАТ КУРСОРА ===
-                // Если ушли с маркера, отменяем таймер и сразу возвращаем курсор
                 _cursorHideTimer.Stop();
+                _targetRtbForCursor = null;
+
                 if (rtb.Cursor == Cursors.None)
                 {
                     rtb.Cursor = Cursors.IBeam;
                 }
-                _targetRtbForCursor = null;
                 HideToolTip();
             }
         }
         private void RichTextBox_MouseLeave(object sender, MouseEventArgs e)
         {
+            var rtb = sender as RichTextBox;
+
+            // === ИСПРАВЛЕНИЕ 2: При выходе из RichTextBox ВСЕГДА принудительно восстанавливаем курсор ===
+            if (rtb != null && rtb.Cursor == Cursors.None)
+            {
+                rtb.Cursor = Cursors.IBeam;
+            }
+
+            _cursorHideTimer.Stop();
+            _targetRtbForCursor = null;
             HideToolTip();
         }
 
