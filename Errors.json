@@ -13965,5 +13965,2685 @@
       "EnglishHighlights": [],
       "RussianHighlights": []
     }
+  ],
+  "B6DC8CB747C056247547FA81C184ED3A": [
+    {
+      "Text": "Опущен struggling - борящихся, пытающихся выжить и так далее",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 81,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Добавлено за счёт их трудов, но перевод мне нравится",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 235,
+          "Length": 17
+        }
+      ]
+    },
+    {
+      "Text": "No Irish Need Apply должно переводится более жёстко: ирландская помощь не требуется",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 373,
+          "Length": 20
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 371,
+          "Length": 33
+        }
+      ]
+    },
+    {
+      "Text": "Добавлено прекрасным",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 278,
+          "Length": 10
+        }
+      ]
+    },
+    {
+      "Text": "\"had few options\" (имел мало возможностей) переведено как \"никто не нуждался\" (no one needed) — небольшой сдвиг от \"ограниченных возможностей\" к категоричному \"никому не нужны\".",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 304,
+          "Length": 46
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 300,
+          "Length": 34
+        }
+      ]
+    },
+    {
+      "Text": "\"antiquated\" (устаревшие/старинные) ослаблено до простого \"старые\"",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 398,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 410,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "\"quaint applications\" (безобидное, причудливо-старомодное применение) переведено как \"замысловатые вещицы\" (intricate things) — слово \"quaint\" несёт коннотацию невинности/безобидности, которая полностью утрачена, заменена на \"замысловатость\", что не передаёт контраст между невинными изделиями при отце и зловещими — без него.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 596,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 590,
+          "Length": 12
+        }
+      ]
+    },
+    {
+      "Text": "\"rip them from their sockets\" (вырвать их из глазниц) переведено как \"вырывать их из черепа\" — анатомическая неточность, глазница ≠ череп в целом.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 770,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 765,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "\"put their discrimination aside\" (отложили в сторону дискриминацию — системную практику) переведено как \"забыли о неприязни\" (forgot their dislike) — смягчение от институциональной \"дискриминации\" до личной \"неприязни\".",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 923,
+          "Length": 14
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 942,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "Добавлено некий",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 986,
+          "Length": 5
+        }
+      ]
+    },
+    {
+      "Text": "слово \"patents\" (патенты — юридический термин) полностью пропущено, заменено обобщённым \"изобретения\".",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1212,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1306,
+          "Length": 11
+        }
+      ]
+    },
+    {
+      "Text": "\"feigned indifference\" (изображал равнодушие) переведено как \"делал вид, будто это маловажные достижения\" — иной нюанс (равнодушие вообще ≠ умаление значимости конкретно).",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1137,
+          "Length": 20
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1189,
+          "Length": 42
+        }
+      ]
+    },
+    {
+      "Text": "Полностью добавлено данное предложение, хз откуда оно вообще взялось",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1434,
+          "Length": 75
+        }
+      ]
+    },
+    {
+      "Text": "добавлено \"мерзавца\" (scoundrel) — оценочное слово, отсутствующее в оригинале, хотя контекстуально оправдано.",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1576,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "\"As he was pulled away\" (в то время как его оттаскивали/удерживали — важная деталь: его пытались остановить, но он всё равно совершил выстрел) полностью пропущено и заменено на \"В приступе гнева\" (in a fit of rage). Это убирает драматический момент сопротивления — то, что Калеб совершил это действие, несмотря на попытки его удержать, что меняет восприятие сцены.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1434,
+          "Length": 21
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1602,
+          "Length": 16
+        }
+      ]
+    },
+    {
+      "Text": "convicts\" (заключённые/осуждённые — нейтральное слово) переведено как \"головорезами\" (thugs/cutthroats) — добавлена немотивированная коннотация жестокости, которой нет в оригинальном слове.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1818,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1994,
+          "Length": 12
+        }
+      ]
+    },
+    {
+      "Text": "\"found an unlikely friend in\" (нашёл неожиданного друга в лице — равноправные отношения) переведено как \"взял под опеку\" (took under his wing) — смещение динамики отношений от дружбы к покровительству/иерархии.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1828,
+          "Length": 57
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2008,
+          "Length": 62
+        }
+      ]
+    },
+    {
+      "Text": "\"Bayshore framed\" (Бейшора подставят/сфабрикуют против него обвинение) переведено просто как \"упечь Бейшора за решетку\" — теряется ключевая деталь о нечестном/незаконном методе (фабрикации обвинения), что меняет моральную окраску предложения тюремщика — речь не просто о законном заключении, а о подставе.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2122,
+          "Length": 15
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2312,
+          "Length": 24
+        }
+      ]
+    },
+    {
+      "Text": "Опущено rotting",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2142,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "ПОЛНОСТЬЮ опущено \"but Caleb had already earned his new nickname: The Deathslinger\" (но Калеб уже заслужил своё новое прозвище: Стрелок). Это важная лорная деталь о происхождении прозвища персонажа, и она отсутствует.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2754,
+          "Length": 64
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Премерзким != Ungodly - Нечеловеческим, невероятным, хотя перевод мне нравится больше оригинале",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2651,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2939,
+          "Length": 10
+        }
+      ]
+    },
+    {
+      "Text": "\"Looking to protect his asset\" (желая защитить свой ценный актив/ресурс, т.е. самого Калеба как ценность) — эта мотивационная деталь полностью пропущена.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2820,
+          "Length": 28
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "\"pulled strings\" (использовал связи/нажал на рычаги) заменено нейтральным \"распорядился\" — теряется оттенок использования влияния/связей.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2868,
+          "Length": 14
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3097,
+          "Length": 12
+        }
+      ]
+    },
+    {
+      "Text": "\"collecting wanted outlaws for the prison\" (собирая разыскиваемых преступников для тюрьмы — конкретное описание их деятельности) пропущено, оставлено только обобщённое \"выполняя свою часть сделки\".",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3000,
+          "Length": 40
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Предали != Sold out - Продали. Плюс добавлено снова, хотя пофиг",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3374,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3563,
+          "Length": 16
+        }
+      ]
+    },
+    {
+      "Text": "\"In a thundering gallop\" (несясь громовым галопом — конкретный образ скачущих на лошадях людей) переведено как \"С оглушительным ревом\" — потеряна важная визуальная деталь о том, что банда мчалась именно верхом на лошадях (галопом), заменена обобщённым \"рёвом\".",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3503,
+          "Length": 17
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3721,
+          "Length": 19
+        }
+      ]
+    },
+    {
+      "Text": "\"a fortunate sight\" (удачное зрелище) переведено усиленно как \"сладостную картину\" (сладостное/наслаждённое зрелище) — добавлен более выраженный садистский оттенок наслаждения, чем нейтральное \"fortunate\".",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3847,
+          "Length": 15
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4114,
+          "Length": 18
+        }
+      ]
+    },
+    {
+      "Text": "три отдельных глагола насилия \"beating, bludgeoning, tearing at his flesh\" (бил, дубасил, рвал его плоть — нарастающая градация жестокости) свёрнуты в один обобщённый глагол \"мордовать\" — теряется эскалация насилия, переданная через тройное перечисление в оригинале.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3987,
+          "Length": 42
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4266,
+          "Length": 21
+        }
+      ]
+    },
+    {
+      "Text": "\"growing crowd\" (растущая толпа) — слово \"growing\" потеряно, осталось просто \"толпе\".",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4283,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4620,
+          "Length": 5
+        }
+      ]
+    },
+    {
+      "Text": "\"faded eyes\" (потухшие/помутневшие глаза — усталость, выцветание взгляда) переведено как \"невидящими глазами\" (unseeing eyes — будто он вообще не воспринимает то, на что смотрит) — близкие, но не идентичные образы: один про усталость взгляда, другой про полное отсутствие восприятия.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4642,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4984,
+          "Length": 18
+        }
+      ]
+    },
+    {
+      "Text": "the executives who took advantage of him\" (руководители/начальники, которые воспользовались им — конкретно деловые/корпоративные фигуры, как Бейшор) переведено как \"лживые представители власти\" (lying authority figures) — смена категории с деловых руководителей на представителей власти/чиновников, плюс добавлено \"лживые\" (lying), которого нет в исходном слове \"executives\".",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4856,
+          "Length": 40
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 5215,
+          "Length": 27
+        }
+      ]
+    },
+    {
+      "Text": "\"a trail of blood flowing\" (струящийся, непрерывный кровавый след) переведено как \"кровавые следы\" (bloody tracks, подразумевает дискретные следы/отпечатки) — небольшой сдвиг образа от текущей крови к отдельным следам.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5154,
+          "Length": 24
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 5498,
+          "Length": 14
+        }
+      ]
+    },
+    {
+      "Text": "Prison Warden переводится то как начальник, то как тюремщик.",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2174,
+          "Length": 8
+        },
+        {
+          "StartIndex": 4170,
+          "Length": 8
+        },
+        {
+          "StartIndex": 4529,
+          "Length": 8
+        }
+      ]
+    }
+  ],
+  "9AF6836745E59CEBDD8EF29CF1C0835F": [
+    {
+      "Text": "слово slack-jawed можно перевести как с отвисшей челюстью, что отсылает на ужасное состояние челюсти Калеба Куинна. Можно было бы сделать акцент на угрозе доломать челюсть, но это уже отсебятина, хотя относится к характеру Генри Бейшора.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 220,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 215,
+          "Length": 10
+        }
+      ]
+    },
+    {
+      "Text": "Опущено, что гарпун находился в животе",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 88,
+          "Length": 21
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "D0B8D76449DB8360FC3DBDB9ECB07A3F": [
+    {
+      "Text": "Генри Бейшор умолял о пощаде за несколько часов до своей смерти. Это не значит, что он молил о пощаде несколько часов.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 40,
+          "Length": 59
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 40,
+          "Length": 58
+        }
+      ]
+    }
+  ],
+  "E22586584DCEF1C58FE244944254F5AD": [
+    {
+      "Text": "Перевод не берёт во внимание образованность Калеба, переводя \"stimulates the nervous system\" как \"неплохо бодрит\"",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 85,
+          "Length": 29
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 99,
+          "Length": 14
+        }
+      ]
+    }
+  ],
+  "1CF8EB7F46C7D7A94753559FD18743B9": [
+    {
+      "Text": "Времена != Frontier - рубеж",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 184,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 176,
+          "Length": 7
+        }
+      ]
+    }
+  ],
+  "560F4F7943AE6CBDA24BD8B810AD383E": [
+    {
+      "Text": "Хелширская банда прижигала клеймо к сварливой \"награде\".",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 142,
+          "Length": 20
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 88,
+          "Length": 26
+        }
+      ]
+    },
+    {
+      "Text": "Outlaw переводится, как преступник, человек вне закона. Не обязательно головорез",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 394,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 373,
+          "Length": 10
+        }
+      ]
+    }
+  ],
+  "F6A954B4459D6C561CE4379FCB1353A6": [
+    {
+      "Text": "Опущено let it loose - выстрелил из ружья в того самого преступника.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 91,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "5C24A81D42CF3B2D65CBABAB84CFF8B4": [
+    {
+      "Text": "Полупрозрачная != Glass-like. Она была полностью похожа на стекло, а не только на половину",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 14
+        }
+      ]
+    }
+  ],
+  "0977B9B34FD48FC03BD59C8A2CFD9182": [
+    {
+      "Text": "Правильный перевод цитаты: \"Ты позвал смерть к себе домой в момент, когда решил предать меня\"",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 194,
+          "Length": 60
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 180,
+          "Length": 55
+        }
+      ]
+    }
+  ],
+  "6762211440FA7CDFE652E8830FBECCDF": [
+    {
+      "Text": "это Значок Маршала, а не Шерифа, ПИПЕЦ БРО",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 7,
+          "Length": 6
+        }
+      ]
+    }
+  ],
+  "7FD83D1A4DC794E3863EAF935FFB1EEE": [
+    {
+      "Text": "из перевода можно сделать вывод, что законник всё делал правильно и помогал жертве, а Хеллширская банда специально его убила. Но в жертва в оригинале - это награда за голову. КАМОООН",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 111,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 110,
+          "Length": 5
+        }
+      ]
+    }
+  ],
+  "B3769E4C4646B836001C6781B2FB6EE1": [
+    {
+      "Text": "Опущено specialized",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 39,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено desert",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 116,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "F73F6AB7483E2A733FF558B5FCCFDE6C": [
+    {
+      "Text": "Железный != Steel",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 38,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 49,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "Справочник != Guard Book",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 325,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 313,
+          "Length": 10
+        }
+      ]
+    },
+    {
+      "Text": "Железный != Steel",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 262,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 272,
+          "Length": 8
+        }
+      ]
+    }
+  ],
+  "6B9C081E46005AA8A5B0039A3139E4C0": [
+    {
+      "Text": "мне не нравится перевод, вот лучший вариант: несмотря на ненадёжность цепи, она имеет сентиментальную ценность.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 59,
+          "Length": 56
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 88,
+          "Length": 40
+        }
+      ]
+    }
+  ],
+  "50DD23EF420E7375F694C4AC76BDF92B": [
+    {
+      "Text": "Мрачного != Morbid - больного, психически нездорового, ну или просто ужасного",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 85,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 9,
+          "Length": 8
+        }
+      ]
+    }
+  ],
+  "37E599D3425AAAF8AF556A8CD916B421": [
+    {
+      "Text": "Смесь != Tincture. Это настойка",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 5
+        }
+      ]
+    }
+  ],
+  "CE5DFAA54AAD64EE7DF4FFA1B09403DE": [
+    {
+      "Text": "Опущено kept",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 57,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Оригинал - прошедшее время, Перевод: настоящее время",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 68,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 55,
+          "Length": 11
+        }
+      ]
+    }
+  ],
+  "C5C2A9C2493652E66B90A887B81F94BC": [
+    {
+      "Text": "Оригинал: яростное воспоминание внутри Калеба. Перевод: ярость и воспоминания",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 37,
+          "Length": 28
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 44,
+          "Length": 22
+        }
+      ]
+    }
+  ],
+  "PerkDescriptionsNamespace.PERK_Gearhead_FlavorText_DESC": [
+    {
+      "Text": "Prison warden != Тюремный охранник",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 66,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 65,
+          "Length": 17
+        }
+      ]
+    }
+  ],
+  "97C80D074B5D42595CF746ABE0AAE1CC": [
+    {
+      "Text": "\"Had little to show for it\" — означает «ему нечем было похвастаться/у него не было достижений», а не «не выделялся из толпы сверстников».",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 28,
+          "Length": 29
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 34,
+          "Length": 41
+        }
+      ]
+    },
+    {
+      "Text": "\"light up a room\" превратилось в \"умел вдохновлять людей\" — смысл смещён в сторону харизмы-лидера, а не просто обаяния в компании.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 218,
+          "Length": 15
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 219,
+          "Length": 17
+        }
+      ]
+    },
+    {
+      "Text": "Оригинал: человек с потенциалом. Перевод: некоторым обаянием. В целом предложение соответствует истории Легиона в целом, но не соответствует истории",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 188,
+          "Length": 18
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 193,
+          "Length": 18
+        }
+      ]
+    },
+    {
+      "Text": "Опущено no matter how many times",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 351,
+          "Length": 24
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "В оригинале это ОПЕКУНЫ перемещали его («they'd kept moving him») — то есть он не сам менял семьи. В переводе субъект действия — сам Фрэнк («менял»). Смещение агентности.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 429,
+          "Length": 22
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 422,
+          "Length": 5
+        }
+      ]
+    },
+    {
+      "Text": "\"Picked him up from the adoption center\" ≠ \"усыновил\". Усыновление (adoption) — это юридически другое понятие, и далее по тексту Клайв называется \"foster dad\" (приемный отец), не родным/усыновившим. Кроме того, упоминание \"adoption center\" пропало.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 561,
+          "Length": 42
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 516,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "В оригинале говорится, что Клайв был последним приёмным отцом, который был в жизни Фрэнка. В переводе этот момент опущен и переведено просто как \"новый\"",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 529,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 525,
+          "Length": 5
+        }
+      ]
+    },
+    {
+      "Text": "Оригинал: бунгало - одноэтажный домик с обширной верандой. Перевод: домик",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 669,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 625,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Опущено remote - отдалённый или поселок городского типа, но не критично",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 856,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "\"He caught the attention of a girl\" — это ОНА обратила внимание на НЕГО (он привлёк её внимание). В переводе наоборот: «он заметил её». Действующее лицо перепутано.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1041,
+          "Length": 43
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 992,
+          "Length": 29
+        }
+      ]
+    },
+    {
+      "Text": "\"Impulsive\" (импульсивный, действующий не думая) перевели как \"вспыльчивый\" (быстро злящийся, агрессивный) — разные качества характера.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1346,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1344,
+          "Length": 11
+        }
+      ]
+    },
+    {
+      "Text": "В оригинале Фрэнк видит в их неопытности шанс вылепить из неё «нечто мощное» (т.е. сформировать, направить). В переводе это упрощено до «легко манипулировать» — общая идея похожа, но конкретная метафора потеряна.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1646,
+          "Length": 57
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1609,
+          "Length": 39
+        }
+      ]
+    },
+    {
+      "Text": "В оригинале именно Фрэнк ОРГАНИЗОВЫВАЛ («lined up») эти ночи разврата — он инициатор. В переводе подаётся так, будто юнцы сами развлекались, а Фрэнк просто наблюдал/тестировал со стороны. Это меняет степень его контроля над ситуацией.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1705,
+          "Length": 11
+        },
+        {
+          "StartIndex": 1751,
+          "Length": 20
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1664,
+          "Length": 4
+        },
+        {
+          "StartIndex": 1697,
+          "Length": 55
+        }
+      ]
+    },
+    {
+      "Text": "развлекаться != debauchery - разврат, распущенность, пьянство, оргия, кутеж и так далее",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1727,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1669,
+          "Length": 12
+        }
+      ]
+    },
+    {
+      "Text": "\"Evening\" (вечер) переведено как \"ночью\" (ночь).",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1957,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1970,
+          "Length": 5
+        }
+      ]
+    },
+    {
+      "Text": "\"Dared\" (подбил/бросил вызов) смягчено до \"предложил\" — теряется оттенок провокации/вызова.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1972,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1982,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "в оригинале — она подошла близко к нему, в переводе — он её заметил",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2185,
+          "Length": 16
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2209,
+          "Length": 21
+        }
+      ]
+    },
+    {
+      "Text": "\"A dark impulse\" (тёмный порыв/импульс) усилено до \"темная ярость\" (ярость — более сильная эмоция, чем impulse).",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2232,
+          "Length": 28
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2268,
+          "Length": 20
+        }
+      ]
+    },
+    {
+      "Text": "В оригинале просто \"cleaner\" (уборщик), без указания возраста. В переводе появилось \"старику\" (старику в спину) — добавлена информация, которой нет в оригинале.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2349,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2346,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Опущено knife in hand - с ножом в руках",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2283,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "\"Shock\" (шок) → \"изумление\" (изумление, удивление) — более мягкая эмоция, чем в оригинале.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2398,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2397,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "Опущено at her",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2566,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "В оригинале нет указания, что Джули это произнесла вслух (\"сказала\"), и нет конкретно слова \"кровь\" — это домысел переводчика (\"повязаны кровью\" вместо нейтрального \"теперь они все в этом замешаны вместе\").",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2714,
+          "Length": 34
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2691,
+          "Length": 41
+        }
+      ]
+    },
+    {
+      "Text": "Опущено deep",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2845,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "В оригинале \"The Fog\" с большой буквы — это собственное название (в лоре DBD «Туман» — конкретная сущность/измерение Entity), а не просто погодное явление.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3193,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3197,
+          "Length": 5
+        }
+      ]
+    },
+    {
+      "Text": "\"Did not return home that night\" (не вернулись домой в ту ночь — первая реакция родителей) превратилось в \"так и не вернулись домой\" (вообще никогда не вернулись) — теряется временная привязка \"в ту ночь\", меняется оттенок: в оригинале это первоначальная мысль родителей сразу после исчезновения, а в переводе звучит как окончательный факт.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3626,
+          "Length": 30
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3574,
+          "Length": 24
+        }
+      ]
+    }
+  ],
+  "25AE4A704E5B60ECC39DBDA32C1AA608": [
+    {
+      "Text": "почему было не перевести лучшие друзья навсегда",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "2DEBFCE844B53D845288598B58D74923": [
+    {
+      "Text": "Значок не безликий, а изуродованный или испорченный, уменьшенный перевод",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 8
+        }
+      ]
+    }
+  ],
+  "8363D7C246B4D94ECD66F084ECAA563B": [
+    {
+      "Text": "Значок не безликий, а изуродованный или испорченный",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 50,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 8,
+          "Length": 8
+        }
+      ]
+    }
+  ],
+  "FD178D80418C2F1DFE171A8669498122": [
+    {
+      "Text": "Опущено deeply",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 15,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "915C2CC846CF113E5E235496AFAAB7E5": [
+    {
+      "Text": "\"grime\" — это грязь/копоть в целом, не именно \"сажа\" (soot).",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 51,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 44,
+          "Length": 4
+        }
+      ]
+    }
+  ],
+  "5CBD67484058F2A79487368B98D05085": [
+    {
+      "Text": "Аритмичные композиции != Shreds. Траст ми бро он зис",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 20,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 26,
+          "Length": 21
+        }
+      ]
+    },
+    {
+      "Text": "Опущено from another world",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 51,
+          "Length": 18
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "34F65B8B4CBD7CEC530620988834E943": [
+    {
+      "Text": "треки не для тех, чья жизнь дерьмо, а когда жизнь дерьмо",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 47,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 39,
+          "Length": 3
+        }
+      ]
+    }
+  ],
+  "3B5DAB824DC9A5C94D3A73AD9A40E2CC": [
+    {
+      "Text": "не Джо, а Джоуи",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 8,
+          "Length": 3
+        }
+      ]
+    }
+  ],
+  "ACA2D1AF496E801F8D15AFAD4D9B02F4": [
+    {
+      "Text": "Это не рисунок на стене, а говно ебаное. Это набросок фрески или мурала",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 16
+        }
+      ]
+    }
+  ],
+  "4F8FA2DC4564F3401F78AD84EE8D0D7A": [
+    {
+      "Text": "Опущено rough - первый, неокончательный",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Оригинал: набросок Легиона. Перевод: набросок оДнОгО иЗ бОйЦоВ ЛеГиОнА",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 15,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 38,
+          "Length": 24
+        }
+      ]
+    }
+  ],
+  "45115CF34D14D7785455A0AC3830E622": [
+    {
+      "Text": "Understated в отношении одежды - сдержанная, но со вкусом. В переводе же откуда-то появился протест, что является вообще противоположностью",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 83,
+          "Length": 18
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 99,
+          "Length": 14
+        }
+      ]
+    }
+  ],
+  "E208F04E43038F139AE0698EB3E5DE6E": [
+    {
+      "Text": "Опущено hash marks - буквально хэштегами",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 37,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "1257859F43FD2E131FFC5D96D1196D2E": [
+    {
+      "Text": "Оригинал: значок, использованный в качестве сарказма. Перевод: выглядит издевательски",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 40,
+          "Length": 31
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 31,
+          "Length": 23
+        }
+      ]
+    }
+  ],
+  "445F1EEA4C41B2FA0384F0862C27294A": [
+    {
+      "Text": "Опущено printed - распечатанная",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Ушибы != Lesions - поражения, повреждения и так далее. В статье о колотых ранах о ушибах бы не рассуждали",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 85,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 80,
+          "Length": 6
+        }
+      ]
+    }
+  ],
+  "64C540214B7AB531C4C32487D7D2364E": [
+    {
+      "Text": "\"Unrestrained ambition\" (безудержные/неконтролируемые амбиции) упрощено до простого \"амбициозного\" — теряется важный оттенок неконтролируемости, который задаёт тон всей истории персонажа.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 121,
+          "Length": 21
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 120,
+          "Length": 12
+        }
+      ]
+    },
+    {
+      "Text": "\"Social graces\" (социальное обаяние/умение нравиться людям) заменено на \"признание\" — близко, но не то же самое понятие.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 279,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 288,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "Бродя != Exploring. Тальбот из-за своего любопытства изучал эти бескрайние поля",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 348,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 377,
+          "Length": 5
+        }
+      ]
+    },
+    {
+      "Text": "\"Purging any food\" — это рвота/тошнота (он не мог удержать еду в желудке), а не \"потеря аппетита\". Это разные симптомы, искажена медицинская деталь.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 557,
+          "Length": 41
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 597,
+          "Length": 25
+        }
+      ]
+    },
+    {
+      "Text": "В оригинале говорится о ПАРАЛЛЕЛЬНОМ РАЗВИТИИ амбиций и сомнительных методов (\"developed as quickly as\"). В переводе это превращено в \"понимание\" — то есть процесс роста заменён на одномоментное осознание.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 776,
+          "Length": 36
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 827,
+          "Length": 35
+        }
+      ]
+    },
+    {
+      "Text": "Конкретное число \"seven years\" (семь лет) заменено на размытое \"несколько лет\" — потеря точной фактической детали лора.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1021,
+          "Length": 18
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1147,
+          "Length": 19
+        }
+      ]
+    },
+    {
+      "Text": "\"Exaggerated\" (преувеличенные) заменено на \"обычные\" (ordinary) — меняется оттенок: преувеличенные истории подразумевают реальную основу с искажением, а \"обычные байки\" звучит более пренебрежительно-вымышленно.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1778,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2043,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "Слетелись != Feasted - пировали, лакомились",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2625,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2982,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "\"The school's knowledge\" (знания именно школы/ордена) заменено на общее \"новых знаний\" — теряется конкретная привязка к знаниям школы. Также advance != обретение, это улучшение",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3519,
+          "Length": 30
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4032,
+          "Length": 22
+        }
+      ]
+    },
+    {
+      "Text": "Until his recovery was complete\" подразумевает ограниченный по времени период (он согласился помогать ТОЛЬКО до выздоровления). \"Во время выздоровления\" не несёт этого временного ограничения — звучит как \"пока выздоравливал\", без чёткой границы окончания.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3569,
+          "Length": 31
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4087,
+          "Length": 22
+        }
+      ]
+    },
+    {
+      "Text": "Опущено what the monk's called - монахи называли это",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3632,
+          "Length": 22
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Фраза \"но Тальбота было не провести\" отсутствует в оригинале на этом месте — добавлена переводчиком. В оригинале там просто when spotted. Однако учитывая интеллект Тальбота, то это строчка подходит его истории",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4283,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4834,
+          "Length": 28
+        }
+      ]
+    },
+    {
+      "Text": "\"Cracked\" (потрескавшийся) заменено на \"старый\" (old) — разные характеристики.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4419,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4994,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Опущено \"through plaster\" (через штукатурку).",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4476,
+          "Length": 15
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено место укуса into his arm, которые являются иглами. Из-за того, что это опущено, следующее предложение является менее говорящим",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4663,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Конец предложения \"that soon fell into half-slumber\" (которые скоро снова погружались в полудрему) полностью отсутствует в переводе.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5063,
+          "Length": 32
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "В оригинале он НЕ УСПЕЛ заметить фигуру (его застали врасплох) — в переводе \"едва успел заметить\" означает, что он ВСЁ-ТАКИ ЗАМЕТИЛ её, хоть и в последний момент.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5097,
+          "Length": 17
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 5679,
+          "Length": 19
+        }
+      ]
+    },
+    {
+      "Text": "\"Behind him\" (за его спиной) заменено на \"перед ним\" (перед ним) — пространственное расположение перевёрнуто.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5139,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 5708,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "«Голос» ≠ «whisper»: whisper = шёпот, а не «голос».",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5429,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 6046,
+          "Length": 5
+        }
+      ]
+    }
+  ],
+  "077A348F4FFAE009552E70AF434D928A": [
+    {
+      "Text": "Учитывая, что все скины переводятся как Моровые, то этот аддон должен называться, как Моровая Ворона. Однако изуродованная тоже подходит",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 13
+        }
+      ]
+    }
+  ],
+  "15EE5F9E48DB8F18CC6B919858AB5B72": [
+    {
+      "Text": "Тальбот ещё не стал Мором, поэтому ворона изуродована моровой сывороткой",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 49,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 41,
+          "Length": 4
+        }
+      ]
+    }
+  ],
+  "DFE072A0491C35F13933EAB868CAF203": [
+    {
+      "Text": "Такая же история, что и с вороной",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 13
+        }
+      ]
+    }
+  ],
+  "D2C3F11547A34D1DA9896D8D7A3CF986": [
+    {
+      "Text": "Опущено visceral",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 31,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "1B76FB8340EACD0F51829DAF9A5208D5": [
+    {
+      "Text": "Glass-like - похожая на стекло, а не полупрозрачная",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 14
+        }
+      ]
+    }
+  ],
+  "AB724F47492041F3875696A79748D713": [
+    {
+      "Text": "Опущено a mixture - смесью",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 58,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "8FEE832C490AE3CC4D5D72AAAA203B1D": [
+    {
+      "Text": "Перевод создаёт впечатление, что этот текст из Лондонской Медицинской Школы, а не из школы тайных знаний. Также Unlabeled должен переводится, как без маркировки, а не неизвестный. Также какой учебник, когда речь идёт про текст",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 193,
+          "Length": 29
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 173,
+          "Length": 42
+        }
+      ]
+    },
+    {
+      "Text": "Бывшего != Recently deceased",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 47,
+          "Length": 17
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 33,
+          "Length": 7
+        }
+      ]
+    }
+  ],
+  "24E3D0C8499E6F1E72C030A54050204D": [
+    {
+      "Text": "Стене != Walls",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 87,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 69,
+          "Length": 5
+        }
+      ]
+    }
+  ],
+  "983A9D9B442CAC5BC58A7488B195D604": [
+    {
+      "Text": "\"Shock and sorrow\" (шок и горе) сужено до одного \"отчаяние\".",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 180,
+          "Length": 16
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 213,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "В описании перка Художницы слово servitude было оправдано переводить, как рабство. Тут же слово служение подходит, однако всё равно слово servitude скорее несёт негативный контекст",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 287,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 256,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "Опущено ceremonial, хотя из контекста понятно",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 366,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "потеря слова \"sign\" (знак) — в переводе просьба обобщена до \"указать цель\", без упоминания именно знака. Учитывая, что далее в тексте знак (статуя) играет важную роль (\"Это был знак, которого она так долго ждала\"), здесь стоило бы сохранить слово \"знак\" для связности.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 425,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "\"High-ranking priests\" — в оригинале \"priests\" без указания пола (или, по умолчанию, мужской/нейтральный), но далее по тексту (и в названии истории — \"верховной жрицы\") логично, что речь о женских жрицах. Тут перевод \"жрицам\" — посмотрим далее: в оригинале также позже \"the priests\" — упоминается множество раз, и везде должно быть согласовано. Здесь сложно сказать наверняка ошибка ли это, так как могут быть и жрицы.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 501,
+          "Length": 20
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 436,
+          "Length": 13
+        }
+      ]
+    },
+    {
+      "Text": "\"Thick black fumes\" (густой ЧЕРНЫЙ дым) — в переводе \"жирные клубы дыма\" — потерян цвет \"черный\", который позже важен (в конце истории снова упоминается \"черные испарения\" — здесь должна быть та же характеристика для связности образа).",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 657,
+          "Length": 17
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 586,
+          "Length": 17
+        }
+      ]
+    },
+    {
+      "Text": "\"towering\" (высокие/возвышающиеся) пропущено при описании колонн.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 697,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Оригинал: единственное число. Перевод: множественное число",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 632,
+          "Length": 14
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 544,
+          "Length": 18
+        }
+      ]
+    },
+    {
+      "Text": "Опущено the priests",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 986,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "\"Had resurfaced\" (чума ВОЗОБНОВИЛАСЬ/вспыхнула СНОВА) — в переводе просто \"свирепствовала\", без указания, что это повторная вспышка. Теряется оттенок, что чума уже была ранее.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1163,
+          "Length": 14
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено high",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1116,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "\"Having assisted many\" (помогавшая во многих) усилено до \"присутствовала на КАЖДОЙ церемонии\" — преувеличение.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1334,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1201,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "Целое предложение оригинала отсутствует в русском тексте (хотя слово \"novice\" было перенесено в предыдущее предложение как \"неофитка\" — частичная компенсация, но сама фраза о \"нарастающей панике, которую нужно было сдержать\" полностью утеряна).",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1396,
+          "Length": 60
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "\"Visited\" (посетила) заменено на \"бродила\" (wandered) — разный оттенок целенаправленности действия.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1500,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1300,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Опущено the priests's",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1512,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено hidden - секретный",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1654,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено sliding through the gap - протиснувшись в отверствие",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1609,
+          "Length": 23
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Оригинал: прихожаны в зале преклонили колено. Адирис взяла кинжал, её пальцы с рубиновыми кольцами обхватили клинок, как когти. Внезапный показ роскоши поразил прихожан, которые были уже поражены её юностью и красотой. Перевод: прихожаны преклонили колена, когда увидели юную и прекрасную жрицу. Адирис взяла кинжал. Её пальцы хищно сжали клинок и удивлённые прихожане увидели на них рубиновые кольца.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1856,
+          "Length": 319
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1592,
+          "Length": 274
+        }
+      ]
+    },
+    {
+      "Text": "Затянула песнь != Reciting the epic. Адирис начала рассказывать о эпосе, а не петь песенки",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2190,
+          "Length": 17
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1875,
+          "Length": 14
+        }
+      ]
+    },
+    {
+      "Text": "\"A silence fell\" (наступила тишина) заменено на \"оправившись от потрясения\" — это не синонимично: в оригинале толпа ЗАМОЛКЛА, в переводе — толпа УЖЕ ПРИШЛА В СЕБЯ от потрясения. Разные стадии эмоциональной реакции.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2514,
+          "Length": 19
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2211,
+          "Length": 25
+        }
+      ]
+    },
+    {
+      "Text": "\"As quickly as the disease\" (так же быстро, КАК болезнь) превращено в \"быстрее болезни\" (faster THAN disease) — это сравнение другой степени, логическая ошибка в переводе сравнительной конструкции.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2667,
+          "Length": 25
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2360,
+          "Length": 15
+        }
+      ]
+    },
+    {
+      "Text": "Appease the gods\" (УМИЛОСТИВИТЬ богов) переведено как \"воззвать к богам\" (призвать/обратиться) — разные действия: умилостивление подразумевает попытку искупления, а \"воззвать\" — просто обращение/просьбу.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3246,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2898,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "Также \"banished herself from the city\" (изгнала себя из города) смягчено до \"удалилась в отшельничество\" — теряется оттенок изгнания/самонаказания.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3271,
+          "Length": 30
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2923,
+          "Length": 26
+        }
+      ]
+    },
+    {
+      "Text": "\"Urashtu\" переведено как \"Урарту\" — это разные названия. Urashtu — это ассирийское название древнего государства, которое в русской традиции обычно именно и называется \"Урарту\", так что тут перевод фактически верен исторически, но стоит иметь в виду, что в оригинале используется специфическая форма \"Urashtu\", а не общеизвестная \"Urartu\". Скорее всего, это осознанный авторский выбор именно формы \"Urashtu\" (более редкое название), и можно было сохранить транслитерацию \"Урашту\" для аутентичности, но это не грубая ошибка, а спорное решение.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3384,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3032,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "\"Followers\" (последователи/спутники) переведено как \"подданных\" (subjects/vassals) — это слово подразумевает формальную иерархическую власть (подданные правителя), что не совпадает с понятием \"followers\" в религиозном контексте (приверженцы/последователи), используемым везде в остальном тексте. Несогласованность терминологии.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3703,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3377,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "\"Told tales of her return\" (рассказывали ИСТОРИИ/легенды о её возвращении — то есть прошедшее действие, легенды) заменено на \"предсказывали ее возвращение\" (предсказывали — то есть пророчили будущее событие). Смысл смещён: легенды о возвращении ≠ предсказания будущего возвращения.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3902,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3585,
+          "Length": 13
+        }
+      ]
+    }
+  ],
+  "EA9B838E4A492F20BF6849AFFDEF23DE": [
+    {
+      "Text": "Опущено when consumed, но не критично",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 50,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "248CA68A47003BA42CFC41BB04504103": [
+    {
+      "Text": "Опущено is consumed",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 62,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "45C0ED7745EACA7FEAC15889204602BE": [
+    {
+      "Text": "В виде статуэтки Чумы != with the effigy of the plague. Должно переводится как с изображением чумы",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 63,
+          "Length": 25
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 37,
+          "Length": 21
+        }
+      ]
+    }
+  ],
+  "EEF263274779721345E6CEB192EC3231": [
+    {
+      "Text": "Песчаник != Limestone - Известняк",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 10,
+          "Length": 9
+        }
+      ]
+    }
+  ],
+  "3D887526479B0D3B79639E99D820B5DF": [
+    {
+      "Text": "Добавлено часто",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 28,
+          "Length": 5
+        }
+      ]
+    }
+  ],
+  "D5CC8C604AA1E9C0C76E7CA6AEF6230F": [
+    {
+      "Text": "Tincture != Микстура. Это настойка",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 7,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 8,
+          "Length": 8
+        }
+      ]
+    }
+  ],
+  "73A12DBD44D144EF95F55FBEE1BC8DEB": [
+    {
+      "Text": "которая пахнет != than permeates the air with an acute aroma.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 25,
+          "Length": 42
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 24,
+          "Length": 14
+        }
+      ]
+    },
+    {
+      "Text": "Опущено directrly",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 98,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "66FE13624121600B1219A58BCB94FB28": [
+    {
+      "Text": "Опущено perfectly - идеально",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "77170C5840EC54472448BAA81CC09540": [
+    {
+      "Text": "Опущено, что амулет носили на шее",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 59,
+          "Length": 33
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "86D7D9834EF180263E4ED0BD5125B5B5": [
+    {
+      "Text": "Опущено half",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 20,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Применяется в качестве рвотного != Consumed to rapidly induce vomiting. При поглощении учащает рвоту",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 73,
+          "Length": 35
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 48,
+          "Length": 31
+        }
+      ]
+    }
+  ],
+  "69311C9544E7A1E251DDAA8378700D66": [
+    {
+      "Text": "Ритуале != Incantation. Это осквернённое заклинание",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 82,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 98,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Повествуют об != Used originally",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 94,
+          "Length": 15
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 71,
+          "Length": 13
+        }
+      ]
+    }
+  ],
+  "4D866C024D3A77816E68A6ABCC74DE7B": [
+    {
+      "Text": "Оригинал: изменяет шансы выживших на выживание. Перевод: мешает выжившим",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 55,
+          "Length": 32
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 52,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "Карать != Curse - проклинать",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 437,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 404,
+          "Length": 6
+        }
+      ]
+    }
+  ],
+  "E6C018D746E272627E389F8CD89AC078": [
+    {
+      "Text": "Приступ != Whirlwind - вихрь",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 37,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 33,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Заблудший != Defiant non-believer - дерзкий, вызываюший неверующий",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 622,
+          "Length": 20
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 563,
+          "Length": 10
+        }
+      ]
+    }
+  ],
+  "803B232744B813EC12C286B7AAFFD436": [
+    {
+      "Text": "И они != Who, это уточнение, типа ужас наполняет сердца только тех неверных, КОТОРЫЕ рыдают у ног павших",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 254,
+          "Length": 3
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 217,
+          "Length": 5
+        }
+      ]
+    },
+    {
+      "Text": "Лишний пробел",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 310,
+          "Length": 1
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "PerkDescriptionsNamespace.PERK_InfectiousFright_FlavorText_DESC": [
+    {
+      "Text": "Такая же проблема, что в оригинале",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "PerkDescriptionsNamespace.PERK_CorruptIntervention_FlavorText_DESC": [
+    {
+      "Text": "Такая же проблема, что в оригинале",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "PerkDescriptionsNamespace.PERK_DarkDevotion_FlavorText_DESC": [
+    {
+      "Text": "Такая же проблема, что в оригинале",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
   ]
 }
