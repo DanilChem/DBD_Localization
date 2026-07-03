@@ -9639,22 +9639,6 @@
         }
       ],
       "RussianHighlights": []
-    },
-    {
-      "Text": "«aiming the Chase Redirect» — это «при наведении/прицеливании перенаправления погони», а не «при смене цели». Нужно: «При прицеливании перенаправления погони...».",
-      "IsEditing": false,
-      "EnglishHighlights": [
-        {
-          "StartIndex": 76,
-          "Length": 25
-        }
-      ],
-      "RussianHighlights": [
-        {
-          "StartIndex": 68,
-          "Length": 17
-        }
-      ]
     }
   ],
   "4BB676904EA069009DADB8BE387B7625": [
