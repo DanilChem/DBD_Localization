@@ -699,11 +699,11 @@
                     <TextBlock Text=" | Отображено: " Foreground="{StaticResource ForegroundSecondary}" Margin="10,0,0,0"/>
                     <TextBlock Text="{Binding DisplayedCount}" Foreground="{StaticResource ForegroundPrimary}" FontWeight="Bold"/>
                     <TextBlock Text=" | Без перевода: " Foreground="{StaticResource ForegroundSecondary}" Margin="10,0,0,0"/>
-                    <TextBlock Text="{Binding MissingCount}" Foreground="{StaticResource ForegroundSecondary}" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding MissingCount}" Foreground="{StaticResource ForegroundPrimary}" FontWeight="Bold"/>
                     <TextBlock Text=" | Завершено: " Foreground="{StaticResource ForegroundSecondary}" Margin="10,0,0,0"/>
-                    <TextBlock Text="{Binding CompletedCount}" Foreground="{StaticResource ForegroundSecondary}" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding CompletedCount}" Foreground="{StaticResource ForegroundPrimary}" FontWeight="Bold"/>
                     <TextBlock Text=" | Замечаний: " Foreground="{StaticResource ForegroundSecondary}" Margin="10,0,0,0"/>
-                    <TextBlock Text="{Binding TotalErrorCount}" Foreground="{StaticResource ForegroundSecondary}" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding TotalErrorCount}" Foreground="{StaticResource ForegroundPrimary}" FontWeight="Bold"/>
                 </StackPanel>
             </Border>
         </Grid>
