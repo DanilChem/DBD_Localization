@@ -24006,6 +24006,44 @@
           "Length": 9
         }
       ]
+    },
+    {
+      "Text": "Добавлено на складе",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 385,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "Будучи изрядно навеселе ≠ While being high - Пока был под кайфом",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 408,
+          "Length": 16
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 472,
+          "Length": 23
+        }
+      ]
+    },
+    {
+      "Text": "Опущено he screwed up",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 384,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": []
     }
   ]
 }
