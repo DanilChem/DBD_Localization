@@ -24750,5 +24750,334 @@
       "EnglishHighlights": [],
       "RussianHighlights": []
     }
+  ],
+  "4DAD7AF6414D4ABB254D6FA945F6A9E5": [
+    {
+      "Text": "Перебирать != Modified - Модифицировала",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 481,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 451,
+          "Length": 10
+        }
+      ]
+    },
+    {
+      "Text": "Опущено so that she could compete - для того, чтобы она могла играть на равных/могла сравняться",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 501,
+          "Length": 25
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Учитывая то, что в прошлом предложении шла речь о хатимаки - повязке на удачу, то переводить No luck for them - Но тщетно, довольно странно",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 726,
+          "Length": 16
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 706,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "Стоило бы вместо гонщицы использовать мотогонщицу",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 919,
+          "Length": 16
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 914,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "Добавлено ожидаемой",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 930,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "В оригинале отец сказал, что ей больше не рады в их доме. Перевод: в итоге её выгнали из дома",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1061,
+          "Length": 48
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1031,
+          "Length": 26
+        }
+      ]
+    },
+    {
+      "Text": "Опущено low grade - низкооплачиваемая",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1257,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено where she won - где она побеждала и зарабатывала...",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1423,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено quick reflexes",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1498,
+          "Length": 14
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено from her apartment",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1774,
+          "Length": 18
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено in the near future",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1942,
+          "Length": 18
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущен село Shirakawa - Сиракава",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2502,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Отправили != Rushed - срочно доставили",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2724,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2724,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "Оригинал: реабилитация была трудной. Перевод: долго восстанавливалась",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2935,
+          "Length": 28
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2929,
+          "Length": 23
+        }
+      ]
+    },
+    {
+      "Text": "Лучше бы снова перевели, как хатимаки",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3121,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3133,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Вскоре создали организацию != Became known as. У них всего лишь появилось название, никакую организацию они не создавали",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3294,
+          "Length": 16
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3336,
+          "Length": 26
+        }
+      ]
+    },
+    {
+      "Text": "Опущена аббревиатура",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3939,
+          "Length": 3
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Оригинал: Юи лидировала в гонке. Перевод: Юи гнала, опережая соперников",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3975,
+          "Length": 24
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4143,
+          "Length": 29
+        }
+      ]
+    },
+    {
+      "Text": "Оригинал: въехала, попала. Перевод: окружил",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4010,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4187,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Опущено that seemed to",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4035,
+          "Length": 14
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "E95DE49E48F3F85BD82863B0A76B10BB": [
+    {
+      "Text": "Опущено necessary - необходимыми",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 10,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "D107C4D24E49632A0465D5BC911D214D": [
+    {
+      "Text": "Изо всех сил != With everything I've got",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 264,
+          "Length": 24
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 266,
+          "Length": 12
+        }
+      ]
+    }
+  ],
+  "3E5B322749F178435AE2BF9E76C01C7A": [
+    {
+      "Text": "Оригинал: вдохновляете их преодолеть любую трудность. Перевод: вместе с ним стараетесь выбраться из передряги",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 51,
+          "Length": 40
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 59,
+          "Length": 47
+        }
+      ]
+    }
+  ],
+  "PerkDescriptionsNamespace.PERK_AnyMeansNecessary_FlavorText_DESC": [
+    {
+      "Text": "Та же ошибка, что и в оригинале",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
   ]
 }
