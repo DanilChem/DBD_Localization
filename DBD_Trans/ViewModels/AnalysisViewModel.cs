@@ -13,12 +13,21 @@ using System.Windows.Media;
 
 namespace DBD_Trans.ViewModels
 {
+    public class SentenceInfo
+    {
+        public int StartIndex { get; set; }
+        public int Length { get; set; }
+        public string Text { get; set; }
+        public bool IsMergedWithNext { get; set; }
+    }
+
     public class AnalysisViewModel : ObservableObject
     {
         private readonly IErrorStorage _errorStorage;
         private readonly IAppSettings _appSettings;
         private readonly string _key;
         private readonly IStatusStorage _statusStorage;
+        private readonly IMergeStorage _mergeStorage; // <-- НОВОЕ
         private readonly LocalizationEntry _entry;
 
         public bool IsCompleted
@@ -37,22 +46,21 @@ namespace DBD_Trans.ViewModels
         }
 
         public bool HasErrors => Errors.Count > 0;
-
         public Brush CompletedButtonBrush
         {
             get
             {
-                if (IsCompleted && HasErrors)
-                    return new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF750000"));
-                if (IsCompleted && !HasErrors)
-                    return new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF004A7C"));
+                if (IsCompleted && HasErrors) return new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF750000"));
+                if (IsCompleted && !HasErrors) return new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF004A7C"));
                 return new SolidColorBrush(Colors.Transparent);
             }
         }
 
         public ICommand ToggleCompletedCommand { get; }
-
-        public IEnumerable<ItemStatus> StatusOptions { get; } = Enum.GetValues(typeof(ItemStatus)).Cast<ItemStatus>();
+        public ICommand ToggleSplitCommand { get; }
+        public ICommand MergeWithPreviousCommand { get; }
+        public ICommand MergeWithNextCommand { get; }
+        public ICommand SplitSentenceCommand { get; }
 
         private static readonly SolidColorBrush TemporaryHighlightBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFCA5100"));
         private static readonly SolidColorBrush PermanentHighlightBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#33CA5100"));
@@ -61,8 +69,10 @@ namespace DBD_Trans.ViewModels
 
         public string EnglishText { get; }
         public string RussianText { get; }
-        public string Title { get; }
+        public string CleanEnglishText => EnglishText?.Replace("\r\n", " ").Replace("\n", " ").Replace("\r", " ") ?? "";
+        public string CleanRussianText => RussianText?.Replace("\r\n", " ").Replace("\n", " ").Replace("\r", " ") ?? "";
 
+        public string Title { get; }
         public ObservableCollection<ErrorItem> Errors { get; } = new ObservableCollection<ErrorItem>();
 
         private string _newErrorText;
@@ -78,10 +88,7 @@ namespace DBD_Trans.ViewModels
             get => _selectedError;
             set
             {
-                if (Set(ref _selectedError, value))
-                {
-                    RebuildDocuments();
-                }
+                if (Set(ref _selectedError, value)) RebuildDocuments();
             }
         }
 
@@ -92,16 +99,26 @@ namespace DBD_Trans.ViewModels
             set => Set(ref _isMarkerActive, value);
         }
 
+        private bool _isSplitBySentences;
+        public bool IsSplitBySentences
+        {
+            get => _isSplitBySentences;
+            set
+            {
+                if (Set(ref _isSplitBySentences, value))
+                {
+                    RebuildDocuments(); // Просто перерисовываем, предложения уже распарсены
+                }
+            }
+        }
+
         private string _searchText;
         public string SearchText
         {
             get => _searchText;
             set
             {
-                if (Set(ref _searchText, value))
-                {
-                    RebuildDocuments();
-                }
+                if (Set(ref _searchText, value)) RebuildDocuments();
             }
         }
 
@@ -127,8 +144,11 @@ namespace DBD_Trans.ViewModels
         public RichTextBox EnglishRichTextBox { get; set; }
         public RichTextBox RussianRichTextBox { get; set; }
 
+        public List<SentenceInfo> EnglishSentences { get; private set; } = new List<SentenceInfo>();
+        public List<SentenceInfo> RussianSentences { get; private set; } = new List<SentenceInfo>();
+
         public AnalysisViewModel(LocalizationEntry entry, List<ErrorItem> existingErrors,
-            IErrorStorage errorStorage, IStatusStorage statusStorage, IAppSettings appSettings)
+            IErrorStorage errorStorage, IStatusStorage statusStorage, IAppSettings appSettings, IMergeStorage mergeStorage)
         {
             _key = entry.Key;
             EnglishText = entry.English;
@@ -138,6 +158,7 @@ namespace DBD_Trans.ViewModels
             _appSettings = appSettings;
             _entry = entry;
             _statusStorage = statusStorage;
+            _mergeStorage = mergeStorage; // <-- НОВОЕ
 
             Errors.CollectionChanged += (s, e) =>
             {
@@ -148,8 +169,7 @@ namespace DBD_Trans.ViewModels
                 RebuildDocuments();
             };
 
-            foreach (var err in existingErrors)
-                Errors.Add(err);
+            foreach (var err in existingErrors) Errors.Add(err);
 
             IncreaseFontCommand = new RelayCommand(_ => FontSize += 1);
             DecreaseFontCommand = new RelayCommand(_ => FontSize -= 1, _ => FontSize > 8);
@@ -159,10 +179,28 @@ namespace DBD_Trans.ViewModels
             SaveCommand = new RelayCommand(_ => SaveChanges());
             ToggleMarkerCommand = new RelayCommand(_ => ToggleMarker());
             ToggleCompletedCommand = new RelayCommand(_ => IsCompleted = !IsCompleted);
+
+            ToggleSplitCommand = new RelayCommand(_ => IsSplitBySentences = !IsSplitBySentences);
+            MergeWithPreviousCommand = new RelayCommand<SentenceInfo>(MergeWithPrevious);
+            MergeWithNextCommand = new RelayCommand<SentenceInfo>(MergeWithNext);
+            SplitSentenceCommand = new RelayCommand<SentenceInfo>(SplitSentence);
         }
 
         public void InitializeDocuments()
         {
+            // Парсим предложения
+            EnglishSentences = ParseSentences(CleanEnglishText);
+            RussianSentences = ParseSentences(CleanRussianText);
+
+            // Загружаем сохраненные склейки
+            var engMerges = _mergeStorage.GetMerges(_key, true);
+            var rusMerges = _mergeStorage.GetMerges(_key, false);
+
+            foreach (var s in EnglishSentences)
+                if (engMerges.Contains(s.StartIndex)) s.IsMergedWithNext = true;
+            foreach (var s in RussianSentences)
+                if (rusMerges.Contains(s.StartIndex)) s.IsMergedWithNext = true;
+
             RebuildDocuments();
         }
 
@@ -178,8 +216,11 @@ namespace DBD_Trans.ViewModels
         {
             if (EnglishRichTextBox == null || RussianRichTextBox == null) return;
 
-            var searchHighlightsEng = FindMatches(EnglishText, _searchText);
-            var searchHighlightsRus = FindMatches(RussianText, _searchText);
+            string engText = IsSplitBySentences ? CleanEnglishText : EnglishText;
+            string rusText = IsSplitBySentences ? CleanRussianText : RussianText;
+
+            var searchHighlightsEng = FindMatches(engText, _searchText);
+            var searchHighlightsRus = FindMatches(rusText, _searchText);
 
             var allEngPermanent = Errors.SelectMany(e => e.EnglishHighlights).ToList();
             var allRusPermanent = Errors.SelectMany(e => e.RussianHighlights).ToList();
@@ -190,50 +231,92 @@ namespace DBD_Trans.ViewModels
             var engSegments = BuildSegments(allEngPermanent, selectedEng, searchHighlightsEng);
             var rusSegments = BuildSegments(allRusPermanent, selectedRus, searchHighlightsRus);
 
-            EnglishRichTextBox.Document = BuildDocument(EnglishText, engSegments);
-            RussianRichTextBox.Document = BuildDocument(RussianText, rusSegments);
+            EnglishRichTextBox.Document = BuildDocument(engText, engSegments, IsSplitBySentences, EnglishSentences);
+            RussianRichTextBox.Document = BuildDocument(rusText, rusSegments, IsSplitBySentences, RussianSentences);
 
             ScrollToFirstMatch(EnglishRichTextBox, searchHighlightsEng);
             ScrollToFirstMatch(RussianRichTextBox, searchHighlightsRus);
+
         }
 
         private List<HighlightSegment> BuildSegments(List<TextRangeInfo> permanent, List<TextRangeInfo> selected, List<TextRangeInfo> search)
         {
             var segments = new List<HighlightSegment>();
-
             if (permanent != null)
                 foreach (var h in permanent)
                     segments.Add(new HighlightSegment { Start = h.StartIndex, Length = h.Length, Brush = PermanentHighlightBrush, Priority = 1 });
-
             if (selected != null)
                 foreach (var h in selected)
                     segments.Add(new HighlightSegment { Start = h.StartIndex, Length = h.Length, Brush = SelectedPermanentHighlightBrush, Priority = 2 });
-
             if (search != null)
                 foreach (var h in search)
                     segments.Add(new HighlightSegment { Start = h.StartIndex, Length = h.Length, Brush = SearchHighlightBrush, Priority = 3 });
-
             return segments;
         }
 
-        private FlowDocument BuildDocument(string text, List<HighlightSegment> highlights)
+        private FlowDocument BuildDocument(string text, List<HighlightSegment> highlights, bool isSplit, List<SentenceInfo> sentences)
         {
             var doc = new FlowDocument();
-            var para = new Paragraph();
-
             if (string.IsNullOrEmpty(text))
             {
-                doc.Blocks.Add(para);
+                doc.Blocks.Add(new Paragraph());
                 return doc;
             }
 
-            var brushes = new Brush[text.Length];
+            if (!isSplit || sentences == null || sentences.Count == 0)
+            {
+                var para = new Paragraph();
+                ApplyRunsToParagraph(para, text, 0, text.Length, highlights, 0);
+                doc.Blocks.Add(para);
+            }
+            else
+            {
+                Paragraph currentPara = null;
+                List<SentenceInfo> currentParaSentences = null;
 
+                foreach (var sentence in sentences)
+                {
+                    if (currentPara == null)
+                    {
+                        currentPara = new Paragraph();
+                        currentParaSentences = new List<SentenceInfo>();
+                        currentPara.Tag = currentParaSentences; // Сохраняем список предложений в Tag абзаца
+                        doc.Blocks.Add(currentPara);
+                    }
+
+                    currentParaSentences.Add(sentence);
+                    // runTag больше не нужен, мы убрали его
+                    ApplyRunsToParagraph(currentPara, sentence.Text, sentence.StartIndex, sentence.Length, highlights, sentence.StartIndex);
+
+                    currentPara.Margin = sentence.IsMergedWithNext ? new Thickness(0) : new Thickness(0, 0, 0, 25);
+
+                    if (sentence.IsMergedWithNext)
+                    {
+                        currentPara.Inlines.Add(new Run(" "));
+                    }
+                    else
+                    {
+                        currentPara = null;
+                        currentParaSentences = null;
+                    }
+                }
+            }
+            return doc;
+        }
+        // Добавлен параметр runTag
+        private void ApplyRunsToParagraph(Paragraph para, string text, int textStart, int textLength, List<HighlightSegment> highlights, int globalOffset = 0)
+        {
+            var brushes = new Brush[textLength];
             var sorted = highlights.OrderBy(h => h.Priority).ToList();
+
             foreach (var h in sorted)
             {
-                int end = Math.Min(h.Start + h.Length, text.Length);
-                for (int i = h.Start; i < end; i++)
+                int hStart = h.Start - globalOffset;
+                int hEnd = hStart + h.Length;
+                int drawStart = Math.Max(0, hStart);
+                int drawEnd = Math.Min(textLength, hEnd);
+
+                for (int i = drawStart; i < drawEnd; i++)
                 {
                     brushes[i] = h.Brush;
                 }
@@ -242,37 +325,83 @@ namespace DBD_Trans.ViewModels
             int lastPos = 0;
             Brush currentBrush = brushes.Length > 0 ? brushes[0] : null;
 
-            for (int i = 1; i <= text.Length; i++)
+            for (int i = 1; i <= textLength; i++)
             {
-                Brush nextBrush = i < text.Length ? brushes[i] : null;
-
-                if (nextBrush != currentBrush || i == text.Length)
+                Brush nextBrush = i < textLength ? brushes[i] : null;
+                if (nextBrush != currentBrush || i == textLength)
                 {
                     int length = i - lastPos;
                     if (length > 0)
                     {
                         var run = new Run(text.Substring(lastPos, length));
-                        if (currentBrush != null)
-                        {
-                            run.Background = currentBrush;
-                        }
+                        if (currentBrush != null) run.Background = currentBrush;
                         para.Inlines.Add(run);
                     }
-
                     lastPos = i;
                     currentBrush = nextBrush;
                 }
             }
+        }
+        private List<SentenceInfo> ParseSentences(string text)
+        {
+            var result = new List<SentenceInfo>();
+            if (string.IsNullOrEmpty(text)) return result;
 
-            doc.Blocks.Add(para);
-            return doc;
+            int start = 0;
+            while (start < text.Length && char.IsWhiteSpace(text[start])) start++;
+
+            for (int i = start; i < text.Length; i++)
+            {
+                char c = text[i];
+                if (c == '.' || c == '!' || c == '?')
+                {
+                    bool isEnd = false;
+                    if (i == text.Length - 1) isEnd = true;
+                    else if (char.IsWhiteSpace(text[i + 1])) isEnd = true;
+                    else if (text[i + 1] == '"' || text[i + 1] == '»' || text[i + 1] == ']' || text[i + 1] == ')') isEnd = true;
+
+                    if (isEnd)
+                    {
+                        int length = i - start + 1;
+                        if (length > 0)
+                        {
+                            result.Add(new SentenceInfo
+                            {
+                                StartIndex = start,
+                                Length = length,
+                                Text = text.Substring(start, length),
+                                IsMergedWithNext = false
+                            });
+                        }
+                        start = i + 1;
+                        while (start < text.Length && char.IsWhiteSpace(text[start])) start++;
+                    }
+                }
+            }
+
+            if (start < text.Length)
+            {
+                int end = text.Length - 1;
+                while (end >= start && char.IsWhiteSpace(text[end])) end--;
+                int length = end - start + 1;
+                if (length > 0)
+                {
+                    result.Add(new SentenceInfo
+                    {
+                        StartIndex = start,
+                        Length = length,
+                        Text = text.Substring(start, length),
+                        IsMergedWithNext = false
+                    });
+                }
+            }
+            return result;
         }
 
         private List<TextRangeInfo> FindMatches(string text, string search)
         {
             var matches = new List<TextRangeInfo>();
             if (string.IsNullOrEmpty(search) || string.IsNullOrEmpty(text)) return matches;
-
             int index = 0;
             while ((index = text.IndexOf(search, index, StringComparison.OrdinalIgnoreCase)) != -1)
             {
@@ -285,16 +414,11 @@ namespace DBD_Trans.ViewModels
         private void ScrollToFirstMatch(RichTextBox rtb, List<TextRangeInfo> matches)
         {
             if (matches == null || matches.Count == 0) return;
-
             var firstMatch = matches[0];
             var pointer = GetTextPointerByIndex(rtb.Document, firstMatch.StartIndex);
-
-            if (pointer != null)
+            if (pointer != null && pointer.Parent is FrameworkContentElement element)
             {
-                if (pointer.Parent is FrameworkContentElement element)
-                {
-                    element.BringIntoView();
-                }
+                element.BringIntoView();
             }
         }
 
@@ -311,27 +435,18 @@ namespace DBD_Trans.ViewModels
                     {
                         var range = new TextRange(pointer, next);
                         int len = range.Text.Length;
-                        if (currentIndex + len > index)
-                        {
-                            return pointer.GetPositionAtOffset(index - currentIndex, LogicalDirection.Forward);
-                        }
+                        if (currentIndex + len > index) return pointer.GetPositionAtOffset(index - currentIndex, LogicalDirection.Forward);
                         currentIndex += len;
                         pointer = next;
                     }
                     else break;
                 }
-                else
-                {
-                    pointer = pointer.GetNextContextPosition(LogicalDirection.Forward);
-                }
+                else pointer = pointer.GetNextContextPosition(LogicalDirection.Forward);
             }
             return null;
         }
 
-        private void ToggleMarker()
-        {
-            IsMarkerActive = !IsMarkerActive;
-        }
+        private void ToggleMarker() => IsMarkerActive = !IsMarkerActive;
 
         public void ApplyMarkerToSelection(RichTextBox rtb)
         {
@@ -375,15 +490,10 @@ namespace DBD_Trans.ViewModels
                     if (next == null) break;
                     var range = new TextRange(current, next);
                     var bg = range.GetPropertyValue(TextElement.BackgroundProperty);
-                    if (bg is SolidColorBrush brush && brush.Color == targetColor)
-                        current = next;
-                    else
-                        break;
+                    if (bg is SolidColorBrush brush && brush.Color == targetColor) current = next;
+                    else break;
                 }
-                else
-                {
-                    current = current.GetNextContextPosition(direction);
-                }
+                else current = current.GetNextContextPosition(direction);
             }
             return current;
         }
@@ -393,6 +503,7 @@ namespace DBD_Trans.ViewModels
             if (string.IsNullOrWhiteSpace(NewErrorText)) return;
             var engHighlights = ExtractHighlightsFromDocument(EnglishRichTextBox.Document, TemporaryHighlightBrush.Color);
             var rusHighlights = ExtractHighlightsFromDocument(RussianRichTextBox.Document, TemporaryHighlightBrush.Color);
+
             var errorItem = new ErrorItem
             {
                 Text = NewErrorText.Trim(),
@@ -409,28 +520,90 @@ namespace DBD_Trans.ViewModels
         private List<TextRangeInfo> ExtractHighlightsFromDocument(FlowDocument doc, Color targetColor)
         {
             var highlights = new List<TextRangeInfo>();
-            int currentPos = 0;
-            var navigator = doc.ContentStart;
-            while (navigator != null)
+            foreach (Block block in doc.Blocks)
             {
-                if (navigator.GetPointerContext(LogicalDirection.Forward) == TextPointerContext.Text)
+                if (block is Paragraph para)
                 {
-                    var next = navigator.GetNextContextPosition(LogicalDirection.Forward);
-                    if (next != null)
+                    var paraSentences = para.Tag as List<SentenceInfo>;
+                    int localPos = 0;
+
+                    foreach (var inline in para.Inlines)
                     {
-                        var textRange = new TextRange(navigator, next);
-                        var bg = textRange.GetPropertyValue(TextElement.BackgroundProperty);
-                        int length = textRange.Text.Length;
-                        if (bg is SolidColorBrush brush && brush.Color == targetColor)
+                        if (inline is Run run && !string.IsNullOrEmpty(run.Text))
                         {
-                            highlights.Add(new TextRangeInfo { StartIndex = currentPos, Length = length });
+                            string text = run.Text;
+                            int textLen = text.Length;
+
+                            // Защита от скрытых \r\n
+                            if (text.EndsWith("\r\n")) textLen -= 2;
+                            else if (text.EndsWith("\n") || text.EndsWith("\r")) textLen -= 1;
+
+                            var bg = run.Background as SolidColorBrush;
+                            if (bg != null && bg.Color == targetColor && textLen > 0)
+                            {
+                                if (paraSentences == null)
+                                {
+                                    // Обычный режим
+                                    highlights.Add(new TextRangeInfo
+                                    {
+                                        StartIndex = localPos,
+                                        Length = textLen
+                                    });
+                                }
+                                else
+                                {
+                                    // Режим разделения: математически маппим localPos на предложения
+                                    int currentOffset = localPos;
+                                    int remaining = textLen;
+
+                                    while (remaining > 0)
+                                    {
+                                        int offsetInPara = currentOffset;
+                                        SentenceInfo targetSentence = null;
+                                        int localIndexInSentence = 0;
+
+                                        foreach (var s in paraSentences)
+                                        {
+                                            if (offsetInPara < s.Length)
+                                            {
+                                                targetSentence = s;
+                                                localIndexInSentence = offsetInPara;
+                                                break;
+                                            }
+                                            offsetInPara -= (s.Length + 1); // +1 за пробел между предложениями
+                                        }
+
+                                        if (targetSentence != null)
+                                        {
+                                            int charsInSentence = Math.Min(remaining, targetSentence.Length - localIndexInSentence);
+
+                                            highlights.Add(new TextRangeInfo
+                                            {
+                                                StartIndex = targetSentence.StartIndex + localIndexInSentence,
+                                                Length = charsInSentence
+                                            });
+
+                                            currentOffset += charsInSentence;
+                                            remaining -= charsInSentence;
+
+                                            // Если дошли до конца предложения, пропускаем пробел
+                                            if (localIndexInSentence + charsInSentence == targetSentence.Length && remaining > 0)
+                                            {
+                                                currentOffset++;
+                                                remaining--;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                            localPos += textLen;
                         }
-                        currentPos += length;
-                        navigator = next;
-                        continue;
                     }
                 }
-                navigator = navigator.GetNextContextPosition(LogicalDirection.Forward);
             }
             return highlights;
         }
@@ -440,17 +613,13 @@ namespace DBD_Trans.ViewModels
             if (item == null || !Errors.Contains(item)) return;
             int index = Errors.IndexOf(item);
             Errors.Remove(item);
-            if (SelectedError == item)
-            {
-                SelectedError = Errors.Count > 0 ? Errors[Math.Min(index, Errors.Count - 1)] : null;
-            }
+            if (SelectedError == item) SelectedError = Errors.Count > 0 ? Errors[Math.Min(index, Errors.Count - 1)] : null;
             SaveChanges();
         }
 
         private void EditError(ErrorItem item)
         {
-            if (item != null)
-                item.IsEditing = true;
+            if (item != null) item.IsEditing = true;
         }
 
         public void SaveChanges()
@@ -459,13 +628,51 @@ namespace DBD_Trans.ViewModels
             _errorStorage.UpdateErrors(_key, errorList);
         }
 
-        public void OnClosing()
+        public void OnClosing() => SaveChanges();
+
+        // --- Логика объединения предложений ---
+        private void MergeWithPrevious(SentenceInfo sentence) => UpdateMergeState(sentence, true);
+        private void MergeWithNext(SentenceInfo sentence) => UpdateMergeState(sentence, false);
+        private void SplitSentence(SentenceInfo sentence) => UpdateMergeState(sentence, null);
+
+        private void UpdateMergeState(SentenceInfo sentence, bool? mergeWithPrev)
         {
-            SaveChanges();
+            int engIndex = EnglishSentences.IndexOf(sentence);
+            if (engIndex >= 0)
+            {
+                if (mergeWithPrev == true && engIndex > 0) EnglishSentences[engIndex - 1].IsMergedWithNext = true;
+                else if (mergeWithPrev == false) sentence.IsMergedWithNext = true;
+                else if (mergeWithPrev == null) // Split
+                {
+                    if (engIndex > 0) EnglishSentences[engIndex - 1].IsMergedWithNext = false;
+                    sentence.IsMergedWithNext = false;
+                }
+            }
+
+            int rusIndex = RussianSentences.IndexOf(sentence);
+            if (rusIndex >= 0)
+            {
+                if (mergeWithPrev == true && rusIndex > 0) RussianSentences[rusIndex - 1].IsMergedWithNext = true;
+                else if (mergeWithPrev == false) sentence.IsMergedWithNext = true;
+                else if (mergeWithPrev == null)
+                {
+                    if (rusIndex > 0) RussianSentences[rusIndex - 1].IsMergedWithNext = false;
+                    sentence.IsMergedWithNext = false;
+                }
+            }
+
+            SaveMerges(); // <-- СОХРАНЯЕМ СОСТОЯНИЕ
+            RebuildDocuments();
         }
 
-        public void SaveDocumentsToSelectedError()
+        private void SaveMerges()
         {
+            var engMerges = EnglishSentences.Where(s => s.IsMergedWithNext).Select(s => s.StartIndex).ToList();
+            var rusMerges = RussianSentences.Where(s => s.IsMergedWithNext).Select(s => s.StartIndex).ToList();
+
+            _mergeStorage.SetMerges(_key, true, engMerges);
+            _mergeStorage.SetMerges(_key, false, rusMerges);
+            _mergeStorage.Save();
         }
     }
 }

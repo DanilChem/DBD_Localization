@@ -106,9 +106,11 @@
     <Compile Include="Models\ItemStatus.cs" />
     <Compile Include="Services\IErrorStorage.cs" />
     <Compile Include="Services\IFileService.cs" />
+    <Compile Include="Services\IMergeStorage.cs" />
     <Compile Include="Services\IStatusStorage.cs" />
     <Compile Include="Services\JsonErrorStorage.cs" />
     <Compile Include="Services\JsonFileService.cs" />
+    <Compile Include="Services\JsonMergeStorage.cs" />
     <Compile Include="Services\JsonStatusStorage.cs" />
     <Compile Include="ViewModels\AnalysisViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />

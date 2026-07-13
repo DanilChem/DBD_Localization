@@ -48,6 +48,61 @@
             </Setter>
         </Style>
 
+        <!-- Стили для темного ContextMenu -->
+        <Style TargetType="ContextMenu">
+            <Setter Property="Background" Value="{StaticResource BackgroundMedium}"/>
+            <Setter Property="Foreground" Value="{StaticResource ForegroundPrimary}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderDark}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="2"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ContextMenu">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="4" Padding="{TemplateBinding Padding}">
+                            <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="MenuItem">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource ForegroundPrimary}"/>
+            <Setter Property="Padding" Value="12,6"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="MenuItem">
+                        <Border x:Name="Border" Background="{TemplateBinding Background}" BorderBrush="Transparent" BorderThickness="0" CornerRadius="3" Margin="2,1">
+                            <Grid>
+                                <ContentPresenter x:Name="ContentPresenter" Content="{TemplateBinding Header}" RecognizesAccessKey="True" Margin="{TemplateBinding Padding}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="{StaticResource WarningOrange}"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="{StaticResource ForegroundSecondary}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="Separator">
+            <Setter Property="Height" Value="1"/>
+            <Setter Property="Background" Value="{StaticResource BorderDark}"/>
+            <Setter Property="Margin" Value="4,2"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Separator">
+                        <Border Background="{TemplateBinding Background}" Height="{TemplateBinding Height}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style x:Key="AddButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="{StaticResource WarningOrange}"/>
             <Setter Property="Foreground" Value="White"/>
@@ -163,41 +218,30 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- Панель инструментов (размер шрифта) -->
+        <!-- Замени существующие кнопки Маркера и Выполнено на этот блок -->
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
-            <TextBlock Text="🔤 Размер шрифта:" Foreground="{StaticResource ForegroundSecondary}" 
-               VerticalAlignment="Center" Margin="0,0,10,0"/>
-            <Button Content="+" Width="25" Height="25" Command="{Binding IncreaseFontCommand}"
-            ToolTip="Увеличить шрифт" Cursor="Hand"
-            Background="{StaticResource BackgroundLight}" Foreground="{StaticResource ForegroundPrimary}" 
-            BorderBrush="{StaticResource BorderDark}" BorderThickness="1"/>
-            <Button Content="−" Width="25" Height="25" Command="{Binding DecreaseFontCommand}"
-            ToolTip="Уменьшить шрифт" Cursor="Hand" Margin="5,0,0,0"
-            Background="{StaticResource BackgroundLight}" Foreground="{StaticResource ForegroundPrimary}" 
-            BorderBrush="{StaticResource BorderDark}" BorderThickness="1"/>
-            <TextBlock Text="{Binding FontSize, StringFormat={}{0:F0} pt}" Foreground="{StaticResource ForegroundSecondary}" 
-               VerticalAlignment="Center" Margin="10,0,0,0"/>
-            <!-- Поле поиска -->
-            <Border BorderBrush="{StaticResource BorderDark}" BorderThickness="1" CornerRadius="3" 
-Background="{StaticResource BackgroundLight}" Margin="20,0,0,0" Width="220" Height="28">
+            <TextBlock Text="🔤 Размер шрифта:" Foreground="{StaticResource ForegroundSecondary}" VerticalAlignment="Center" Margin="0,0,10,0"/>
+            <Button Content="+" Width="25" Height="25" Command="{Binding IncreaseFontCommand}" ToolTip="Увеличить шрифт" Cursor="Hand"
+            Background="{StaticResource BackgroundLight}" Foreground="{StaticResource ForegroundPrimary}" BorderBrush="{StaticResource BorderDark}" BorderThickness="1"/>
+            <Button Content="−" Width="25" Height="25" Command="{Binding DecreaseFontCommand}" ToolTip="Уменьшить шрифт" Cursor="Hand" Margin="5,0,0,0"
+            Background="{StaticResource BackgroundLight}" Foreground="{StaticResource ForegroundPrimary}" BorderBrush="{StaticResource BorderDark}" BorderThickness="1"/>
+            <TextBlock Text="{Binding FontSize, StringFormat={}{0:F0} pt}" Foreground="{StaticResource ForegroundSecondary}" VerticalAlignment="Center" Margin="10,0,0,0"/>
+
+            <Border BorderBrush="{StaticResource BorderDark}" BorderThickness="1" CornerRadius="3" Background="{StaticResource BackgroundLight}" Margin="20,0,0,0" Width="220" Height="28">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="🔍" Foreground="{StaticResource ForegroundSecondary}" 
-           VerticalAlignment="Center" Margin="8,0,6,0" FontSize="12"/>
-                    <TextBox Grid.Column="1" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
-         Background="Transparent" BorderThickness="0" Foreground="{StaticResource ForegroundPrimary}"
-         VerticalContentAlignment="Center" CaretBrush="{StaticResource ForegroundPrimary}"/>
+                    <TextBlock Text="🔍" Foreground="{StaticResource ForegroundSecondary}" VerticalAlignment="Center" Margin="8,0,6,0" FontSize="12"/>
+                    <TextBox Grid.Column="1" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Background="Transparent" BorderThickness="0" Foreground="{StaticResource ForegroundPrimary}" VerticalContentAlignment="Center" CaretBrush="{StaticResource ForegroundPrimary}"/>
                 </Grid>
             </Border>
 
             <!-- Кнопка маркера -->
-            <Button Content="🖍️ Маркер" Width="80" Margin="20,0,0,0"
-        Command="{Binding ToggleMarkerCommand}"
-        Background="{Binding IsMarkerActive, Converter={StaticResource BoolToBrushConverter}, ConverterParameter=#CA5100}"
-        Foreground="White" BorderThickness="0" Cursor="Hand">
+            <Button Content="🖍️ Маркер" Width="80" Margin="20,0,0,0" Command="{Binding ToggleMarkerCommand}"
+            Background="{Binding IsMarkerActive, Converter={StaticResource BoolToBrushConverter}, ConverterParameter=#CA5100}"
+            Foreground="White" BorderThickness="0" Cursor="Hand">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="3"/>
@@ -205,19 +249,28 @@ Background="{StaticResource BackgroundLight}" Margin="20,0,0,0" Width="220" Heig
                 </Button.Resources>
             </Button>
 
-            <!-- Кнопка "Выполнено" (работает как Маркер, но переключает IsCompleted) -->
-            <Button Content="✔️ Выполнено" Width="90" Margin="20,0,0,0"
-        Command="{Binding ToggleCompletedCommand}"
-        Background="{Binding CompletedButtonBrush}"
-        Foreground="White" BorderThickness="0" Cursor="Hand"
-        ToolTip="Отметить как завершённое">
+            <!-- НОВАЯ КНОПКА: Разделение по предложениям -->
+            <ToggleButton Content="📑 Разделение" Width="100" Margin="10,0,0,0" 
+                  IsChecked="{Binding IsSplitBySentences}"
+                  Background="{Binding IsSplitBySentences, Converter={StaticResource BoolToBrushConverter}, ConverterParameter=#CA5100}"
+                  Foreground="White" BorderThickness="0" Cursor="Hand"
+                  ToolTip="Разделить текст на предложения (ПКМ для объединения)">
+                <ToggleButton.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="3"/>
+                    </Style>
+                </ToggleButton.Resources>
+            </ToggleButton>
+
+            <!-- Кнопка "Выполнено" -->
+            <Button Content="✔️ Выполнено" Width="90" Margin="10,0,0,0" Command="{Binding ToggleCompletedCommand}"
+            Background="{Binding CompletedButtonBrush}" Foreground="White" BorderThickness="0" Cursor="Hand" ToolTip="Отметить как завершённое">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="3"/>
                     </Style>
                 </Button.Resources>
             </Button>
-
         </StackPanel>
 
         <!-- Тексты -->
@@ -254,6 +307,7 @@ Background="{StaticResource BackgroundLight}" Margin="20,0,0,0" Width="220" Heig
              PreviewMouseLeftButtonDown="RichTextBox_PreviewMouseLeftButtonDown"
              PreviewMouseLeftButtonUp="RichTextBox_PreviewMouseLeftButtonUp"
                                  PreviewMouseMove="RichTextBox_PreviewMouseMove"
+                                 PreviewMouseRightButtonDown="RichTextBox_PreviewMouseRightButtonDown"
 MouseLeave="RichTextBox_MouseLeave">
 
                         <FlowDocument>
@@ -287,6 +341,7 @@ MouseLeave="RichTextBox_MouseLeave">
              ScrollViewer.CanContentScroll="False" 
              PreviewMouseLeftButtonUp="RichTextBox_PreviewMouseLeftButtonUp"
               PreviewMouseMove="RichTextBox_PreviewMouseMove"
+                                 PreviewMouseRightButtonDown="RichTextBox_PreviewMouseRightButtonDown"
                                  
 MouseLeave="RichTextBox_MouseLeave"
                                  >

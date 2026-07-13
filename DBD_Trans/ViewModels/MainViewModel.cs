@@ -24,6 +24,7 @@ namespace DBD_Trans.ViewModels
         private readonly IErrorStorage _errorStorage;
         private readonly IAppSettings _appSettings;
         private readonly IStatusStorage _statusStorage;
+        private readonly IMergeStorage _mergeStorage;
         private readonly string _dataDirectory;
         private readonly DispatcherTimer _searchTimer;
 
@@ -105,13 +106,15 @@ namespace DBD_Trans.ViewModels
             set => Set(ref _isLoading, value);
         }
 
-        public MainViewModel(IFileService fileService, IErrorStorage errorStorage, IStatusStorage statusStorage, IAppSettings appSettings, string dataDirectory)
+        public MainViewModel(IFileService fileService, IErrorStorage errorStorage, IStatusStorage statusStorage, IAppSettings appSettings, string dataDirectory, IMergeStorage mergeStorage)
+
         {
             _fileService = fileService;
             _errorStorage = errorStorage;
             _appSettings = appSettings;
             _statusStorage = statusStorage;
             _dataDirectory = dataDirectory;
+            _mergeStorage = mergeStorage;
 
             FilteredEntries = CollectionViewSource.GetDefaultView(AllEntries);
             FilteredEntries.Filter = FilterEntry;
@@ -266,28 +269,18 @@ namespace DBD_Trans.ViewModels
         private void AnalyzeEntry(LocalizationEntry entry)
         {
             var errors = _errorStorage.GetErrors(entry.Key);
-            var vm = new AnalysisViewModel(entry, errors, _errorStorage, _statusStorage, _appSettings);
+            // Передаем mergeStorage в AnalysisViewModel
+            var vm = new AnalysisViewModel(entry, errors, _errorStorage, _statusStorage, _appSettings, _mergeStorage);
             var window = new AnalysisWindow();
             window.DataContext = vm;
-
             var mainWindow = App.Current.MainWindow;
-
             window.Owner = mainWindow;
-
-            // === ДОБАВЬ ЭТУ СТРОКУ, если Windows всё равно рисует вторую иконку ===
-            // Она уберет окно анализа из панели задач, но оставит его в Alt-Tab.
             window.ShowInTaskbar = false;
-
             window.ShowDialog();
-
-            // Главное окно было в панели задач всё это время, поэтому оно просто 
-            // вернет фокус без всяких "всплытий" и анимаций.
             mainWindow.Activate();
-
             CalculateTotalStatistics();
             UpdateStatistics();
         }
-
         // 添加一个属性供 View 层判断当前是否处于代码跳转状态
         public bool IsNavigating { get; private set; }
 
