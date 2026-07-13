@@ -25079,5 +25079,117 @@
       "EnglishHighlights": [],
       "RussianHighlights": []
     }
+  ],
+  "9EB3DA134A5AEFD25A93288A4B56B090": [
+    {
+      "Text": "Маскот на карте Трюкача зовут Чак, а не Чаки",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 4
+        }
+      ]
+    }
+  ],
+  "3222A0604B0193599FB9C485F1A5F27E": [
+    {
+      "Text": "Опущено unique",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 74,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Культура != Cultural idenities. Культура - что это? Культурная идентичность - кто Я?",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 81,
+          "Length": 19
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 78,
+          "Length": 10
+        }
+      ]
+    },
+    {
+      "Text": "Опущено painted a target on her back",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 136,
+          "Length": 28
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Неправильные != Foreign. Точно не знаю, но я не думаю, что foreign на сленге - неправильные",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 366,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 420,
+          "Length": 12
+        }
+      ]
+    },
+    {
+      "Text": "Опущено her own",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 498,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Оригинал: срочные новости о несправедливости. Перевод: репортажи об ужасах и несправедливости",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 426,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 494,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Опущено producer",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1398,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    }
   ]
 }
