@@ -10,9 +10,24 @@
         WindowState="Maximized"
         Background="#FF1E1E1E"
         ResizeMode="CanResizeWithGrip"
-        FocusVisualStyle="{x:Null}">
+        FocusVisualStyle="{x:Null}"
+        Focusable="True">
+    <!-- ===== НАЧАЛО НОВОГО БЛОКА ===== -->
+    <Window.InputBindings>
+        <!-- Alt + M: Маркер -->
+        <KeyBinding Key="Z" Modifiers="Alt" Command="{Binding ToggleMarkerCommand}" />
+
+        <!-- Alt + S: Разделение по предложениям -->
+        <KeyBinding Key="S" Modifiers="Alt" Command="{Binding ToggleSplitCommand}" />
+
+        <!-- Alt + F: Режим фокуса -->
+        <KeyBinding Key="F" Modifiers="Alt" Command="{Binding ToggleFocusCommand}" />
+    </Window.InputBindings>
+    <!-- ===== КОНЕЦ НОВОГО БЛОКА ===== -->
     <Window.Resources>
         <converters:BoolToBrushConverter x:Key="BoolToBrushConverter"/>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <converters:BoolToScrollBarVisibilityConverter x:Key="BoolToScrollBarVisibilityConverter"/>
         
         <SolidColorBrush x:Key="BackgroundDark" Color="#FF171717"/>
         <SolidColorBrush x:Key="BackgroundMedium" Color="#FF1E1E1E"/>
@@ -40,6 +55,78 @@
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="True">
                                 <Setter TargetName="border" Property="Background" Value="{StaticResource CompletedBlue}"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Стили для кнопок панели инструментов -->
+        <Style x:Key="ToolbarButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Background" Value="{StaticResource BackgroundLight}"/>
+            <Setter Property="Foreground" Value="{StaticResource ForegroundPrimary}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderDark}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" 
+                        Background="{TemplateBinding Background}" 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}" 
+                        CornerRadius="3">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!-- Оранжевая обводка при наведении -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource WarningOrange}"/>
+                                <Setter TargetName="border" Property="BorderThickness" Value="1.5"/>
+                            </Trigger>
+                            <!-- Легкая подсветка при нажатии -->
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#33CA5100"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ToolbarToggleButtonStyle" TargetType="ToggleButton">
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Background" Value="{StaticResource BackgroundLight}"/>
+            <Setter Property="Foreground" Value="{StaticResource ForegroundPrimary}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderDark}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border x:Name="border" 
+                        Background="{TemplateBinding Background}" 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}" 
+                        CornerRadius="3">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!-- Оранжевая обводка при наведении -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource WarningOrange}"/>
+                                <Setter TargetName="border" Property="BorderThickness" Value="1.5"/>
+                            </Trigger>
+                            <!-- Оранжевый фон при активации (для Фокуса и Разделения) -->
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource WarningOrange}"/>
                                 <Setter Property="Foreground" Value="White"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
@@ -219,15 +306,24 @@
         </Grid.RowDefinitions>
 
         <!-- Замени существующие кнопки Маркера и Выполнено на этот блок -->
-        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
-            <TextBlock Text="🔤 Размер шрифта:" Foreground="{StaticResource ForegroundSecondary}" VerticalAlignment="Center" Margin="0,0,10,0"/>
-            <Button Content="+" Width="25" Height="25" Command="{Binding IncreaseFontCommand}" ToolTip="Увеличить шрифт" Cursor="Hand"
-            Background="{StaticResource BackgroundLight}" Foreground="{StaticResource ForegroundPrimary}" BorderBrush="{StaticResource BorderDark}" BorderThickness="1"/>
-            <Button Content="−" Width="25" Height="25" Command="{Binding DecreaseFontCommand}" ToolTip="Уменьшить шрифт" Cursor="Hand" Margin="5,0,0,0"
-            Background="{StaticResource BackgroundLight}" Foreground="{StaticResource ForegroundPrimary}" BorderBrush="{StaticResource BorderDark}" BorderThickness="1"/>
-            <TextBlock Text="{Binding FontSize, StringFormat={}{0:F0} pt}" Foreground="{StaticResource ForegroundSecondary}" VerticalAlignment="Center" Margin="10,0,0,0"/>
+        <!-- Верхняя панель инструментов -->
+        <!-- Верхняя панель инструментов -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10" VerticalAlignment="Center">
 
-            <Border BorderBrush="{StaticResource BorderDark}" BorderThickness="1" CornerRadius="3" Background="{StaticResource BackgroundLight}" Margin="20,0,0,0" Width="220" Height="28">
+            <!-- ГРУППА 1: Размер шрифта -->
+            <TextBlock Text="🔤" FontSize="16" Foreground="{StaticResource ForegroundSecondary}" VerticalAlignment="Center" Margin="0,0,5,0" ToolTip="Размер шрифта"/>
+            <Button Content="−" Command="{Binding DecreaseFontCommand}" ToolTip="Уменьшить шрифт" 
+            Style="{StaticResource ToolbarButtonStyle}" FontSize="16" FontWeight="Bold"/>
+            <TextBlock Text="{Binding FontSize, StringFormat={}{0:F0}}" Foreground="{StaticResource ForegroundPrimary}" 
+               VerticalAlignment="Center" Margin="5,0" MinWidth="20" TextAlignment="Center" FontWeight="SemiBold"/>
+            <Button Content="+" Command="{Binding IncreaseFontCommand}" ToolTip="Увеличить шрифт" 
+            Style="{StaticResource ToolbarButtonStyle}" FontSize="16" FontWeight="Bold"/>
+
+            <!-- Разделитель -->
+            <Border Width="1" Height="20" Background="{StaticResource BorderDark}" Margin="15,0,10,0"/>
+
+            <!-- ГРУППА 2: Поиск -->
+            <Border BorderBrush="{StaticResource BorderDark}" BorderThickness="1" CornerRadius="3" Background="{StaticResource BackgroundLight}" Width="200" Height="30">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -238,41 +334,39 @@
                 </Grid>
             </Border>
 
-            <!-- Кнопка маркера -->
-            <Button Content="🖍️ Маркер" Width="80" Margin="20,0,0,0" Command="{Binding ToggleMarkerCommand}"
+            <!-- Разделитель -->
+            <Border Width="1" Height="20" Background="{StaticResource BorderDark}" Margin="15,0,10,0"/>
+
+            <!-- ГРУППА 3: Инструменты -->
+            <Button Content="🖍️" Command="{Binding ToggleMarkerCommand}" ToolTip="Маркер"
             Background="{Binding IsMarkerActive, Converter={StaticResource BoolToBrushConverter}, ConverterParameter=#CA5100}"
-            Foreground="White" BorderThickness="0" Cursor="Hand">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="3"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
+            Foreground="White" Style="{StaticResource ToolbarButtonStyle}"/>
 
-            <!-- НОВАЯ КНОПКА: Разделение по предложениям -->
-            <ToggleButton Content="📑 Разделение" Width="100" Margin="10,0,0,0" 
-                  IsChecked="{Binding IsSplitBySentences}"
-                  Background="{Binding IsSplitBySentences, Converter={StaticResource BoolToBrushConverter}, ConverterParameter=#CA5100}"
-                  Foreground="White" BorderThickness="0" Cursor="Hand"
-                  ToolTip="Разделить текст на предложения (ПКМ для объединения)">
-                <ToggleButton.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="3"/>
-                    </Style>
-                </ToggleButton.Resources>
-            </ToggleButton>
+            <ToggleButton Content="📑" IsChecked="{Binding IsSplitBySentences}" ToolTip="Разделение по предложениям"
+                  Style="{StaticResource ToolbarToggleButtonStyle}"/>
 
-            <!-- Кнопка "Выполнено" -->
-            <Button Content="✔️ Выполнено" Width="90" Margin="10,0,0,0" Command="{Binding ToggleCompletedCommand}"
-            Background="{Binding CompletedButtonBrush}" Foreground="White" BorderThickness="0" Cursor="Hand" ToolTip="Отметить как завершённое">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="3"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
+            <ToggleButton Content="🎯" IsChecked="{Binding IsFocusMode}" ToolTip="Режим фокуса"
+                  Style="{StaticResource ToolbarToggleButtonStyle}"
+                  Visibility="{Binding IsSplitBySentences, Converter={StaticResource BoolToVisibilityConverter}}"/>
+
+            <!-- Разделитель -->
+            <Border Width="1" Height="20" Background="{StaticResource BorderDark}" Margin="15,0,10,0"/>
+
+            <!-- ГРУППА 4: Статус (перенесено в конец) -->
+            <Button Content="✔️" Command="{Binding ToggleCompletedCommand}" ToolTip="Отметить как выполненное"
+            Background="{Binding CompletedButtonBrush}" Foreground="White" 
+            Style="{StaticResource ToolbarButtonStyle}"/>
+
+            <!-- ===== НОВОЕ: Индикатор быстрого перехода ===== -->
+            <TextBlock Text="{Binding JumpBufferText}" 
+           Foreground="{StaticResource WarningOrange}" 
+           FontWeight="SemiBold" 
+           VerticalAlignment="Center" 
+           Margin="15,0,0,0"
+           FontSize="14"/>
+            <!-- ================================================ -->
+
         </StackPanel>
-
         <!-- Тексты -->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -289,7 +383,9 @@
             <!-- Английский -->
             <Border Grid.Column="2" Grid.Row="1" Background="{StaticResource BackgroundLight}" BorderBrush="{StaticResource BorderDark}" 
         BorderThickness="1" CornerRadius="3" Margin="5,0,0,0">
-                <ScrollViewer x:Name="EnglishScrollViewer" VerticalScrollBarVisibility="Auto" CanContentScroll="False">
+                <ScrollViewer x:Name="EnglishScrollViewer" 
+              VerticalScrollBarVisibility="{Binding IsFocusMode, Converter={StaticResource BoolToScrollBarVisibilityConverter}}" 
+              CanContentScroll="False">
                     <RichTextBox x:Name="EnglishRichTextBox" 
                              AutoWordSelection="False"
              IsReadOnly="True"
@@ -323,7 +419,10 @@ MouseLeave="RichTextBox_MouseLeave">
             <!-- Русский RichTextBox -->
             <Border Grid.Column="0" Grid.Row="1" Background="{StaticResource BackgroundLight}" BorderBrush="{StaticResource BorderDark}" 
         BorderThickness="1" CornerRadius="3" Margin="0,0,5,0">
-                <ScrollViewer x:Name="RussianScrollViewer" VerticalScrollBarVisibility="Auto" CanContentScroll="False">
+
+                <ScrollViewer x:Name="RussianScrollViewer" 
+              VerticalScrollBarVisibility="{Binding IsFocusMode, Converter={StaticResource BoolToScrollBarVisibilityConverter}}" 
+              CanContentScroll="False">
                     <RichTextBox x:Name="RussianRichTextBox" 
                                  AutoWordSelection="False"
              IsReadOnly="True"

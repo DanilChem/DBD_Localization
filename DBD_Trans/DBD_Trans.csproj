@@ -99,6 +99,7 @@
     <Compile Include="Base\FastObservableCollection.cs" />
     <Compile Include="Converters\BoolInverseConverter.cs" />
     <Compile Include="Converters\BoolToBrushConverter.cs" />
+    <Compile Include="Converters\BoolToScrollBarVisibilityConverter.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Helpers\DarkTitleBarHelper.cs" />
     <Compile Include="Helpers\HtmlStripper.cs" />

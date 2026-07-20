@@ -11,6 +11,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Media.Media3D;
 using System.Windows.Threading;
 
@@ -21,6 +22,9 @@ namespace DBD_Trans.Views
         private AnalysisViewModel ViewModel => (AnalysisViewModel)DataContext;
 
         private bool _isMiddleScrolling = false;
+        // Кэш для сохранения позиций скролла до входа в режим фокуса
+        private double _engOffsetBeforeFocus = 0;
+        private double _rusOffsetBeforeFocus = 0;
         private Point _middleScrollOrigin;
         private ScrollViewer _targetScrollViewer;
         private DispatcherTimer _scrollTimer;
@@ -33,23 +37,126 @@ namespace DBD_Trans.Views
         private ToolTip _sharedToolTip;
         private TextBlock _toolTipTextBlock;
 
+        // ===== Настройки жеста "умного скролла" тачпада в режиме фокуса =====
+        // Всё, что помечено [РЕДАКТИРУЕМОЕ], можно спокойно подстраивать под себя.
+
+        // [РЕДАКТИРУЕМОЕ] Сколько мс пальцы должны непрерывно "ехать" по тачпаду (без пауз),
+        // прежде чем мы перейдём в режим непрерывного скролла по абзацам.
+        // Пока это время не прошло — быстрый свайп после отрыва пальцев просто перелистывает 1 абзац.
+        private const double HoldToScrollThresholdMs = 500;
+
+        // [РЕДАКТИРУЕМОЕ] Через сколько мс без новых событий колеса/тачпада считаем,
+        // что пальцы оторвались от тачпада (жест завершён).
+        private const double FingerLiftGapMs = 150;
+
+        // [РЕДАКТИРУЕМОЕ] Минимальная суммарная дельта быстрого свайпа, чтобы считать его
+        // осознанным движением, а не случайным касанием тачпада.
+        private const double MinSwipeDeltaThreshold = 20;
+
+        // [РЕДАКТИРУЕМОЕ] Диапазон скорости перелистывания абзацев в режиме удержания (мс между прыжками):
+        // MaxJumpIntervalMs — сразу после входа в режим (пальцы почти не отведены от начала свайпа);
+        // MinJumpIntervalMs — потолок скорости, когда пальцы отведены далеко.
+        private const int MaxJumpIntervalMs = 280;
+        private const int MinJumpIntervalMs = 60;
+
+        // [РЕДАКТИРУЕМОЕ] Насколько сильно накопленное отведение пальцев от начала свайпа
+        // влияет на скорость перелистывания (чем больше значение — тем резче нарастает скорость).
+        private const double SwipeSpeedFactor = 0.6;
+
+        // Как часто "опрашиваем" состояние жеста. Не стоит делать сильно больше 30-40мс,
+        // иначе просядет точность попадания в HoldToScrollThresholdMs и плавность ускорения.
+        private const double GestureTickIntervalMs = 25;
+
+        // Накопленное смещение с начала ТЕКУЩЕГО жеста. Пока жест короткий — это просто
+        // направление/сила свайпа для решения "прыгнуть на 1 абзац или нет" при отпускании.
+        // Как только вошли в режим удержания — это же значение работает как "виртуальное
+        // расстояние", на которое пальцы отведены от точки начала свайпа, и определяет скорость.
+        private double _wheelAccumulator = 0;
+        private DateTime _lastWheelEventTime = DateTime.MinValue;
+        private DateTime _gestureStartTime = DateTime.MinValue;
+        private DateTime _lastParagraphJumpTime = DateTime.MinValue;
+        private bool _isGestureActive = false;
+        private bool _isHeldScrollMode = false;
+        private DispatcherTimer _smartScrollTimer;
+
+        // Вложенный класс для независимой анимации каждого ScrollViewer
+        private class ScrollAnimator
+        {
+            private DispatcherTimer _timer;
+            private ScrollViewer _sv;
+            private double _startOffset;
+            private double _targetOffset;
+            private DateTime _startTime;
+            private TimeSpan _duration;
+
+            public void SmoothScrollTo(ScrollViewer sv, double targetOffset, int durationMs)
+            {
+                if (_timer != null && _timer.IsEnabled)
+                {
+                    _timer.Stop();
+                }
+
+                _sv = sv;
+                _startOffset = sv.VerticalOffset;
+                _targetOffset = targetOffset;
+                _startTime = DateTime.Now;
+                _duration = TimeSpan.FromMilliseconds(durationMs);
+
+                _timer = new DispatcherTimer(DispatcherPriority.Render);
+                _timer.Interval = TimeSpan.FromMilliseconds(16); // ~60 FPS
+                _timer.Tick += Timer_Tick;
+                _timer.Start();
+            }
+
+            private void Timer_Tick(object sender, EventArgs e)
+            {
+                var elapsed = DateTime.Now - _startTime;
+                double progress = elapsed.TotalMilliseconds / _duration.TotalMilliseconds;
+
+                if (progress >= 1.0)
+                {
+                    progress = 1.0;
+                    _timer.Stop();
+                }
+
+                // 【НОВОЕ】 EaseOutQuint - дает очень мягкое, "премиальное" и естественное торможение
+                double eased = 1 - Math.Pow(1 - progress, 5);
+                double currentOffset = _startOffset + (_targetOffset - _startOffset) * eased;
+
+                if (_sv != null)
+                {
+                    _sv.ScrollToVerticalOffset(currentOffset);
+                }
+            }
+        }
+
+        // Два независимых аниматора: один для английского, другой для русского
+        private readonly ScrollAnimator _engAnimator = new ScrollAnimator();
+        private readonly ScrollAnimator _rusAnimator = new ScrollAnimator();
+
         public AnalysisWindow()
         {
             InitializeComponent();
+
             this.SourceInitialized += (s, e) =>
             {
                 var handle = new System.Windows.Interop.WindowInteropHelper(this).Handle;
                 SendMessage(handle, 0x80, IntPtr.Zero, IntPtr.Zero);
                 SendMessage(handle, 0x80, IntPtr.Zero, new IntPtr(1));
             };
+
             Loaded += AnalysisWindow_Loaded;
             PreviewMouseLeftButtonDown += OnWindowPreviewMouseLeftButtonDown;
+
             DarkTitleBarHelper.ApplyDarkTitleBar(this);
             InitMiddleScroll();
 
             _cursorHideTimer = new DispatcherTimer();
             _cursorHideTimer.Interval = TimeSpan.FromMilliseconds(CursorHideDelayMs);
             _cursorHideTimer.Tick += CursorHideTimer_Tick;
+
+            _smartScrollTimer = new DispatcherTimer();
+            _smartScrollTimer.Tick += SmartScrollTimer_Tick;
         }
 
         private void AnalysisWindow_Loaded(object sender, RoutedEventArgs e)
@@ -58,10 +165,396 @@ namespace DBD_Trans.Views
             ViewModel.RussianRichTextBox = RussianRichTextBox;
             ViewModel.InitializeDocuments();
             InitSharedToolTip();
+
+            ViewModel.FocusModeChanged += ViewModel_FocusModeChanged;
+            ViewModel.DocumentsRebuilding += ViewModel_DocumentsRebuilding; // НОВОЕ
+            ViewModel.DocumentsRebuilt += ViewModel_DocumentsRebuilt;       // реализация ниже — замените старую с Opacity
+            ViewModel.PropertyChanged += ViewModel_PropertyChanged;
+            this.SizeChanged += (s, ev) => AdjustPaddingBlocks();
+        }
+
+        private double _savedEnglishOffset;
+        private double _savedRussianOffset;
+
+        private void ViewModel_DocumentsRebuilding()
+        {
+            // Синхронно, ДО пересборки — запоминаем текущую позицию скролла.
+            // Document ещё старый, ничего не менялось.
+            _savedEnglishOffset = EnglishScrollViewer.VerticalOffset;
+            _savedRussianOffset = RussianScrollViewer.VerticalOffset;
+        }
+
+        private void ViewModel_DocumentsRebuilt()
+        {
+            // Вызывается сразу после того, как ViewModel присвоил новый .Document —
+            // всё ещё в том же синхронном стеке вызовов, WPF пока не отрисовал
+            // ни одного кадра. Правим паддинг и возвращаем скролл прямо здесь.
+            AdjustPaddingBlocks();
+            EnglishScrollViewer.ScrollToVerticalOffset(_savedEnglishOffset);
+            RussianScrollViewer.ScrollToVerticalOffset(_savedRussianOffset);
+        }
+
+        private void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(AnalysisViewModel.IsMarkerActive) && !ViewModel.IsMarkerActive)
+            {
+                EnglishRichTextBox.Focus(); // <-- ЗАМЕНИТЬ
+            }
         }
 
         [DllImport("user32.dll")]
         private static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+
+        // ==========================================
+        // ЛОГИКА РЕЖИМА ФОКУСА (Центрирование и Отступы)
+        // ==========================================
+
+        private string _paragraphJumpBuffer = "";
+
+        protected override void OnPreviewKeyDown(KeyEventArgs e)
+        {
+            // 1. Проверяем, что мы в режиме фокуса
+            if (ViewModel.IsFocusMode && ViewModel.IsSplitBySentences)
+            {
+                // 2. 【ЗАЩИТА】 Проверяем, не печатает ли пользователь сейчас в TextBox 
+                // (Это защитит Поиск, Добавление и Редактирование замечаний)
+                var focusedElement = Keyboard.FocusedElement;
+                bool isTypingInTextBox = focusedElement is TextBox;
+
+                if (!isTypingInTextBox)
+                {
+                    // Определяем нажатую цифру (основная клавиатура и Numpad)
+                    int digit = -1;
+                    if (e.Key >= Key.D0 && e.Key <= Key.D9) digit = e.Key - Key.D0;
+                    else if (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9) digit = e.Key - Key.NumPad0;
+
+                    // --- Обработка цифр ---
+                    if (digit != -1)
+                    {
+                        _paragraphJumpBuffer += digit.ToString();
+                        UpdateJumpBufferUI();
+                        e.Handled = true; // Блокируем дальнейшую обработку
+                        return;
+                    }
+
+                    // --- Обработка Backspace (удалить последнюю цифру) ---
+                    if (e.Key == Key.Back)
+                    {
+                        if (_paragraphJumpBuffer.Length > 0)
+                        {
+                            _paragraphJumpBuffer = _paragraphJumpBuffer.Substring(0, _paragraphJumpBuffer.Length - 1);
+                            UpdateJumpBufferUI();
+                        }
+                        e.Handled = true;
+                        return;
+                    }
+
+                    // --- Обработка Enter (Прыжок) ---
+                    if (e.Key == Key.Enter)
+                    {
+                        if (int.TryParse(_paragraphJumpBuffer, out int targetNumber))
+                        {
+                            // В UI нумерация с 1, а индекс массива с 0
+                            int targetIndex = targetNumber - 1;
+
+                            // Проверяем, существует ли такой абзац
+                            if (targetIndex >= 0 && targetIndex < ViewModel.TotalParagraphs)
+                            {
+                                ViewModel.CurrentFocusedParagraphIndex = targetIndex;
+                            }
+                        }
+                        _paragraphJumpBuffer = ""; // Сбрасываем буфер в любом случае
+                        UpdateJumpBufferUI();
+                        e.Handled = true;
+                        return;
+                    }
+
+                    // --- Обработка Escape (Отмена) ---
+                    if (e.Key == Key.Escape)
+                    {
+                        _paragraphJumpBuffer = "";
+                        UpdateJumpBufferUI();
+                        e.Handled = true;
+                        return;
+                    }
+
+                    // --- Сброс буфера при нажатии других клавиш (буквы, символы) ---
+                    if (e.Key != Key.LeftShift && e.Key != Key.RightShift &&
+                        e.Key != Key.LeftCtrl && e.Key != Key.RightCtrl &&
+                        e.Key != Key.LeftAlt && e.Key != Key.RightAlt)
+                    {
+                        _paragraphJumpBuffer = "";
+                        UpdateJumpBufferUI();
+                    }
+                }
+
+                // --- Навигация стрелками (осталась как была) ---
+                if (e.Key == Key.Down)
+                {
+                    ViewModel.NextParagraphCommand.Execute(null);
+                    e.Handled = true;
+                    return;
+                }
+                else if (e.Key == Key.Up)
+                {
+                    ViewModel.PrevParagraphCommand.Execute(null);
+                    e.Handled = true;
+                    return;
+                }
+            }
+
+            base.OnPreviewKeyDown(e);
+        }
+
+        // Вспомогательный метод для обновления UI
+        private void UpdateJumpBufferUI()
+        {
+            ViewModel.JumpBufferText = string.IsNullOrEmpty(_paragraphJumpBuffer)
+                ? ""
+                : $"🎯 Переход к абзацу: {_paragraphJumpBuffer}";
+        }
+        private void ViewModel_FocusModeChanged()
+        {
+            // Определяем, входим мы в фокус или выходим из него
+            bool isEnteringFocus = ViewModel.IsFocusMode;
+
+            if (isEnteringFocus)
+            {
+                // 【ВХОД В РЕЖИМ ФОКУСА】
+                // Сохраняем текущие позиции скролла СИНХРОННО. 
+                // Это критично сделать прямо сейчас, ДО того как WPF пересчитает layout 
+                // из-за изменения FontSize/Opacity в ApplyFocusMode() и добавления Padding.
+                _engOffsetBeforeFocus = EnglishScrollViewer.VerticalOffset;
+                _rusOffsetBeforeFocus = RussianScrollViewer.VerticalOffset;
+            }
+
+            // Используем Dispatcher, чтобы дать WPF завершить layout pass
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                // Обновляем отступы (Top/Bottom Padding). 
+                // При входе в фокус они увеличатся, при выходе — вернутся к 0.
+                AdjustPaddingBlocks();
+
+                if (isEnteringFocus)
+                {
+                    // Если вошли в фокус — центрируем текущий абзац
+                    ScrollToCurrentParagraph();
+                }
+                else
+                {
+                    // 【ВЫХОД ИЗ РЕЖИМА ФОКУСА】
+                    // Так как AdjustPaddingBlocks() уже отработал, Padding вернулся в норму,
+                    // и координатная сетка документа снова совпадает с той, что была до входа.
+                    // Спокойно возвращаем скролл на сохраненные позиции.
+                    EnglishScrollViewer.ScrollToVerticalOffset(_engOffsetBeforeFocus);
+                    RussianScrollViewer.ScrollToVerticalOffset(_rusOffsetBeforeFocus);
+                }
+            }), System.Windows.Threading.DispatcherPriority.Render);
+        }
+
+        private void AdjustPaddingBlocks()
+        {
+            AdjustPaddingForRtb(EnglishRichTextBox);
+            AdjustPaddingForRtb(RussianRichTextBox);
+        }
+
+        private void AdjustPaddingForRtb(RichTextBox rtb)
+        {
+            if (rtb?.Document == null) return;
+            ScrollViewer sv = (rtb == EnglishRichTextBox) ? EnglishScrollViewer : RussianScrollViewer;
+            if (sv == null) return;
+
+            rtb.UpdateLayout();
+            sv.UpdateLayout();
+
+            double viewportHeight = sv.ViewportHeight;
+            if (viewportHeight <= 0) viewportHeight = sv.ActualHeight;
+
+            double targetHeight = ViewModel.IsFocusMode ? viewportHeight : 0;
+            if (targetHeight < 0) targetHeight = 0;
+
+            if (rtb.Document.Blocks.FirstBlock is Paragraph topPad && topPad.Tag as string == "TopPadding")
+            {
+                topPad.Padding = new Thickness(0, targetHeight, 0, 0); // было Margin
+            }
+
+            if (rtb.Document.Blocks.LastBlock is Paragraph bottomPad && bottomPad.Tag as string == "BottomPadding")
+            {
+                bottomPad.Padding = new Thickness(0, 0, 0, targetHeight); // было Margin
+            }
+
+            rtb.UpdateLayout();
+            sv.UpdateLayout();
+        }
+        private void ScrollToCurrentParagraph()
+        {
+            if (!ViewModel.IsFocusMode) return;
+            ScrollToCenter(EnglishRichTextBox, ViewModel.GetEnglishParagraph(ViewModel.CurrentFocusedParagraphIndex));
+            ScrollToCenter(RussianRichTextBox, ViewModel.GetRussianParagraph(ViewModel.CurrentFocusedParagraphIndex));
+        }
+
+        private void ScrollToCenter(RichTextBox rtb, Paragraph targetParagraph)
+        {
+            if (rtb == null || targetParagraph == null) return;
+            ScrollViewer sv = (rtb == EnglishRichTextBox) ? EnglishScrollViewer : RussianScrollViewer;
+            if (sv == null) return;
+
+            rtb.UpdateLayout();
+            sv.UpdateLayout();
+
+            Rect startRect = targetParagraph.ContentStart.GetCharacterRect(LogicalDirection.Forward);
+            Rect endRect = targetParagraph.ContentEnd.GetCharacterRect(LogicalDirection.Backward);
+            Rect blockRect = Rect.Union(startRect, endRect);
+
+            if (blockRect.IsEmpty) blockRect = new Rect(0, 0, 0, targetParagraph.FontSize);
+
+            double viewportHeight = sv.ViewportHeight;
+            if (viewportHeight <= 0) viewportHeight = sv.ActualHeight;
+
+            double blockCenterY = blockRect.Y + (blockRect.Height / 2);
+            double targetOffset = blockCenterY - (viewportHeight / 2);
+
+            double maxOffset = sv.ExtentHeight - sv.ViewportHeight;
+            if (maxOffset < 0) maxOffset = 0;
+            targetOffset = Math.Max(0, Math.Min(targetOffset, maxOffset));
+
+            // 【ИЗМЕНЕНО】 Увеличиваем время до 300мс для более плавного, "маслянистого" торможения
+            var animator = (sv == EnglishScrollViewer) ? _engAnimator : _rusAnimator;
+            animator.SmoothScrollTo(sv, targetOffset, 300);
+        }
+        // ==========================================
+        // ОБРАБОТКА СКРОЛЛА МЫШИ
+        // ==========================================
+
+        private void RichTextBox_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            // Если включен режим фокуса — перехватываем управление
+            if (ViewModel.IsFocusMode && ViewModel.IsSplitBySentences)
+            {
+                e.Handled = true;
+                HandleFocusScrollWheel(e.Delta);
+                return;
+            }
+
+            // === Обычный режим (код ниже остался без изменений) ===
+            var rtb = sender as RichTextBox;
+            if (rtb == null) return;
+
+            ScrollViewer sv = (rtb == EnglishRichTextBox) ? EnglishScrollViewer : RussianScrollViewer;
+            if (sv == null) return;
+
+            double scrollAmount = e.Delta / 8.0;
+            double newOffset = sv.VerticalOffset - scrollAmount;
+            sv.ScrollToVerticalOffset(newOffset);
+            e.Handled = true;
+        }
+
+        private void HandleFocusScrollWheel(int delta)
+        {
+            var now = DateTime.Now;
+
+            if (!_isGestureActive)
+            {
+                // Пальцы только коснулись тачпада и начали двигаться — начало нового жеста
+                _isGestureActive = true;
+                _isHeldScrollMode = false;
+                _gestureStartTime = now;
+                _wheelAccumulator = 0;
+
+                _smartScrollTimer.Interval = TimeSpan.FromMilliseconds(GestureTickIntervalMs);
+                _smartScrollTimer.Start();
+            }
+
+            _lastWheelEventTime = now;
+            _wheelAccumulator += delta;
+        }
+
+        private void SmartScrollTimer_Tick(object sender, EventArgs e)
+        {
+            var now = DateTime.Now;
+            double timeSinceLastWheel = (now - _lastWheelEventTime).TotalMilliseconds;
+
+            // 1. Пальцы оторвались от тачпада: новых событий давно не было
+            if (timeSinceLastWheel > FingerLiftGapMs)
+            {
+                _smartScrollTimer.Stop();
+
+                // Если мы так и не успели войти в режим удержания — это был быстрый свайп.
+                // Перелистываем РОВНО на 1 абзац, ровно в момент отрыва пальцев.
+                if (!_isHeldScrollMode && Math.Abs(_wheelAccumulator) > MinSwipeDeltaThreshold)
+                {
+                    ExecuteParagraphJump(_wheelAccumulator);
+                }
+
+                ResetGestureState();
+                return;
+            }
+
+            // 2. Пальцы всё ещё на тачпаде (свайп продолжается без пауз) — проверяем,
+            // не пора ли перейти в режим непрерывного скролла
+            if (!_isHeldScrollMode)
+            {
+                double timeSinceGestureStart = (now - _gestureStartTime).TotalMilliseconds;
+                if (timeSinceGestureStart >= HoldToScrollThresholdMs)
+                {
+                    _isHeldScrollMode = true;
+                    // Сразу перелистываем первый абзац, не дожидаясь ещё одного интервала —
+                    // иначе после 500мс ожидания будет ощущаться "залипание"
+                    ExecuteParagraphJump(_wheelAccumulator);
+                    _lastParagraphJumpTime = now;
+                }
+                return;
+            }
+
+            // 3. Режим непрерывного скролла: чем дальше пальцы "отведены" от точки начала
+            // свайпа (чем больше |_wheelAccumulator|), тем чаще перелистываем абзацы
+            double timeSinceLastJump = (now - _lastParagraphJumpTime).TotalMilliseconds;
+            int jumpIntervalMs = CalculateJumpInterval(_wheelAccumulator);
+
+            if (timeSinceLastJump >= jumpIntervalMs)
+            {
+                ExecuteParagraphJump(_wheelAccumulator);
+                _lastParagraphJumpTime = now;
+            }
+        }
+
+        private int CalculateJumpInterval(double accumulatedDelta)
+        {
+            // Чем больше суммарное отведение пальцев от начала свайпа, тем короче интервал
+            // между прыжками (быстрее листаем). Значение НЕ гасится со временем само по себе —
+            // оно отражает то, насколько далеко "уехал" жест с момента, когда он начался.
+            double absDelta = Math.Abs(accumulatedDelta);
+            int intervalMs = (int)(MaxJumpIntervalMs - (absDelta * SwipeSpeedFactor));
+
+            return Math.Max(MinJumpIntervalMs, Math.Min(MaxJumpIntervalMs, intervalMs));
+        }
+
+        private void ResetGestureState()
+        {
+            _isGestureActive = false;
+            _isHeldScrollMode = false;
+            _wheelAccumulator = 0;
+        }
+
+        private void ExecuteParagraphJump(double delta)
+        {
+            if (delta < 0)
+            {
+                if (ViewModel.NextParagraphCommand.CanExecute(null))
+                    ViewModel.NextParagraphCommand.Execute(null);
+            }
+            else if (delta > 0)
+            {
+                if (ViewModel.PrevParagraphCommand.CanExecute(null))
+                    ViewModel.PrevParagraphCommand.Execute(null);
+            }
+        }
+
+
+
+        // ==========================================
+        // ТУЛТИПЫ И МАРКЕР
+        // ==========================================
 
         private void InitSharedToolTip()
         {
@@ -80,17 +573,280 @@ namespace DBD_Trans.Views
             ToolTipService.SetShowDuration(_sharedToolTip, 10000);
         }
 
-        protected override void OnClosing(CancelEventArgs e)
-        {
-            ViewModel.OnClosing();
-            base.OnClosing(e);
-        }
-
         private void CursorHideTimer_Tick(object sender, EventArgs e)
         {
             _cursorHideTimer.Stop();
             if (_targetRtbForCursor != null) _targetRtbForCursor.Cursor = Cursors.None;
         }
+
+        private void RichTextBox_PreviewMouseMove(object sender, MouseEventArgs e)
+        {
+            if (_sharedToolTip == null) return;
+            var rtb = sender as RichTextBox;
+            if (rtb == null) return;
+
+            if (ViewModel.IsMarkerActive)
+            {
+                if (rtb.Cursor == Cursors.None) rtb.Cursor = Cursors.IBeam;
+                _cursorHideTimer.Stop(); _targetRtbForCursor = null; HideToolTip(); return;
+            }
+
+            var pos = e.GetPosition(rtb);
+            var pointer = rtb.GetPositionFromPoint(pos, false);
+            var error = GetErrorAtPointer(rtb, pointer);
+
+            if (error != null)
+            {
+                if (_targetRtbForCursor != rtb || !_cursorHideTimer.IsEnabled)
+                {
+                    _targetRtbForCursor = rtb; _cursorHideTimer.Stop(); _cursorHideTimer.Start();
+                }
+
+                if (_toolTipTextBlock.Text != error.Text) _toolTipTextBlock.Text = error.Text;
+
+                Rect charRect = pointer.GetCharacterRect(LogicalDirection.Forward);
+                Point bottomLeftInWindow = rtb.TransformToAncestor(this).Transform(new Point(charRect.Left, charRect.Bottom));
+
+                if (!_sharedToolTip.IsOpen || _currentToolTipError != error)
+                {
+                    _sharedToolTip.PlacementTarget = this;
+                    _sharedToolTip.Placement = System.Windows.Controls.Primitives.PlacementMode.Relative;
+                    _sharedToolTip.VerticalOffset = bottomLeftInWindow.Y + 2;
+                    _sharedToolTip.HorizontalOffset = bottomLeftInWindow.X;
+                    _currentToolTipError = error;
+                    if (!_sharedToolTip.IsOpen) _sharedToolTip.IsOpen = true;
+                }
+            }
+            else
+            {
+                _cursorHideTimer.Stop(); _targetRtbForCursor = null;
+                if (rtb.Cursor == Cursors.None) rtb.Cursor = Cursors.IBeam;
+                HideToolTip();
+            }
+        }
+
+        private void RichTextBox_MouseLeave(object sender, MouseEventArgs e)
+        {
+            var rtb = sender as RichTextBox;
+            if (rtb != null && rtb.Cursor == Cursors.None) rtb.Cursor = Cursors.IBeam;
+            _cursorHideTimer.Stop(); _targetRtbForCursor = null; HideToolTip();
+        }
+
+        private void HideToolTip()
+        {
+            if (_sharedToolTip != null && _sharedToolTip.IsOpen) _sharedToolTip.IsOpen = false;
+            _currentToolTipError = null;
+        }
+
+        private ErrorItem GetErrorAtPointer(RichTextBox rtb, TextPointer pointer)
+        {
+            if (pointer == null) return null;
+            var context = pointer.GetPointerContext(LogicalDirection.Forward);
+            if (context != TextPointerContext.Text) return null;
+
+            var nextContext = pointer.GetNextContextPosition(LogicalDirection.Forward);
+            if (nextContext == null) return null;
+
+            var checkRange = new TextRange(pointer, nextContext);
+            string currentText = checkRange.Text;
+
+            if (string.IsNullOrEmpty(currentText)) return null;
+
+            var bg = checkRange.GetPropertyValue(TextElement.BackgroundProperty);
+            if (bg is SolidColorBrush brush)
+            {
+                Color permColor = (Color)ColorConverter.ConvertFromString("#33CA5100");
+                Color selColor = (Color)ColorConverter.ConvertFromString("#FFCA5100");
+
+                if (brush.Color == permColor || brush.Color == selColor)
+                {
+                    int index = GetTextIndexFromPointer(rtb.Document, pointer);
+                    if (index >= 0)
+                    {
+                        bool isEnglish = (rtb == EnglishRichTextBox);
+                        var vm = DataContext as AnalysisViewModel;
+                        if (vm == null) return null;
+
+                        foreach (var error in vm.Errors)
+                        {
+                            var highlights = isEnglish ? error.EnglishHighlights : error.RussianHighlights;
+                            if (highlights != null)
+                            {
+                                foreach (var h in highlights)
+                                {
+                                    if (index >= h.StartIndex && index < h.StartIndex + h.Length) return error;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
+        private int GetTextIndexFromPointer(FlowDocument doc, TextPointer target)
+        {
+            var targetParagraph = target.Paragraph;
+            if (targetParagraph == null) return -1;
+
+            var paraSentences = targetParagraph.Tag as List<SentenceInfo>;
+            int localIndex = 0;
+            var pointer = targetParagraph.ContentStart;
+
+            while (pointer != null && pointer.CompareTo(target) < 0)
+            {
+                var context = pointer.GetPointerContext(LogicalDirection.Forward);
+                if (context == TextPointerContext.Text)
+                {
+                    var next = pointer.GetNextContextPosition(LogicalDirection.Forward);
+                    if (next != null)
+                    {
+                        if (pointer.Parent is Run parentRun && parentRun.Tag as string == "ParagraphNumber")
+                        {
+                            pointer = next;
+                            continue;
+                        }
+
+                        if (next.CompareTo(target) > 0)
+                        {
+                            var range = new TextRange(pointer, target);
+                            string text = range.Text;
+                            int len = text.Length;
+                            if (text.EndsWith("\r\n")) len -= 2;
+                            else if (text.EndsWith("\n") || text.EndsWith("\r")) len -= 1;
+                            localIndex += len;
+                            break;
+                        }
+                        else
+                        {
+                            var range = new TextRange(pointer, next);
+                            string text = range.Text;
+                            int len = text.Length;
+                            if (text.EndsWith("\r\n")) len -= 2;
+                            else if (text.EndsWith("\n") || text.EndsWith("\r")) len -= 1;
+                            localIndex += len;
+                            pointer = next;
+                        }
+                    }
+                    else break;
+                }
+                else
+                {
+                    pointer = pointer.GetNextContextPosition(LogicalDirection.Forward);
+                }
+            }
+
+            if (paraSentences == null)
+            {
+                return localIndex;
+            }
+
+            int offsetInPara = localIndex;
+            foreach (var s in paraSentences)
+            {
+                if (offsetInPara <= s.Length)
+                {
+                    return s.StartIndex + offsetInPara;
+                }
+                offsetInPara -= (s.Length + 1);
+            }
+
+            var lastSentence = paraSentences[paraSentences.Count - 1];
+            return lastSentence.StartIndex + lastSentence.Length;
+        }
+
+        // ==========================================
+        // МАРКЕР И КЛИКИ
+        // ==========================================
+
+        private void RichTextBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var rtb = sender as RichTextBox;
+            if (rtb == null || !ViewModel.IsMarkerActive) return;
+
+            if (Keyboard.Modifiers == ModifierKeys.Control)
+            {
+                TextPointer pos = rtb.GetPositionFromPoint(e.GetPosition(rtb), true);
+                if (pos != null) { ViewModel.RemoveHighlightAtPosition(rtb, pos); e.Handled = true; }
+            }
+        }
+
+        private void RichTextBox_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var rtb = sender as RichTextBox;
+            if (rtb == null || !ViewModel.IsMarkerActive) return;
+            if (!rtb.Selection.IsEmpty)
+            {
+                ViewModel.ApplyMarkerToSelection(rtb);
+                Mouse.Capture(null); e.Handled = true;
+                rtb.Selection.Select(rtb.Selection.Start, rtb.Selection.Start);
+
+                // ---> АВТОФОКУС НА ПОЛЕ ВВОДА <---
+                NewErrorTextBox.Focus();
+            }
+        }
+
+        private void RichTextBox_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (!ViewModel.IsSplitBySentences) return;
+
+            var rtb = sender as RichTextBox;
+            var pos = e.GetPosition(rtb);
+            var pointer = rtb.GetPositionFromPoint(pos, false);
+
+            if (pointer != null)
+            {
+                var para = pointer.Paragraph;
+                if (para != null && para.Tag is List<SentenceInfo> paraSentences && paraSentences.Count > 0)
+                {
+                    int cursorIndex = GetTextIndexFromPointer(rtb.Document, pointer);
+                    SentenceInfo targetSentence = null;
+
+                    foreach (var s in paraSentences)
+                    {
+                        if (cursorIndex >= s.StartIndex && cursorIndex <= s.StartIndex + s.Length)
+                        {
+                            targetSentence = s;
+                            break;
+                        }
+                    }
+
+                    if (targetSentence == null)
+                    {
+                        targetSentence = paraSentences[paraSentences.Count - 1];
+                    }
+
+                    if (targetSentence != null)
+                    {
+                        var menu = new ContextMenu();
+
+                        var prevItem = new MenuItem { Header = "⬆️ Объединить с предыдущим" };
+                        prevItem.Click += (s, ev) => ViewModel.MergeWithPreviousCommand.Execute(targetSentence);
+
+                        var nextItem = new MenuItem { Header = "⬇️ Объединить со следующим" };
+                        nextItem.Click += (s, ev) => ViewModel.MergeWithNextCommand.Execute(targetSentence);
+
+                        var splitItem = new MenuItem { Header = "↕️ Выделить в отдельную строку" };
+                        splitItem.Click += (s, ev) => ViewModel.SplitSentenceCommand.Execute(targetSentence);
+
+                        menu.Items.Add(prevItem);
+                        menu.Items.Add(nextItem);
+                        menu.Items.Add(new Separator());
+                        menu.Items.Add(splitItem);
+
+                        menu.PlacementTarget = rtb;
+                        menu.IsOpen = true;
+                        e.Handled = true;
+                    }
+                }
+            }
+        }
+
+        private void RichTextBox_LostFocus(object sender, RoutedEventArgs e) { }
+
+        // ==========================================
+        // ОШИБКИ И ПАНЕЛИ
+        // ==========================================
 
         private void OnWindowPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -102,17 +858,24 @@ namespace DBD_Trans.Views
                 FindParentOfType<ScrollBar>(source) != null || FindParentOfType<Thumb>(source) != null) return;
 
             ViewModel.SelectedError = null;
+
+            // ---> ДОБАВЬ ЭТУ СТРОКУ <---
+            EnglishRichTextBox.Focus(); // <-- ЗАМЕНИТЬ
+
             e.Handled = true;
         }
 
         private void ToggleErrorsPanel()
         {
             if (ErrorsRow == null) return;
+
             bool isCollapsed = ErrorsRow.Height.IsStar || (ErrorsRow.Height.IsAbsolute && ErrorsRow.Height.Value <= 30);
+
             if (isCollapsed)
             {
                 int errorCount = ViewModel.Errors.Count;
                 if (errorCount == 0) return;
+
                 double calculatedHeight = 30 + (errorCount * 32);
                 ErrorsRow.Height = new GridLength(Math.Min(calculatedHeight, Math.Max(150, this.ActualHeight * 0.4)));
             }
@@ -124,6 +887,7 @@ namespace DBD_Trans.Views
             while (child != null)
             {
                 if (child == parent) return true;
+
                 DependencyObject next = LogicalTreeHelper.GetParent(child);
                 if (next == null)
                 {
@@ -196,7 +960,7 @@ namespace DBD_Trans.Views
                 {
                     errorItem.IsEditing = false;
                     if (string.IsNullOrWhiteSpace(errorItem.Text)) ViewModel.DeleteErrorCommand.Execute(errorItem);
-                    else { ViewModel.SelectedError = null; ViewModel.SaveChanges(); Keyboard.ClearFocus(); }
+                    else { ViewModel.SelectedError = null; ViewModel.SaveChanges(); EnglishRichTextBox.Focus(); } // <-- ЗАМЕНИТЬ
                 }
                 e.Handled = true;
             }
@@ -204,7 +968,7 @@ namespace DBD_Trans.Views
             {
                 if (sender is TextBox textBox && textBox.DataContext is ErrorItem errorItem)
                 {
-                    errorItem.IsEditing = false; ViewModel.SelectedError = null; Keyboard.ClearFocus();
+                    errorItem.IsEditing = false; ViewModel.SelectedError = null; EnglishRichTextBox.Focus(); // <-- ЗАМЕНИТЬ
                 }
                 e.Handled = true;
             }
@@ -212,265 +976,33 @@ namespace DBD_Trans.Views
 
         private void NewErrorTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter) { ViewModel.AddErrorCommand.Execute(null); Keyboard.ClearFocus(); e.Handled = true; }
+            if (e.Key == Key.Enter)
+            {
+                ViewModel.AddErrorCommand.Execute(null);
+
+                // Снимаем фокус с TextBox, чтобы он не оставался выделенным
+                EnglishRichTextBox.Focus();
+                e.Handled = true;
+            }
         }
 
-        private void RichTextBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void NewErrorTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            var rtb = sender as RichTextBox;
-            if (rtb == null || !ViewModel.IsMarkerActive) return;
-            if (Keyboard.Modifiers == ModifierKeys.Control)
-            {
-                TextPointer pos = rtb.GetPositionFromPoint(e.GetPosition(rtb), true);
-                if (pos != null) { ViewModel.RemoveHighlightAtPosition(rtb, pos); e.Handled = true; }
-            }
+            if (ViewModel != null) ViewModel.SelectedError = null;
         }
 
-        private void RichTextBox_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            var rtb = sender as RichTextBox;
-            if (rtb == null || !ViewModel.IsMarkerActive) return;
-            if (!rtb.Selection.IsEmpty)
-            {
-                ViewModel.ApplyMarkerToSelection(rtb);
-                Mouse.Capture(null); e.Handled = true;
-                rtb.Selection.Select(rtb.Selection.Start, rtb.Selection.Start);
-            }
-        }
+        // ==========================================
+        // СКРОЛЛ СРЕДНЕЙ КНОПКОЙ МЫШИ
+        // ==========================================
 
-        // --- НОВОЕ: Обработка правого клика для объединения предложений ---
-        private void RichTextBox_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (!ViewModel.IsSplitBySentences) return;
-
-            var rtb = sender as RichTextBox;
-            var pos = e.GetPosition(rtb);
-            var pointer = rtb.GetPositionFromPoint(pos, false);
-
-            if (pointer != null)
-            {
-                var para = pointer.Paragraph;
-                if (para != null && para.Tag is List<SentenceInfo> paraSentences && paraSentences.Count > 0)
-                {
-                    int cursorIndex = GetTextIndexFromPointer(rtb.Document, pointer);
-
-                    SentenceInfo targetSentence = null;
-                    foreach (var s in paraSentences)
-                    {
-                        if (cursorIndex >= s.StartIndex && cursorIndex <= s.StartIndex + s.Length)
-                        {
-                            targetSentence = s;
-                            break;
-                        }
-                    }
-
-                    if (targetSentence == null)
-                    {
-                        targetSentence = paraSentences[paraSentences.Count - 1];
-                    }
-
-                    if (targetSentence != null)
-                    {
-                        var menu = new ContextMenu();
-                        var prevItem = new MenuItem { Header = "⬆️ Объединить с предыдущим" };
-                        prevItem.Click += (s, ev) => ViewModel.MergeWithPreviousCommand.Execute(targetSentence);
-                        var nextItem = new MenuItem { Header = "⬇️ Объединить со следующим" };
-                        nextItem.Click += (s, ev) => ViewModel.MergeWithNextCommand.Execute(targetSentence);
-                        var splitItem = new MenuItem { Header = "↕️ Выделить в отдельную строку" };
-                        splitItem.Click += (s, ev) => ViewModel.SplitSentenceCommand.Execute(targetSentence);
-
-                        menu.Items.Add(prevItem);
-                        menu.Items.Add(nextItem);
-                        menu.Items.Add(new Separator());
-                        menu.Items.Add(splitItem);
-
-                        menu.PlacementTarget = rtb;
-                        menu.IsOpen = true;
-                        e.Handled = true;
-                    }
-                }
-            }
-        }
-
-        private void RichTextBox_LostFocus(object sender, RoutedEventArgs e) { }
-
-        private void RichTextBox_PreviewMouseMove(object sender, MouseEventArgs e)
-        {
-            if (_sharedToolTip == null) return;
-            var rtb = sender as RichTextBox;
-            if (rtb == null) return;
-
-            if (ViewModel.IsMarkerActive)
-            {
-                if (rtb.Cursor == Cursors.None) rtb.Cursor = Cursors.IBeam;
-                _cursorHideTimer.Stop(); _targetRtbForCursor = null; HideToolTip(); return;
-            }
-
-            var pos = e.GetPosition(rtb);
-            var pointer = rtb.GetPositionFromPoint(pos, false);
-            var error = GetErrorAtPointer(rtb, pointer);
-
-            if (error != null)
-            {
-                if (_targetRtbForCursor != rtb || !_cursorHideTimer.IsEnabled)
-                {
-                    _targetRtbForCursor = rtb; _cursorHideTimer.Stop(); _cursorHideTimer.Start();
-                }
-                if (_toolTipTextBlock.Text != error.Text) _toolTipTextBlock.Text = error.Text;
-
-                Rect charRect = pointer.GetCharacterRect(LogicalDirection.Forward);
-                Point bottomLeftInWindow = rtb.TransformToAncestor(this).Transform(new Point(charRect.Left, charRect.Bottom));
-
-                if (!_sharedToolTip.IsOpen || _currentToolTipError != error)
-                {
-                    _sharedToolTip.PlacementTarget = this;
-                    _sharedToolTip.Placement = System.Windows.Controls.Primitives.PlacementMode.Relative;
-                    _sharedToolTip.VerticalOffset = bottomLeftInWindow.Y + 2;
-                    _sharedToolTip.HorizontalOffset = bottomLeftInWindow.X;
-                    _currentToolTipError = error;
-                    if (!_sharedToolTip.IsOpen) _sharedToolTip.IsOpen = true;
-                }
-            }
-            else
-            {
-                _cursorHideTimer.Stop(); _targetRtbForCursor = null;
-                if (rtb.Cursor == Cursors.None) rtb.Cursor = Cursors.IBeam;
-                HideToolTip();
-            }
-        }
-
-        private void RichTextBox_MouseLeave(object sender, MouseEventArgs e)
-        {
-            var rtb = sender as RichTextBox;
-            if (rtb != null && rtb.Cursor == Cursors.None) rtb.Cursor = Cursors.IBeam;
-            _cursorHideTimer.Stop(); _targetRtbForCursor = null; HideToolTip();
-        }
-
-        private void HideToolTip()
-        {
-            if (_sharedToolTip != null && _sharedToolTip.IsOpen) _sharedToolTip.IsOpen = false;
-            _currentToolTipError = null;
-        }
-
-        private ErrorItem GetErrorAtPointer(RichTextBox rtb, TextPointer pointer)
-        {
-            if (pointer == null) return null;
-            var context = pointer.GetPointerContext(LogicalDirection.Forward);
-            if (context != TextPointerContext.Text) return null;
-            var nextContext = pointer.GetNextContextPosition(LogicalDirection.Forward);
-            if (nextContext == null) return null;
-
-            var checkRange = new TextRange(pointer, nextContext);
-            string currentText = checkRange.Text;
-
-            // ИСПРАВЛЕНИЕ: Используем IsNullOrEmpty вместо IsNullOrWhiteSpace, 
-            // чтобы тултипы работали на пробелах (которые заменяют \n в режиме разделения).
-            if (string.IsNullOrEmpty(currentText)) return null;
-
-            var bg = checkRange.GetPropertyValue(TextElement.BackgroundProperty);
-            if (bg is SolidColorBrush brush)
-            {
-                Color permColor = (Color)ColorConverter.ConvertFromString("#33CA5100");
-                Color selColor = (Color)ColorConverter.ConvertFromString("#FFCA5100");
-                if (brush.Color == permColor || brush.Color == selColor)
-                {
-                    int index = GetTextIndexFromPointer(rtb.Document, pointer);
-                    if (index >= 0)
-                    {
-                        bool isEnglish = (rtb == EnglishRichTextBox);
-                        var vm = DataContext as AnalysisViewModel;
-                        if (vm == null) return null;
-
-                        foreach (var error in vm.Errors)
-                        {
-                            var highlights = isEnglish ? error.EnglishHighlights : error.RussianHighlights;
-                            if (highlights != null)
-                            {
-                                foreach (var h in highlights)
-                                {
-                                    if (index >= h.StartIndex && index < h.StartIndex + h.Length) return error;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            return null;
-        }
-
-        private int GetTextIndexFromPointer(FlowDocument doc, TextPointer target)
-        {
-            var targetParagraph = target.Paragraph;
-            if (targetParagraph == null) return -1;
-
-            var paraSentences = targetParagraph.Tag as List<SentenceInfo>;
-            int localIndex = 0;
-            var pointer = targetParagraph.ContentStart;
-
-            while (pointer != null && pointer.CompareTo(target) < 0)
-            {
-                var context = pointer.GetPointerContext(LogicalDirection.Forward);
-                if (context == TextPointerContext.Text)
-                {
-                    var next = pointer.GetNextContextPosition(LogicalDirection.Forward);
-                    if (next != null)
-                    {
-                        if (next.CompareTo(target) > 0)
-                        {
-                            var range = new TextRange(pointer, target);
-                            string text = range.Text;
-                            int len = text.Length;
-                            if (text.EndsWith("\r\n")) len -= 2;
-                            else if (text.EndsWith("\n") || text.EndsWith("\r")) len -= 1;
-
-                            localIndex += len;
-                            break;
-                        }
-                        else
-                        {
-                            var range = new TextRange(pointer, next);
-                            string text = range.Text;
-                            int len = text.Length;
-                            if (text.EndsWith("\r\n")) len -= 2;
-                            else if (text.EndsWith("\n") || text.EndsWith("\r")) len -= 1;
-
-                            localIndex += len;
-                            pointer = next;
-                        }
-                    }
-                    else break;
-                }
-                else
-                {
-                    pointer = pointer.GetNextContextPosition(LogicalDirection.Forward);
-                }
-            }
-
-            if (paraSentences == null)
-            {
-                return localIndex; // Обычный режим
-            }
-
-            // Режим разделения: маппим localIndex на предложение
-            int offsetInPara = localIndex;
-            foreach (var s in paraSentences)
-            {
-                if (offsetInPara <= s.Length)
-                {
-                    return s.StartIndex + offsetInPara;
-                }
-                offsetInPara -= (s.Length + 1); // Пропускаем предложение и пробел
-            }
-
-            var lastSentence = paraSentences[paraSentences.Count - 1];
-            return lastSentence.StartIndex + lastSentence.Length;
-        }
         private void InitMiddleScroll()
         {
             _scrollTimer = new DispatcherTimer(DispatcherPriority.Render) { Interval = TimeSpan.FromMilliseconds(16) };
             _scrollTimer.Tick += ScrollTimer_Tick;
+
             EnglishScrollViewer.PreviewMouseDown += MiddleScroll_PreviewMouseDown;
             RussianScrollViewer.PreviewMouseDown += MiddleScroll_PreviewMouseDown;
+
             this.PreviewMouseUp += MiddleScroll_PreviewMouseUp;
             this.Deactivated += (s, e) => StopMiddleScroll();
         }
@@ -494,14 +1026,17 @@ namespace DBD_Trans.Views
         private void ScrollTimer_Tick(object sender, EventArgs e)
         {
             if (!_isMiddleScrolling || _targetScrollViewer == null) return;
+
             Point currentPos = Mouse.GetPosition(this);
             double deltaY = currentPos.Y - _middleScrollOrigin.Y;
+
             const double deadzone = 15.0; const double speed = 0.8; const double maxScroll = 40.0;
 
             if (Math.Abs(deltaY) > deadzone)
             {
                 double distance = Math.Abs(deltaY) - deadzone;
                 double scrollY = (deltaY > 0 ? 1 : -1) * distance * speed;
+
                 if (scrollY > maxScroll) scrollY = maxScroll; else if (scrollY < -maxScroll) scrollY = -maxScroll;
                 scrollY *= 0.6;
 
@@ -509,8 +1044,10 @@ namespace DBD_Trans.Views
                 {
                     double currentOffset = _targetScrollViewer.VerticalOffset;
                     double newOffsetY = currentOffset + scrollY;
+
                     double maxOffset = _targetScrollViewer.ExtentHeight - _targetScrollViewer.ViewportHeight;
                     if (maxOffset < 0) maxOffset = 0;
+
                     if (newOffsetY < 0) newOffsetY = 0; else if (newOffsetY > maxOffset) newOffsetY = maxOffset;
 
                     if (Math.Abs(newOffsetY - currentOffset) > 0.01) _targetScrollViewer.ScrollToVerticalOffset(newOffsetY);
@@ -523,22 +1060,11 @@ namespace DBD_Trans.Views
             if (_isMiddleScrolling) { _isMiddleScrolling = false; _scrollTimer.Stop(); this.Cursor = Cursors.Arrow; Mouse.Capture(null); }
         }
 
-        private void NewErrorTextBox_GotFocus(object sender, RoutedEventArgs e)
+        protected override void OnClosing(CancelEventArgs e)
         {
-            if (ViewModel != null) ViewModel.SelectedError = null;
+            ViewModel.OnClosing();
+            base.OnClosing(e);
         }
 
-        private void RichTextBox_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
-        {
-            var rtb = sender as RichTextBox;
-            if (rtb == null) return;
-            ScrollViewer sv = (rtb == EnglishRichTextBox) ? EnglishScrollViewer : RussianScrollViewer;
-            if (sv == null) return;
-
-            double scrollAmount = e.Delta / 8.0;
-            double newOffset = sv.VerticalOffset - scrollAmount;
-            sv.ScrollToVerticalOffset(newOffset);
-            e.Handled = true;
-        }
     }
 }

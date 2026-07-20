@@ -1,4 +1,4 @@
-cd "C:\Users\danil\OneDrive\Рабочий стол\СЦЕНАРИИ\Незакончено\DBD_Trans-master"
+﻿cd "C:\Users\Disposable\Desktop\СЦЕНАРИИ\В процессе\DanilChem\DBD_Localization"
 $outputPath = Join-Path (Get-Location) "project_dump.txt"
 $ignore = @('bin', 'obj', '.git', '.vs', 'node_modules', 'packages', '*.user', '*.suo', '*.dll', '*.exe', '*.pdb')
 $files = Get-ChildItem -Recurse -File -Include '*.cs', '*.cshtml', '*.xaml', '*.config' -Exclude $ignore
@@ -7,4 +7,4 @@ $content = foreach ($f in $files) {
     "===== $relativePath =====" + "`n" + (Get-Content $f.FullName -Raw) + "`n"
 }
 $content | Out-File -FilePath $outputPath -Encoding UTF8
-Write-Host "Готово! Файл сохранён: $outputPath"
+Write-Host "ПОШЕЛ НАХЕР"
