@@ -688,6 +688,15 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
+                    <DataGridTextColumn x:Name="ErrorCountColumn" Header="Замечания" Binding="{Binding ErrorCount}" Width="80">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextAlignment" Value="Center"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
 

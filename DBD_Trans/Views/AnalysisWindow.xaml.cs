@@ -46,12 +46,39 @@ namespace DBD_Trans.Views
         private const double HoldToScrollThresholdMs = 500;
 
         // [РЕДАКТИРУЕМОЕ] Через сколько мс без новых событий колеса/тачпада считаем,
-        // что пальцы оторвались от тачпада (жест завершён).
+        // что пальцы оторвались от тачпада (жест завершён). Действует ТОЛЬКО пока мы
+        // ещё не вошли в режим удержания — здесь короткий порог нужен, чтобы быстрый
+        // свайп отрабатывал отзывчиво, без задержки.
         private const double FingerLiftGapMs = 150;
+
+        // [РЕДАКТИРУЕМОЕ] Тот же смысл, что и FingerLiftGapMs, но действует УЖЕ В режиме
+        // удержания. Порог специально гораздо более щедрый: если пальцы почти не двигаются
+        // (а тачпад в принципе не шлёт события без движения), мы не должны тут же считать
+        // это отрывом пальцев — иначе скролл будет останавливаться, стоит на секунду
+        // задержать палец на месте, что и была вторая жалоба.
+        private const double HeldModeReleaseGapMs = 700;
 
         // [РЕДАКТИРУЕМОЕ] Минимальная суммарная дельта быстрого свайпа, чтобы считать его
         // осознанным движением, а не случайным касанием тачпада.
-        private const double MinSwipeDeltaThreshold = 20;
+        private const double MinSwipeDeltaThreshold = 50;
+
+        // [РЕДАКТИРУЕМОЕ] Защита от входа в режим удержания на затухающем "хвосте" инерции
+        // тачпада, а не на реальном продолжении свайпа. Идея: в момент, когда время жеста
+        // пересекает HoldToScrollThresholdMs, смотрим не на весь жест целиком, а только на
+        // СВЕЖУЮ активность за последние RecentActivityWindowMs миллисекунд. У живого,
+        // по-настоящему удерживаемого свайпа эта свежая сумма всегда останется существенной.
+        // У инерционного хвоста (после реального отрыва пальцев) она к этому моменту почти
+        // наверняка провалится ниже MinRecentActivityForHold — и неважно, плавно или
+        // "ступеньками" эта инерция затухает, важна только суммарная свежая сила.
+        // Если проверка не проходит — просто НЕ входим в удержание и ждём естественного
+        // завершения жеста по паузе (сработает обычный прыжок ровно на 1 абзац).
+        private const double RecentActivityWindowMs = 180;
+        private const double MinRecentActivityForHold = 45;
+
+        // [РЕДАКТИРУЕМОЕ] Сразу после завершения жеста ненадолго игнорируем новые события
+        // колеса — это "гасит" остаток инерционного хвоста тачпада, чтобы он не запустил
+        // новый мини-жест и не породил лишний прыжок сразу вслед за только что выполненным.
+        private const double PostGestureCooldownMs = 180;
 
         // [РЕДАКТИРУЕМОЕ] Диапазон скорости перелистывания абзацев в режиме удержания (мс между прыжками):
         // MaxJumpIntervalMs — сразу после входа в режим (пальцы почти не отведены от начала свайпа);
@@ -78,6 +105,18 @@ namespace DBD_Trans.Views
         private bool _isGestureActive = false;
         private bool _isHeldScrollMode = false;
         private DispatcherTimer _smartScrollTimer;
+
+        // Для проверки "свежей активности" при входе в режим удержания (см. RecentActivityWindowMs выше):
+        // список недавних событий колеса (время + сила), старые записи стираются по мере поступления новых
+        private struct WheelEventSample
+        {
+            public DateTime Time;
+            public double AbsDelta;
+        }
+        private readonly List<WheelEventSample> _recentEvents = new List<WheelEventSample>();
+
+        // Когда завершился предыдущий жест — используется для короткого "гашения" (PostGestureCooldownMs)
+        private DateTime _gestureEndedAt = DateTime.MinValue;
 
         // Вложенный класс для независимой анимации каждого ScrollViewer
         private class ScrollAnimator
@@ -211,11 +250,69 @@ namespace DBD_Trans.Views
 
         private string _paragraphJumpBuffer = "";
 
+        // ===== DBD_Trans\Views\AnalysisWindow.xaml.cs =====
+
         protected override void OnPreviewKeyDown(KeyEventArgs e)
         {
-            // 1. Проверяем, что мы в режиме фокуса
+            if (Keyboard.Modifiers == ModifierKeys.Alt)
+            {
+                bool isHandled = false;
+                string textToInsert = null;
+
+                // Alt + 1: Только русский текст
+                if (e.SystemKey == Key.D1 || e.SystemKey == Key.NumPad1)
+                {
+                    textToInsert = ViewModel.GetHighlightedText(false);
+                    isHandled = true;
+                }
+                // Alt + 2: Только английский текст
+                else if (e.SystemKey == Key.D2 || e.SystemKey == Key.NumPad2)
+                {
+                    textToInsert = ViewModel.GetHighlightedText(true);
+                    isHandled = true;
+                }
+                // Alt + 3: Русский ≠ Английский (с заглавной буквы)
+                else if (e.SystemKey == Key.D3 || e.SystemKey == Key.NumPad3)
+                {
+                    string ruText = ViewModel.GetHighlightedText(false);
+                    string enText = ViewModel.GetHighlightedText(true);
+
+                    if (!string.IsNullOrWhiteSpace(ruText) && !string.IsNullOrWhiteSpace(enText))
+                    {
+                        // Если выделены оба языка — формируем строку с "≠"
+                        textToInsert = $"{CapitalizeFirstLetter(ruText)} ≠ {CapitalizeFirstLetter(enText)}";
+                    }
+                    else if (!string.IsNullOrWhiteSpace(ruText))
+                    {
+                        // Если выделен только русский
+                        textToInsert = CapitalizeFirstLetter(ruText);
+                    }
+                    else if (!string.IsNullOrWhiteSpace(enText))
+                    {
+                        // Если выделен только английский
+                        textToInsert = CapitalizeFirstLetter(enText);
+                    }
+                    isHandled = true;
+                }
+
+                // Если комбинация была нажата
+                if (isHandled)
+                {
+                    if (!string.IsNullOrEmpty(textToInsert))
+                    {
+                        InsertTextAtCaret(textToInsert);
+                        NewErrorTextBox.Focus(); // Переносим фокус для продолжения ввода
+                    }
+                    e.Handled = true; // Блокируем дальнейшую обработку клавиш
+                    return;
+                }
+            }
+            // ================================================
+
+            // 1. Проверяем, что мы в режиме фокуса (твой старый код ниже)
             if (ViewModel.IsFocusMode && ViewModel.IsSplitBySentences)
             {
+                // ... (остальной код без изменений)
                 // 2. 【ЗАЩИТА】 Проверяем, не печатает ли пользователь сейчас в TextBox 
                 // (Это защитит Поиск, Добавление и Редактирование замечаний)
                 var focusedElement = Keyboard.FocusedElement;
@@ -449,9 +546,27 @@ namespace DBD_Trans.Views
             e.Handled = true;
         }
 
+        // [РЕДАКТИРУЕМОЕ] Включает вывод отладочной информации о жестах в окно Output (Debug)
+        // в Visual Studio. Если поведение всё ещё будет не устраивать — включите это,
+        // повторите проблемный свайп и посмотрите реальные дельты/паузы/суммы по логу:
+        // так пороги выше можно будет откалибровать не вслепую, а по фактическим цифрам.
+        private const bool EnableGestureDebugLog = true;
+
+        private void GestureLog(string message)
+        {
+            if (EnableGestureDebugLog)
+                System.Diagnostics.Debug.WriteLine("[FocusScroll " + DateTime.Now.ToString("HH:mm:ss.fff") + "] " + message);
+        }
+
         private void HandleFocusScrollWheel(int delta)
         {
             var now = DateTime.Now;
+
+            // Сразу после завершения предыдущего жеста ненадолго "глушим" входящие события —
+            // отсекает остаток инерционного хвоста тачпада или дребезг при повторном касании,
+            // который иначе мог бы ошибочно запустить новый жест / лишний прыжок.
+            if (!_isGestureActive && (now - _gestureEndedAt).TotalMilliseconds < PostGestureCooldownMs)
+                return;
 
             if (!_isGestureActive)
             {
@@ -460,6 +575,7 @@ namespace DBD_Trans.Views
                 _isHeldScrollMode = false;
                 _gestureStartTime = now;
                 _wheelAccumulator = 0;
+                _recentEvents.Clear();
 
                 _smartScrollTimer.Interval = TimeSpan.FromMilliseconds(GestureTickIntervalMs);
                 _smartScrollTimer.Start();
@@ -467,6 +583,44 @@ namespace DBD_Trans.Views
 
             _lastWheelEventTime = now;
             _wheelAccumulator += delta;
+
+            _recentEvents.Add(new WheelEventSample { Time = now, AbsDelta = Math.Abs(delta) });
+            PruneRecentEvents(now);
+
+            GestureLog("событие delta=" + delta + " накоплено=" + _wheelAccumulator.ToString("F0")
+                + " удержание=" + _isHeldScrollMode + " свежаяАктивность=" + GetRecentActivitySum(now).ToString("F0"));
+        }
+
+        private void PruneRecentEvents(DateTime now)
+        {
+            _recentEvents.RemoveAll(ev => (now - ev.Time).TotalMilliseconds > RecentActivityWindowMs);
+        }
+
+        // Суммарная "сила" событий колеса за последние RecentActivityWindowMs мс. Используется
+        // ТОЛЬКО как дополнительное условие для входа в режим удержания (см. комментарий у
+        // RecentActivityWindowMs) — намеренно НЕ используется, пока мы уже в режиме удержания,
+        // чтобы не сломать возможность держать палец почти неподвижно (вторая жалоба).
+        private double GetRecentActivitySum(DateTime now)
+        {
+            PruneRecentEvents(now);
+            double sum = 0;
+            for (int i = 0; i < _recentEvents.Count; i++)
+                sum += _recentEvents[i].AbsDelta;
+            return sum;
+        }
+
+        private void FinalizeQuickSwipe(DateTime now)
+        {
+            _smartScrollTimer.Stop();
+
+            bool willJump = Math.Abs(_wheelAccumulator) > MinSwipeDeltaThreshold;
+            GestureLog("завершение быстрого свайпа, накоплено=" + _wheelAccumulator.ToString("F0") + " прыжок=" + willJump);
+
+            if (willJump)
+                ExecuteParagraphJump(_wheelAccumulator);
+
+            ResetGestureState();
+            _gestureEndedAt = now;
         }
 
         private void SmartScrollTimer_Tick(object sender, EventArgs e)
@@ -474,19 +628,29 @@ namespace DBD_Trans.Views
             var now = DateTime.Now;
             double timeSinceLastWheel = (now - _lastWheelEventTime).TotalMilliseconds;
 
-            // 1. Пальцы оторвались от тачпада: новых событий давно не было
-            if (timeSinceLastWheel > FingerLiftGapMs)
+            // 1. Пальцы оторвались от тачпада: новых событий давно не было.
+            // До входа в режим удержания порог короткий (свайп отрабатывает быстро),
+            // а уже в режиме удержания — гораздо более щедрый (см. HeldModeReleaseGapMs),
+            // чтобы можно было держать палец почти неподвижно и не терять скорость скролла.
+            double releaseGapMs = _isHeldScrollMode ? HeldModeReleaseGapMs : FingerLiftGapMs;
+
+            if (timeSinceLastWheel > releaseGapMs)
             {
-                _smartScrollTimer.Stop();
-
-                // Если мы так и не успели войти в режим удержания — это был быстрый свайп.
-                // Перелистываем РОВНО на 1 абзац, ровно в момент отрыва пальцев.
-                if (!_isHeldScrollMode && Math.Abs(_wheelAccumulator) > MinSwipeDeltaThreshold)
+                // Если мы так и не успели войти в режим удержания — это был быстрый свайп,
+                // и FinalizeQuickSwipe перелистнёт РОВНО 1 абзац. Если мы уже были в режиме
+                // удержания — просто останавливаем непрерывный скролл без лишнего прыжка
+                // (последний абзац уже был показан предыдущим тиком).
+                if (_isHeldScrollMode)
                 {
-                    ExecuteParagraphJump(_wheelAccumulator);
+                    _smartScrollTimer.Stop();
+                    GestureLog("отпускание в режиме удержания, останавливаемся");
+                    ResetGestureState();
+                    _gestureEndedAt = now;
                 }
-
-                ResetGestureState();
+                else
+                {
+                    FinalizeQuickSwipe(now);
+                }
                 return;
             }
 
@@ -497,11 +661,26 @@ namespace DBD_Trans.Views
                 double timeSinceGestureStart = (now - _gestureStartTime).TotalMilliseconds;
                 if (timeSinceGestureStart >= HoldToScrollThresholdMs)
                 {
-                    _isHeldScrollMode = true;
-                    // Сразу перелистываем первый абзац, не дожидаясь ещё одного интервала —
-                    // иначе после 500мс ожидания будет ощущаться "залипание"
-                    ExecuteParagraphJump(_wheelAccumulator);
-                    _lastParagraphJumpTime = now;
+                    // Времени прошло достаточно, но это может быть и затухающий хвост
+                    // инерции тачпада, а не живой удерживаемый свайп — дополнительно
+                    // проверяем, что прямо СЕЙЧАС есть существенная свежая активность
+                    double recentActivity = GetRecentActivitySum(now);
+                    if (recentActivity >= MinRecentActivityForHold)
+                    {
+                        _isHeldScrollMode = true;
+                        GestureLog("вход в режим удержания, свежаяАктивность=" + recentActivity.ToString("F0"));
+                        // Сразу перелистываем первый абзац, не дожидаясь ещё одного интервала —
+                        // иначе после 500мс ожидания будет ощущаться "залипание"
+                        ExecuteParagraphJump(_wheelAccumulator);
+                        _lastParagraphJumpTime = now;
+                    }
+                    else
+                    {
+                        GestureLog("порог времени пройден, но свежая активность мала (" + recentActivity.ToString("F0") + ") — похоже на хвост инерции, удержание НЕ включаем");
+                    }
+                    // Иначе — не входим в удержание и просто ждём: либо свежая активность
+                    // ещё вернётся (жест продолжится), либо жест скоро завершится по паузе,
+                    // и тогда сработает обычный прыжок ровно на 1 абзац
                 }
                 return;
             }
@@ -515,6 +694,7 @@ namespace DBD_Trans.Views
             {
                 ExecuteParagraphJump(_wheelAccumulator);
                 _lastParagraphJumpTime = now;
+                GestureLog("прыжок в режиме удержания, накоплено=" + _wheelAccumulator.ToString("F0") + " интервал=" + jumpIntervalMs);
             }
         }
 
@@ -534,6 +714,7 @@ namespace DBD_Trans.Views
             _isGestureActive = false;
             _isHeldScrollMode = false;
             _wheelAccumulator = 0;
+            _recentEvents.Clear();
         }
 
         private void ExecuteParagraphJump(double delta)
@@ -842,7 +1023,20 @@ namespace DBD_Trans.Views
             }
         }
 
-        private void RichTextBox_LostFocus(object sender, RoutedEventArgs e) { }
+        private void RichTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (sender is RichTextBox rtb && rtb.Document != null)
+            {
+                // WPF в режиме IsReadOnly="True" имеет особенность "замораживать" выделение 
+                // при потере фокуса и некорректно восстанавливать его при следующем клике.
+                // Принудительно сворачиваем выделение в текущую позицию курсора, чтобы сбросить кэш.
+                var caret = rtb.CaretPosition;
+                if (caret != null)
+                {
+                    rtb.Selection.Select(caret, caret);
+                }
+            }
+        }
 
         // ==========================================
         // ОШИБКИ И ПАНЕЛИ
@@ -1064,6 +1258,54 @@ namespace DBD_Trans.Views
         {
             ViewModel.OnClosing();
             base.OnClosing(e);
+        }
+
+        // ===== DBD_Trans\Views\AnalysisWindow.xaml.cs =====
+
+        // ... (внутри класса AnalysisWindow)
+
+        /// <summary>
+        /// Делает первую букву строки заглавной.
+        /// </summary>
+        private string CapitalizeFirstLetter(string text)
+        {
+            if (string.IsNullOrEmpty(text)) return text;
+            // char.ToUpper корректно работает с кириллицей и латиницей
+            return char.ToUpper(text[0]) + text.Substring(1);
+        }
+
+        /// <summary>
+        /// Умная вставка текста в NewErrorTextBox с учетом позиции курсора, выделения и авто-пробела.
+        /// </summary>
+        private void InsertTextAtCaret(string textToInsert)
+        {
+            if (string.IsNullOrEmpty(textToInsert)) return;
+
+            int selStart = NewErrorTextBox.SelectionStart;
+            int selLength = NewErrorTextBox.SelectionLength;
+            string currentText = NewErrorTextBox.Text ?? "";
+
+            // Добавляем пробел перед вставкой, если нужно (чтобы слова не слипались)
+            string prefix = "";
+            if (selStart > 0 && currentText[selStart - 1] != ' ')
+            {
+                prefix = " ";
+            }
+
+            string finalTextToInsert = prefix + textToInsert;
+
+            // Формируем новый текст
+            string newText = currentText.Substring(0, selStart) +
+                             finalTextToInsert +
+                             currentText.Substring(selStart + selLength);
+
+            // Обновляем UI и ViewModel
+            ViewModel.NewErrorText = newText;
+            NewErrorTextBox.Text = newText;
+
+            // Ставим курсор в конец вставленного текста
+            NewErrorTextBox.CaretIndex = selStart + finalTextToInsert.Length;
+            NewErrorTextBox.SelectionLength = 0;
         }
 
     }

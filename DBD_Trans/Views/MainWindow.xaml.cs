@@ -40,8 +40,12 @@ namespace DBD_Trans.Views
                 if (vm != null)
                 {
                     vm.ScrollToItemRequested += OnScrollToItem;
+                    vm.PropertyChanged += Vm_PropertyChanged; // <-- Подписываемся на изменения свойств VM
                 }
+                UpdateErrorCountColumnVisibility(); // <-- Вызываем для начальной инициализации (скроем столбец, т.к. по умолчанию фильтр "Все")
             };
+
+
 
             // Снятие выделения при клике вне DataGrid
             this.PreviewMouseLeftButtonDown += OnWindowPreviewMouseLeftButtonDown;
@@ -146,6 +150,37 @@ namespace DBD_Trans.Views
             var vm = DataContext as MainViewModel;
             if (vm != null)
                 vm.SelectedEntry = null;
+        }
+
+        private void Vm_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            // Реагируем только на изменение фильтра
+            if (e.PropertyName == nameof(MainViewModel.SelectedFilter))
+            {
+                UpdateErrorCountColumnVisibility();
+            }
+        }
+
+        private void UpdateErrorCountColumnVisibility()
+        {
+            var vm = DataContext as MainViewModel;
+            if (vm == null || ErrorCountColumn == null) return;
+
+            // Проверяем, выбран ли нужный фильтр
+            bool showErrorsColumn = vm.SelectedFilter == "С ошибками (по убыванию)";
+
+            // Проверяем, находится ли столбец сейчас в DataGrid
+            bool isCurrentlyAdded = LocalizationGrid.Columns.Contains(ErrorCountColumn);
+
+            // Добавляем или удаляем столбец из коллекции
+            if (showErrorsColumn && !isCurrentlyAdded)
+            {
+                LocalizationGrid.Columns.Add(ErrorCountColumn);
+            }
+            else if (!showErrorsColumn && isCurrentlyAdded)
+            {
+                LocalizationGrid.Columns.Remove(ErrorCountColumn);
+            }
         }
 
         private void OnScrollToItem(LocalizationEntry entry)

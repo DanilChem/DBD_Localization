@@ -942,5 +942,52 @@ namespace DBD_Trans.ViewModels
                 }
             }
         }
+        // ===== DBD_Trans\ViewModels\AnalysisViewModel.cs =====
+
+        /// <summary>
+        /// Извлекает текст, отмеченный временным маркером, и возвращает его.
+        /// </summary>
+        public string GetHighlightedText(bool isEnglish)
+        {
+            var rtb = isEnglish ? EnglishRichTextBox : RussianRichTextBox;
+            if (rtb?.Document == null) return null;
+
+            var sb = new System.Text.StringBuilder();
+            bool lastWasHighlight = false;
+            var targetColor = TemporaryHighlightBrush.Color;
+
+            foreach (Block block in rtb.Document.Blocks)
+            {
+                if (block is Paragraph para)
+                {
+                    foreach (Inline inline in para.Inlines)
+                    {
+                        if (inline is Run run)
+                        {
+                            bool isHighlight = false;
+                            if (run.Background is SolidColorBrush bgBrush)
+                            {
+                                Color actualColor = run.Tag is Color c ? c : bgBrush.Color;
+                                isHighlight = actualColor == targetColor;
+                            }
+
+                            if (isHighlight)
+                            {
+                                if (sb.Length > 0 && !lastWasHighlight) sb.Append(" ");
+                                sb.Append(run.Text);
+                                lastWasHighlight = true;
+                            }
+                            else
+                            {
+                                lastWasHighlight = false;
+                            }
+                        }
+                    }
+                    if (lastWasHighlight) { sb.Append(" "); lastWasHighlight = false; }
+                }
+            }
+
+            return sb.ToString().Trim();
+        }
     }
 }
