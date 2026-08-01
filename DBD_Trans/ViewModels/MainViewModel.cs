@@ -298,6 +298,13 @@ namespace DBD_Trans.ViewModels
         /// <summary>Есть ли сейчас в таблице строка с таким ключом (используется окном истории изменений).</summary>
         public bool EntryExists(string key) => AllEntries.Any(e => e.Key == key);
 
+        /// <summary>
+        /// Снимок всех ключей, которые сейчас есть в таблице — окно истории изменений
+        /// берёт его один раз при открытии вместо того, чтобы линейно искать по AllEntries
+        /// для каждой отдельной строки истории (это и было основной причиной медленного открытия).
+        /// </summary>
+        public HashSet<string> GetAllKeys() => new HashSet<string>(AllEntries.Select(e => e.Key));
+
         private void ShowChanges()
         {
             if (_changeHistoryStorage == null) return;
