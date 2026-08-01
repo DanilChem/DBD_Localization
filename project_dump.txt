@@ -245,6 +245,33 @@ namespace DBD_Trans.Converters
     }
 }
 
+===== DBD_Trans\Converters\IntToVisibilityConverter.cs =====
+using System;
+using System.Globalization;
+using System.Windows;
+using System.Windows.Data;
+
+namespace DBD_Trans.Converters
+{
+    /// <summary>
+    /// Visible, РµСЃР»Рё С‡РёСЃР»Рѕ Р±РѕР»СЊС€Рµ РЅСѓР»СЏ вЂ” РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РґР»СЏ Р±РµР№РґР¶Р° СЃС‡С‘С‚С‡РёРєР°
+    /// РЅРµРїСЂРѕСЃРјРѕС‚СЂРµРЅРЅС‹С… РёР·РјРµРЅРµРЅРёР№ РЅР° РєРЅРѕРїРєРµ "РСЃС‚РѕСЂРёСЏ РёР·РјРµРЅРµРЅРёР№".
+    /// </summary>
+    public class IntToVisibilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return (value is int i && i > 0) ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}
+
+
 ===== DBD_Trans\Helpers\DarkTitleBarHelper.cs =====
 using System;
 using System.Runtime.InteropServices;
@@ -366,6 +393,96 @@ namespace DBD_Trans.Helpers
     }
 }
 
+===== DBD_Trans\Helpers\LocalizationDiffer.cs =====
+using DBD_Trans.Models;
+using System;
+using System.Collections.Generic;
+
+namespace DBD_Trans.Helpers
+{
+    /// <summary>
+    /// Р§РёСЃС‚Р°СЏ Р»РѕРіРёРєР° СЃСЂР°РІРЅРµРЅРёСЏ: Р±РµСЂС‘С‚ С‚РµРєСѓС‰РµРµ СЃРѕРґРµСЂР¶РёРјРѕРµ Dbd-En.json / Dbd-Ru.json
+    /// (СѓР¶Рµ СЂР°Р·РІС‘СЂРЅСѓС‚РѕРµ РІ СЃР»РѕРІР°СЂРё "РєР»СЋС‡ -> Р·РЅР°С‡РµРЅРёРµ") Рё СЃРЅРёРјРѕРє, СЃРѕС…СЂР°РЅС‘РЅРЅС‹Р№ РїСЂРё
+    /// РїСЂРµРґС‹РґСѓС‰РµР№ РїСЂРѕРІРµСЂРєРµ, Рё РІРѕР·РІСЂР°С‰Р°РµС‚ СЃРїРёСЃРѕРє С‚РѕРіРѕ, С‡С‚Рѕ РґРѕР±Р°РІРёР»РѕСЃСЊ, РёР·РјРµРЅРёР»РѕСЃСЊ
+    /// РёР»Рё РїСЂРѕРїР°Р»Рѕ. РќРёРєР°РєРѕРіРѕ С‡С‚РµРЅРёСЏ/Р·Р°РїРёСЃРё С„Р°Р№Р»РѕРІ вЂ” С‚РѕР»СЊРєРѕ СЃСЂР°РІРЅРµРЅРёРµ.
+    /// </summary>
+    public static class LocalizationDiffer
+    {
+        public static List<ChangeItem> Diff(
+            Dictionary<string, string> currentEnglish,
+            Dictionary<string, string> currentRussian,
+            Dictionary<string, SnapshotEntry> previousSnapshot)
+        {
+            var changes = new List<ChangeItem>();
+
+            var allKeys = new HashSet<string>(currentEnglish.Keys);
+            allKeys.UnionWith(currentRussian.Keys);
+            allKeys.UnionWith(previousSnapshot.Keys);
+
+            foreach (var key in allKeys)
+            {
+                currentEnglish.TryGetValue(key, out var newEn);
+                currentRussian.TryGetValue(key, out var newRu);
+                bool existsNow = currentEnglish.ContainsKey(key) || currentRussian.ContainsKey(key);
+
+                previousSnapshot.TryGetValue(key, out var old);
+                bool existedBefore = old != null;
+
+                if (existsNow && !existedBefore)
+                {
+                    changes.Add(new ChangeItem
+                    {
+                        Key = key,
+                        Type = ChangeType.Added,
+                        NewEnglish = newEn,
+                        NewRussian = newRu,
+                        EnglishChanged = !string.IsNullOrEmpty(newEn),
+                        RussianChanged = !string.IsNullOrEmpty(newRu)
+                    });
+                }
+                else if (!existsNow && existedBefore)
+                {
+                    changes.Add(new ChangeItem
+                    {
+                        Key = key,
+                        Type = ChangeType.Removed,
+                        OldEnglish = old.English,
+                        OldRussian = old.Russian,
+                        EnglishChanged = !string.IsNullOrEmpty(old.English),
+                        RussianChanged = !string.IsNullOrEmpty(old.Russian)
+                    });
+                }
+                else if (existsNow && existedBefore)
+                {
+                    bool enChanged = !string.Equals(old.English ?? "", newEn ?? "", StringComparison.Ordinal);
+                    bool ruChanged = !string.Equals(old.Russian ?? "", newRu ?? "", StringComparison.Ordinal);
+
+                    if (enChanged || ruChanged)
+                    {
+                        changes.Add(new ChangeItem
+                        {
+                            Key = key,
+                            Type = ChangeType.Updated,
+                            OldEnglish = old.English,
+                            NewEnglish = newEn,
+                            EnglishChanged = enChanged,
+                            OldRussian = old.Russian,
+                            NewRussian = newRu,
+                            RussianChanged = ruChanged
+                        });
+                    }
+                }
+                // existsNow == false && existedBefore == false вЂ” РєР»СЋС‡, РєРѕС‚РѕСЂС‹Р№ СѓРїРѕРјСЏРЅСѓС‚ РІ
+                // allKeys РёР·-Р·Р° UnionWith, РЅРѕ РЅР° РґРµР»Рµ РЅРёРіРґРµ РЅРµ РІСЃС‚СЂРµС‡Р°РµС‚СЃСЏ, РїСЂРѕРїСѓСЃРєР°РµРј.
+            }
+
+            changes.Sort((a, b) => string.Compare(a.Key, b.Key, StringComparison.OrdinalIgnoreCase));
+            return changes;
+        }
+    }
+}
+
+
 ===== DBD_Trans\Models\AppSettings.cs =====
 using System;
 using System.Collections.Generic;
@@ -387,6 +504,75 @@ namespace DBD_Trans.Models
         {
             Properties.Settings.Default.Save();
         }
+    }
+}
+
+
+===== DBD_Trans\Models\ChangeModels.cs =====
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace DBD_Trans.Models
+{
+    /// <summary>
+    /// РўРёРї РёР·РјРµРЅРµРЅРёСЏ СЃС‚СЂРѕРєРё Р»РѕРєР°Р»РёР·Р°С†РёРё РјРµР¶РґСѓ РґРІСѓРјСЏ РїСЂРѕРІРµСЂРєР°РјРё С„Р°Р№Р»РѕРІ.
+    /// </summary>
+    public enum ChangeType
+    {
+        Added,
+        Updated,
+        Removed
+    }
+
+    /// <summary>
+    /// РћРґРЅР° РєРѕРЅРєСЂРµС‚РЅР°СЏ СЃС‚СЂРѕРєР°, РєРѕС‚РѕСЂР°СЏ РїРѕСЏРІРёР»Р°СЃСЊ, РёР·РјРµРЅРёР»Р°СЃСЊ РёР»Рё РёСЃС‡РµР·Р»Р°
+    /// РІ Dbd-En.json / Dbd-Ru.json РїРѕ СЃСЂР°РІРЅРµРЅРёСЋ СЃ РїСЂРµРґС‹РґСѓС‰РёРј Р·Р°РїСѓСЃРєРѕРј.
+    /// </summary>
+    public class ChangeItem
+    {
+        public string Key { get; set; }
+        public ChangeType Type { get; set; }
+
+        public string OldEnglish { get; set; }
+        public string NewEnglish { get; set; }
+        public bool EnglishChanged { get; set; }
+
+        public string OldRussian { get; set; }
+        public string NewRussian { get; set; }
+        public bool RussianChanged { get; set; }
+    }
+
+    /// <summary>
+    /// РќР°Р±РѕСЂ РёР·РјРµРЅРµРЅРёР№, РѕР±РЅР°СЂСѓР¶РµРЅРЅС‹Р№ Р·Р° РѕРґРЅСѓ РїСЂРѕРІРµСЂРєСѓ С„Р°Р№Р»РѕРІ (РїРѕ СЃСѓС‚Рё вЂ” РѕРґРёРЅ РїР°С‚С‡).
+    /// РҐСЂР°РЅРёС‚СЃСЏ РІ ChangeHistory.json Рё РѕС‚РѕР±СЂР°Р¶Р°РµС‚СЃСЏ РІ РѕРєРЅРµ РёСЃС‚РѕСЂРёРё РёР·РјРµРЅРµРЅРёР№.
+    /// </summary>
+    public class ChangeSet
+    {
+        public Guid Id { get; set; } = Guid.NewGuid();
+        public DateTime DetectedAt { get; set; } = DateTime.Now;
+        public bool IsViewed { get; set; }
+        public List<ChangeItem> Changes { get; set; } = new List<ChangeItem>();
+
+        [JsonIgnore]
+        public int AddedCount => Changes?.Count(c => c.Type == ChangeType.Added) ?? 0;
+
+        [JsonIgnore]
+        public int UpdatedCount => Changes?.Count(c => c.Type == ChangeType.Updated) ?? 0;
+
+        [JsonIgnore]
+        public int RemovedCount => Changes?.Count(c => c.Type == ChangeType.Removed) ?? 0;
+    }
+
+    /// <summary>
+    /// РЎРЅРёРјРѕРє Р·РЅР°С‡РµРЅРёСЏ РѕРґРЅРѕР№ СЃС‚СЂРѕРєРё РЅР° РјРѕРјРµРЅС‚ РїРѕСЃР»РµРґРЅРµР№ РїСЂРѕРІРµСЂРєРё. РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ
+    /// С‚РѕР»СЊРєРѕ РґР»СЏ СЃСЂР°РІРЅРµРЅРёСЏ СЃ РЅРѕРІС‹Рј СЃРѕРґРµСЂР¶РёРјС‹Рј С„Р°Р№Р»РѕРІ Рё С…СЂР°РЅРёС‚СЃСЏ РІ ChangeSnapshot.json.
+    /// </summary>
+    public class SnapshotEntry
+    {
+        public string English { get; set; }
+        public string Russian { get; set; }
     }
 }
 
@@ -1184,8 +1370,168 @@ namespace DBD_Trans.Views {
 
 
 
+===== DBD_Trans\obj\Debug\Views\ChangesWindow.g.cs =====
+#pragma checksum "..\..\..\Views\ChangesWindow.xaml" "{8829d00f-11b8-4213-878b-770e8597ac16}" "804C793242F2822EF3137641CF4544F00EFC0E7D7B0B6A7F1251F5AF13754112"
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     Этот код создан программой.
+//     Исполняемая версия:4.0.30319.42000
+//
+//     Изменения в этом файле могут привести к неправильной работе и будут потеряны в случае
+//     повторной генерации кода.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+using DBD_Trans.Converters;
+using DBD_Trans.ViewModels;
+using DBD_Trans.Views;
+using System;
+using System.Diagnostics;
+using System.Windows;
+using System.Windows.Automation;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Ink;
+using System.Windows.Input;
+using System.Windows.Markup;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
+using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
+using System.Windows.Media.TextFormatting;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Windows.Shell;
+
+
+namespace DBD_Trans.Views {
+    
+    
+    /// <summary>
+    /// ChangesWindow
+    /// </summary>
+    public partial class ChangesWindow : System.Windows.Window, System.Windows.Markup.IComponentConnector {
+        
+        private bool _contentLoaded;
+        
+        /// <summary>
+        /// InitializeComponent
+        /// </summary>
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        public void InitializeComponent() {
+            if (_contentLoaded) {
+                return;
+            }
+            _contentLoaded = true;
+            System.Uri resourceLocater = new System.Uri("/DBD_Trans;component/views/changeswindow.xaml", System.UriKind.Relative);
+            
+            #line 1 "..\..\..\Views\ChangesWindow.xaml"
+            System.Windows.Application.LoadComponent(this, resourceLocater);
+            
+            #line default
+            #line hidden
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
+        void System.Windows.Markup.IComponentConnector.Connect(int connectionId, object target) {
+            this._contentLoaded = true;
+        }
+    }
+}
+
+
+
+===== DBD_Trans\obj\Debug\Views\ChangesWindow.g.i.cs =====
+#pragma checksum "..\..\..\Views\ChangesWindow.xaml" "{8829d00f-11b8-4213-878b-770e8597ac16}" "804C793242F2822EF3137641CF4544F00EFC0E7D7B0B6A7F1251F5AF13754112"
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     Этот код создан программой.
+//     Исполняемая версия:4.0.30319.42000
+//
+//     Изменения в этом файле могут привести к неправильной работе и будут потеряны в случае
+//     повторной генерации кода.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+using DBD_Trans.Converters;
+using DBD_Trans.ViewModels;
+using DBD_Trans.Views;
+using System;
+using System.Diagnostics;
+using System.Windows;
+using System.Windows.Automation;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Ink;
+using System.Windows.Input;
+using System.Windows.Markup;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
+using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
+using System.Windows.Media.TextFormatting;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Windows.Shell;
+
+
+namespace DBD_Trans.Views {
+    
+    
+    /// <summary>
+    /// ChangesWindow
+    /// </summary>
+    public partial class ChangesWindow : System.Windows.Window, System.Windows.Markup.IComponentConnector {
+        
+        private bool _contentLoaded;
+        
+        /// <summary>
+        /// InitializeComponent
+        /// </summary>
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        public void InitializeComponent() {
+            if (_contentLoaded) {
+                return;
+            }
+            _contentLoaded = true;
+            System.Uri resourceLocater = new System.Uri("/DBD_Trans;component/views/changeswindow.xaml", System.UriKind.Relative);
+            
+            #line 1 "..\..\..\Views\ChangesWindow.xaml"
+            System.Windows.Application.LoadComponent(this, resourceLocater);
+            
+            #line default
+            #line hidden
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
+        void System.Windows.Markup.IComponentConnector.Connect(int connectionId, object target) {
+            this._contentLoaded = true;
+        }
+    }
+}
+
+
+
 ===== DBD_Trans\obj\Debug\Views\MainWindow.g.cs =====
-#pragma checksum "..\..\..\Views\MainWindow.xaml" "{8829d00f-11b8-4213-878b-770e8597ac16}" "C94F5636344FE20017897ACC3563EF28E48650F051A7EC1CDF4A8225076216BA"
+#pragma checksum "..\..\..\Views\MainWindow.xaml" "{8829d00f-11b8-4213-878b-770e8597ac16}" "16C1607C28B50F1FEE91564BDB70AB4BC9586693732AF7D4761FFAB7EE49AA21"
 //------------------------------------------------------------------------------
 // <auto-generated>
 //     Этот код создан программой.
@@ -1230,7 +1576,7 @@ namespace DBD_Trans.Views {
     public partial class MainWindow : System.Windows.Window, System.Windows.Markup.IComponentConnector {
         
         
-        #line 609 "..\..\..\Views\MainWindow.xaml"
+        #line 616 "..\..\..\Views\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox SearchBox;
         
@@ -1238,7 +1584,7 @@ namespace DBD_Trans.Views {
         #line hidden
         
         
-        #line 615 "..\..\..\Views\MainWindow.xaml"
+        #line 622 "..\..\..\Views\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.ComboBox FilterComboBox;
         
@@ -1246,7 +1592,7 @@ namespace DBD_Trans.Views {
         #line hidden
         
         
-        #line 626 "..\..\..\Views\MainWindow.xaml"
+        #line 661 "..\..\..\Views\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.DataGrid LocalizationGrid;
         
@@ -1254,7 +1600,7 @@ namespace DBD_Trans.Views {
         #line hidden
         
         
-        #line 691 "..\..\..\Views\MainWindow.xaml"
+        #line 726 "..\..\..\Views\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.DataGridTextColumn ErrorCountColumn;
         
@@ -1294,7 +1640,7 @@ namespace DBD_Trans.Views {
             case 1:
             this.SearchBox = ((System.Windows.Controls.TextBox)(target));
             
-            #line 609 "..\..\..\Views\MainWindow.xaml"
+            #line 616 "..\..\..\Views\MainWindow.xaml"
             this.SearchBox.TextChanged += new System.Windows.Controls.TextChangedEventHandler(this.SearchBox_TextChanged);
             
             #line default
@@ -1303,7 +1649,7 @@ namespace DBD_Trans.Views {
             case 2:
             this.FilterComboBox = ((System.Windows.Controls.ComboBox)(target));
             
-            #line 618 "..\..\..\Views\MainWindow.xaml"
+            #line 625 "..\..\..\Views\MainWindow.xaml"
             this.FilterComboBox.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(this.FilterComboBox_SelectionChanged);
             
             #line default
@@ -1324,7 +1670,7 @@ namespace DBD_Trans.Views {
 
 
 ===== DBD_Trans\obj\Debug\Views\MainWindow.g.i.cs =====
-#pragma checksum "..\..\..\Views\MainWindow.xaml" "{8829d00f-11b8-4213-878b-770e8597ac16}" "C94F5636344FE20017897ACC3563EF28E48650F051A7EC1CDF4A8225076216BA"
+#pragma checksum "..\..\..\Views\MainWindow.xaml" "{8829d00f-11b8-4213-878b-770e8597ac16}" "16C1607C28B50F1FEE91564BDB70AB4BC9586693732AF7D4761FFAB7EE49AA21"
 //------------------------------------------------------------------------------
 // <auto-generated>
 //     Этот код создан программой.
@@ -1369,7 +1715,7 @@ namespace DBD_Trans.Views {
     public partial class MainWindow : System.Windows.Window, System.Windows.Markup.IComponentConnector {
         
         
-        #line 609 "..\..\..\Views\MainWindow.xaml"
+        #line 616 "..\..\..\Views\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox SearchBox;
         
@@ -1377,7 +1723,7 @@ namespace DBD_Trans.Views {
         #line hidden
         
         
-        #line 615 "..\..\..\Views\MainWindow.xaml"
+        #line 622 "..\..\..\Views\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.ComboBox FilterComboBox;
         
@@ -1385,7 +1731,7 @@ namespace DBD_Trans.Views {
         #line hidden
         
         
-        #line 626 "..\..\..\Views\MainWindow.xaml"
+        #line 661 "..\..\..\Views\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.DataGrid LocalizationGrid;
         
@@ -1393,7 +1739,7 @@ namespace DBD_Trans.Views {
         #line hidden
         
         
-        #line 691 "..\..\..\Views\MainWindow.xaml"
+        #line 726 "..\..\..\Views\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.DataGridTextColumn ErrorCountColumn;
         
@@ -1433,7 +1779,7 @@ namespace DBD_Trans.Views {
             case 1:
             this.SearchBox = ((System.Windows.Controls.TextBox)(target));
             
-            #line 609 "..\..\..\Views\MainWindow.xaml"
+            #line 616 "..\..\..\Views\MainWindow.xaml"
             this.SearchBox.TextChanged += new System.Windows.Controls.TextChangedEventHandler(this.SearchBox_TextChanged);
             
             #line default
@@ -1442,7 +1788,7 @@ namespace DBD_Trans.Views {
             case 2:
             this.FilterComboBox = ((System.Windows.Controls.ComboBox)(target));
             
-            #line 618 "..\..\..\Views\MainWindow.xaml"
+            #line 625 "..\..\..\Views\MainWindow.xaml"
             this.FilterComboBox.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(this.FilterComboBox_SelectionChanged);
             
             #line default
@@ -1470,7 +1816,7 @@ using System.Reflection;
 
 
 ===== DBD_Trans\obj\Debug\App.g.cs =====
-#pragma checksum "..\..\App.xaml" "{8829d00f-11b8-4213-878b-770e8597ac16}" "76811A29EF40183F9CDC7C543BC1CB48BD096D318E81D103FACF703E974B071F"
+#pragma checksum "..\..\App.xaml" "{8829d00f-11b8-4213-878b-770e8597ac16}" "21AE1F5F5A989EC4013546CB94A8C214089CC715205538CABACE5EBE0E75F83D"
 //------------------------------------------------------------------------------
 // <auto-generated>
 //     Этот код создан программой.
@@ -1550,7 +1896,7 @@ namespace DBD_Trans {
 
 
 ===== DBD_Trans\obj\Debug\App.g.i.cs =====
-#pragma checksum "..\..\App.xaml" "{8829d00f-11b8-4213-878b-770e8597ac16}" "76811A29EF40183F9CDC7C543BC1CB48BD096D318E81D103FACF703E974B071F"
+#pragma checksum "..\..\App.xaml" "{8829d00f-11b8-4213-878b-770e8597ac16}" "21AE1F5F5A989EC4013546CB94A8C214089CC715205538CABACE5EBE0E75F83D"
 //------------------------------------------------------------------------------
 // <auto-generated>
 //     Этот код создан программой.
@@ -1629,7 +1975,27 @@ namespace DBD_Trans {
 
 
 
-===== DBD_Trans\obj\Debug\GeneratedInternalTypeHelper.g.cs =====
+===== DBD_Trans\obj\Debug\DBD_Trans.exe.config =====
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <configSections>
+        <sectionGroup name="userSettings" type="System.Configuration.UserSettingsGroup, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" >
+            <section name="DBD_Trans.Properties.Settings" type="System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" allowExeDefinition="MachineToLocalUser" requirePermission="false" />
+        </sectionGroup>
+    </configSections>
+    <startup> 
+        <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.8" />
+    </startup>
+    <userSettings>
+        <DBD_Trans.Properties.Settings>
+            <setting name="AnalysisFontSize" serializeAs="String">
+                <value>14</value>
+            </setting>
+        </DBD_Trans.Properties.Settings>
+    </userSettings>
+</configuration>
+
+===== DBD_Trans\obj\Debug\DBD_Trans_Content.g.i.cs =====
 //------------------------------------------------------------------------------
 // <auto-generated>
 //     Этот код создан программой.
@@ -1640,57 +2006,13 @@ namespace DBD_Trans {
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace XamlGeneratedNamespace {
-    
-    
-    /// <summary>
-    /// GeneratedInternalTypeHelper
-    /// </summary>
-    [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
-    public sealed class GeneratedInternalTypeHelper : System.Windows.Markup.InternalTypeHelper {
-        
-        /// <summary>
-        /// CreateInstance
-        /// </summary>
-        protected override object CreateInstance(System.Type type, System.Globalization.CultureInfo culture) {
-            return System.Activator.CreateInstance(type, ((System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic) 
-                            | (System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.CreateInstance)), null, null, culture);
-        }
-        
-        /// <summary>
-        /// GetPropertyValue
-        /// </summary>
-        protected override object GetPropertyValue(System.Reflection.PropertyInfo propertyInfo, object target, System.Globalization.CultureInfo culture) {
-            return propertyInfo.GetValue(target, System.Reflection.BindingFlags.Default, null, null, culture);
-        }
-        
-        /// <summary>
-        /// SetPropertyValue
-        /// </summary>
-        protected override void SetPropertyValue(System.Reflection.PropertyInfo propertyInfo, object target, object value, System.Globalization.CultureInfo culture) {
-            propertyInfo.SetValue(target, value, System.Reflection.BindingFlags.Default, null, null, culture);
-        }
-        
-        /// <summary>
-        /// CreateDelegate
-        /// </summary>
-        protected override System.Delegate CreateDelegate(System.Type delegateType, object target, string handler) {
-            return ((System.Delegate)(target.GetType().InvokeMember("_CreateDelegate", (System.Reflection.BindingFlags.InvokeMethod 
-                            | (System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)), null, target, new object[] {
-                        delegateType,
-                        handler}, null)));
-        }
-        
-        /// <summary>
-        /// AddEventHandler
-        /// </summary>
-        protected override void AddEventHandler(System.Reflection.EventInfo eventInfo, object target, System.Delegate handler) {
-            eventInfo.AddEventHandler(target, handler);
-        }
-    }
-}
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("logo123.ico")]
+
+
+
+
+===== DBD_Trans\obj\Debug\GeneratedInternalTypeHelper.g.cs =====
+
 
 
 
@@ -2393,8 +2715,168 @@ namespace DBD_Trans.Views {
 
 
 
+===== DBD_Trans\obj\Release\Views\ChangesWindow.g.cs =====
+#pragma checksum "..\..\..\Views\ChangesWindow.xaml" "{8829d00f-11b8-4213-878b-770e8597ac16}" "804C793242F2822EF3137641CF4544F00EFC0E7D7B0B6A7F1251F5AF13754112"
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     Этот код создан программой.
+//     Исполняемая версия:4.0.30319.42000
+//
+//     Изменения в этом файле могут привести к неправильной работе и будут потеряны в случае
+//     повторной генерации кода.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+using DBD_Trans.Converters;
+using DBD_Trans.ViewModels;
+using DBD_Trans.Views;
+using System;
+using System.Diagnostics;
+using System.Windows;
+using System.Windows.Automation;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Ink;
+using System.Windows.Input;
+using System.Windows.Markup;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
+using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
+using System.Windows.Media.TextFormatting;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Windows.Shell;
+
+
+namespace DBD_Trans.Views {
+    
+    
+    /// <summary>
+    /// ChangesWindow
+    /// </summary>
+    public partial class ChangesWindow : System.Windows.Window, System.Windows.Markup.IComponentConnector {
+        
+        private bool _contentLoaded;
+        
+        /// <summary>
+        /// InitializeComponent
+        /// </summary>
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        public void InitializeComponent() {
+            if (_contentLoaded) {
+                return;
+            }
+            _contentLoaded = true;
+            System.Uri resourceLocater = new System.Uri("/DBD_Trans;component/views/changeswindow.xaml", System.UriKind.Relative);
+            
+            #line 1 "..\..\..\Views\ChangesWindow.xaml"
+            System.Windows.Application.LoadComponent(this, resourceLocater);
+            
+            #line default
+            #line hidden
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
+        void System.Windows.Markup.IComponentConnector.Connect(int connectionId, object target) {
+            this._contentLoaded = true;
+        }
+    }
+}
+
+
+
+===== DBD_Trans\obj\Release\Views\ChangesWindow.g.i.cs =====
+#pragma checksum "..\..\..\Views\ChangesWindow.xaml" "{8829d00f-11b8-4213-878b-770e8597ac16}" "804C793242F2822EF3137641CF4544F00EFC0E7D7B0B6A7F1251F5AF13754112"
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     Этот код создан программой.
+//     Исполняемая версия:4.0.30319.42000
+//
+//     Изменения в этом файле могут привести к неправильной работе и будут потеряны в случае
+//     повторной генерации кода.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+using DBD_Trans.Converters;
+using DBD_Trans.ViewModels;
+using DBD_Trans.Views;
+using System;
+using System.Diagnostics;
+using System.Windows;
+using System.Windows.Automation;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Ink;
+using System.Windows.Input;
+using System.Windows.Markup;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
+using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
+using System.Windows.Media.TextFormatting;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Windows.Shell;
+
+
+namespace DBD_Trans.Views {
+    
+    
+    /// <summary>
+    /// ChangesWindow
+    /// </summary>
+    public partial class ChangesWindow : System.Windows.Window, System.Windows.Markup.IComponentConnector {
+        
+        private bool _contentLoaded;
+        
+        /// <summary>
+        /// InitializeComponent
+        /// </summary>
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        public void InitializeComponent() {
+            if (_contentLoaded) {
+                return;
+            }
+            _contentLoaded = true;
+            System.Uri resourceLocater = new System.Uri("/DBD_Trans;component/views/changeswindow.xaml", System.UriKind.Relative);
+            
+            #line 1 "..\..\..\Views\ChangesWindow.xaml"
+            System.Windows.Application.LoadComponent(this, resourceLocater);
+            
+            #line default
+            #line hidden
+        }
+        
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
+        void System.Windows.Markup.IComponentConnector.Connect(int connectionId, object target) {
+            this._contentLoaded = true;
+        }
+    }
+}
+
+
+
 ===== DBD_Trans\obj\Release\Views\MainWindow.g.cs =====
-#pragma checksum "..\..\..\Views\MainWindow.xaml" "{8829d00f-11b8-4213-878b-770e8597ac16}" "C94F5636344FE20017897ACC3563EF28E48650F051A7EC1CDF4A8225076216BA"
+#pragma checksum "..\..\..\Views\MainWindow.xaml" "{8829d00f-11b8-4213-878b-770e8597ac16}" "16C1607C28B50F1FEE91564BDB70AB4BC9586693732AF7D4761FFAB7EE49AA21"
 //------------------------------------------------------------------------------
 // <auto-generated>
 //     Этот код создан программой.
@@ -2439,7 +2921,7 @@ namespace DBD_Trans.Views {
     public partial class MainWindow : System.Windows.Window, System.Windows.Markup.IComponentConnector {
         
         
-        #line 609 "..\..\..\Views\MainWindow.xaml"
+        #line 616 "..\..\..\Views\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox SearchBox;
         
@@ -2447,7 +2929,7 @@ namespace DBD_Trans.Views {
         #line hidden
         
         
-        #line 615 "..\..\..\Views\MainWindow.xaml"
+        #line 622 "..\..\..\Views\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.ComboBox FilterComboBox;
         
@@ -2455,7 +2937,7 @@ namespace DBD_Trans.Views {
         #line hidden
         
         
-        #line 626 "..\..\..\Views\MainWindow.xaml"
+        #line 661 "..\..\..\Views\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.DataGrid LocalizationGrid;
         
@@ -2463,7 +2945,7 @@ namespace DBD_Trans.Views {
         #line hidden
         
         
-        #line 691 "..\..\..\Views\MainWindow.xaml"
+        #line 726 "..\..\..\Views\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.DataGridTextColumn ErrorCountColumn;
         
@@ -2503,7 +2985,7 @@ namespace DBD_Trans.Views {
             case 1:
             this.SearchBox = ((System.Windows.Controls.TextBox)(target));
             
-            #line 609 "..\..\..\Views\MainWindow.xaml"
+            #line 616 "..\..\..\Views\MainWindow.xaml"
             this.SearchBox.TextChanged += new System.Windows.Controls.TextChangedEventHandler(this.SearchBox_TextChanged);
             
             #line default
@@ -2512,7 +2994,7 @@ namespace DBD_Trans.Views {
             case 2:
             this.FilterComboBox = ((System.Windows.Controls.ComboBox)(target));
             
-            #line 618 "..\..\..\Views\MainWindow.xaml"
+            #line 625 "..\..\..\Views\MainWindow.xaml"
             this.FilterComboBox.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(this.FilterComboBox_SelectionChanged);
             
             #line default
@@ -2533,7 +3015,7 @@ namespace DBD_Trans.Views {
 
 
 ===== DBD_Trans\obj\Release\Views\MainWindow.g.i.cs =====
-#pragma checksum "..\..\..\Views\MainWindow.xaml" "{8829d00f-11b8-4213-878b-770e8597ac16}" "C94F5636344FE20017897ACC3563EF28E48650F051A7EC1CDF4A8225076216BA"
+#pragma checksum "..\..\..\Views\MainWindow.xaml" "{8829d00f-11b8-4213-878b-770e8597ac16}" "16C1607C28B50F1FEE91564BDB70AB4BC9586693732AF7D4761FFAB7EE49AA21"
 //------------------------------------------------------------------------------
 // <auto-generated>
 //     Этот код создан программой.
@@ -2578,7 +3060,7 @@ namespace DBD_Trans.Views {
     public partial class MainWindow : System.Windows.Window, System.Windows.Markup.IComponentConnector {
         
         
-        #line 609 "..\..\..\Views\MainWindow.xaml"
+        #line 616 "..\..\..\Views\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox SearchBox;
         
@@ -2586,7 +3068,7 @@ namespace DBD_Trans.Views {
         #line hidden
         
         
-        #line 615 "..\..\..\Views\MainWindow.xaml"
+        #line 622 "..\..\..\Views\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.ComboBox FilterComboBox;
         
@@ -2594,7 +3076,7 @@ namespace DBD_Trans.Views {
         #line hidden
         
         
-        #line 626 "..\..\..\Views\MainWindow.xaml"
+        #line 661 "..\..\..\Views\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.DataGrid LocalizationGrid;
         
@@ -2602,7 +3084,7 @@ namespace DBD_Trans.Views {
         #line hidden
         
         
-        #line 691 "..\..\..\Views\MainWindow.xaml"
+        #line 726 "..\..\..\Views\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.DataGridTextColumn ErrorCountColumn;
         
@@ -2642,7 +3124,7 @@ namespace DBD_Trans.Views {
             case 1:
             this.SearchBox = ((System.Windows.Controls.TextBox)(target));
             
-            #line 609 "..\..\..\Views\MainWindow.xaml"
+            #line 616 "..\..\..\Views\MainWindow.xaml"
             this.SearchBox.TextChanged += new System.Windows.Controls.TextChangedEventHandler(this.SearchBox_TextChanged);
             
             #line default
@@ -2651,7 +3133,7 @@ namespace DBD_Trans.Views {
             case 2:
             this.FilterComboBox = ((System.Windows.Controls.ComboBox)(target));
             
-            #line 618 "..\..\..\Views\MainWindow.xaml"
+            #line 625 "..\..\..\Views\MainWindow.xaml"
             this.FilterComboBox.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(this.FilterComboBox_SelectionChanged);
             
             #line default
@@ -2679,7 +3161,7 @@ using System.Reflection;
 
 
 ===== DBD_Trans\obj\Release\App.g.cs =====
-#pragma checksum "..\..\App.xaml" "{8829d00f-11b8-4213-878b-770e8597ac16}" "76811A29EF40183F9CDC7C543BC1CB48BD096D318E81D103FACF703E974B071F"
+#pragma checksum "..\..\App.xaml" "{8829d00f-11b8-4213-878b-770e8597ac16}" "21AE1F5F5A989EC4013546CB94A8C214089CC715205538CABACE5EBE0E75F83D"
 //------------------------------------------------------------------------------
 // <auto-generated>
 //     Этот код создан программой.
@@ -2759,7 +3241,7 @@ namespace DBD_Trans {
 
 
 ===== DBD_Trans\obj\Release\App.g.i.cs =====
-#pragma checksum "..\..\App.xaml" "{8829d00f-11b8-4213-878b-770e8597ac16}" "76811A29EF40183F9CDC7C543BC1CB48BD096D318E81D103FACF703E974B071F"
+#pragma checksum "..\..\App.xaml" "{8829d00f-11b8-4213-878b-770e8597ac16}" "21AE1F5F5A989EC4013546CB94A8C214089CC715205538CABACE5EBE0E75F83D"
 //------------------------------------------------------------------------------
 // <auto-generated>
 //     Этот код создан программой.
@@ -2837,6 +3319,26 @@ namespace DBD_Trans {
 }
 
 
+
+===== DBD_Trans\obj\Release\DBD_Trans.exe.config =====
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <configSections>
+        <sectionGroup name="userSettings" type="System.Configuration.UserSettingsGroup, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" >
+            <section name="DBD_Trans.Properties.Settings" type="System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" allowExeDefinition="MachineToLocalUser" requirePermission="false" />
+        </sectionGroup>
+    </configSections>
+    <startup> 
+        <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.8" />
+    </startup>
+    <userSettings>
+        <DBD_Trans.Properties.Settings>
+            <setting name="AnalysisFontSize" serializeAs="String">
+                <value>14</value>
+            </setting>
+        </DBD_Trans.Properties.Settings>
+    </userSettings>
+</configuration>
 
 ===== DBD_Trans\obj\Release\GeneratedInternalTypeHelper.g.cs =====
 //------------------------------------------------------------------------------
@@ -3138,6 +3640,42 @@ namespace DBD_Trans.Properties {
 }
 
 
+===== DBD_Trans\Services\IChangeHistoryStorage.cs =====
+using DBD_Trans.Models;
+using System.Collections.Generic;
+
+namespace DBD_Trans.Services
+{
+    public interface IChangeHistoryStorage
+    {
+        /// <summary>
+        /// РЎСЂР°РІРЅРёРІР°РµС‚ С‚РµРєСѓС‰РµРµ СЃРѕРґРµСЂР¶РёРјРѕРµ Dbd-En.json / Dbd-Ru.json СЃРѕ СЃРЅРёРјРєРѕРј,
+        /// СЃРѕС…СЂР°РЅС‘РЅРЅС‹Рј РїСЂРё РїСЂРµРґС‹РґСѓС‰РµР№ РїСЂРѕРІРµСЂРєРµ, Рё РѕР±РЅРѕРІР»СЏРµС‚ СЃРЅРёРјРѕРє С‚РµРєСѓС‰РёРј СЃРѕСЃС‚РѕСЏРЅРёРµРј.
+        /// Р•СЃР»Рё СЌС‚Рѕ СЃР°РјС‹Р№ РїРµСЂРІС‹Р№ Р·Р°РїСѓСЃРє СЃ РґР°РЅРЅРѕР№ С„СѓРЅРєС†РёРµР№ (СЃРЅРёРјРєР° РµС‰С‘ РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚),
+        /// РёР·РјРµРЅРµРЅРёСЏ РЅРµ РІС‹С‡РёСЃР»СЏСЋС‚СЃСЏ вЂ” РїСЂРѕСЃС‚Рѕ С„РёРєСЃРёСЂСѓРµС‚СЃСЏ С‚РѕС‡РєР° РѕС‚СЃС‡С‘С‚Р°, Рё РјРµС‚РѕРґ
+        /// РІРѕР·РІСЂР°С‰Р°РµС‚ null (С‡С‚РѕР±С‹ РЅРµ РїРѕРєР°Р·С‹РІР°С‚СЊ СѓРІРµРґРѕРјР»РµРЅРёРµ Рѕ "С‚С‹СЃСЏС‡Р°С… РґРѕР±Р°РІР»РµРЅРЅС‹С… СЃС‚СЂРѕРє").
+        /// Р•СЃР»Рё СЂРµР°Р»СЊРЅС‹С… РёР·РјРµРЅРµРЅРёР№ РЅРµС‚ вЂ” С‚РѕР¶Рµ РІРѕР·РІСЂР°С‰Р°РµС‚ null.
+        /// Р•СЃР»Рё РёР·РјРµРЅРµРЅРёСЏ РЅР°Р№РґРµРЅС‹ вЂ” СЃРѕС…СЂР°РЅСЏРµС‚ РёС… РІ РёСЃС‚РѕСЂРёСЋ Рё РІРѕР·РІСЂР°С‰Р°РµС‚ РЅРѕРІС‹Р№ ChangeSet.
+        /// </summary>
+        ChangeSet DetectAndRecordChanges(Dictionary<string, string> currentEnglish, Dictionary<string, string> currentRussian);
+
+        /// <summary>Р’СЃСЏ РёСЃС‚РѕСЂРёСЏ РёР·РјРµРЅРµРЅРёР№, РѕС‚ РЅРѕРІС‹С… Рє СЃС‚Р°СЂС‹Рј.</summary>
+        List<ChangeSet> GetHistory();
+
+        /// <summary>РЎРєРѕР»СЊРєРѕ РѕС‚РґРµР»СЊРЅС‹С… СЃС‚СЂРѕРє РёР·РјРµРЅРёР»РѕСЃСЊ РІ РµС‰С‘ РЅРµ РїСЂРѕСЃРјРѕС‚СЂРµРЅРЅС‹С… РЅР°Р±РѕСЂР°С….</summary>
+        int GetUnviewedChangeItemCount();
+
+        /// <summary>РћС‚РјРµС‚РёС‚СЊ РІСЃСЋ РёСЃС‚РѕСЂРёСЋ РєР°Рє РїСЂРѕСЃРјРѕС‚СЂРµРЅРЅСѓСЋ (СЃР±СЂР°СЃС‹РІР°РµС‚ СЃС‡С‘С‚С‡РёРє СѓРІРµРґРѕРјР»РµРЅРёР№).</summary>
+        void MarkAllAsViewed();
+
+        /// <summary>РџРѕР»РЅРѕСЃС‚СЊСЋ РѕС‡РёСЃС‚РёС‚СЊ РёСЃС‚РѕСЂРёСЋ РёР·РјРµРЅРµРЅРёР№ (С‚РµРєСѓС‰РёР№ СЃРЅРёРјРѕРє РЅРµ Р·Р°С‚СЂР°РіРёРІР°РµС‚СЃСЏ).</summary>
+        void ClearHistory();
+
+        void Save();
+    }
+}
+
+
 ===== DBD_Trans\Services\IErrorStorage.cs =====
 using System.Collections.Generic;
 using DBD_Trans.Models;
@@ -3195,6 +3733,152 @@ namespace DBD_Trans.Services
         void Save();
     }
 }
+
+===== DBD_Trans\Services\JsonChangeHistoryStorage.cs =====
+using DBD_Trans.Helpers;
+using DBD_Trans.Models;
+using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
+namespace DBD_Trans.Services
+{
+    /// <summary>
+    /// РҐСЂР°РЅРёС‚ РґРІР° С„Р°Р№Р»Р° СЂСЏРґРѕРј СЃ Errors.json / Statuses.json:
+    ///  - ChangeSnapshot.json вЂ” РїРѕСЃР»РµРґРЅРµРµ РёР·РІРµСЃС‚РЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РєР°Р¶РґРѕР№ СЃС‚СЂРѕРєРё (РґР»СЏ СЃСЂР°РІРЅРµРЅРёСЏ);
+    ///  - ChangeHistory.json  вЂ” Р¶СѓСЂРЅР°Р» РІСЃРµС… РѕР±РЅР°СЂСѓР¶РµРЅРЅС‹С… РЅР°Р±РѕСЂРѕРІ РёР·РјРµРЅРµРЅРёР№ (РґР»СЏ РѕРєРЅР° РёСЃС‚РѕСЂРёРё).
+    /// </summary>
+    public class JsonChangeHistoryStorage : IChangeHistoryStorage
+    {
+        // РЎРєРѕР»СЊРєРѕ РїРѕСЃР»РµРґРЅРёС… РїР°С‚С‡РµР№ С…СЂР°РЅРёРј РІ РёСЃС‚РѕСЂРёРё, С‡С‚РѕР±С‹ С„Р°Р№Р» РЅРµ СЂРѕСЃ Р±РµСЃРєРѕРЅРµС‡РЅРѕ.
+        private const int MaxHistoryEntries = 100;
+
+        private readonly IFileService _fileService;
+        private readonly string _snapshotPath;
+        private readonly string _historyPath;
+        private readonly bool _snapshotExistedOnStart;
+
+        private Dictionary<string, SnapshotEntry> _snapshot;
+        private List<ChangeSet> _history;
+
+        public JsonChangeHistoryStorage(IFileService fileService, string baseDirectory)
+        {
+            _fileService = fileService;
+            _snapshotPath = Path.Combine(baseDirectory, "ChangeSnapshot.json");
+            _historyPath = Path.Combine(baseDirectory, "ChangeHistory.json");
+
+            _snapshotExistedOnStart = File.Exists(_snapshotPath);
+
+            Load();
+        }
+
+        private void Load()
+        {
+            if (File.Exists(_snapshotPath))
+            {
+                var json = File.ReadAllText(_snapshotPath);
+                _snapshot = JsonConvert.DeserializeObject<Dictionary<string, SnapshotEntry>>(json)
+                            ?? new Dictionary<string, SnapshotEntry>();
+            }
+            else
+            {
+                _snapshot = new Dictionary<string, SnapshotEntry>();
+            }
+
+            if (File.Exists(_historyPath))
+            {
+                var json = File.ReadAllText(_historyPath);
+                _history = JsonConvert.DeserializeObject<List<ChangeSet>>(json)
+                           ?? new List<ChangeSet>();
+            }
+            else
+            {
+                _history = new List<ChangeSet>();
+            }
+        }
+
+        public ChangeSet DetectAndRecordChanges(Dictionary<string, string> currentEnglish, Dictionary<string, string> currentRussian)
+        {
+            currentEnglish = currentEnglish ?? new Dictionary<string, string>();
+            currentRussian = currentRussian ?? new Dictionary<string, string>();
+
+            // РџРµСЂРІС‹Р№ Р·Р°РїСѓСЃРє СЃ СЌС‚РѕР№ С„СѓРЅРєС†РёРµР№ вЂ” СЃРЅРёРјРєР° РµС‰С‘ РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚. РќРµ СЃС‡РёС‚Р°РµРј РІСЃС‘
+            // С‚РµРєСѓС‰РµРµ СЃРѕРґРµСЂР¶РёРјРѕРµ "РґРѕР±Р°РІР»РµРЅРЅС‹Рј", Р° РїСЂРѕСЃС‚Рѕ С„РёРєСЃРёСЂСѓРµРј С‚РѕС‡РєСѓ РѕС‚СЃС‡С‘С‚Р°.
+            if (!_snapshotExistedOnStart)
+            {
+                RebuildSnapshot(currentEnglish, currentRussian);
+                Save();
+                return null;
+            }
+
+            var changes = LocalizationDiffer.Diff(currentEnglish, currentRussian, _snapshot);
+
+            RebuildSnapshot(currentEnglish, currentRussian);
+
+            if (changes.Count == 0)
+            {
+                Save();
+                return null;
+            }
+
+            var changeSet = new ChangeSet { Changes = changes };
+            _history.Insert(0, changeSet);
+
+            if (_history.Count > MaxHistoryEntries)
+                _history.RemoveRange(MaxHistoryEntries, _history.Count - MaxHistoryEntries);
+
+            Save();
+            return changeSet;
+        }
+
+        private void RebuildSnapshot(Dictionary<string, string> currentEnglish, Dictionary<string, string> currentRussian)
+        {
+            var newSnapshot = new Dictionary<string, SnapshotEntry>();
+            var allKeys = new HashSet<string>(currentEnglish.Keys);
+            allKeys.UnionWith(currentRussian.Keys);
+
+            foreach (var key in allKeys)
+            {
+                currentEnglish.TryGetValue(key, out var en);
+                currentRussian.TryGetValue(key, out var ru);
+                newSnapshot[key] = new SnapshotEntry { English = en, Russian = ru };
+            }
+
+            _snapshot = newSnapshot;
+        }
+
+        public List<ChangeSet> GetHistory()
+        {
+            return _history.OrderByDescending(c => c.DetectedAt).ToList();
+        }
+
+        public int GetUnviewedChangeItemCount()
+        {
+            return _history.Where(c => !c.IsViewed).Sum(c => c.Changes?.Count ?? 0);
+        }
+
+        public void MarkAllAsViewed()
+        {
+            foreach (var set in _history)
+                set.IsViewed = true;
+            Save();
+        }
+
+        public void ClearHistory()
+        {
+            _history.Clear();
+            Save();
+        }
+
+        public void Save()
+        {
+            _fileService.SaveJson(_snapshotPath, _snapshot);
+            _fileService.SaveJson(_historyPath, _history);
+        }
+    }
+}
+
 
 ===== DBD_Trans\Services\JsonErrorStorage.cs =====
 using Newtonsoft.Json;
@@ -4430,6 +5114,301 @@ namespace DBD_Trans.ViewModels
     }
 }
 
+===== DBD_Trans\ViewModels\ChangesViewModel.cs =====
+using DBD_Trans.Base;
+using DBD_Trans.Models;
+using DBD_Trans.Services;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows;
+using System.Windows.Input;
+
+namespace DBD_Trans.ViewModels
+{
+    /// <summary>
+    /// РћР±С‘СЂС‚РєР° РЅР°Рґ РѕРґРЅРёРј ChangeItem РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РІ СЃРїРёСЃРєРµ: РіРѕС‚РѕРІС‹Рµ РїРѕРґРїРёСЃРё,
+    /// РґРѕСЃС‚СѓРїРЅРѕСЃС‚СЊ РїРµСЂРµС…РѕРґР° Рє СЃС‚СЂРѕРєРµ РІ РіР»Р°РІРЅРѕРј РѕРєРЅРµ Рё С‚.Рґ.
+    /// </summary>
+    public class ChangeEntryViewModel
+    {
+        public string Key { get; }
+        public ChangeType Type { get; }
+
+        public string TypeLabel
+        {
+            get
+            {
+                switch (Type)
+                {
+                    case ChangeType.Added: return "Р”РѕР±Р°РІР»РµРЅРѕ";
+                    case ChangeType.Updated: return "РР·РјРµРЅРµРЅРѕ";
+                    case ChangeType.Removed: return "РЈРґР°Р»РµРЅРѕ";
+                    default: return "";
+                }
+            }
+        }
+
+        // Р“РѕС‚РѕРІС‹Рµ Рє Р±РёРЅРґРёРЅРіСѓ С„Р»Р°РіРё/Р·РЅР°С‡РµРЅРёСЏ вЂ” РІСЃСЏ РІРµС‚РІРёСЃС‚Р°СЏ Р»РѕРіРёРєР° "С‡С‚Рѕ Рё РєР°Рє РїРѕРєР°Р·Р°С‚СЊ"
+        // РїРѕСЃС‡РёС‚Р°РЅР° РѕРґРёРЅ СЂР°Р· Р·РґРµСЃСЊ, С‡С‚РѕР±С‹ XAML РѕСЃС‚Р°РІР°Р»СЃСЏ РїСЂРѕСЃС‚С‹Рј.
+        public bool ShowEnglish { get; }
+        public bool ShowEnglishDiff { get; }   // РїРѕРєР°Р·С‹РІР°РµРј РїР°СЂСѓ "Р‘С‹Р»Рѕ / РЎС‚Р°Р»Рѕ"
+        public bool ShowEnglishSingle { get; } // РїРѕРєР°Р·С‹РІР°РµРј РѕРґРЅРѕ Р·РЅР°С‡РµРЅРёРµ
+        public string EnglishSingleValue { get; }
+        public string OldEnglish { get; }
+        public string NewEnglish { get; }
+
+        public bool ShowRussian { get; }
+        public bool ShowRussianDiff { get; }
+        public bool ShowRussianSingle { get; }
+        public string RussianSingleValue { get; }
+        public string OldRussian { get; }
+        public string NewRussian { get; }
+
+        public bool CanNavigate { get; }
+
+        public ChangeEntryViewModel(ChangeItem source, bool canNavigate)
+        {
+            Key = source.Key;
+            Type = source.Type;
+            CanNavigate = canNavigate;
+
+            OldEnglish = source.OldEnglish;
+            NewEnglish = source.NewEnglish;
+            OldRussian = source.OldRussian;
+            NewRussian = source.NewRussian;
+
+            ComputeDisplay(
+                source.Type, source.EnglishChanged, source.OldEnglish, source.NewEnglish,
+                out bool showEn, out bool diffEn, out string singleEn);
+            ShowEnglish = showEn;
+            ShowEnglishDiff = diffEn;
+            ShowEnglishSingle = showEn && !diffEn;
+            EnglishSingleValue = singleEn;
+
+            ComputeDisplay(
+                source.Type, source.RussianChanged, source.OldRussian, source.NewRussian,
+                out bool showRu, out bool diffRu, out string singleRu);
+            ShowRussian = showRu;
+            ShowRussianDiff = diffRu;
+            ShowRussianSingle = showRu && !diffRu;
+            RussianSingleValue = singleRu;
+        }
+
+        private static void ComputeDisplay(ChangeType type, bool changed, string oldValue, string newValue,
+            out bool show, out bool showDiff, out string singleValue)
+        {
+            switch (type)
+            {
+                case ChangeType.Added:
+                    show = !string.IsNullOrEmpty(newValue);
+                    showDiff = false;
+                    singleValue = newValue;
+                    break;
+                case ChangeType.Removed:
+                    show = !string.IsNullOrEmpty(oldValue);
+                    showDiff = false;
+                    singleValue = oldValue;
+                    break;
+                default: // Updated вЂ” РёРЅС‚РµСЂРµСЃСѓРµС‚ С‚РѕР»СЊРєРѕ СЂРµР°Р»СЊРЅРѕ РёР·РјРµРЅРёРІС€РёР№СЃСЏ СЏР·С‹Рє
+                    show = changed;
+                    showDiff = changed;
+                    singleValue = null;
+                    break;
+            }
+        }
+    }
+
+    /// <summary>
+    /// РћРґРёРЅ "РїР°С‚С‡" вЂ” РіСЂСѓРїРїР° РёР·РјРµРЅРµРЅРёР№, РѕР±РЅР°СЂСѓР¶РµРЅРЅР°СЏ Р·Р° РѕРґРЅСѓ РїСЂРѕРІРµСЂРєСѓ С„Р°Р№Р»РѕРІ.
+    /// </summary>
+    public class ChangeSetViewModel : ObservableObject
+    {
+        public DateTime DetectedAt { get; }
+        public string DateLabel => DetectedAt.ToString("dd.MM.yyyy HH:mm");
+        public string SummaryText { get; }
+        public ObservableCollection<ChangeEntryViewModel> Items { get; }
+
+        private bool _isExpanded;
+        public bool IsExpanded
+        {
+            get => _isExpanded;
+            set => Set(ref _isExpanded, value);
+        }
+
+        public ChangeSetViewModel(ChangeSet source, Func<string, bool> entryExists)
+        {
+            DetectedAt = source.DetectedAt;
+
+            var parts = new List<string>();
+            if (source.AddedCount > 0) parts.Add($"РґРѕР±Р°РІР»РµРЅРѕ: {source.AddedCount}");
+            if (source.UpdatedCount > 0) parts.Add($"РёР·РјРµРЅРµРЅРѕ: {source.UpdatedCount}");
+            if (source.RemovedCount > 0) parts.Add($"СѓРґР°Р»РµРЅРѕ: {source.RemovedCount}");
+            SummaryText = parts.Count > 0 ? string.Join(" В· ", parts) : "РЅРµС‚ РёР·РјРµРЅРµРЅРёР№";
+
+            Items = new ObservableCollection<ChangeEntryViewModel>(
+                source.Changes.Select(c => new ChangeEntryViewModel(
+                    c,
+                    c.Type != ChangeType.Removed && entryExists(c.Key))));
+        }
+    }
+
+    public class ChangesViewModel : ObservableObject
+    {
+        private readonly IChangeHistoryStorage _historyStorage;
+        private readonly MainViewModel _mainViewModel;
+        private List<ChangeSet> _allSets = new List<ChangeSet>();
+
+        public ObservableCollection<ChangeSetViewModel> ChangeSets { get; } = new ObservableCollection<ChangeSetViewModel>();
+
+        public string[] FilterOptions { get; } = { "Р’СЃРµ", "Р”РѕР±Р°РІР»РµРЅРЅС‹Рµ", "РР·РјРµРЅС‘РЅРЅС‹Рµ", "РЈРґР°Р»С‘РЅРЅС‹Рµ" };
+
+        private string _selectedFilter = "Р’СЃРµ";
+        public string SelectedFilter
+        {
+            get => _selectedFilter;
+            set
+            {
+                if (Set(ref _selectedFilter, value))
+                    ApplyFilter();
+            }
+        }
+
+        private string _searchText = string.Empty;
+        public string SearchText
+        {
+            get => _searchText;
+            set
+            {
+                if (Set(ref _searchText, value))
+                    ApplyFilter();
+            }
+        }
+
+        private bool _hasHistory;
+        public bool HasHistory
+        {
+            get => _hasHistory;
+            set
+            {
+                if (Set(ref _hasHistory, value))
+                {
+                    OnPropertyChanged(nameof(ShowEmptyHistoryState));
+                    OnPropertyChanged(nameof(ShowNoFilterResultsState));
+                }
+            }
+        }
+
+        private bool _hasVisibleResults;
+        public bool HasVisibleResults
+        {
+            get => _hasVisibleResults;
+            set
+            {
+                if (Set(ref _hasVisibleResults, value))
+                    OnPropertyChanged(nameof(ShowNoFilterResultsState));
+            }
+        }
+
+        /// <summary>РСЃС‚РѕСЂРёСЏ РІРѕРѕР±С‰Рµ РїСѓСЃС‚Р° вЂ” РЅРё РѕРґРЅРѕРіРѕ РїР°С‚С‡Р° РµС‰С‘ РЅРµ РѕР±РЅР°СЂСѓР¶РµРЅРѕ.</summary>
+        public bool ShowEmptyHistoryState => !HasHistory;
+
+        /// <summary>РСЃС‚РѕСЂРёСЏ РЅРµ РїСѓСЃС‚Р°, РЅРѕ РїРѕРґ С‚РµРєСѓС‰РёР№ С„РёР»СЊС‚СЂ/РїРѕРёСЃРє РЅРёС‡РµРіРѕ РЅРµ РїРѕРґС…РѕРґРёС‚.</summary>
+        public bool ShowNoFilterResultsState => HasHistory && !HasVisibleResults;
+
+        public ICommand GoToCommand { get; }
+        public ICommand ClearHistoryCommand { get; }
+
+        /// <summary>РџСЂРѕСЃРёС‚ View Р·Р°РєСЂС‹С‚СЊ РѕРєРЅРѕ (РЅР°РїСЂРёРјРµСЂ, РїРѕСЃР»Рµ РїРµСЂРµС…РѕРґР° Рє СЃС‚СЂРѕРєРµ).</summary>
+        public event Action RequestClose;
+
+        public ChangesViewModel(IChangeHistoryStorage historyStorage, MainViewModel mainViewModel)
+        {
+            _historyStorage = historyStorage;
+            _mainViewModel = mainViewModel;
+
+            GoToCommand = new RelayCommand<string>(GoTo);
+            ClearHistoryCommand = new RelayCommand(_ => ClearHistory());
+
+            LoadAll();
+        }
+
+        private void LoadAll()
+        {
+            _allSets = _historyStorage.GetHistory();
+            HasHistory = _allSets.Count > 0;
+            ApplyFilter();
+        }
+
+        private void ApplyFilter()
+        {
+            ChangeSets.Clear();
+
+            ChangeType? typeFilter = null;
+            if (SelectedFilter == "Р”РѕР±Р°РІР»РµРЅРЅС‹Рµ") typeFilter = ChangeType.Added;
+            else if (SelectedFilter == "РР·РјРµРЅС‘РЅРЅС‹Рµ") typeFilter = ChangeType.Updated;
+            else if (SelectedFilter == "РЈРґР°Р»С‘РЅРЅС‹Рµ") typeFilter = ChangeType.Removed;
+
+            string search = (SearchText ?? "").Trim();
+
+            foreach (var set in _allSets)
+            {
+                var filteredChanges = set.Changes.Where(c =>
+                        (typeFilter == null || c.Type == typeFilter) &&
+                        (string.IsNullOrEmpty(search) ||
+                         (c.Key != null && c.Key.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                         (c.NewEnglish != null && c.NewEnglish.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                         (c.NewRussian != null && c.NewRussian.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0)))
+                    .ToList();
+
+                if (filteredChanges.Count == 0) continue;
+
+                var filteredSet = new ChangeSet
+                {
+                    Id = set.Id,
+                    DetectedAt = set.DetectedAt,
+                    IsViewed = set.IsViewed,
+                    Changes = filteredChanges
+                };
+
+                ChangeSets.Add(new ChangeSetViewModel(filteredSet, _mainViewModel.EntryExists));
+            }
+
+            // Р Р°СЃРєСЂС‹РІР°РµРј РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ С‚РѕР»СЊРєРѕ СЃР°РјС‹Р№ СЃРІРµР¶РёР№ РїР°С‚С‡ вЂ” РѕСЃС‚Р°Р»СЊРЅС‹Рµ СЃРІС‘СЂРЅСѓС‚С‹,
+            // С‡С‚РѕР±С‹ РїСЂРё Р±РѕР»СЊС€РѕР№ РёСЃС‚РѕСЂРёРё (РёР»Рё Р±РѕР»СЊС€РѕРј РїР°С‚С‡Рµ) РѕРєРЅРѕ РЅРµ РїС‹С‚Р°Р»РѕСЃСЊ
+            // РѕС‚СЂРёСЃРѕРІР°С‚СЊ СЃСЂР°Р·Сѓ РІСЃРµ РєР°СЂС‚РѕС‡РєРё.
+            if (ChangeSets.Count > 0)
+                ChangeSets[0].IsExpanded = true;
+
+            HasVisibleResults = ChangeSets.Count > 0;
+        }
+
+        private void GoTo(string key)
+        {
+            if (string.IsNullOrEmpty(key)) return;
+            _mainViewModel.NavigateToKey(key);
+            RequestClose?.Invoke();
+        }
+
+        private void ClearHistory()
+        {
+            var result = MessageBox.Show(
+                "РЈРґР°Р»РёС‚СЊ РІСЃСЋ РёСЃС‚РѕСЂРёСЋ РёР·РјРµРЅРµРЅРёР№? РўРµРєСѓС‰РµРµ СЃРѕСЃС‚РѕСЏРЅРёРµ СЃС‚СЂРѕРє РѕСЃС‚Р°РЅРµС‚СЃСЏ С‚РѕС‡РєРѕР№ РѕС‚СЃС‡С‘С‚Р° РґР»СЏ Р±СѓРґСѓС‰РёС… СЃСЂР°РІРЅРµРЅРёР№.",
+                "РћС‡РёСЃС‚РёС‚СЊ РёСЃС‚РѕСЂРёСЋ",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                _historyStorage.ClearHistory();
+                LoadAll();
+            }
+        }
+    }
+}
+
+
 ===== DBD_Trans\ViewModels\MainViewModel.cs =====
 using DBD_Trans.Base;
 using DBD_Trans.Helpers;
@@ -4458,8 +5437,11 @@ namespace DBD_Trans.ViewModels
         private readonly IAppSettings _appSettings;
         private readonly IStatusStorage _statusStorage;
         private readonly IMergeStorage _mergeStorage;
+        private readonly IChangeHistoryStorage _changeHistoryStorage;
         private readonly string _dataDirectory;
         private readonly DispatcherTimer _searchTimer;
+        private readonly DispatcherTimer _toastTimer;
+        private ChangesWindow _openChangesWindow;
 
         private int _missingCountCache;
         private int _completedCountCache;
@@ -4468,10 +5450,10 @@ namespace DBD_Trans.ViewModels
         public FastObservableCollection<LocalizationEntry> AllEntries { get; } = new FastObservableCollection<LocalizationEntry>();
         public ICollectionView FilteredEntries { get; }
 
-        // --- Новые свойства для фильтра ---
-        public string[] FilterOptions { get; } = { "Все", "Выполненные", "С ошибками (по убыванию)" };
+        // --- РќРѕРІС‹Рµ СЃРІРѕР№СЃС‚РІР° РґР»СЏ С„РёР»СЊС‚СЂР° ---
+        public string[] FilterOptions { get; } = { "Р’СЃРµ", "Р’С‹РїРѕР»РЅРµРЅРЅС‹Рµ", "РЎ РѕС€РёР±РєР°РјРё (РїРѕ СѓР±С‹РІР°РЅРёСЋ)" };
 
-        private string _selectedFilter = "Все";
+        private string _selectedFilter = "Р’СЃРµ";
         public string SelectedFilter
         {
             get => _selectedFilter;
@@ -4494,8 +5476,8 @@ namespace DBD_Trans.ViewModels
             {
                 if (Set(ref _searchText, value))
                 {
-                    // --- ИЗМЕНЕННАЯ ЛОГИКА ---
-                    // При каждом изменении текста сбрасываем и запускаем таймер заново
+                    // --- РР—РњР•РќР•РќРќРђРЇ Р›РћР“РРљРђ ---
+                    // РџСЂРё РєР°Р¶РґРѕРј РёР·РјРµРЅРµРЅРёРё С‚РµРєСЃС‚Р° СЃР±СЂР°СЃС‹РІР°РµРј Рё Р·Р°РїСѓСЃРєР°РµРј С‚Р°Р№РјРµСЂ Р·Р°РЅРѕРІРѕ
                     _searchTimer.Stop();
                     _searchTimer.Start();
                     // -------------------------
@@ -4532,6 +5514,21 @@ namespace DBD_Trans.ViewModels
         public ICommand GoToCommand { get; }
         public ICommand ClearSelectionCommand { get; }
 
+        // --- РЈРІРµРґРѕРјР»РµРЅРёРµ РѕР± РёР·РјРµРЅРµРЅРёСЏС… СЃС‚СЂРѕРє РјРµР¶РґСѓ РїР°С‚С‡Р°РјРё ---
+        private int _unviewedChangeCount;
+        public int UnviewedChangeCount { get => _unviewedChangeCount; set => Set(ref _unviewedChangeCount, value); }
+
+        private bool _showChangeToast;
+        public bool ShowChangeToast { get => _showChangeToast; set => Set(ref _showChangeToast, value); }
+
+        private string _changeToastText;
+        public string ChangeToastText { get => _changeToastText; set => Set(ref _changeToastText, value); }
+
+        public ICommand ShowChangesCommand { get; }
+        public ICommand OpenChangesFromToastCommand { get; }
+        public ICommand DismissToastCommand { get; }
+        // ------------------------------------------------------
+
         private bool _isLoading;
         public bool IsLoading
         {
@@ -4539,7 +5536,7 @@ namespace DBD_Trans.ViewModels
             set => Set(ref _isLoading, value);
         }
 
-        public MainViewModel(IFileService fileService, IErrorStorage errorStorage, IStatusStorage statusStorage, IAppSettings appSettings, string dataDirectory, IMergeStorage mergeStorage)
+        public MainViewModel(IFileService fileService, IErrorStorage errorStorage, IStatusStorage statusStorage, IAppSettings appSettings, string dataDirectory, IMergeStorage mergeStorage, IChangeHistoryStorage changeHistoryStorage)
 
         {
             _fileService = fileService;
@@ -4548,6 +5545,7 @@ namespace DBD_Trans.ViewModels
             _statusStorage = statusStorage;
             _dataDirectory = dataDirectory;
             _mergeStorage = mergeStorage;
+            _changeHistoryStorage = changeHistoryStorage;
 
             FilteredEntries = CollectionViewSource.GetDefaultView(AllEntries);
             FilteredEntries.Filter = FilterEntry;
@@ -4555,6 +5553,10 @@ namespace DBD_Trans.ViewModels
             AnalyzeCommand = new RelayCommand<LocalizationEntry>(AnalyzeEntry, CanAnalyze);
             GoToCommand = new RelayCommand<LocalizationEntry>(GoToEntry, CanGoTo);
             ClearSelectionCommand = new RelayCommand(_ => SelectedEntry = null);
+
+            ShowChangesCommand = new RelayCommand(_ => ShowChanges());
+            OpenChangesFromToastCommand = new RelayCommand(_ => { ShowChangeToast = false; ShowChanges(); });
+            DismissToastCommand = new RelayCommand(_ => ShowChangeToast = false);
 
             BindingOperations.EnableCollectionSynchronization(AllEntries, new object());
 
@@ -4564,6 +5566,18 @@ namespace DBD_Trans.ViewModels
             };
             _searchTimer.Tick += SearchTimer_Tick;
 
+            _toastTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(8)
+            };
+            _toastTimer.Tick += (s, e) =>
+            {
+                _toastTimer.Stop();
+                ShowChangeToast = false;
+            };
+
+            UnviewedChangeCount = _changeHistoryStorage?.GetUnviewedChangeItemCount() ?? 0;
+
             IsLoading = true;
             Task.Run(() =>
             {
@@ -4572,12 +5586,12 @@ namespace DBD_Trans.ViewModels
             });
         }
 
-        // --- Логика применения фильтра и сортировки ---
+        // --- Р›РѕРіРёРєР° РїСЂРёРјРµРЅРµРЅРёСЏ С„РёР»СЊС‚СЂР° Рё СЃРѕСЂС‚РёСЂРѕРІРєРё ---
         private void ApplyFilterAndSort()
         {
             FilteredEntries.SortDescriptions.Clear();
 
-            if (_selectedFilter == "С ошибками (по убыванию)")
+            if (_selectedFilter == "РЎ РѕС€РёР±РєР°РјРё (РїРѕ СѓР±С‹РІР°РЅРёСЋ)")
             {
                 FilteredEntries.SortDescriptions.Add(new SortDescription("ErrorCount", ListSortDirection.Descending));
             }
@@ -4605,6 +5619,15 @@ namespace DBD_Trans.ViewModels
             var enEntries = JsonFlattener.FlattenToOrderedList(enJson);
             var ruDict = ruJson != null ? JsonFlattener.FlattenToDictionary(ruJson) : new Dictionary<string, string>();
 
+            // --- РЎСЂР°РІРЅРёРІР°РµРј СЃС‹СЂРѕРµ СЃРѕРґРµСЂР¶РёРјРѕРµ С„Р°Р№Р»РѕРІ СЃРѕ СЃРЅРёРјРєРѕРј РїСЂРµРґС‹РґСѓС‰РµРіРѕ Р·Р°РїСѓСЃРєР° ---
+            // (СЃСЂР°РІРЅРµРЅРёРµ РґРµР»Р°РµРј РЅР° "СЃС‹СЂС‹С…" Р·РЅР°С‡РµРЅРёСЏС… РёР· JSON, Р° РЅРµ РЅР° РѕС‡РёС‰РµРЅРЅС‹С… РѕС‚ HTML-С‚РµРіРѕРІ,
+            // С‡С‚РѕР±С‹ РЅРµ РїСЂРѕРїСѓСЃС‚РёС‚СЊ РЅРё РѕРґРЅСѓ СЂРµР°Р»СЊРЅСѓСЋ РїСЂР°РІРєСѓ РїР°С‚С‡Р°)
+            var enDictRaw = new Dictionary<string, string>();
+            foreach (var kv in enEntries) enDictRaw[kv.Key] = kv.Value;
+
+            var detectedChangeSet = _changeHistoryStorage?.DetectAndRecordChanges(enDictRaw, ruDict);
+            // ---------------------------------------------------------------------------
+
             int index = 1;
             var tempEntries = new List<LocalizationEntry>();
 
@@ -4614,7 +5637,7 @@ namespace DBD_Trans.ViewModels
                 string english = HtmlStripper.StripHtmlTags(en.Value);
                 string russian = ruDict.TryGetValue(key, out var ruValue)
                     ? HtmlStripper.StripHtmlTags(ruValue)
-                    : "[нет перевода]";
+                    : "[РЅРµС‚ РїРµСЂРµРІРѕРґР°]";
 
                 var entry = new LocalizationEntry
                 {
@@ -4640,7 +5663,7 @@ namespace DBD_Trans.ViewModels
                 {
                     Index = index++,
                     Key = key,
-                    English = "[нет перевода]",
+                    English = "[РЅРµС‚ РїРµСЂРµРІРѕРґР°]",
                     Russian = HtmlStripper.StripHtmlTags(ruDict[key]),
                     HasTranslation = false
                 };
@@ -4661,22 +5684,74 @@ namespace DBD_Trans.ViewModels
                 CalculateTotalStatistics();
                 UpdateStatistics();
                 IsLoading = false;
+
+                UnviewedChangeCount = _changeHistoryStorage?.GetUnviewedChangeItemCount() ?? 0;
+
+                if (detectedChangeSet != null && detectedChangeSet.Changes.Count > 0)
+                {
+                    ChangeToastText = BuildToastText(detectedChangeSet);
+                    ShowChangeToast = true;
+                    _toastTimer.Stop();
+                    _toastTimer.Start();
+                }
             });
+        }
+
+        private static string BuildToastText(ChangeSet changeSet)
+        {
+            var parts = new List<string>();
+            if (changeSet.AddedCount > 0) parts.Add($"РґРѕР±Р°РІР»РµРЅРѕ: {changeSet.AddedCount}");
+            if (changeSet.UpdatedCount > 0) parts.Add($"РёР·РјРµРЅРµРЅРѕ: {changeSet.UpdatedCount}");
+            if (changeSet.RemovedCount > 0) parts.Add($"СѓРґР°Р»РµРЅРѕ: {changeSet.RemovedCount}");
+
+            return "РћР±РЅР°СЂСѓР¶РµРЅС‹ РёР·РјРµРЅРµРЅРёСЏ СЃС‚СЂРѕРє Р»РѕРєР°Р»РёР·Р°С†РёРё (" + string.Join(", ", parts) + ")";
+        }
+
+        /// <summary>Р•СЃС‚СЊ Р»Рё СЃРµР№С‡Р°СЃ РІ С‚Р°Р±Р»РёС†Рµ СЃС‚СЂРѕРєР° СЃ С‚Р°РєРёРј РєР»СЋС‡РѕРј (РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РѕРєРЅРѕРј РёСЃС‚РѕСЂРёРё РёР·РјРµРЅРµРЅРёР№).</summary>
+        public bool EntryExists(string key) => AllEntries.Any(e => e.Key == key);
+
+        private void ShowChanges()
+        {
+            if (_changeHistoryStorage == null) return;
+
+            if (_openChangesWindow != null)
+            {
+                _openChangesWindow.Activate();
+                return;
+            }
+
+            var vm = new ChangesViewModel(_changeHistoryStorage, this);
+            var window = new ChangesWindow
+            {
+                DataContext = vm,
+                Owner = Application.Current.MainWindow,
+                ShowInTaskbar = false
+            };
+
+            window.Closed += (s, e) => { _openChangesWindow = null; };
+
+            _openChangesWindow = window;
+
+            // РћС‚РєСЂС‹С‚РёРµ РѕРєРЅР° РёСЃС‚РѕСЂРёРё СЃС‡РёС‚Р°РµС‚СЃСЏ "РїСЂРѕС‡С‚РµРЅРёРµРј" СѓРІРµРґРѕРјР»РµРЅРёР№
+            _changeHistoryStorage.MarkAllAsViewed();
+            UnviewedChangeCount = 0;
+
+            window.Show();
         }
 
         private bool FilterEntry(object obj)
         {
             if (!(obj is LocalizationEntry entry)) return false;
 
-            // 1. Быстрый фильтр по статусу
-            if (_selectedFilter == "Выполненные" && entry.Status != ItemStatus.Completed) return false;
-            if (_selectedFilter == "С ошибками (по убыванию)" && !entry.HasErrors) return false;
+            // 1. Р‘С‹СЃС‚СЂС‹Р№ С„РёР»СЊС‚СЂ РїРѕ СЃС‚Р°С‚СѓСЃСѓ
+            if (_selectedFilter == "Р’С‹РїРѕР»РЅРµРЅРЅС‹Рµ" && entry.Status != ItemStatus.Completed) return false;
+            if (_selectedFilter == "РЎ РѕС€РёР±РєР°РјРё (РїРѕ СѓР±С‹РІР°РЅРёСЋ)" && !entry.HasErrors) return false;
 
-            // 2. Оптимизированный фильтр по поисковой строке
+            // 2. РћРїС‚РёРјРёР·РёСЂРѕРІР°РЅРЅС‹Р№ С„РёР»СЊС‚СЂ РїРѕ РїРѕРёСЃРєРѕРІРѕР№ СЃС‚СЂРѕРєРµ
             if (!string.IsNullOrWhiteSpace(_searchText))
             {
                 var s = _searchText.Trim();
-                // IndexOf работает в разы быстрее, чем Contains или Regex
+                // IndexOf СЂР°Р±РѕС‚Р°РµС‚ РІ СЂР°Р·С‹ Р±С‹СЃС‚СЂРµРµ, С‡РµРј Contains РёР»Рё Regex
                 bool matches = (entry.Key != null && entry.Key.IndexOf(s, StringComparison.OrdinalIgnoreCase) >= 0) ||
                                (entry.English != null && entry.English.IndexOf(s, StringComparison.OrdinalIgnoreCase) >= 0) ||
                                (entry.Russian != null && entry.Russian.IndexOf(s, StringComparison.OrdinalIgnoreCase) >= 0);
@@ -4693,7 +5768,7 @@ namespace DBD_Trans.ViewModels
             MissingCount = _missingCountCache;
             CompletedCount = _completedCountCache;
             TotalErrorCount = _totalErrorCountCache;
-            ResultCountText = DisplayedCount != TotalCount ? $"(найдено: {DisplayedCount})" : "";
+            ResultCountText = DisplayedCount != TotalCount ? $"(РЅР°Р№РґРµРЅРѕ: {DisplayedCount})" : "";
         }
 
         private bool CanAnalyze(LocalizationEntry entry) => entry != null;
@@ -4701,16 +5776,16 @@ namespace DBD_Trans.ViewModels
 
         private void AnalyzeEntry(LocalizationEntry entry)
         {
-            // Получаем актуальный отфильтрованный список
+            // РџРѕР»СѓС‡Р°РµРј Р°РєС‚СѓР°Р»СЊРЅС‹Р№ РѕС‚С„РёР»СЊС‚СЂРѕРІР°РЅРЅС‹Р№ СЃРїРёСЃРѕРє
             var list = FilteredEntries.Cast<LocalizationEntry>().ToList();
             int currentIndex = list.IndexOf(entry);
             if (currentIndex < 0) return;
 
-            // Цикл навигации: окно будет пересоздаваться, пока пользователь не закроет его штатно
+            // Р¦РёРєР» РЅР°РІРёРіР°С†РёРё: РѕРєРЅРѕ Р±СѓРґРµС‚ РїРµСЂРµСЃРѕР·РґР°РІР°С‚СЊСЃСЏ, РїРѕРєР° РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ РЅРµ Р·Р°РєСЂРѕРµС‚ РµРіРѕ С€С‚Р°С‚РЅРѕ
             while (true)
             {
                 var errors = _errorStorage.GetErrors(entry.Key);
-                // Передаем 'this' (MainViewModel) в AnalysisViewModel
+                // РџРµСЂРµРґР°РµРј 'this' (MainViewModel) РІ AnalysisViewModel
                 var vm = new AnalysisViewModel(entry, errors, _errorStorage, _statusStorage, _appSettings, _mergeStorage, this);
                 var window = new AnalysisWindow();
                 window.DataContext = vm;
@@ -4720,51 +5795,63 @@ namespace DBD_Trans.ViewModels
 
                 LocalizationEntry nextEntry = null;
 
-                // Подписываемся на событие навигации
+                // РџРѕРґРїРёСЃС‹РІР°РµРјСЃСЏ РЅР° СЃРѕР±С‹С‚РёРµ РЅР°РІРёРіР°С†РёРё
                 vm.RequestNavigate += (direction) =>
                 {
                     int newIndex = list.IndexOf(entry) + direction;
                     if (newIndex >= 0 && newIndex < list.Count)
                     {
                         nextEntry = list[newIndex];
-                        window.Close(); // Закрываем текущее окно, чтобы цикл открыл следующее
+                        window.Close(); // Р—Р°РєСЂС‹РІР°РµРј С‚РµРєСѓС‰РµРµ РѕРєРЅРѕ, С‡С‚РѕР±С‹ С†РёРєР» РѕС‚РєСЂС‹Р» СЃР»РµРґСѓСЋС‰РµРµ
                     }
                 };
 
                 window.ShowDialog();
 
-                // Если пользователь просто закрыл окно (крестиком), nextEntry будет null
+                // Р•СЃР»Рё РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ РїСЂРѕСЃС‚Рѕ Р·Р°РєСЂС‹Р» РѕРєРЅРѕ (РєСЂРµСЃС‚РёРєРѕРј), nextEntry Р±СѓРґРµС‚ null
                 if (nextEntry == null)
                 {
                     break;
                 }
 
-                // Иначе обновляем entry и переходим на следующую итерацию цикла
+                // РРЅР°С‡Рµ РѕР±РЅРѕРІР»СЏРµРј entry Рё РїРµСЂРµС…РѕРґРёРј РЅР° СЃР»РµРґСѓСЋС‰СѓСЋ РёС‚РµСЂР°С†РёСЋ С†РёРєР»Р°
                 entry = nextEntry;
             }
 
-            // Обновляем статистику в главном окне после закрытия цепочки окон
+            // РћР±РЅРѕРІР»СЏРµРј СЃС‚Р°С‚РёСЃС‚РёРєСѓ РІ РіР»Р°РІРЅРѕРј РѕРєРЅРµ РїРѕСЃР»Рµ Р·Р°РєСЂС‹С‚РёСЏ С†РµРїРѕС‡РєРё РѕРєРѕРЅ
             CalculateTotalStatistics();
             UpdateStatistics();
         }
-        // 添加一个属性供 View 层判断当前是否处于代码跳转状态
+        // ж·»еЉ дёЂдёЄе±ћжЂ§дѕ› View е±‚е€¤ж–­еЅ“е‰ЌжЇеђ¦е¤„дєЋд»Јз Ѓи·іиЅ¬зЉ¶жЂЃ
         public bool IsNavigating { get; private set; }
 
         private void GoToEntry(LocalizationEntry entry)
         {
-            _searchTimer.Stop(); // 1. 立即停止可能正在计时的搜索 Timer
+            if (entry == null) return;
+            NavigateToKey(entry.Key);
+        }
+
+        /// <summary>
+        /// РќР°С…РѕРґРёС‚ СЃС‚СЂРѕРєСѓ РїРѕ РєР»СЋС‡Сѓ, СЃР±СЂР°СЃС‹РІР°РµС‚ РїРѕРёСЃРє/С„РёР»СЊС‚СЂ Рё РїСЂРѕРєСЂСѓС‡РёРІР°РµС‚ Рє РЅРµР№ РіР»Р°РІРЅСѓСЋ С‚Р°Р±Р»РёС†Сѓ.
+        /// РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РєР°Рє РєРѕРЅС‚РµРєСЃС‚РЅС‹Рј РјРµРЅСЋ "РџРµСЂРµР№С‚Рё", С‚Р°Рє Рё РѕРєРЅРѕРј РёСЃС‚РѕСЂРёРё РёР·РјРµРЅРµРЅРёР№.
+        /// </summary>
+        public void NavigateToKey(string key)
+        {
+            if (string.IsNullOrEmpty(key)) return;
+
+            _searchTimer.Stop(); // 1. з«‹еЌіеЃњж­ўеЏЇиѓЅж­ЈењЁи®Ўж—¶зљ„жђњзґў Timer
             IsNavigating = true;
 
             SearchText = string.Empty;
-            _searchTimer.Stop(); // 2. 【关键】再次停止！因为上面的 setter 会 Start() 它，防止 300ms 后的重复 Refresh
+            _searchTimer.Stop(); // 2. гЂђе…ій”®гЂ‘е†Ќж¬ЎеЃњж­ўпјЃе› дёєдёЉйќўзљ„ setter дјљ Start() е®ѓпјЊйІж­ў 300ms еђЋзљ„й‡Ќе¤Ќ Refresh
 
-            SelectedFilter = "Все";
+            SelectedFilter = "Р’СЃРµ";
 
             Application.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Background, new Action(() =>
             {
                 FilteredEntries.Refresh();
                 UpdateStatistics();
-                var target = AllEntries.FirstOrDefault(e => e.Key == entry.Key);
+                var target = AllEntries.FirstOrDefault(e => e.Key == key);
                 if (target != null)
                 {
                     SelectedEntry = target;
@@ -4779,7 +5866,7 @@ namespace DBD_Trans.ViewModels
         private void SearchTimer_Tick(object sender, EventArgs e)
         {
             _searchTimer.Stop();
-            // Просто обновляем стандартное представление
+            // РџСЂРѕСЃС‚Рѕ РѕР±РЅРѕРІР»СЏРµРј СЃС‚Р°РЅРґР°СЂС‚РЅРѕРµ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёРµ
             FilteredEntries.Refresh();
             UpdateStatistics();
         }
@@ -4804,6 +5891,7 @@ namespace DBD_Trans.ViewModels
         public event Action<LocalizationEntry> ScrollToItemRequested;
     }
 }
+
 
 ===== DBD_Trans\Views\AnalysisWindow.xaml =====
     <Window x:Class="DBD_Trans.Views.AnalysisWindow"
@@ -6708,6 +7796,493 @@ namespace DBD_Trans.Views
     }
 }
 
+===== DBD_Trans\Views\ChangesWindow.xaml =====
+<Window x:Class="DBD_Trans.Views.ChangesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:DBD_Trans.Views"
+        xmlns:viewModels="clr-namespace:DBD_Trans.ViewModels"
+        xmlns:converters="clr-namespace:DBD_Trans.Converters"
+        Title="РСЃС‚РѕСЂРёСЏ РёР·РјРµРЅРµРЅРёР№ СЃС‚СЂРѕРє" Height="720" Width="980"
+        MinHeight="400" MinWidth="640"
+        WindowState="Maximized"
+        WindowStartupLocation="CenterOwner"
+        Background="#FF171717"
+        ResizeMode="CanResizeWithGrip"
+        FocusVisualStyle="{x:Null}">
+    <Window.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+
+        <!-- Р¦РІРµС‚РѕРІР°СЏ РїР°Р»РёС‚СЂР° вЂ” РєР°Рє РІ РѕСЃС‚Р°Р»СЊРЅС‹С… РѕРєРЅР°С… РїСЂРёР»РѕР¶РµРЅРёСЏ -->
+        <SolidColorBrush x:Key="BackgroundDark" Color="#FF171717"/>
+        <SolidColorBrush x:Key="BackgroundMedium" Color="#FF1E1E1E"/>
+        <SolidColorBrush x:Key="BackgroundLight" Color="#FF212121"/>
+        <SolidColorBrush x:Key="ForegroundPrimary" Color="#FFE0E0E0"/>
+        <SolidColorBrush x:Key="ForegroundSecondary" Color="#FFA0A0A0"/>
+        <SolidColorBrush x:Key="BorderDark" Color="#FF333333"/>
+        <SolidColorBrush x:Key="WarningOrange" Color="#FFCA5100"/>
+
+        <!-- Р¦РІРµС‚Р° С‚РёРїРѕРІ РёР·РјРµРЅРµРЅРёР№ -->
+        <SolidColorBrush x:Key="AddedColor" Color="#FFCA5100"/>
+        <SolidColorBrush x:Key="AddedColorBg" Color="#33CA5100"/>
+        <SolidColorBrush x:Key="UpdatedColor" Color="#FF3D8BFF"/>
+        <SolidColorBrush x:Key="UpdatedColorBg" Color="#333D8BFF"/>
+        <SolidColorBrush x:Key="RemovedColor" Color="#FFE24A4A"/>
+        <SolidColorBrush x:Key="RemovedColorBg" Color="#33E24A4A"/>
+
+        <!-- TextBox -->
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="{StaticResource BackgroundMedium}"/>
+            <Setter Property="Foreground" Value="{StaticResource ForegroundPrimary}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderDark}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="6,4"/>
+            <Setter Property="CaretBrush" Value="{StaticResource ForegroundPrimary}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="3">
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="2"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- ComboBox (СѓРїСЂРѕС‰С‘РЅРЅР°СЏ С‚С‘РјРЅР°СЏ РІРµСЂСЃРёСЏ) -->
+        <Style TargetType="ComboBox">
+            <Setter Property="Background" Value="{StaticResource BackgroundMedium}"/>
+            <Setter Property="Foreground" Value="{StaticResource ForegroundPrimary}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderDark}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="6,4"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <ToggleButton x:Name="ToggleButton"
+                                          Background="{TemplateBinding Background}"
+                                          BorderBrush="{TemplateBinding BorderBrush}"
+                                          BorderThickness="{TemplateBinding BorderThickness}"
+                                          Focusable="False"
+                                          IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                          ClickMode="Press">
+                                <ToggleButton.Template>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Border x:Name="Border"
+                                                Background="{TemplateBinding Background}"
+                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                BorderThickness="{TemplateBinding BorderThickness}"
+                                                CornerRadius="3">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="20"/>
+                                                </Grid.ColumnDefinitions>
+                                                <ContentPresenter x:Name="ContentSite"
+                                                                    Content="{Binding SelectionBoxItem, RelativeSource={RelativeSource AncestorType=ComboBox}}"
+                                                                    ContentTemplate="{Binding SelectionBoxItemTemplate, RelativeSource={RelativeSource AncestorType=ComboBox}}"
+                                                                    TextBlock.Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ComboBox}}"
+                                                                    HorizontalAlignment="Left"
+                                                                    VerticalAlignment="Center"
+                                                                    Margin="6,0,0,0"/>
+                                                <Path x:Name="Arrow"
+                                                      Grid.Column="1"
+                                                      Fill="{StaticResource ForegroundSecondary}"
+                                                      HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"
+                                                      Data="M 0 0 L 4 4 L 8 0 Z"/>
+                                            </Grid>
+                                        </Border>
+                                    </ControlTemplate>
+                                </ToggleButton.Template>
+                            </ToggleButton>
+                            <Popup x:Name="Popup"
+                                   Placement="Bottom"
+                                   IsOpen="{TemplateBinding IsDropDownOpen}"
+                                   AllowsTransparency="True"
+                                   Focusable="False"
+                                   PopupAnimation="Slide">
+                                <Grid x:Name="DropDown"
+                                      SnapsToDevicePixels="True"
+                                      MinWidth="{TemplateBinding ActualWidth}"
+                                      MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border x:Name="DropDownBorder"
+                                            Background="{StaticResource BackgroundMedium}"
+                                            BorderBrush="{StaticResource BorderDark}"
+                                            BorderThickness="1"
+                                            CornerRadius="3"/>
+                                    <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained"/>
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="ComboBoxItem">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource ForegroundPrimary}"/>
+            <Setter Property="Padding" Value="6,4"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBoxItem">
+                        <Border x:Name="Border" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" CornerRadius="3" Margin="2,1">
+                            <ContentPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsHighlighted" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="{StaticResource WarningOrange}"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- РљРЅРѕРїРєРё -->
+        <Style x:Key="ActionButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource BackgroundLight}"/>
+            <Setter Property="Foreground" Value="{StaticResource ForegroundPrimary}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderDark}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="12,6"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="4">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource WarningOrange}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="{StaticResource ForegroundSecondary}"/>
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource BackgroundMedium}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="GoToButtonStyle" TargetType="Button" BasedOn="{StaticResource ActionButtonStyle}">
+            <Setter Property="Padding" Value="10,4"/>
+            <Setter Property="FontSize" Value="11"/>
+        </Style>
+
+        <!-- Р—РЅР°С‡РѕРє С‚РёРїР° РёР·РјРµРЅРµРЅРёСЏ -->
+        <Style x:Key="TypeBadgeStyle" TargetType="Border">
+            <Setter Property="CornerRadius" Value="3"/>
+            <Setter Property="Padding" Value="6,2"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Type}" Value="Added">
+                    <Setter Property="Background" Value="{StaticResource AddedColorBg}"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource AddedColor}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Type}" Value="Updated">
+                    <Setter Property="Background" Value="{StaticResource UpdatedColorBg}"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource UpdatedColor}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Type}" Value="Removed">
+                    <Setter Property="Background" Value="{StaticResource RemovedColorBg}"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource RemovedColor}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="TypeBadgeTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Type}" Value="Added">
+                    <Setter Property="Foreground" Value="{StaticResource AddedColor}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Type}" Value="Updated">
+                    <Setter Property="Foreground" Value="{StaticResource UpdatedColor}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Type}" Value="Removed">
+                    <Setter Property="Foreground" Value="{StaticResource RemovedColor}"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- РљР°СЂС‚РѕС‡РєР° РѕРґРЅРѕР№ РёР·РјРµРЅС‘РЅРЅРѕР№ СЃС‚СЂРѕРєРё -->
+        <DataTemplate x:Key="ChangeEntryTemplate" DataType="{x:Type viewModels:ChangeEntryViewModel}">
+            <Border Background="{StaticResource BackgroundMedium}" BorderBrush="{StaticResource BorderDark}" BorderThickness="1" CornerRadius="4" Padding="10" Margin="0,0,0,6">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Р—Р°РіРѕР»РѕРІРѕРє РєР°СЂС‚РѕС‡РєРё: Р±РµР№РґР¶ С‚РёРїР°, РєР»СЋС‡, РєРЅРѕРїРєР° РїРµСЂРµС…РѕРґР° -->
+                    <Grid Grid.Row="0" Margin="0,0,0,6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0" Style="{StaticResource TypeBadgeStyle}" Margin="0,0,8,0">
+                            <TextBlock Text="{Binding TypeLabel}" Style="{StaticResource TypeBadgeTextStyle}"/>
+                        </Border>
+                        <TextBlock Grid.Column="1" Text="{Binding Key}" FontFamily="Consolas, Courier New" FontSize="12"
+                                   Foreground="{StaticResource ForegroundPrimary}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" ToolTip="{Binding Key}"/>
+                        <Button Grid.Column="2" Content="РџРµСЂРµР№С‚Рё в†’" Style="{StaticResource GoToButtonStyle}"
+                                IsEnabled="{Binding CanNavigate}"
+                                Command="{Binding DataContext.GoToCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                CommandParameter="{Binding Key}"/>
+                    </Grid>
+
+                    <!-- Р СѓСЃСЃРєРёР№ -->
+                    <StackPanel Grid.Row="1" Margin="0,0,0,4" Visibility="{Binding ShowRussian, Converter={StaticResource BoolToVisibilityConverter}}">
+                        <TextBlock Text="Р СѓСЃСЃРєРёР№" FontSize="10" Foreground="{StaticResource ForegroundSecondary}" Margin="0,0,0,2"/>
+                        <TextBlock Text="{Binding RussianSingleValue}" TextWrapping="Wrap" Foreground="{StaticResource ForegroundPrimary}" FontSize="13"
+                                   Visibility="{Binding ShowRussianSingle, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                        <StackPanel Visibility="{Binding ShowRussianDiff, Converter={StaticResource BoolToVisibilityConverter}}">
+                            <TextBlock TextWrapping="Wrap" FontSize="13">
+                                <Run Text="Р‘С‹Р»Рѕ: " Foreground="{StaticResource ForegroundSecondary}"/>
+                                <Run Text="{Binding OldRussian, Mode=OneWay}" Foreground="{StaticResource RemovedColor}" TextDecorations="Strikethrough"/>
+                            </TextBlock>
+                            <TextBlock TextWrapping="Wrap" FontSize="13" Margin="0,2,0,0">
+                                <Run Text="РЎС‚Р°Р»Рѕ: " Foreground="{StaticResource ForegroundSecondary}"/>
+                                <Run Text="{Binding NewRussian, Mode=OneWay}" Foreground="{StaticResource ForegroundPrimary}" FontWeight="SemiBold"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- РђРЅРіР»РёР№СЃРєРёР№ -->
+                    <StackPanel Grid.Row="2" Visibility="{Binding ShowEnglish, Converter={StaticResource BoolToVisibilityConverter}}">
+                        <TextBlock Text="РђРЅРіР»РёР№СЃРєРёР№" FontSize="10" Foreground="{StaticResource ForegroundSecondary}" Margin="0,0,0,2"/>
+                        <TextBlock Text="{Binding EnglishSingleValue}" TextWrapping="Wrap" Foreground="{StaticResource ForegroundSecondary}" FontSize="13"
+                                   Visibility="{Binding ShowEnglishSingle, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                        <StackPanel Visibility="{Binding ShowEnglishDiff, Converter={StaticResource BoolToVisibilityConverter}}">
+                            <TextBlock TextWrapping="Wrap" FontSize="13">
+                                <Run Text="Р‘С‹Р»Рѕ: " Foreground="{StaticResource ForegroundSecondary}"/>
+                                <Run Text="{Binding OldEnglish, Mode=OneWay}" Foreground="{StaticResource RemovedColor}" TextDecorations="Strikethrough"/>
+                            </TextBlock>
+                            <TextBlock TextWrapping="Wrap" FontSize="13" Margin="0,2,0,0">
+                                <Run Text="РЎС‚Р°Р»Рѕ: " Foreground="{StaticResource ForegroundSecondary}"/>
+                                <Run Text="{Binding NewEnglish, Mode=OneWay}" Foreground="{StaticResource ForegroundSecondary}" FontWeight="SemiBold"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </DataTemplate>
+
+        <Style x:Key="ScrollBarButtonStyle" TargetType="RepeatButton">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border Background="Transparent"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ScrollBarThumbStyle" TargetType="Thumb">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Thumb">
+                        <Border Background="{StaticResource WarningOrange}" CornerRadius="6" Margin="2,0"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="ScrollBar">
+            <Setter Property="Background" Value="{StaticResource BackgroundMedium}"/>
+            <Setter Property="Width" Value="12"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ScrollBar">
+                        <Grid>
+                            <Border Background="{TemplateBinding Background}" CornerRadius="6"/>
+                            <Track x:Name="PART_Track" IsDirectionReversed="True">
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Command="ScrollBar.PageUpCommand" Style="{StaticResource ScrollBarButtonStyle}"/>
+                                </Track.DecreaseRepeatButton>
+                                <Track.Thumb>
+                                    <Thumb Style="{StaticResource ScrollBarThumbStyle}"/>
+                                </Track.Thumb>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Command="ScrollBar.PageDownCommand" Style="{StaticResource ScrollBarButtonStyle}"/>
+                                </Track.IncreaseRepeatButton>
+                            </Track>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Р“СЂСѓРїРїР° РёР·РјРµРЅРµРЅРёР№ РѕРґРЅРѕРіРѕ РїР°С‚С‡Р° -->
+        <DataTemplate x:Key="ChangeSetTemplate" DataType="{x:Type viewModels:ChangeSetViewModel}">
+            <Expander IsExpanded="{Binding IsExpanded}" Margin="0,0,0,14">
+                <Expander.Style>
+                    <Style TargetType="Expander">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="{StaticResource ForegroundPrimary}"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Expander">
+                                    <DockPanel>
+                                        <ToggleButton DockPanel.Dock="Top" Cursor="Hand"
+                                                      IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}">
+                                            <ToggleButton.Template>
+                                                <ControlTemplate TargetType="ToggleButton">
+                                                    <Border Background="{StaticResource BackgroundLight}" BorderBrush="{StaticResource BorderDark}" BorderThickness="1" CornerRadius="4" Padding="10,8">
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                                <ColumnDefinition Width="*"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Path x:Name="Arrow" Grid.Column="0" Data="M 0 0 L 8 0 L 4 6 Z" Fill="{StaticResource ForegroundSecondary}"
+                                                                  Width="10" Height="10" Stretch="Uniform" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                                                            <StackPanel Grid.Column="1">
+                                                                <TextBlock Text="{Binding DateLabel}" FontWeight="SemiBold" FontSize="14" Foreground="{StaticResource ForegroundPrimary}"/>
+                                                                <TextBlock Text="{Binding SummaryText}" FontSize="12" Foreground="{StaticResource ForegroundSecondary}" Margin="0,2,0,0"/>
+                                                            </StackPanel>
+                                                        </Grid>
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsChecked" Value="False">
+                                                            <Setter TargetName="Arrow" Property="Data" Value="M 0 0 L 0 8 L 6 4 Z"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </ToggleButton.Template>
+                                        </ToggleButton>
+                                        <ContentPresenter Margin="0,8,0,0" Visibility="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                                    </DockPanel>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Expander.Style>
+                <ScrollViewer MaxHeight="560" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
+                    <ItemsControl ItemsSource="{Binding Items}" ItemTemplate="{StaticResource ChangeEntryTemplate}"
+                                  VirtualizingPanel.IsVirtualizing="True"
+                                  VirtualizingPanel.VirtualizationMode="Recycling"
+                                  VirtualizingPanel.ScrollUnit="Pixel">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Expander>
+        </DataTemplate>
+    </Window.Resources>
+
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- РџР°РЅРµР»СЊ РїРѕРёСЃРєР°/С„РёР»СЊС‚СЂР° -->
+        <Border Grid.Row="0" Background="{StaticResource BackgroundMedium}" CornerRadius="4" Padding="10" Margin="0,0,0,12">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Horizontal" Grid.Column="0">
+                    <TextBlock Text="рџ”Ќ" Foreground="{StaticResource ForegroundSecondary}" VerticalAlignment="Center" Margin="0,0,8,0" FontSize="14"/>
+                    <TextBox Width="300" Height="30" VerticalAlignment="Center" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
+
+                    <TextBlock Text="РџРѕРєР°Р·Р°С‚СЊ:" Foreground="{StaticResource ForegroundSecondary}" VerticalAlignment="Center" Margin="15,0,8,0"/>
+                    <ComboBox Width="180" Height="30" VerticalAlignment="Center" ItemsSource="{Binding FilterOptions}" SelectedItem="{Binding SelectedFilter}"/>
+                </StackPanel>
+                <Button Grid.Column="1" Content="РћС‡РёСЃС‚РёС‚СЊ РёСЃС‚РѕСЂРёСЋ" Style="{StaticResource ActionButtonStyle}"
+                        Command="{Binding ClearHistoryCommand}" IsEnabled="{Binding HasHistory}"/>
+            </Grid>
+        </Border>
+
+        <!-- РЎРїРёСЃРѕРє РїР°С‚С‡РµР№ -->
+        <Grid Grid.Row="1">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ItemsControl ItemsSource="{Binding ChangeSets}" ItemTemplate="{StaticResource ChangeSetTemplate}"/>
+            </ScrollViewer>
+
+            <!-- РџСѓСЃС‚РѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ: РёСЃС‚РѕСЂРёРё РІРѕРѕР±С‰Рµ РµС‰С‘ РЅРµС‚ -->
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"
+                        Visibility="{Binding ShowEmptyHistoryState, Converter={StaticResource BoolToVisibilityConverter}}">
+                <TextBlock Text="РСЃС‚РѕСЂРёСЏ РёР·РјРµРЅРµРЅРёР№ РїРѕРєР° РїСѓСЃС‚Р°" Foreground="{StaticResource ForegroundSecondary}" FontSize="16" HorizontalAlignment="Center"/>
+                <TextBlock Text="РћРЅР° Р·Р°РїРѕР»РЅРёС‚СЃСЏ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё, РєРѕРіРґР° РІ Dbd-En.json / Dbd-Ru.json РїРѕСЏРІРёС‚СЃСЏ РЅРѕРІС‹Р№ РїР°С‚С‡" Foreground="{StaticResource ForegroundSecondary}" FontSize="12" Margin="0,6,0,0" HorizontalAlignment="Center"/>
+            </StackPanel>
+
+            <!-- РџСѓСЃС‚РѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ: РЅРёС‡РµРіРѕ РЅРµ РЅР°Р№РґРµРЅРѕ РїРѕ С„РёР»СЊС‚СЂСѓ -->
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"
+                        Visibility="{Binding ShowNoFilterResultsState, Converter={StaticResource BoolToVisibilityConverter}}">
+                <TextBlock Text="РќРёС‡РµРіРѕ РЅРµ РЅР°Р№РґРµРЅРѕ" Foreground="{StaticResource ForegroundSecondary}" FontSize="16" HorizontalAlignment="Center"/>
+                <TextBlock Text="РџРѕРїСЂРѕР±СѓР№С‚Рµ РёР·РјРµРЅРёС‚СЊ С„РёР»СЊС‚СЂ РёР»Рё РїРѕРёСЃРєРѕРІС‹Р№ Р·Р°РїСЂРѕСЃ" Foreground="{StaticResource ForegroundSecondary}" FontSize="12" Margin="0,6,0,0" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
+
+
+===== DBD_Trans\Views\ChangesWindow.xaml.cs =====
+using DBD_Trans.Helpers;
+using DBD_Trans.ViewModels;
+using System;
+using System.Runtime.InteropServices;
+using System.Windows;
+
+namespace DBD_Trans.Views
+{
+    public partial class ChangesWindow : Window
+    {
+        private ChangesViewModel ViewModel => DataContext as ChangesViewModel;
+
+        public ChangesWindow()
+        {
+            InitializeComponent();
+
+            this.SourceInitialized += (s, e) =>
+            {
+                var handle = new System.Windows.Interop.WindowInteropHelper(this).Handle;
+                SendMessage(handle, 0x80, IntPtr.Zero, IntPtr.Zero);
+                SendMessage(handle, 0x80, IntPtr.Zero, new IntPtr(1));
+            };
+
+            DarkTitleBarHelper.ApplyDarkTitleBar(this);
+
+            this.Loaded += (s, e) =>
+            {
+                if (ViewModel != null)
+                    ViewModel.RequestClose += OnRequestClose;
+            };
+
+            this.Closed += (s, e) =>
+            {
+                if (ViewModel != null)
+                    ViewModel.RequestClose -= OnRequestClose;
+            };
+        }
+
+        private void OnRequestClose()
+        {
+            Close();
+        }
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+    }
+}
+
+
 ===== DBD_Trans\Views\MainWindow.xaml =====
 <Window x:Class="DBD_Trans.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -6716,15 +8291,16 @@ namespace DBD_Trans.Views
         xmlns:viewModels="clr-namespace:DBD_Trans.ViewModels"
         xmlns:converters="clr-namespace:DBD_Trans.Converters"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
-        Title="Локализация DBD" Height="600" Width="950"
+        Title="Р›РѕРєР°Р»РёР·Р°С†РёСЏ DBD" Height="600" Width="950"
         WindowState="Maximized"
         Background="#FF171717"
         FocusVisualStyle="{x:Null}">
     <Window.Resources>
         <converters:BoolInverseConverter x:Key="BoolInverseConverter" />
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <converters:IntToVisibilityConverter x:Key="IntToVisibilityConverter" />
 
-        <!-- Цветовая палитра -->
+        <!-- Р¦РІРµС‚РѕРІР°СЏ РїР°Р»РёС‚СЂР° -->
         <SolidColorBrush x:Key="BackgroundDark" Color="#FF171717"/>
         <SolidColorBrush x:Key="BackgroundMedium" Color="#FF1E1E1E"/>
         <SolidColorBrush x:Key="BackgroundLight" Color="#FF212121"/>
@@ -6737,7 +8313,7 @@ namespace DBD_Trans.Views
         <SolidColorBrush x:Key="ErrorRed" Color="#FF3D1C1C"/>
         <SolidColorBrush x:Key="WarningYellowLight" Color="#FF504A28"/>
 
-        <!-- Стиль для ComboBox (Темная тема) -->
+        <!-- РЎС‚РёР»СЊ РґР»СЏ ComboBox (РўРµРјРЅР°СЏ С‚РµРјР°) -->
         <Style TargetType="ComboBox">
             <Setter Property="Background" Value="{StaticResource BackgroundMedium}"/>
             <Setter Property="Foreground" Value="{StaticResource ForegroundPrimary}"/>
@@ -6812,7 +8388,7 @@ namespace DBD_Trans.Views
             </Setter>
         </Style>
 
-        <!-- Стиль для элементов ComboBox -->
+        <!-- РЎС‚РёР»СЊ РґР»СЏ СЌР»РµРјРµРЅС‚РѕРІ ComboBox -->
         <Style TargetType="ComboBoxItem">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="{StaticResource ForegroundPrimary}"/>
@@ -6838,7 +8414,7 @@ namespace DBD_Trans.Views
             </Setter>
         </Style>
 
-        <!-- Остальные стили (загрузка, TextBox, ScrollBar, DataGrid и т.д.) -->
+        <!-- РћСЃС‚Р°Р»СЊРЅС‹Рµ СЃС‚РёР»Рё (Р·Р°РіСЂСѓР·РєР°, TextBox, ScrollBar, DataGrid Рё С‚.Рґ.) -->
         <Style x:Key="ThreeDotsLoading" TargetType="ItemsControl">
             <Setter Property="ItemsPanel">
                 <Setter.Value>
@@ -6927,7 +8503,7 @@ namespace DBD_Trans.Views
             </Setter>
         </Style>
 
-        <!-- Стиль DataGrid (без рамок фокуса и внешних обводок) -->
+        <!-- РЎС‚РёР»СЊ DataGrid (Р±РµР· СЂР°РјРѕРє С„РѕРєСѓСЃР° Рё РІРЅРµС€РЅРёС… РѕР±РІРѕРґРѕРє) -->
         <Style TargetType="DataGrid">
             <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
             <Setter Property="Background" Value="{StaticResource BackgroundMedium}"/>
@@ -7085,7 +8661,7 @@ namespace DBD_Trans.Views
                     <Setter Property="Background" Value="{StaticResource BackgroundLight}"/>
                 </Trigger>
 
-                <!-- НЕТ ПЕРЕВОДА -->
+                <!-- РќР•Рў РџР•Р Р•Р’РћР”Рђ -->
                 <MultiDataTrigger>
                     <MultiDataTrigger.Conditions>
                         <Condition Binding="{Binding HasTranslation}" Value="False"/>
@@ -7129,7 +8705,7 @@ namespace DBD_Trans.Views
                     <Setter Property="Foreground" Value="{StaticResource ForegroundPrimary}"/>
                 </MultiDataTrigger>
 
-                <!-- ЗАВЕРШЕНО БЕЗ ОШИБОК -->
+                <!-- Р—РђР’Р•Р РЁР•РќРћ Р‘Р•Р— РћРЁРР‘РћРљ -->
                 <MultiDataTrigger>
                     <MultiDataTrigger.Conditions>
                         <Condition Binding="{Binding Status}" Value="Completed"/>
@@ -7177,7 +8753,7 @@ namespace DBD_Trans.Views
                     <Setter Property="Foreground" Value="{StaticResource ForegroundPrimary}"/>
                 </MultiDataTrigger>
 
-                <!-- ЗАВЕРШЕНО С ОШИБКАМИ -->
+                <!-- Р—РђР’Р•Р РЁР•РќРћ РЎ РћРЁРР‘РљРђРњР -->
                 <MultiDataTrigger>
                     <MultiDataTrigger.Conditions>
                         <Condition Binding="{Binding Status}" Value="Completed"/>
@@ -7225,7 +8801,7 @@ namespace DBD_Trans.Views
                     <Setter Property="Foreground" Value="{StaticResource ForegroundPrimary}"/>
                 </MultiDataTrigger>
 
-                <!-- В ПРОЦЕССЕ С ОШИБКАМИ -->
+                <!-- Р’ РџР РћР¦Р•РЎРЎР• РЎ РћРЁРР‘РљРђРњР -->
                 <MultiDataTrigger>
                     <MultiDataTrigger.Conditions>
                         <Condition Binding="{Binding Status}" Value="InProgress"/>
@@ -7273,7 +8849,7 @@ namespace DBD_Trans.Views
                     <Setter Property="Foreground" Value="{StaticResource ForegroundPrimary}"/>
                 </MultiDataTrigger>
 
-                <!-- ОБЫЧНЫЕ СТРОКИ -->
+                <!-- РћР‘Р«Р§РќР«Р• РЎРўР РћРљР -->
                 <MultiDataTrigger>
                     <MultiDataTrigger.Conditions>
                         <Condition Binding="{Binding HasTranslation}" Value="True"/>
@@ -7310,30 +8886,64 @@ namespace DBD_Trans.Views
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <!-- Панель поиска и фильтра -->
+            <!-- РџР°РЅРµР»СЊ РїРѕРёСЃРєР° Рё С„РёР»СЊС‚СЂР° -->
             <Border Grid.Row="0" Background="{StaticResource BackgroundMedium}" CornerRadius="4" Padding="10" Margin="0,0,0,15">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="🔍" Foreground="{StaticResource ForegroundSecondary}" VerticalAlignment="Center" Margin="0,0,8,0" FontSize="14"/>
-                    <TextBlock Text="Поиск:" Foreground="{StaticResource ForegroundSecondary}" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
 
-                    <!-- ДОБАВЛЕНО Height="30" -->
-                    <TextBox x:Name="SearchBox" Width="350" Height="30" VerticalAlignment="Center" TextChanged="SearchBox_TextChanged"
-                 Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
+                    <StackPanel Grid.Column="0" Orientation="Horizontal">
+                        <TextBlock Text="рџ”Ќ" Foreground="{StaticResource ForegroundSecondary}" VerticalAlignment="Center" Margin="0,0,8,0" FontSize="14"/>
+                        <TextBlock Text="РџРѕРёСЃРє:" Foreground="{StaticResource ForegroundSecondary}" VerticalAlignment="Center" Margin="0,0,8,0"/>
 
-                    <TextBlock Text="Фильтр:" Foreground="{StaticResource ForegroundSecondary}" VerticalAlignment="Center" Margin="15,0,8,0"/>
+                        <!-- Р”РћР‘РђР’Р›Р•РќРћ Height="30" -->
+                        <TextBox x:Name="SearchBox" Width="350" Height="30" VerticalAlignment="Center" TextChanged="SearchBox_TextChanged"
+                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
 
-                    <!-- ДОБАВЛЕНО Height="30" -->
-                    <ComboBox x:Name="FilterComboBox" Width="220" Height="30" VerticalAlignment="Center"
-                  ItemsSource="{Binding FilterOptions}"
-                  SelectedItem="{Binding SelectedFilter}"
-                  SelectionChanged="FilterComboBox_SelectionChanged"/>
+                        <TextBlock Text="Р¤РёР»СЊС‚СЂ:" Foreground="{StaticResource ForegroundSecondary}" VerticalAlignment="Center" Margin="15,0,8,0"/>
 
-                    <TextBlock Text="{Binding ResultCountText}" Foreground="{StaticResource ForegroundSecondary}"
-                   VerticalAlignment="Center" Margin="15,0,0,0" FontSize="12"/>
-                </StackPanel>
+                        <!-- Р”РћР‘РђР’Р›Р•РќРћ Height="30" -->
+                        <ComboBox x:Name="FilterComboBox" Width="220" Height="30" VerticalAlignment="Center"
+                      ItemsSource="{Binding FilterOptions}"
+                      SelectedItem="{Binding SelectedFilter}"
+                      SelectionChanged="FilterComboBox_SelectionChanged"/>
+
+                        <TextBlock Text="{Binding ResultCountText}" Foreground="{StaticResource ForegroundSecondary}"
+                       VerticalAlignment="Center" Margin="15,0,0,0" FontSize="12"/>
+                    </StackPanel>
+
+                    <!-- Р”РѕСЃС‚СѓРї Рє РёСЃС‚РѕСЂРёРё РёР·РјРµРЅРµРЅРёР№ СЃС‚СЂРѕРє РјРµР¶РґСѓ РїР°С‚С‡Р°РјРё -->
+                    <Button Grid.Column="1" Command="{Binding ShowChangesCommand}" Height="30" Padding="10,0" Cursor="Hand"
+                            VerticalAlignment="Center" Background="{StaticResource BackgroundLight}"
+                            BorderBrush="{StaticResource BorderDark}" BorderThickness="1" Foreground="{StaticResource ForegroundPrimary}">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="3">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource WarningOrange}"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="рџ•“" FontSize="13" Margin="0,0,6,0"/>
+                            <TextBlock Text="РСЃС‚РѕСЂРёСЏ РёР·РјРµРЅРµРЅРёР№" FontSize="12"/>
+                            <Border Background="{StaticResource WarningOrange}" CornerRadius="8" Padding="6,1" Margin="8,0,0,0"
+                                    Visibility="{Binding UnviewedChangeCount, Converter={StaticResource IntToVisibilityConverter}}">
+                                <TextBlock Text="{Binding UnviewedChangeCount}" Foreground="White" FontSize="11" FontWeight="Bold"/>
+                            </Border>
+                        </StackPanel>
+                    </Button>
+                </Grid>
             </Border>
 
-            <!-- Таблица -->
+            <!-- РўР°Р±Р»РёС†Р° -->
             <DataGrid x:Name="LocalizationGrid" Grid.Row="1"
                           ItemsSource="{Binding FilteredEntries}"
                           SelectedItem="{Binding SelectedEntry}"
@@ -7347,12 +8957,12 @@ namespace DBD_Trans.Views
                       VirtualizingPanel.CacheLength="2,1">
                 <DataGrid.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Анализ" Command="{Binding AnalyzeCommand}" CommandParameter="{Binding SelectedEntry}">
+                        <MenuItem Header="РђРЅР°Р»РёР·" Command="{Binding AnalyzeCommand}" CommandParameter="{Binding SelectedEntry}">
                             <MenuItem.Icon>
                                 <Path Data="M0,0 L10,10 M10,0 L0,10" Stroke="{StaticResource ForegroundPrimary}" StrokeThickness="2"/>
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Header="Перейти" Command="{Binding GoToCommand}" CommandParameter="{Binding SelectedEntry}">
+                        <MenuItem Header="РџРµСЂРµР№С‚Рё" Command="{Binding GoToCommand}" CommandParameter="{Binding SelectedEntry}">
                             <MenuItem.Icon>
                                 <Path Data="M0,0 L8,5 L0,10 Z" Fill="{StaticResource ForegroundPrimary}" Width="12" Height="12" Stretch="Uniform" Margin="0,0,4,0"/>
                             </MenuItem.Icon>
@@ -7360,7 +8970,7 @@ namespace DBD_Trans.Views
                     </ContextMenu>
                 </DataGrid.ContextMenu>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="№" Binding="{Binding Index}" Width="60">
+                    <DataGridTextColumn Header="в„–" Binding="{Binding Index}" Width="60">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="TextAlignment" Value="Right"/>
@@ -7369,7 +8979,7 @@ namespace DBD_Trans.Views
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Код строки" Binding="{Binding Key}" Width="260">
+                    <DataGridTextColumn Header="РљРѕРґ СЃС‚СЂРѕРєРё" Binding="{Binding Key}" Width="260">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="FontFamily" Value="Consolas, Courier New"/>
@@ -7379,7 +8989,7 @@ namespace DBD_Trans.Views
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Русский" Binding="{Binding Russian}" Width="*">
+                    <DataGridTextColumn Header="Р СѓСЃСЃРєРёР№" Binding="{Binding Russian}" Width="*">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="TextWrapping" Value="Wrap"/>
@@ -7389,7 +8999,7 @@ namespace DBD_Trans.Views
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Английский" Binding="{Binding English}" Width="*">
+                    <DataGridTextColumn Header="РђРЅРіР»РёР№СЃРєРёР№" Binding="{Binding English}" Width="*">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="TextWrapping" Value="Wrap"/>
@@ -7399,7 +9009,7 @@ namespace DBD_Trans.Views
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn x:Name="ErrorCountColumn" Header="Замечания" Binding="{Binding ErrorCount}" Width="80">
+                    <DataGridTextColumn x:Name="ErrorCountColumn" Header="Р—Р°РјРµС‡Р°РЅРёСЏ" Binding="{Binding ErrorCount}" Width="80">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="TextAlignment" Value="Center"/>
@@ -7411,24 +9021,24 @@ namespace DBD_Trans.Views
                 </DataGrid.Columns>
             </DataGrid>
 
-            <!-- Статусная строка -->
+            <!-- РЎС‚Р°С‚СѓСЃРЅР°СЏ СЃС‚СЂРѕРєР° -->
             <Border Grid.Row="2" Background="{StaticResource BackgroundMedium}" CornerRadius="4" Padding="10,6" Margin="0,10,0,0">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Всего строк: " Foreground="{StaticResource ForegroundSecondary}"/>
+                    <TextBlock Text="Р’СЃРµРіРѕ СЃС‚СЂРѕРє: " Foreground="{StaticResource ForegroundSecondary}"/>
                     <TextBlock Text="{Binding TotalCount}" Foreground="{StaticResource ForegroundPrimary}" FontWeight="Bold"/>
-                    <TextBlock Text=" | Отображено: " Foreground="{StaticResource ForegroundSecondary}" Margin="10,0,0,0"/>
+                    <TextBlock Text=" | РћС‚РѕР±СЂР°Р¶РµРЅРѕ: " Foreground="{StaticResource ForegroundSecondary}" Margin="10,0,0,0"/>
                     <TextBlock Text="{Binding DisplayedCount}" Foreground="{StaticResource ForegroundPrimary}" FontWeight="Bold"/>
-                    <TextBlock Text=" | Без перевода: " Foreground="{StaticResource ForegroundSecondary}" Margin="10,0,0,0"/>
+                    <TextBlock Text=" | Р‘РµР· РїРµСЂРµРІРѕРґР°: " Foreground="{StaticResource ForegroundSecondary}" Margin="10,0,0,0"/>
                     <TextBlock Text="{Binding MissingCount}" Foreground="{StaticResource ForegroundPrimary}" FontWeight="Bold"/>
-                    <TextBlock Text=" | Завершено: " Foreground="{StaticResource ForegroundSecondary}" Margin="10,0,0,0"/>
+                    <TextBlock Text=" | Р—Р°РІРµСЂС€РµРЅРѕ: " Foreground="{StaticResource ForegroundSecondary}" Margin="10,0,0,0"/>
                     <TextBlock Text="{Binding CompletedCount}" Foreground="{StaticResource ForegroundPrimary}" FontWeight="Bold"/>
-                    <TextBlock Text=" | Замечаний: " Foreground="{StaticResource ForegroundSecondary}" Margin="10,0,0,0"/>
+                    <TextBlock Text=" | Р—Р°РјРµС‡Р°РЅРёР№: " Foreground="{StaticResource ForegroundSecondary}" Margin="10,0,0,0"/>
                     <TextBlock Text="{Binding TotalErrorCount}" Foreground="{StaticResource ForegroundPrimary}" FontWeight="Bold"/>
                 </StackPanel>
             </Border>
         </Grid>
 
-        <!-- Экран загрузки -->
+        <!-- Р­РєСЂР°РЅ Р·Р°РіСЂСѓР·РєРё -->
         <Border Background="#CC1E1E1E" Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}">
             <Grid>
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -7437,12 +9047,67 @@ namespace DBD_Trans.Views
                         <sys:Int32>2</sys:Int32>
                         <sys:Int32>3</sys:Int32>
                     </ItemsControl>
-                    <TextBlock Text="Загрузка данных..." Foreground="#FFE0E0E0" FontSize="14" FontWeight="SemiBold" Margin="0,20,0,0" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Р—Р°РіСЂСѓР·РєР° РґР°РЅРЅС‹С…..." Foreground="#FFE0E0E0" FontSize="14" FontWeight="SemiBold" Margin="0,20,0,0" HorizontalAlignment="Center"/>
                 </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- РЈРІРµРґРѕРјР»РµРЅРёРµ РѕР± РёР·РјРµРЅРµРЅРёСЏС… СЃС‚СЂРѕРє РјРµР¶РґСѓ РїР°С‚С‡Р°РјРё -->
+        <Border HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,25,25" MaxWidth="420"
+                Background="{StaticResource BackgroundLight}" CornerRadius="6"
+                Visibility="{Binding ShowChangeToast, Converter={StaticResource BoolToVisibilityConverter}}">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="18" ShadowDepth="4" Opacity="0.4" Color="Black"/>
+            </Border.Effect>
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Setter Property="Opacity" Value="0"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ShowChangeToast}" Value="True">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.25"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+            <Grid Margin="14,12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" Width="4" Background="{StaticResource WarningOrange}" CornerRadius="2" Margin="0,0,12,0"/>
+                <StackPanel Grid.Column="1" VerticalAlignment="Center" MaxWidth="270">
+                    <TextBlock Text="РЎС‚СЂРѕРєРё Р»РѕРєР°Р»РёР·Р°С†РёРё РѕР±РЅРѕРІР»РµРЅС‹" Foreground="{StaticResource ForegroundPrimary}" FontWeight="SemiBold" FontSize="13" TextWrapping="Wrap"/>
+                    <TextBlock Text="{Binding ChangeToastText}" Foreground="{StaticResource ForegroundSecondary}" FontSize="12" TextWrapping="Wrap" Margin="0,3,0,0"/>
+                    <Button Content="РџРѕРєР°Р·Р°С‚СЊ СЃРїРёСЃРѕРє в†’" Command="{Binding OpenChangesFromToastCommand}" HorizontalAlignment="Left"
+                            Foreground="{StaticResource WarningOrange}" Background="Transparent" BorderThickness="0" Padding="0" Margin="0,6,0,0" Cursor="Hand">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <ContentPresenter/>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+                <Button Grid.Column="2" Content="вњ•" Command="{Binding DismissToastCommand}" VerticalAlignment="Top"
+                        Foreground="{StaticResource ForegroundSecondary}" Background="Transparent" BorderThickness="0"
+                        Padding="4" Margin="8,0,0,0" Cursor="Hand" FontSize="12">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <ContentPresenter/>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
             </Grid>
         </Border>
     </Grid>
 </Window>
+
 
 ===== DBD_Trans\Views\MainWindow.xaml.cs =====
 using DBD_Trans.Helpers;
@@ -7832,10 +9497,11 @@ namespace DBD_Trans
             var fileService = new JsonFileService();
             var errorStorage = new JsonErrorStorage(fileService, dataDir);
             var statusStorage = new JsonStatusStorage(dataDir);
-            var mergeStorage = new JsonMergeStorage(fileService, dataDir); // <-- НОВОЕ
+            var mergeStorage = new JsonMergeStorage(fileService, dataDir); // <-- РќРћР’РћР•
+            var changeHistoryStorage = new JsonChangeHistoryStorage(fileService, dataDir); // <-- РќРћР’РћР•: РёСЃС‚РѕСЂРёСЏ РёР·РјРµРЅРµРЅРёР№ СЃС‚СЂРѕРє
             var appSettings = new AppSettings();
 
-            var mainVM = new MainViewModel(fileService, errorStorage, statusStorage, appSettings, dataDir, mergeStorage);
+            var mainVM = new MainViewModel(fileService, errorStorage, statusStorage, appSettings, dataDir, mergeStorage, changeHistoryStorage);
             var mainWindow = new MainWindow();
             mainWindow.DataContext = mainVM;
             mainWindow.Show();
@@ -7852,6 +9518,7 @@ namespace DBD_Trans
         }
     }
 }
+
 
 ===== DBD_Trans\packages.config =====
 <?xml version="1.0" encoding="utf-8"?>
