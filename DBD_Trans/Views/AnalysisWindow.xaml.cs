@@ -118,6 +118,7 @@ namespace DBD_Trans.Views
         // Когда завершился предыдущий жест — используется для короткого "гашения" (PostGestureCooldownMs)
         private DateTime _gestureEndedAt = DateTime.MinValue;
 
+
         // Вложенный класс для независимой анимации каждого ScrollViewer
         private class ScrollAnimator
         {
@@ -295,16 +296,31 @@ namespace DBD_Trans.Views
                     isHandled = true;
                 }
 
-                // Если комбинация была нажата
-                if (isHandled)
+                else if (e.SystemKey == Key.D4 || e.SystemKey == Key.NumPad4)
                 {
-                    if (!string.IsNullOrEmpty(textToInsert))
+                    textToInsert = "Ед. число ≠ Мн. число";
+                    isHandled = true;
+                }
+
+                else if (e.SystemKey == Key.D5 || e.SystemKey == Key.NumPad5)
+                {
+                    textToInsert = "Мн. число ≠ Ед. число";
+                    isHandled = true;
+                }
+
+                {
+
+                    // Если комбинация была нажата
+                    if (isHandled)
                     {
-                        InsertTextAtCaret(textToInsert);
-                        NewErrorTextBox.Focus(); // Переносим фокус для продолжения ввода
+                        if (!string.IsNullOrEmpty(textToInsert))
+                        {
+                            InsertTextAtCaret(textToInsert);
+                            NewErrorTextBox.Focus(); // Переносим фокус для продолжения ввода
+                        }
+                        e.Handled = true; // Блокируем дальнейшую обработку клавиш
+                        return;
                     }
-                    e.Handled = true; // Блокируем дальнейшую обработку клавиш
-                    return;
                 }
             }
             // ================================================

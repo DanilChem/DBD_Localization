@@ -1,4 +1,4 @@
-﻿<Window x:Class="DBD_Trans.Views.AnalysisWindow"
+﻿    <Window x:Class="DBD_Trans.Views.AnalysisWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:DBD_Trans.Views"
@@ -308,65 +308,70 @@
         <!-- Замени существующие кнопки Маркера и Выполнено на этот блок -->
         <!-- Верхняя панель инструментов -->
         <!-- Верхняя панель инструментов -->
-        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10" VerticalAlignment="Center">
+        <!-- Верхняя панель инструментов (Разделенная на левую и правую части) -->
+        <Grid Grid.Row="0" Margin="0,0,0,10">
+            <!-- Левая часть: Существующие инструменты -->
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+                <!-- ГРУППА 1: Размер шрифта -->
+                <TextBlock Text="🔤" FontSize="16" Foreground="{StaticResource ForegroundSecondary}" VerticalAlignment="Center" Margin="0,0,5,0" ToolTip="Размер шрифта"/>
+                <Button Content="−" Command="{Binding DecreaseFontCommand}" ToolTip="Уменьшить шрифт"
+                Style="{StaticResource ToolbarButtonStyle}" FontSize="16" FontWeight="Bold"/>
+                <TextBlock Text="{Binding FontSize, StringFormat={}{0:F0}}" Foreground="{StaticResource ForegroundPrimary}"
+                   VerticalAlignment="Center" Margin="5,0" MinWidth="20" TextAlignment="Center" FontWeight="SemiBold"/>
+                <Button Content="+" Command="{Binding IncreaseFontCommand}" ToolTip="Увеличить шрифт"
+                Style="{StaticResource ToolbarButtonStyle}" FontSize="16" FontWeight="Bold"/>
 
-            <!-- ГРУППА 1: Размер шрифта -->
-            <TextBlock Text="🔤" FontSize="16" Foreground="{StaticResource ForegroundSecondary}" VerticalAlignment="Center" Margin="0,0,5,0" ToolTip="Размер шрифта"/>
-            <Button Content="−" Command="{Binding DecreaseFontCommand}" ToolTip="Уменьшить шрифт" 
-            Style="{StaticResource ToolbarButtonStyle}" FontSize="16" FontWeight="Bold"/>
-            <TextBlock Text="{Binding FontSize, StringFormat={}{0:F0}}" Foreground="{StaticResource ForegroundPrimary}" 
-               VerticalAlignment="Center" Margin="5,0" MinWidth="20" TextAlignment="Center" FontWeight="SemiBold"/>
-            <Button Content="+" Command="{Binding IncreaseFontCommand}" ToolTip="Увеличить шрифт" 
-            Style="{StaticResource ToolbarButtonStyle}" FontSize="16" FontWeight="Bold"/>
+                <Border Width="1" Height="20" Background="{StaticResource BorderDark}" Margin="10,0,10,0"/>
 
-            <!-- Разделитель -->
-            <Border Width="1" Height="20" Background="{StaticResource BorderDark}" Margin="15,0,10,0"/>
+                <!-- ГРУППА 2: Поиск -->
+                <Border BorderBrush="{StaticResource BorderDark}" BorderThickness="1" CornerRadius="3" Background="{StaticResource BackgroundLight}" Width="200" Height="30">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="🔍" Foreground="{StaticResource ForegroundSecondary}" VerticalAlignment="Center" Margin="8,0,6,0" FontSize="12"/>
+                        <TextBox Grid.Column="1" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Background="Transparent" BorderThickness="0" Foreground="{StaticResource ForegroundPrimary}" VerticalContentAlignment="Center" CaretBrush="{StaticResource ForegroundPrimary}"/>
+                    </Grid>
+                </Border>
 
-            <!-- ГРУППА 2: Поиск -->
-            <Border BorderBrush="{StaticResource BorderDark}" BorderThickness="1" CornerRadius="3" Background="{StaticResource BackgroundLight}" Width="200" Height="30">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="🔍" Foreground="{StaticResource ForegroundSecondary}" VerticalAlignment="Center" Margin="8,0,6,0" FontSize="12"/>
-                    <TextBox Grid.Column="1" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Background="Transparent" BorderThickness="0" Foreground="{StaticResource ForegroundPrimary}" VerticalContentAlignment="Center" CaretBrush="{StaticResource ForegroundPrimary}"/>
-                </Grid>
-            </Border>
+                <Border Width="1" Height="20" Background="{StaticResource BorderDark}" Margin="10,0,10,0"/>
 
-            <!-- Разделитель -->
-            <Border Width="1" Height="20" Background="{StaticResource BorderDark}" Margin="15,0,10,0"/>
+                <!-- ГРУППА 3: Инструменты -->
+                <Button Content="🖍️" Command="{Binding ToggleMarkerCommand}" ToolTip="Маркер"
+                Background="{Binding IsMarkerActive, Converter={StaticResource BoolToBrushConverter}, ConverterParameter=#CA5100}"
+                Foreground="White" Style="{StaticResource ToolbarButtonStyle}"/>
+                <Border Width="1" Height="20" Background="{StaticResource BorderDark}" Margin="10,0,10,0"/>
+                <ToggleButton Content="📑" IsChecked="{Binding IsSplitBySentences}" ToolTip="Разделение по предложениям"
+                      Style="{StaticResource ToolbarToggleButtonStyle}"/>
+                <ToggleButton Content="🎯" IsChecked="{Binding IsFocusMode}" ToolTip="Режим фокуса"
+                      Style="{StaticResource ToolbarToggleButtonStyle}"/>
 
-            <!-- ГРУППА 3: Инструменты -->
-            <Button Content="🖍️" Command="{Binding ToggleMarkerCommand}" ToolTip="Маркер"
-            Background="{Binding IsMarkerActive, Converter={StaticResource BoolToBrushConverter}, ConverterParameter=#CA5100}"
-            Foreground="White" Style="{StaticResource ToolbarButtonStyle}"/>
+                <Border Width="1" Height="20" Background="{StaticResource BorderDark}" Margin="10,0,10,0"/>
 
-            <ToggleButton Content="📑" IsChecked="{Binding IsSplitBySentences}" ToolTip="Разделение по предложениям"
-                  Style="{StaticResource ToolbarToggleButtonStyle}"/>
+                <!-- ГРУППА 4: Статус -->
+                <Button Content="✔️" Command="{Binding ToggleCompletedCommand}" ToolTip="Отметить как выполненное"
+                Background="{Binding CompletedButtonBrush}" Foreground="White"
+                Style="{StaticResource ToolbarButtonStyle}"/>
 
-            <ToggleButton Content="🎯" IsChecked="{Binding IsFocusMode}" ToolTip="Режим фокуса"
-                  Style="{StaticResource ToolbarToggleButtonStyle}"
-                  Visibility="{Binding IsSplitBySentences, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                <TextBlock Text="{Binding JumpBufferText}"
+                   Foreground="{StaticResource WarningOrange}"
+                   FontWeight="SemiBold"
+                   VerticalAlignment="Center"
+                   Margin="15,0,0,0"
+                   FontSize="14"/>
+            </StackPanel>
 
-            <!-- Разделитель -->
-            <Border Width="1" Height="20" Background="{StaticResource BorderDark}" Margin="15,0,10,0"/>
-
-            <!-- ГРУППА 4: Статус (перенесено в конец) -->
-            <Button Content="✔️" Command="{Binding ToggleCompletedCommand}" ToolTip="Отметить как выполненное"
-            Background="{Binding CompletedButtonBrush}" Foreground="White" 
-            Style="{StaticResource ToolbarButtonStyle}"/>
-
-            <!-- ===== НОВОЕ: Индикатор быстрого перехода ===== -->
-            <TextBlock Text="{Binding JumpBufferText}" 
-           Foreground="{StaticResource WarningOrange}" 
-           FontWeight="SemiBold" 
-           VerticalAlignment="Center" 
-           Margin="15,0,0,0"
-           FontSize="14"/>
-            <!-- ================================================ -->
-
-        </StackPanel>
+            <!-- Правая часть: Кнопки навигации -->
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                <Button Content="◀" Command="{Binding PrevEntryCommand}" ToolTip="Предыдущая запись"
+                Style="{StaticResource ToolbarButtonStyle}" FontSize="16" FontWeight="Bold"
+                IsEnabled="{Binding CanGoPrev}"/>
+                <Button Content="▶" Command="{Binding NextEntryCommand}" ToolTip="Следующая запись"
+                Style="{StaticResource ToolbarButtonStyle}" FontSize="16" FontWeight="Bold"
+                IsEnabled="{Binding CanGoNext}" Margin="5,0,0,0"/>
+            </StackPanel>
+        </Grid>
         <!-- Тексты -->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>

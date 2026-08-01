@@ -49,6 +49,20 @@ namespace DBD_Trans.ViewModels
             }
         }
 
+        // Добавьте поле для хранения ссылки на MainViewModel
+        private readonly MainViewModel _mainViewModel;
+
+        // Добавьте свойства для блокировки кнопок на краях списка
+        public bool CanGoNext { get; }
+        public bool CanGoPrev { get; }
+
+        // Событие для запроса навигации (1 = вперед, -1 = назад)
+        public event Action<int> RequestNavigate;
+
+        // Команды навигации
+        public ICommand NextEntryCommand { get; }
+        public ICommand PrevEntryCommand { get; }
+
         private string _jumpBufferText = "";
         public string JumpBufferText
         {
@@ -245,17 +259,27 @@ namespace DBD_Trans.ViewModels
         public List<SentenceInfo> RussianSentences { get; private set; } = new List<SentenceInfo>();
 
         public AnalysisViewModel(LocalizationEntry entry, List<ErrorItem> existingErrors,
-            IErrorStorage errorStorage, IStatusStorage statusStorage, IAppSettings appSettings, IMergeStorage mergeStorage)
+            IErrorStorage errorStorage, IStatusStorage statusStorage, IAppSettings appSettings, IMergeStorage mergeStorage, MainViewModel mainViewModel)
         {
             _key = entry.Key;
             EnglishText = entry.English;
             RussianText = entry.Russian;
-            Title = $"Анализ строки: {_key}";
+            Title = $"Анализ строки #{entry.Index}: {_key}";
             _errorStorage = errorStorage;
             _appSettings = appSettings;
             _entry = entry;
             _statusStorage = statusStorage;
             _mergeStorage = mergeStorage; // <-- НОВОЕ
+
+            _mainViewModel = mainViewModel;
+
+            if (_mainViewModel != null)
+            {
+                var list = _mainViewModel.FilteredEntries.Cast<LocalizationEntry>().ToList();
+                int index = list.IndexOf(entry);
+                CanGoPrev = index > 0;
+                CanGoNext = index < list.Count - 1;
+            }
 
             Errors.CollectionChanged += (s, e) =>
             {
@@ -284,6 +308,10 @@ namespace DBD_Trans.ViewModels
 
             NextParagraphCommand = new RelayCommand(_ => MoveFocus(1), _ => IsFocusMode && CurrentFocusedParagraphIndex < TotalParagraphs - 1);
             PrevParagraphCommand = new RelayCommand(_ => MoveFocus(-1), _ => IsFocusMode && CurrentFocusedParagraphIndex > 0);
+
+            NextEntryCommand = new RelayCommand(_ => RequestNavigate?.Invoke(1), _ => CanGoNext);
+            PrevEntryCommand = new RelayCommand(_ => RequestNavigate?.Invoke(-1), _ => CanGoPrev);
+
 
             ToggleFocusCommand = new RelayCommand(_ =>
             {

@@ -1,4 +1,4 @@
-﻿<Window x:Class="DBD_Trans.Views.MainWindow"
+<Window x:Class="DBD_Trans.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:DBD_Trans.Views"
@@ -12,6 +12,7 @@
     <Window.Resources>
         <converters:BoolInverseConverter x:Key="BoolInverseConverter" />
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <converters:IntToVisibilityConverter x:Key="IntToVisibilityConverter" />
 
         <!-- Цветовая палитра -->
         <SolidColorBrush x:Key="BackgroundDark" Color="#FF171717"/>
@@ -601,25 +602,59 @@
 
             <!-- Панель поиска и фильтра -->
             <Border Grid.Row="0" Background="{StaticResource BackgroundMedium}" CornerRadius="4" Padding="10" Margin="0,0,0,15">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="🔍" Foreground="{StaticResource ForegroundSecondary}" VerticalAlignment="Center" Margin="0,0,8,0" FontSize="14"/>
-                    <TextBlock Text="Поиск:" Foreground="{StaticResource ForegroundSecondary}" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
 
-                    <!-- ДОБАВЛЕНО Height="30" -->
-                    <TextBox x:Name="SearchBox" Width="350" Height="30" VerticalAlignment="Center" TextChanged="SearchBox_TextChanged"
-                 Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
+                    <StackPanel Grid.Column="0" Orientation="Horizontal">
+                        <TextBlock Text="🔍" Foreground="{StaticResource ForegroundSecondary}" VerticalAlignment="Center" Margin="0,0,8,0" FontSize="14"/>
+                        <TextBlock Text="Поиск:" Foreground="{StaticResource ForegroundSecondary}" VerticalAlignment="Center" Margin="0,0,8,0"/>
 
-                    <TextBlock Text="Фильтр:" Foreground="{StaticResource ForegroundSecondary}" VerticalAlignment="Center" Margin="15,0,8,0"/>
+                        <!-- ДОБАВЛЕНО Height="30" -->
+                        <TextBox x:Name="SearchBox" Width="350" Height="30" VerticalAlignment="Center" TextChanged="SearchBox_TextChanged"
+                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
 
-                    <!-- ДОБАВЛЕНО Height="30" -->
-                    <ComboBox x:Name="FilterComboBox" Width="220" Height="30" VerticalAlignment="Center"
-                  ItemsSource="{Binding FilterOptions}"
-                  SelectedItem="{Binding SelectedFilter}"
-                  SelectionChanged="FilterComboBox_SelectionChanged"/>
+                        <TextBlock Text="Фильтр:" Foreground="{StaticResource ForegroundSecondary}" VerticalAlignment="Center" Margin="15,0,8,0"/>
 
-                    <TextBlock Text="{Binding ResultCountText}" Foreground="{StaticResource ForegroundSecondary}"
-                   VerticalAlignment="Center" Margin="15,0,0,0" FontSize="12"/>
-                </StackPanel>
+                        <!-- ДОБАВЛЕНО Height="30" -->
+                        <ComboBox x:Name="FilterComboBox" Width="220" Height="30" VerticalAlignment="Center"
+                      ItemsSource="{Binding FilterOptions}"
+                      SelectedItem="{Binding SelectedFilter}"
+                      SelectionChanged="FilterComboBox_SelectionChanged"/>
+
+                        <TextBlock Text="{Binding ResultCountText}" Foreground="{StaticResource ForegroundSecondary}"
+                       VerticalAlignment="Center" Margin="15,0,0,0" FontSize="12"/>
+                    </StackPanel>
+
+                    <!-- Доступ к истории изменений строк между патчами -->
+                    <Button Grid.Column="1" Command="{Binding ShowChangesCommand}" Height="30" Padding="10,0" Cursor="Hand"
+                            VerticalAlignment="Center" Background="{StaticResource BackgroundLight}"
+                            BorderBrush="{StaticResource BorderDark}" BorderThickness="1" Foreground="{StaticResource ForegroundPrimary}">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="3">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource WarningOrange}"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="🕓" FontSize="13" Margin="0,0,6,0"/>
+                            <TextBlock Text="История изменений" FontSize="12"/>
+                            <Border Background="{StaticResource WarningOrange}" CornerRadius="8" Padding="6,1" Margin="8,0,0,0"
+                                    Visibility="{Binding UnviewedChangeCount, Converter={StaticResource IntToVisibilityConverter}}">
+                                <TextBlock Text="{Binding UnviewedChangeCount}" Foreground="White" FontSize="11" FontWeight="Bold"/>
+                            </Border>
+                        </StackPanel>
+                    </Button>
+                </Grid>
             </Border>
 
             <!-- Таблица -->
@@ -728,6 +763,60 @@
                     </ItemsControl>
                     <TextBlock Text="Загрузка данных..." Foreground="#FFE0E0E0" FontSize="14" FontWeight="SemiBold" Margin="0,20,0,0" HorizontalAlignment="Center"/>
                 </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Уведомление об изменениях строк между патчами -->
+        <Border HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,25,25" MaxWidth="420"
+                Background="{StaticResource BackgroundLight}" CornerRadius="6"
+                Visibility="{Binding ShowChangeToast, Converter={StaticResource BoolToVisibilityConverter}}">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="18" ShadowDepth="4" Opacity="0.4" Color="Black"/>
+            </Border.Effect>
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Setter Property="Opacity" Value="0"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ShowChangeToast}" Value="True">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.25"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+            <Grid Margin="14,12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" Width="4" Background="{StaticResource WarningOrange}" CornerRadius="2" Margin="0,0,12,0"/>
+                <StackPanel Grid.Column="1" VerticalAlignment="Center" MaxWidth="270">
+                    <TextBlock Text="Строки локализации обновлены" Foreground="{StaticResource ForegroundPrimary}" FontWeight="SemiBold" FontSize="13" TextWrapping="Wrap"/>
+                    <TextBlock Text="{Binding ChangeToastText}" Foreground="{StaticResource ForegroundSecondary}" FontSize="12" TextWrapping="Wrap" Margin="0,3,0,0"/>
+                    <Button Content="Показать список →" Command="{Binding OpenChangesFromToastCommand}" HorizontalAlignment="Left"
+                            Foreground="{StaticResource WarningOrange}" Background="Transparent" BorderThickness="0" Padding="0" Margin="0,6,0,0" Cursor="Hand">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <ContentPresenter/>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+                <Button Grid.Column="2" Content="✕" Command="{Binding DismissToastCommand}" VerticalAlignment="Top"
+                        Foreground="{StaticResource ForegroundSecondary}" Background="Transparent" BorderThickness="0"
+                        Padding="4" Margin="8,0,0,0" Cursor="Hand" FontSize="12">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <ContentPresenter/>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
             </Grid>
         </Border>
     </Grid>

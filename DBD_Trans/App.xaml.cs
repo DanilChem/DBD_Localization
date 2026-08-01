@@ -1,4 +1,4 @@
-﻿using DBD_Trans.Models;
+using DBD_Trans.Models;
 using DBD_Trans.Services;
 using DBD_Trans.ViewModels;
 using DBD_Trans.Views;
@@ -19,9 +19,10 @@ namespace DBD_Trans
             var errorStorage = new JsonErrorStorage(fileService, dataDir);
             var statusStorage = new JsonStatusStorage(dataDir);
             var mergeStorage = new JsonMergeStorage(fileService, dataDir); // <-- НОВОЕ
+            var changeHistoryStorage = new JsonChangeHistoryStorage(fileService, dataDir); // <-- НОВОЕ: история изменений строк
             var appSettings = new AppSettings();
 
-            var mainVM = new MainViewModel(fileService, errorStorage, statusStorage, appSettings, dataDir, mergeStorage);
+            var mainVM = new MainViewModel(fileService, errorStorage, statusStorage, appSettings, dataDir, mergeStorage, changeHistoryStorage);
             var mainWindow = new MainWindow();
             mainWindow.DataContext = mainVM;
             mainWindow.Show();

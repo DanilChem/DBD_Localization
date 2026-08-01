@@ -1,4 +1,4 @@
-﻿using DBD_Trans.Base;
+using DBD_Trans.Base;
 using DBD_Trans.Helpers;
 using DBD_Trans.Models;
 using DBD_Trans.Services;
@@ -25,8 +25,11 @@ namespace DBD_Trans.ViewModels
         private readonly IAppSettings _appSettings;
         private readonly IStatusStorage _statusStorage;
         private readonly IMergeStorage _mergeStorage;
+        private readonly IChangeHistoryStorage _changeHistoryStorage;
         private readonly string _dataDirectory;
         private readonly DispatcherTimer _searchTimer;
+        private readonly DispatcherTimer _toastTimer;
+        private ChangesWindow _openChangesWindow;
 
         private int _missingCountCache;
         private int _completedCountCache;
@@ -99,6 +102,21 @@ namespace DBD_Trans.ViewModels
         public ICommand GoToCommand { get; }
         public ICommand ClearSelectionCommand { get; }
 
+        // --- Уведомление об изменениях строк между патчами ---
+        private int _unviewedChangeCount;
+        public int UnviewedChangeCount { get => _unviewedChangeCount; set => Set(ref _unviewedChangeCount, value); }
+
+        private bool _showChangeToast;
+        public bool ShowChangeToast { get => _showChangeToast; set => Set(ref _showChangeToast, value); }
+
+        private string _changeToastText;
+        public string ChangeToastText { get => _changeToastText; set => Set(ref _changeToastText, value); }
+
+        public ICommand ShowChangesCommand { get; }
+        public ICommand OpenChangesFromToastCommand { get; }
+        public ICommand DismissToastCommand { get; }
+        // ------------------------------------------------------
+
         private bool _isLoading;
         public bool IsLoading
         {
@@ -106,7 +124,7 @@ namespace DBD_Trans.ViewModels
             set => Set(ref _isLoading, value);
         }
 
-        public MainViewModel(IFileService fileService, IErrorStorage errorStorage, IStatusStorage statusStorage, IAppSettings appSettings, string dataDirectory, IMergeStorage mergeStorage)
+        public MainViewModel(IFileService fileService, IErrorStorage errorStorage, IStatusStorage statusStorage, IAppSettings appSettings, string dataDirectory, IMergeStorage mergeStorage, IChangeHistoryStorage changeHistoryStorage)
 
         {
             _fileService = fileService;
@@ -115,6 +133,7 @@ namespace DBD_Trans.ViewModels
             _statusStorage = statusStorage;
             _dataDirectory = dataDirectory;
             _mergeStorage = mergeStorage;
+            _changeHistoryStorage = changeHistoryStorage;
 
             FilteredEntries = CollectionViewSource.GetDefaultView(AllEntries);
             FilteredEntries.Filter = FilterEntry;
@@ -123,6 +142,10 @@ namespace DBD_Trans.ViewModels
             GoToCommand = new RelayCommand<LocalizationEntry>(GoToEntry, CanGoTo);
             ClearSelectionCommand = new RelayCommand(_ => SelectedEntry = null);
 
+            ShowChangesCommand = new RelayCommand(_ => ShowChanges());
+            OpenChangesFromToastCommand = new RelayCommand(_ => { ShowChangeToast = false; ShowChanges(); });
+            DismissToastCommand = new RelayCommand(_ => ShowChangeToast = false);
+
             BindingOperations.EnableCollectionSynchronization(AllEntries, new object());
 
             _searchTimer = new DispatcherTimer
@@ -130,6 +153,18 @@ namespace DBD_Trans.ViewModels
                 Interval = TimeSpan.FromMilliseconds(300)
             };
             _searchTimer.Tick += SearchTimer_Tick;
+
+            _toastTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(8)
+            };
+            _toastTimer.Tick += (s, e) =>
+            {
+                _toastTimer.Stop();
+                ShowChangeToast = false;
+            };
+
+            UnviewedChangeCount = _changeHistoryStorage?.GetUnviewedChangeItemCount() ?? 0;
 
             IsLoading = true;
             Task.Run(() =>
@@ -171,6 +206,15 @@ namespace DBD_Trans.ViewModels
 
             var enEntries = JsonFlattener.FlattenToOrderedList(enJson);
             var ruDict = ruJson != null ? JsonFlattener.FlattenToDictionary(ruJson) : new Dictionary<string, string>();
+
+            // --- Сравниваем сырое содержимое файлов со снимком предыдущего запуска ---
+            // (сравнение делаем на "сырых" значениях из JSON, а не на очищенных от HTML-тегов,
+            // чтобы не пропустить ни одну реальную правку патча)
+            var enDictRaw = new Dictionary<string, string>();
+            foreach (var kv in enEntries) enDictRaw[kv.Key] = kv.Value;
+
+            var detectedChangeSet = _changeHistoryStorage?.DetectAndRecordChanges(enDictRaw, ruDict);
+            // ---------------------------------------------------------------------------
 
             int index = 1;
             var tempEntries = new List<LocalizationEntry>();
@@ -228,7 +272,59 @@ namespace DBD_Trans.ViewModels
                 CalculateTotalStatistics();
                 UpdateStatistics();
                 IsLoading = false;
+
+                UnviewedChangeCount = _changeHistoryStorage?.GetUnviewedChangeItemCount() ?? 0;
+
+                if (detectedChangeSet != null && detectedChangeSet.Changes.Count > 0)
+                {
+                    ChangeToastText = BuildToastText(detectedChangeSet);
+                    ShowChangeToast = true;
+                    _toastTimer.Stop();
+                    _toastTimer.Start();
+                }
             });
+        }
+
+        private static string BuildToastText(ChangeSet changeSet)
+        {
+            var parts = new List<string>();
+            if (changeSet.AddedCount > 0) parts.Add($"добавлено: {changeSet.AddedCount}");
+            if (changeSet.UpdatedCount > 0) parts.Add($"изменено: {changeSet.UpdatedCount}");
+            if (changeSet.RemovedCount > 0) parts.Add($"удалено: {changeSet.RemovedCount}");
+
+            return "Обнаружены изменения строк локализации (" + string.Join(", ", parts) + ")";
+        }
+
+        /// <summary>Есть ли сейчас в таблице строка с таким ключом (используется окном истории изменений).</summary>
+        public bool EntryExists(string key) => AllEntries.Any(e => e.Key == key);
+
+        private void ShowChanges()
+        {
+            if (_changeHistoryStorage == null) return;
+
+            if (_openChangesWindow != null)
+            {
+                _openChangesWindow.Activate();
+                return;
+            }
+
+            var vm = new ChangesViewModel(_changeHistoryStorage, this);
+            var window = new ChangesWindow
+            {
+                DataContext = vm,
+                Owner = Application.Current.MainWindow,
+                ShowInTaskbar = false
+            };
+
+            window.Closed += (s, e) => { _openChangesWindow = null; };
+
+            _openChangesWindow = window;
+
+            // Открытие окна истории считается "прочтением" уведомлений
+            _changeHistoryStorage.MarkAllAsViewed();
+            UnviewedChangeCount = 0;
+
+            window.Show();
         }
 
         private bool FilterEntry(object obj)
@@ -268,16 +364,49 @@ namespace DBD_Trans.ViewModels
 
         private void AnalyzeEntry(LocalizationEntry entry)
         {
-            var errors = _errorStorage.GetErrors(entry.Key);
-            // Передаем mergeStorage в AnalysisViewModel
-            var vm = new AnalysisViewModel(entry, errors, _errorStorage, _statusStorage, _appSettings, _mergeStorage);
-            var window = new AnalysisWindow();
-            window.DataContext = vm;
-            var mainWindow = App.Current.MainWindow;
-            window.Owner = mainWindow;
-            window.ShowInTaskbar = false;
-            window.ShowDialog();
-            mainWindow.Activate();
+            // Получаем актуальный отфильтрованный список
+            var list = FilteredEntries.Cast<LocalizationEntry>().ToList();
+            int currentIndex = list.IndexOf(entry);
+            if (currentIndex < 0) return;
+
+            // Цикл навигации: окно будет пересоздаваться, пока пользователь не закроет его штатно
+            while (true)
+            {
+                var errors = _errorStorage.GetErrors(entry.Key);
+                // Передаем 'this' (MainViewModel) в AnalysisViewModel
+                var vm = new AnalysisViewModel(entry, errors, _errorStorage, _statusStorage, _appSettings, _mergeStorage, this);
+                var window = new AnalysisWindow();
+                window.DataContext = vm;
+                var mainWindow = App.Current.MainWindow;
+                window.Owner = mainWindow;
+                window.ShowInTaskbar = false;
+
+                LocalizationEntry nextEntry = null;
+
+                // Подписываемся на событие навигации
+                vm.RequestNavigate += (direction) =>
+                {
+                    int newIndex = list.IndexOf(entry) + direction;
+                    if (newIndex >= 0 && newIndex < list.Count)
+                    {
+                        nextEntry = list[newIndex];
+                        window.Close(); // Закрываем текущее окно, чтобы цикл открыл следующее
+                    }
+                };
+
+                window.ShowDialog();
+
+                // Если пользователь просто закрыл окно (крестиком), nextEntry будет null
+                if (nextEntry == null)
+                {
+                    break;
+                }
+
+                // Иначе обновляем entry и переходим на следующую итерацию цикла
+                entry = nextEntry;
+            }
+
+            // Обновляем статистику в главном окне после закрытия цепочки окон
             CalculateTotalStatistics();
             UpdateStatistics();
         }
@@ -286,6 +415,18 @@ namespace DBD_Trans.ViewModels
 
         private void GoToEntry(LocalizationEntry entry)
         {
+            if (entry == null) return;
+            NavigateToKey(entry.Key);
+        }
+
+        /// <summary>
+        /// Находит строку по ключу, сбрасывает поиск/фильтр и прокручивает к ней главную таблицу.
+        /// Используется как контекстным меню "Перейти", так и окном истории изменений.
+        /// </summary>
+        public void NavigateToKey(string key)
+        {
+            if (string.IsNullOrEmpty(key)) return;
+
             _searchTimer.Stop(); // 1. 立即停止可能正在计时的搜索 Timer
             IsNavigating = true;
 
@@ -298,7 +439,7 @@ namespace DBD_Trans.ViewModels
             {
                 FilteredEntries.Refresh();
                 UpdateStatistics();
-                var target = AllEntries.FirstOrDefault(e => e.Key == entry.Key);
+                var target = AllEntries.FirstOrDefault(e => e.Key == key);
                 if (target != null)
                 {
                     SelectedEntry = target;

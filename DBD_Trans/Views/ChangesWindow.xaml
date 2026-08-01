@@ -1,0 +1,390 @@
+<Window x:Class="DBD_Trans.Views.ChangesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:DBD_Trans.Views"
+        xmlns:viewModels="clr-namespace:DBD_Trans.ViewModels"
+        xmlns:converters="clr-namespace:DBD_Trans.Converters"
+        Title="История изменений строк" Height="720" Width="980"
+        MinHeight="400" MinWidth="640"
+        WindowStartupLocation="CenterOwner"
+        Background="#FF171717"
+        ResizeMode="CanResizeWithGrip"
+        FocusVisualStyle="{x:Null}">
+    <Window.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+
+        <!-- Цветовая палитра — как в остальных окнах приложения -->
+        <SolidColorBrush x:Key="BackgroundDark" Color="#FF171717"/>
+        <SolidColorBrush x:Key="BackgroundMedium" Color="#FF1E1E1E"/>
+        <SolidColorBrush x:Key="BackgroundLight" Color="#FF212121"/>
+        <SolidColorBrush x:Key="ForegroundPrimary" Color="#FFE0E0E0"/>
+        <SolidColorBrush x:Key="ForegroundSecondary" Color="#FFA0A0A0"/>
+        <SolidColorBrush x:Key="BorderDark" Color="#FF333333"/>
+        <SolidColorBrush x:Key="WarningOrange" Color="#FFCA5100"/>
+
+        <!-- Цвета типов изменений -->
+        <SolidColorBrush x:Key="AddedColor" Color="#FFCA5100"/>
+        <SolidColorBrush x:Key="AddedColorBg" Color="#33CA5100"/>
+        <SolidColorBrush x:Key="UpdatedColor" Color="#FF3D8BFF"/>
+        <SolidColorBrush x:Key="UpdatedColorBg" Color="#333D8BFF"/>
+        <SolidColorBrush x:Key="RemovedColor" Color="#FFE24A4A"/>
+        <SolidColorBrush x:Key="RemovedColorBg" Color="#33E24A4A"/>
+
+        <!-- TextBox -->
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="{StaticResource BackgroundMedium}"/>
+            <Setter Property="Foreground" Value="{StaticResource ForegroundPrimary}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderDark}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="6,4"/>
+            <Setter Property="CaretBrush" Value="{StaticResource ForegroundPrimary}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="3">
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="2"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- ComboBox (упрощённая тёмная версия) -->
+        <Style TargetType="ComboBox">
+            <Setter Property="Background" Value="{StaticResource BackgroundMedium}"/>
+            <Setter Property="Foreground" Value="{StaticResource ForegroundPrimary}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderDark}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="6,4"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <ToggleButton x:Name="ToggleButton"
+                                          Background="{TemplateBinding Background}"
+                                          BorderBrush="{TemplateBinding BorderBrush}"
+                                          BorderThickness="{TemplateBinding BorderThickness}"
+                                          Focusable="False"
+                                          IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                          ClickMode="Press">
+                                <ToggleButton.Template>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Border x:Name="Border"
+                                                Background="{TemplateBinding Background}"
+                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                BorderThickness="{TemplateBinding BorderThickness}"
+                                                CornerRadius="3">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="20"/>
+                                                </Grid.ColumnDefinitions>
+                                                <ContentPresenter x:Name="ContentSite"
+                                                                    Content="{Binding SelectionBoxItem, RelativeSource={RelativeSource AncestorType=ComboBox}}"
+                                                                    ContentTemplate="{Binding SelectionBoxItemTemplate, RelativeSource={RelativeSource AncestorType=ComboBox}}"
+                                                                    TextBlock.Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ComboBox}}"
+                                                                    HorizontalAlignment="Left"
+                                                                    VerticalAlignment="Center"
+                                                                    Margin="6,0,0,0"/>
+                                                <Path x:Name="Arrow"
+                                                      Grid.Column="1"
+                                                      Fill="{StaticResource ForegroundSecondary}"
+                                                      HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"
+                                                      Data="M 0 0 L 4 4 L 8 0 Z"/>
+                                            </Grid>
+                                        </Border>
+                                    </ControlTemplate>
+                                </ToggleButton.Template>
+                            </ToggleButton>
+                            <Popup x:Name="Popup"
+                                   Placement="Bottom"
+                                   IsOpen="{TemplateBinding IsDropDownOpen}"
+                                   AllowsTransparency="True"
+                                   Focusable="False"
+                                   PopupAnimation="Slide">
+                                <Grid x:Name="DropDown"
+                                      SnapsToDevicePixels="True"
+                                      MinWidth="{TemplateBinding ActualWidth}"
+                                      MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border x:Name="DropDownBorder"
+                                            Background="{StaticResource BackgroundMedium}"
+                                            BorderBrush="{StaticResource BorderDark}"
+                                            BorderThickness="1"
+                                            CornerRadius="3"/>
+                                    <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained"/>
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="ComboBoxItem">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource ForegroundPrimary}"/>
+            <Setter Property="Padding" Value="6,4"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBoxItem">
+                        <Border x:Name="Border" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" CornerRadius="3" Margin="2,1">
+                            <ContentPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsHighlighted" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="{StaticResource WarningOrange}"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Кнопки -->
+        <Style x:Key="ActionButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource BackgroundLight}"/>
+            <Setter Property="Foreground" Value="{StaticResource ForegroundPrimary}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderDark}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="12,6"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="4">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource WarningOrange}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="{StaticResource ForegroundSecondary}"/>
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource BackgroundMedium}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="GoToButtonStyle" TargetType="Button" BasedOn="{StaticResource ActionButtonStyle}">
+            <Setter Property="Padding" Value="10,4"/>
+            <Setter Property="FontSize" Value="11"/>
+        </Style>
+
+        <!-- Значок типа изменения -->
+        <Style x:Key="TypeBadgeStyle" TargetType="Border">
+            <Setter Property="CornerRadius" Value="3"/>
+            <Setter Property="Padding" Value="6,2"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Type}" Value="Added">
+                    <Setter Property="Background" Value="{StaticResource AddedColorBg}"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource AddedColor}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Type}" Value="Updated">
+                    <Setter Property="Background" Value="{StaticResource UpdatedColorBg}"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource UpdatedColor}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Type}" Value="Removed">
+                    <Setter Property="Background" Value="{StaticResource RemovedColorBg}"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource RemovedColor}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="TypeBadgeTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Type}" Value="Added">
+                    <Setter Property="Foreground" Value="{StaticResource AddedColor}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Type}" Value="Updated">
+                    <Setter Property="Foreground" Value="{StaticResource UpdatedColor}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Type}" Value="Removed">
+                    <Setter Property="Foreground" Value="{StaticResource RemovedColor}"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Карточка одной изменённой строки -->
+        <DataTemplate x:Key="ChangeEntryTemplate" DataType="{x:Type viewModels:ChangeEntryViewModel}">
+            <Border Background="{StaticResource BackgroundMedium}" BorderBrush="{StaticResource BorderDark}" BorderThickness="1" CornerRadius="4" Padding="10" Margin="0,0,0,6">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Заголовок карточки: бейдж типа, ключ, кнопка перехода -->
+                    <Grid Grid.Row="0" Margin="0,0,0,6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0" Style="{StaticResource TypeBadgeStyle}" Margin="0,0,8,0">
+                            <TextBlock Text="{Binding TypeLabel}" Style="{StaticResource TypeBadgeTextStyle}"/>
+                        </Border>
+                        <TextBlock Grid.Column="1" Text="{Binding Key}" FontFamily="Consolas, Courier New" FontSize="12"
+                                   Foreground="{StaticResource ForegroundPrimary}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" ToolTip="{Binding Key}"/>
+                        <Button Grid.Column="2" Content="Перейти →" Style="{StaticResource GoToButtonStyle}"
+                                IsEnabled="{Binding CanNavigate}"
+                                Command="{Binding DataContext.GoToCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                CommandParameter="{Binding Key}"/>
+                    </Grid>
+
+                    <!-- Русский -->
+                    <StackPanel Grid.Row="1" Margin="0,0,0,4" Visibility="{Binding ShowRussian, Converter={StaticResource BoolToVisibilityConverter}}">
+                        <TextBlock Text="Русский" FontSize="10" Foreground="{StaticResource ForegroundSecondary}" Margin="0,0,0,2"/>
+                        <TextBlock Text="{Binding RussianSingleValue}" TextWrapping="Wrap" Foreground="{StaticResource ForegroundPrimary}" FontSize="13"
+                                   Visibility="{Binding ShowRussianSingle, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                        <StackPanel Visibility="{Binding ShowRussianDiff, Converter={StaticResource BoolToVisibilityConverter}}">
+                            <TextBlock TextWrapping="Wrap" FontSize="13">
+                                <Run Text="Было: " Foreground="{StaticResource ForegroundSecondary}"/>
+                                <Run Text="{Binding OldRussian, Mode=OneWay}" Foreground="{StaticResource RemovedColor}" TextDecorations="Strikethrough"/>
+                            </TextBlock>
+                            <TextBlock TextWrapping="Wrap" FontSize="13" Margin="0,2,0,0">
+                                <Run Text="Стало: " Foreground="{StaticResource ForegroundSecondary}"/>
+                                <Run Text="{Binding NewRussian, Mode=OneWay}" Foreground="{StaticResource ForegroundPrimary}" FontWeight="SemiBold"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- Английский -->
+                    <StackPanel Grid.Row="2" Visibility="{Binding ShowEnglish, Converter={StaticResource BoolToVisibilityConverter}}">
+                        <TextBlock Text="Английский" FontSize="10" Foreground="{StaticResource ForegroundSecondary}" Margin="0,0,0,2"/>
+                        <TextBlock Text="{Binding EnglishSingleValue}" TextWrapping="Wrap" Foreground="{StaticResource ForegroundSecondary}" FontSize="13"
+                                   Visibility="{Binding ShowEnglishSingle, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                        <StackPanel Visibility="{Binding ShowEnglishDiff, Converter={StaticResource BoolToVisibilityConverter}}">
+                            <TextBlock TextWrapping="Wrap" FontSize="13">
+                                <Run Text="Было: " Foreground="{StaticResource ForegroundSecondary}"/>
+                                <Run Text="{Binding OldEnglish, Mode=OneWay}" Foreground="{StaticResource RemovedColor}" TextDecorations="Strikethrough"/>
+                            </TextBlock>
+                            <TextBlock TextWrapping="Wrap" FontSize="13" Margin="0,2,0,0">
+                                <Run Text="Стало: " Foreground="{StaticResource ForegroundSecondary}"/>
+                                <Run Text="{Binding NewEnglish, Mode=OneWay}" Foreground="{StaticResource ForegroundSecondary}" FontWeight="SemiBold"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </DataTemplate>
+
+        <!-- Группа изменений одного патча -->
+        <DataTemplate x:Key="ChangeSetTemplate" DataType="{x:Type viewModels:ChangeSetViewModel}">
+            <Expander IsExpanded="{Binding IsExpanded}" Margin="0,0,0,14">
+                <Expander.Style>
+                    <Style TargetType="Expander">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="{StaticResource ForegroundPrimary}"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Expander">
+                                    <DockPanel>
+                                        <ToggleButton DockPanel.Dock="Top" Cursor="Hand"
+                                                      IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}">
+                                            <ToggleButton.Template>
+                                                <ControlTemplate TargetType="ToggleButton">
+                                                    <Border Background="{StaticResource BackgroundLight}" BorderBrush="{StaticResource BorderDark}" BorderThickness="1" CornerRadius="4" Padding="10,8">
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                                <ColumnDefinition Width="*"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Path x:Name="Arrow" Grid.Column="0" Data="M 0 0 L 8 0 L 4 6 Z" Fill="{StaticResource ForegroundSecondary}"
+                                                                  Width="10" Height="10" Stretch="Uniform" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                                                            <StackPanel Grid.Column="1">
+                                                                <TextBlock Text="{Binding DateLabel}" FontWeight="SemiBold" FontSize="14" Foreground="{StaticResource ForegroundPrimary}"/>
+                                                                <TextBlock Text="{Binding SummaryText}" FontSize="12" Foreground="{StaticResource ForegroundSecondary}" Margin="0,2,0,0"/>
+                                                            </StackPanel>
+                                                        </Grid>
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsChecked" Value="False">
+                                                            <Setter TargetName="Arrow" Property="Data" Value="M 0 0 L 0 8 L 6 4 Z"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </ToggleButton.Template>
+                                        </ToggleButton>
+                                        <ContentPresenter Margin="0,8,0,0" Visibility="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                                    </DockPanel>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Expander.Style>
+                <ScrollViewer MaxHeight="560" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
+                    <ItemsControl ItemsSource="{Binding Items}" ItemTemplate="{StaticResource ChangeEntryTemplate}"
+                                  VirtualizingPanel.IsVirtualizing="True"
+                                  VirtualizingPanel.VirtualizationMode="Recycling"
+                                  VirtualizingPanel.ScrollUnit="Pixel">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Expander>
+        </DataTemplate>
+    </Window.Resources>
+
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Панель поиска/фильтра -->
+        <Border Grid.Row="0" Background="{StaticResource BackgroundMedium}" CornerRadius="4" Padding="10" Margin="0,0,0,12">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Horizontal" Grid.Column="0">
+                    <TextBlock Text="🔍" Foreground="{StaticResource ForegroundSecondary}" VerticalAlignment="Center" Margin="0,0,8,0" FontSize="14"/>
+                    <TextBox Width="300" Height="30" VerticalAlignment="Center" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
+
+                    <TextBlock Text="Показать:" Foreground="{StaticResource ForegroundSecondary}" VerticalAlignment="Center" Margin="15,0,8,0"/>
+                    <ComboBox Width="180" Height="30" VerticalAlignment="Center" ItemsSource="{Binding FilterOptions}" SelectedItem="{Binding SelectedFilter}"/>
+                </StackPanel>
+                <Button Grid.Column="1" Content="Очистить историю" Style="{StaticResource ActionButtonStyle}"
+                        Command="{Binding ClearHistoryCommand}" IsEnabled="{Binding HasHistory}"/>
+            </Grid>
+        </Border>
+
+        <!-- Список патчей -->
+        <Grid Grid.Row="1">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ItemsControl ItemsSource="{Binding ChangeSets}" ItemTemplate="{StaticResource ChangeSetTemplate}"/>
+            </ScrollViewer>
+
+            <!-- Пустое состояние: истории вообще ещё нет -->
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"
+                        Visibility="{Binding ShowEmptyHistoryState, Converter={StaticResource BoolToVisibilityConverter}}">
+                <TextBlock Text="История изменений пока пуста" Foreground="{StaticResource ForegroundSecondary}" FontSize="16" HorizontalAlignment="Center"/>
+                <TextBlock Text="Она заполнится автоматически, когда в Dbd-En.json / Dbd-Ru.json появится новый патч" Foreground="{StaticResource ForegroundSecondary}" FontSize="12" Margin="0,6,0,0" HorizontalAlignment="Center"/>
+            </StackPanel>
+
+            <!-- Пустое состояние: ничего не найдено по фильтру -->
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"
+                        Visibility="{Binding ShowNoFilterResultsState, Converter={StaticResource BoolToVisibilityConverter}}">
+                <TextBlock Text="Ничего не найдено" Foreground="{StaticResource ForegroundSecondary}" FontSize="16" HorizontalAlignment="Center"/>
+                <TextBlock Text="Попробуйте изменить фильтр или поисковый запрос" Foreground="{StaticResource ForegroundSecondary}" FontSize="12" Margin="0,6,0,0" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

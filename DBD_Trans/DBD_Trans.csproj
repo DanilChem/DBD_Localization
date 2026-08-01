@@ -101,22 +101,31 @@
     <Compile Include="Converters\BoolToBrushConverter.cs" />
     <Compile Include="Converters\BoolToScrollBarVisibilityConverter.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\IntToVisibilityConverter.cs" />
     <Compile Include="Helpers\DarkTitleBarHelper.cs" />
     <Compile Include="Helpers\HtmlStripper.cs" />
     <Compile Include="Helpers\JsonFlattener.cs" />
+    <Compile Include="Helpers\LocalizationDiffer.cs" />
+    <Compile Include="Models\ChangeModels.cs" />
     <Compile Include="Models\ItemStatus.cs" />
+    <Compile Include="Services\IChangeHistoryStorage.cs" />
     <Compile Include="Services\IErrorStorage.cs" />
     <Compile Include="Services\IFileService.cs" />
     <Compile Include="Services\IMergeStorage.cs" />
     <Compile Include="Services\IStatusStorage.cs" />
+    <Compile Include="Services\JsonChangeHistoryStorage.cs" />
     <Compile Include="Services\JsonErrorStorage.cs" />
     <Compile Include="Services\JsonFileService.cs" />
     <Compile Include="Services\JsonMergeStorage.cs" />
     <Compile Include="Services\JsonStatusStorage.cs" />
     <Compile Include="ViewModels\AnalysisViewModel.cs" />
+    <Compile Include="ViewModels\ChangesViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\AnalysisWindow.xaml.cs">
       <DependentUpon>AnalysisWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ChangesWindow.xaml.cs">
+      <DependentUpon>ChangesWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -130,6 +139,10 @@
     <Page Include="Views\AnalysisWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ChangesWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\MainWindow.xaml">
       <SubType>Designer</SubType>
