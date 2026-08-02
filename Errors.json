@@ -32317,5 +32317,489 @@
       "EnglishHighlights": [],
       "RussianHighlights": []
     }
+  ],
+  "4937E0FE42763E2E99F195B402535F21": [
+    {
+      "Text": "Совсем возрасте ≠ At an early age. Реально, что за херь",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 169,
+          "Length": 15
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 163,
+          "Length": 15
+        }
+      ]
+    },
+    {
+      "Text": "Буквально ≠ Virtually - Практически, то есть не всё",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 308,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 347,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "Клуб ≠ Show - Шоу, концерт",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 402,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 449,
+          "Length": 4
+        }
+      ]
+    },
+    {
+      "Text": "Подолгу ≠ Took ages - Занимало вечность",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 631,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 688,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Сувениры ≠ Merch - Мерч, товары",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 738,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 818,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "Куда бы та ни направилась ≠ Show to show - от концерта к концерту",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 814,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 908,
+          "Length": 25
+        }
+      ]
+    },
+    {
+      "Text": "Душном ≠ Massive - Огромном",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1014,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1091,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Опущено house - барабанная установка в собственности клуба или что-то подобное",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1216,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "«Клещ и Аморалы» ≠ Tik and Krit",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1345,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1426,
+          "Length": 16
+        }
+      ]
+    },
+    {
+      "Text": "Опущено seemed",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1358,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Мощной энергичной подачи ≠ Brash, loud style and boundless energy - Дерзкому, громкому стилю и безграничой энергии",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1384,
+          "Length": 38
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1474,
+          "Length": 24
+        }
+      ]
+    },
+    {
+      "Text": "Добавлено официально",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1522,
+          "Length": 10
+        }
+      ]
+    },
+    {
+      "Text": "Опущено it was time",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1525,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Оригинал: Ви решила оставить слово Kicks без s в новом названии - Axekick. Перевод: из-за того, что Kicks ранее было переведено как Аморалы, то предложение ПОЛНОСТЬЮ неверно. Я сам хз как это обыграть, так что просто без примера",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1553,
+          "Length": 53
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1616,
+          "Length": 53
+        }
+      ]
+    },
+    {
+      "Text": "Весьма неплохой ≠ From around the world - Со всего мира. Нифига уменьшили влияние группы",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1818,
+          "Length": 21
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1907,
+          "Length": 15
+        }
+      ]
+    },
+    {
+      "Text": "Альбом ≠ EP - мини-альбом, расширенное воспроизведение (Extended Play). Он занимает промежуточное положение между обычным синглом и полноценным большим альбомом (LP)",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1918,
+          "Length": 2
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2001,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "ВАТАФАГ??? Все переводы фразы Before long, the three were scraping out a modest living - это то, что они либо мало зарабатывали, либо сводили концы с концами, либо вообще где-то подрабатывали на своё скромное существование. Какая блять жизнь трио существенно улучшилась",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1929,
+          "Length": 57
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2030,
+          "Length": 41
+        }
+      ]
+    },
+    {
+      "Text": "Фишкой века ≠ The gig of the century - концертом века с большой буквы",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2263,
+          "Length": 22
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2373,
+          "Length": 11
+        }
+      ]
+    },
+    {
+      "Text": "Звуки заплясали под сводами ≠ Sounds—voices that seemed to dance around the room - звуки - голоса, которые, казалось, танцуют по всей комнате",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2710,
+          "Length": 50
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2742,
+          "Length": 27
+        }
+      ]
+    },
+    {
+      "Text": "Круто ≠ Tighter - Плотно, отточено",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2882,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2919,
+          "Length": 5
+        }
+      ]
+    },
+    {
+      "Text": "Обливалась потом ≠ Sweat pooled on brow - На лбу выступил пот, но перевод мне нравится",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2935,
+          "Length": 15
+        },
+        {
+          "StartIndex": 2957,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2952,
+          "Length": 16
+        }
+      ]
+    },
+    {
+      "Text": "Но ≠ As",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2962,
+          "Length": 2
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2993,
+          "Length": 2
+        }
+      ]
+    },
+    {
+      "Text": "Бите ≠ Encore - Бис, доп песни",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3213,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3193,
+          "Length": 4
+        }
+      ]
+    },
+    {
+      "Text": "Опущено she opened her eyes, and could barely see",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3239,
+          "Length": 41
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Добавлено яростно",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3228,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Опущено thinking it was the sweat",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3302,
+          "Length": 25
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Но ей не показалось: она оказалась в ослепительно черном тумане ≠ But it was something else: a thick, black fog - Но это было что-то другое - толстый чёрный туман",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3329,
+          "Length": 45
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3252,
+          "Length": 63
+        }
+      ]
+    },
+    {
+      "Text": "Название группы переведено неправильно и не в рифму",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 415,
+          "Length": 17
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 465,
+          "Length": 18
+        }
+      ]
+    }
+  ],
+  "4468B7A54CD907FE04CA7EBFF9D3E6A0": [
+    {
+      "Text": "Опущено your own",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 424,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "EC38E9EC4283A37943C9AA84BCA05CF6": [
+    {
+      "Text": "За самыми болезненными падениями следуют самые мощные взлеты ≠ You know that the best breakdowns precede the biggest build-ups. Брейкдаун в музыке — это элемент композиции, где резко меняется ритм или убирается часть инструментов, чтобы создать сильный контраст, замедлить темп или усилить напряжение перед главным моментом (билд-апом)",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 63
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 60
+        }
+      ]
+    },
+    {
+      "Text": "Пора выложиться на полную! ≠ Let’s take it to the bridge - Давайте дойдём до бриджа, давайте перейдём к бриджу",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 257,
+          "Length": 27
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 284,
+          "Length": 26
+        }
+      ]
+    }
+  ],
+  "987F6B684E3616650EB48397D12BB9CE": [
+    {
+      "Text": "КОНЧЕННЫЙ ПЕРЕВОД, ПЕРСОНАЖ БАРАБАНЩИК, КАК ЭТО МОЖНО БЫЛО ВООБЩЕ ДОПУСТИТЬ!!!!!",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 18
+        }
+      ]
+    }
   ]
 }
