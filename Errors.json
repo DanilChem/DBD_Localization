@@ -2810,18 +2810,18 @@
   ],
   "D592F3D24ED47082F309A1930086F447": [
     {
-      "Text": "Опущено, что у Уильяма костюм был beloved",
+      "Text": "Опущено disguise - маскировка",
       "IsEditing": false,
       "EnglishHighlights": [
         {
-          "StartIndex": 126,
-          "Length": 7
+          "StartIndex": 161,
+          "Length": 8
         }
       ],
       "RussianHighlights": []
     },
     {
-      "Text": "Опущено слово heinous",
+      "Text": "Опущено heinous - ужасающие",
       "IsEditing": false,
       "EnglishHighlights": [
         {
@@ -2832,7 +2832,39 @@
       "RussianHighlights": []
     },
     {
-      "Text": "Пошёл != Marched. Корректнее было бы перевести зашагал или быстро пошёл, но не критично",
+      "Text": "Пружины ≠ Springlocks - Пружинные замки",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 833,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 841,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Пронзили его ≠ Tore through his body - Прорвали сквозь его тело",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 845,
+          "Length": 21
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 849,
+          "Length": 12
+        }
+      ]
+    },
+    {
+      "Text": "Пошел ≠ Marched - Решительно зашагал",
       "IsEditing": false,
       "EnglishHighlights": [
         {
@@ -2842,35 +2874,46 @@
       ],
       "RussianHighlights": [
         {
-          "StartIndex": 1075,
+          "StartIndex": 1071,
           "Length": 5
         }
       ]
     },
     {
-      "Text": "Грамматическая ошибка в слове прекратиться",
+      "Text": "Добавлено полностью",
       "IsEditing": false,
       "EnglishHighlights": [],
       "RussianHighlights": [
         {
-          "StartIndex": 1536,
-          "Length": 12
+          "StartIndex": 1255,
+          "Length": 9
         }
       ]
     },
     {
-      "Text": "Опущено слово swirling по отношению к чёрным клубам тумана",
+      "Text": "Опущено emerge within the fog - появляются из тумана",
       "IsEditing": false,
       "EnglishHighlights": [
         {
-          "StartIndex": 1315,
-          "Length": 8
+          "StartIndex": 1503,
+          "Length": 21
         }
       ],
       "RussianHighlights": []
     },
     {
-      "Text": "Неведомая сила подсказывала != Somehow, he knew",
+      "Text": "Грамматическая ошибка",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1527,
+          "Length": 12
+        }
+      ]
+    },
+    {
+      "Text": "Неведомая сила подсказывала ≠ Somehow, he knew - Откуда-то он знал",
       "IsEditing": false,
       "EnglishHighlights": [
         {
@@ -2880,7 +2923,7 @@
       ],
       "RussianHighlights": [
         {
-          "StartIndex": 1486,
+          "StartIndex": 1477,
           "Length": 27
         }
       ]
@@ -31335,7 +31378,7 @@
       ],
       "RussianHighlights": [
         {
-          "StartIndex": 1288,
+          "StartIndex": 1286,
           "Length": 6
         }
       ]
