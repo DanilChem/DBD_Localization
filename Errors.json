@@ -32844,5 +32844,443 @@
         }
       ]
     }
+  ],
+  "E0D72DFE447BB21BC5B7D082FF527EEA": [
+    {
+      "Text": "Опущено in a household",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 23,
+          "Length": 14
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Ресторан с доставкой не совсем корректный перевод catering business, ведь это ВЫЕЗДНОЙ ресторан или обслуживание",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 246,
+          "Length": 17
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 234,
+          "Length": 20
+        }
+      ]
+    },
+    {
+      "Text": "Лаваша ≠ Naan - Мягкий, воздушный хлеб готовится из дрожжевого теста на йогурте и выпекается в глиняной печи тандури. Часто подается горячим со сливочным маслом, чесноком или сыром",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 407,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 391,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Опущено on her tenth birthday - на её десятый день рождения",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 500,
+          "Length": 21
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено winding - извилистых",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 789,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено gnarled",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 885,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено Despite the enormous loss",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1333,
+          "Length": 25
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Ед. число ≠ Мн. число",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1930,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1992,
+          "Length": 3
+        }
+      ]
+    },
+    {
+      "Text": "Опущено high",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2265,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено document",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2450,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Заброшенной ≠ Haunted - Призрачной",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2509,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2498,
+          "Length": 11
+        }
+      ]
+    },
+    {
+      "Text": "Темных уголков ≠ Haunted places",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2467,
+          "Length": 14
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2464,
+          "Length": 14
+        }
+      ]
+    },
+    {
+      "Text": "Записи ≠ Footage and recordings - видеоматериалы и записи",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3108,
+          "Length": 22
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3074,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Ужасные ≠ Haunted",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3607,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3550,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Ед. число ≠ Мн. число",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3669,
+          "Length": 18
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3597,
+          "Length": 13
+        }
+      ]
+    },
+    {
+      "Text": "Опустевшего ≠ Ghost",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3971,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3862,
+          "Length": 11
+        }
+      ]
+    },
+    {
+      "Text": "Опущено СВОДНИЙ БРАТИК, Я ЗАСТРЯЛА В СТИРАЛЬКЕ",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4306,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено playing tricks on her",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4465,
+          "Length": 21
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Событие ≠ Encounter - Встреча",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4547,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4380,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Опущено personal - личном, ведь она всегда хотела посетить Индию вместе с родителями",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4731,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Под звуки поднявшейся снаружи метели ведущий из бункера тоннель неожиданно вывел ее к заснеженному лесу ≠ Snow flurried in the bunker as a tunnel suddenly opened to a snow-covered forest - В бункере зашуршал снег, и внезапно открылся туннель, ведущий в заснеженный лес.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4969,
+          "Length": 80
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4840,
+          "Length": 103
+        }
+      ]
+    },
+    {
+      "Text": "Опущено and faded away",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5081,
+          "Length": 14
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Стекло ≠ Windshield - Ловобое стекло",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5281,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 5148,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Окруженные ≠ Stuck - Застрявшие",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5326,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 5183,
+          "Length": 10
+        }
+      ]
+    },
+    {
+      "Text": "Бросилась ≠ Rushed around - Металась вокруг",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5492,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 5330,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "Опущено trying her best",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5516,
+          "Length": 15
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "E337C2284374689D059E5A9CB6E9A097": [
+    {
+      "Text": "Жордан - брат Хэдди Каур, тут почему-то переведён, как Джордан",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "1C13080245EEDFF9FD81EA961A90830A": [
+    {
+      "Text": "Развили ≠ Honed - Отточили",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 9,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3,
+          "Length": 7
+        }
+      ]
+    }
+  ],
+  "66A123B44BF5410F7ACC56800183C6E9": [
+    {
+      "Text": "Оригинал: Внутренняя собранность, фокус, концентрация. Перевод: Собранность",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 11
+        }
+      ]
+    }
+  ],
+  "6EFB2C0C47508A5F404F3E8D0C24E490": [
+    {
+      "Text": "Прошедшее время ≠ Настоящее время",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 309,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 314,
+          "Length": 7
+        }
+      ]
+    }
+  ],
+  "58777B88434375D8EE3EDC8A1DF761E3": [
+    {
+      "Text": "Правильнее было бы перевести как: чрезмерно усердный, но это слишком длинное название",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 7
+        }
+      ]
+    }
   ]
 }
