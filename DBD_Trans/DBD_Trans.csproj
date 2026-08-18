@@ -104,6 +104,7 @@
     <Compile Include="Converters\IntToVisibilityConverter.cs" />
     <Compile Include="Helpers\DarkTitleBarHelper.cs" />
     <Compile Include="Helpers\DiffTextBehavior.cs" />
+    <Compile Include="Helpers\HighlighterRemapper.cs" />
     <Compile Include="Helpers\HtmlStripper.cs" />
     <Compile Include="Helpers\JsonFlattener.cs" />
     <Compile Include="Helpers\LocalizationDiffer.cs" />

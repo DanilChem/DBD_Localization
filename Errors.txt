@@ -2810,18 +2810,18 @@
   ],
   "D592F3D24ED47082F309A1930086F447": [
     {
-      "Text": "Опущено, что у Уильяма костюм был beloved",
+      "Text": "Опущено disguise - маскировка",
       "IsEditing": false,
       "EnglishHighlights": [
         {
-          "StartIndex": 126,
-          "Length": 7
+          "StartIndex": 161,
+          "Length": 8
         }
       ],
       "RussianHighlights": []
     },
     {
-      "Text": "Опущено слово heinous",
+      "Text": "Опущено heinous - ужасающие",
       "IsEditing": false,
       "EnglishHighlights": [
         {
@@ -2832,7 +2832,39 @@
       "RussianHighlights": []
     },
     {
-      "Text": "Пошёл != Marched. Корректнее было бы перевести зашагал или быстро пошёл, но не критично",
+      "Text": "Пружины ≠ Springlocks - Пружинные замки",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 833,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 841,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Пронзили его ≠ Tore through his body - Прорвали сквозь его тело",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 845,
+          "Length": 21
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 849,
+          "Length": 12
+        }
+      ]
+    },
+    {
+      "Text": "Пошел ≠ Marched - Решительно зашагал",
       "IsEditing": false,
       "EnglishHighlights": [
         {
@@ -2842,35 +2874,46 @@
       ],
       "RussianHighlights": [
         {
-          "StartIndex": 1075,
+          "StartIndex": 1071,
           "Length": 5
         }
       ]
     },
     {
-      "Text": "Грамматическая ошибка в слове прекратиться",
+      "Text": "Добавлено полностью",
       "IsEditing": false,
       "EnglishHighlights": [],
       "RussianHighlights": [
         {
-          "StartIndex": 1536,
-          "Length": 12
+          "StartIndex": 1255,
+          "Length": 9
         }
       ]
     },
     {
-      "Text": "Опущено слово swirling по отношению к чёрным клубам тумана",
+      "Text": "Опущено emerge within the fog - появляются из тумана",
       "IsEditing": false,
       "EnglishHighlights": [
         {
-          "StartIndex": 1315,
-          "Length": 8
+          "StartIndex": 1503,
+          "Length": 21
         }
       ],
       "RussianHighlights": []
     },
     {
-      "Text": "Неведомая сила подсказывала != Somehow, he knew",
+      "Text": "Грамматическая ошибка",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1527,
+          "Length": 12
+        }
+      ]
+    },
+    {
+      "Text": "Неведомая сила подсказывала ≠ Somehow, he knew - Откуда-то он знал",
       "IsEditing": false,
       "EnglishHighlights": [
         {
@@ -2880,7 +2923,7 @@
       ],
       "RussianHighlights": [
         {
-          "StartIndex": 1486,
+          "StartIndex": 1477,
           "Length": 27
         }
       ]
@@ -26432,6 +26475,8282 @@
   "PerkDescriptionsNamespace.PERK_S24P03_FlavorText_DESC": [
     {
       "Text": "Такие же ошибки, что в оригинале",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "D5C038A447F2DB141B7BD99B61474246": [
+    {
+      "Text": "Опущено sudden and unexpected",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 244,
+          "Length": 21
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Добавлено густой",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 252,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Уничтожило != Raveged - опустошило. Раккун-сити уничтожила ядерка. ГАСТЕР ВИНОВАТ",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 152,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 154,
+          "Length": 10
+        }
+      ]
+    },
+    {
+      "Text": "Опущено led him astray - сбил с пути",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 276,
+          "Length": 14
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "C47E9C4640B0134C8B8F9BA34E4A0653": [
+    {
+      "Text": "Оригинал: уйти от моего лица! Перевод: вали отсюда!",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 418,
+          "Length": 18
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 445,
+          "Length": 12
+        }
+      ]
+    }
+  ],
+  "16E930504C70C5E18BD795BE1A1B65F8": [
+    {
+      "Text": "Оригинал: вы внимательно следите за целями, когда они начинают ускользать. Перевод: какая-то хуйня",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 64
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 59
+        }
+      ]
+    }
+  ],
+  "PerkDescriptionsNamespace.PERK_S27P02_FlavorText_DESC": [
+    {
+      "Text": "Такая же ошибка, что в оригинале",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "3ACC978D49A8F46F68CA74B8CFF32386": [
+    {
+      "Text": "Опущено was - была",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 60,
+          "Length": 3
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Страшной != Devastating - разрушительной, опустошительной",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 178,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 189,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "Опущено her body turned numb",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 456,
+          "Length": 20
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "5B6B8BBE43D9B9022ADC319634641F2F": [
+    {
+      "Text": "Опущено or recognition",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 975,
+          "Length": 14
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Фрагменты ≠ Soundbites - слоганы. Как у компании Nike - just do it и так далее",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1073,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1135,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "Новое ≠ Raw - грязный, сырой",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1433,
+          "Length": 3
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1559,
+          "Length": 5
+        }
+      ]
+    },
+    {
+      "Text": "Опущено re-launched - перезапустила",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1463,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено harsh - суровое",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1701,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Дорогих ≠ Skyline",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1810,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2006,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Опущено bolted out into - выбежала на улицу",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2138,
+          "Length": 15
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Не желали гаснуть ≠ Slowly tamed - медленно укрощали",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2274,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2498,
+          "Length": 17
+        }
+      ]
+    },
+    {
+      "Text": "Опущено steady",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2294,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Оригинал: её отложат в долгий ящий, то есть о ней не забудут, но она и не будет на первом месте, жить, как королева. Перевод: о ней забудут",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2431,
+          "Length": 20
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2694,
+          "Length": 13
+        }
+      ]
+    },
+    {
+      "Text": "Опущено would rot away - будет разлагаться, гнить",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2466,
+          "Length": 14
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Хитрый ход ≠ Cleverly - умно, ловко, изобретательно",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2882,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3129,
+          "Length": 10
+        }
+      ]
+    },
+    {
+      "Text": "Оригинал: легендарные духи Токкэби. Перевод: духи из легенд",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3009,
+          "Length": 26
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3271,
+          "Length": 15
+        }
+      ]
+    },
+    {
+      "Text": "Оригинал: на каждом берегу (может быть континенте). Перевод: в каждой стране",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3221,
+          "Length": 14
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3439,
+          "Length": 15
+        }
+      ]
+    },
+    {
+      "Text": "Датами != Time - временем смерти жертв",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3390,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3618,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Опущено unhinged - неуравновешанный",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3564,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Оригинал: Юнчин работала вместе с Чиуном над его новым материалом",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3663,
+          "Length": 48
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3876,
+          "Length": 45
+        }
+      ]
+    },
+    {
+      "Text": "Опущено already there",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3795,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Хрипов ≠ Snares - малых барабанов или снэйров",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3948,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4110,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Оригинал: это было слишком эксперементально для её вкуса",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3956,
+          "Length": 38
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4123,
+          "Length": 21
+        },
+        {
+          "StartIndex": 4145,
+          "Length": 25
+        }
+      ]
+    },
+    {
+      "Text": "Добавлено даже",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4118,
+          "Length": 4
+        }
+      ]
+    },
+    {
+      "Text": "Торчали ≠ Вогнаны",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4167,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4355,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Опущено television",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4241,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Оригинал: спазм в желудке. Перевод: внутри похолодело",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4393,
+          "Length": 26
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4568,
+          "Length": 26
+        }
+      ]
+    },
+    {
+      "Text": "Вскрик != Squeal - визг",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4616,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4762,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "Оригинал: про себя Юнчин уверенно думает, что это было невозможно. В переводе же просто происходит да нет момент",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4671,
+          "Length": 19
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4832,
+          "Length": 2
+        }
+      ]
+    },
+    {
+      "Text": "Опущено booth's - кабинки",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4797,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Можно было бы снова упомянуть название группы",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4826,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4985,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Опущено wave",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5125,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено maybe",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5348,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Прибыль ≠ Revenue - доход",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5647,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 5920,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Опущено to be on his side - быть на его стороне",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 6036,
+          "Length": 17
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено terrified",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 6541,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Оригинал: Трюкач был вихрем из крови. Перевод: среди потоков крови",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 6599,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 6985,
+          "Length": 7
+        }
+      ]
+    }
+  ],
+  "C5E1D4254D691A16CA51D79EBB764120": [
+    {
+      "Text": "Тут два смысла: первый оглушительный успех - трек в чартах, проданы много копий пластинок. Второй смачный удар по башке паллетой",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 13
+        }
+      ]
+    }
+  ],
+  "8719493B4EFA72FF7B15F79F7F4A542D": [
+    {
+      "Text": "Опущено Corporation",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 188,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено advanced и training",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 367,
+          "Length": 8
+        },
+        {
+          "StartIndex": 389,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "6F3399D3447E284CF1493C85A0C3948D": [
+    {
+      "Text": "Почему не перевели как реактивное лечение",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 9
+        }
+      ]
+    }
+  ],
+  "3FAA57FB4AC3BA2AAD6E3E83B599CD88": [
+    {
+      "Text": "Оригинал: вы лучше работаете в одиночку. Перевод: вы предпочитаете работать в одиночку",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 9,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3,
+          "Length": 13
+        }
+      ]
+    }
+  ],
+  "350C889C49629C32B7CED496805EB415": [
+    {
+      "Text": "Опущено rookie",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 73,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено disembodied - бесплотными. Это уже проявление Сущности",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 608,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено her weapons were gone",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 856,
+          "Length": 22
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "02A9469C47BB0D134F67038313EDB531": [
+    {
+      "Text": "Опущено associated with extreme conditions - из-за экстремальных условий",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 54,
+          "Length": 34
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "E9ECF6B6485C68D42888B08D04D61472": [
+    {
+      "Text": "Ед. число != Мн. число",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 38,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 27,
+          "Length": 6
+        }
+      ]
+    }
+  ],
+  "67F826AF44EE817DA738E296C076D806": [
+    {
+      "Text": "Грамматическая ошибка",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 82,
+          "Length": 8
+        }
+      ]
+    }
+  ],
+  "71768ECB493D1753C8B13F9E6EBC9A4C": [
+    {
+      "Text": "Куин вместо Куинн",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1604,
+          "Length": 4
+        }
+      ]
+    }
+  ],
+  "C243B52E419A9716B11EC5B3DB3521C7": [
+    {
+      "Text": "Текст вообще не совпадает",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "2215A4B44E9B0B8FDE53099D6B23C888": [
+    {
+      "Text": "Опущено high school",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 43,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Узнал ≠ Stumbled onto - случайно наткнулись",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 131,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 111,
+          "Length": 5
+        }
+      ]
+    },
+    {
+      "Text": "Опущено alternate dimension",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 186,
+          "Length": 19
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Ед. число ≠ Мн. число",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 251,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 231,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "Опасном положении ≠ State of emergency - Чрезвычайном положении",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 494,
+          "Length": 18
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 518,
+          "Length": 17
+        }
+      ]
+    },
+    {
+      "Text": "Открываться ≠ Rip through - прорываться наповерхность",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 451,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 472,
+          "Length": 11
+        }
+      ]
+    }
+  ],
+  "D4C2E8F24F3DDBB6C811528E1249B8CB": [
+    {
+      "Text": "Всегда есть способ ≠ Clever ways - более умные способы",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 39,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 24,
+          "Length": 18
+        }
+      ]
+    },
+    {
+      "Text": "Эта фраза была обращена к Стиву, поэтому он должен был сказать никогда не говори мне о шансах",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 340,
+          "Length": 22
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 337,
+          "Length": 33
+        }
+      ]
+    }
+  ],
+  "5F8344574E42C667FD3E14B14B7D2EAA": [
+    {
+      "Text": "Опущено recalculate",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 35,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "78620D2C4D68E10DD600B8B8D55DC434": [
+    {
+      "Text": "Результатами ≠ Abilities",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 61,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 56,
+          "Length": 12
+        }
+      ]
+    },
+    {
+      "Text": "Опущено to others",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 71,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено on the money - абсолютно, если судить по идиоме",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 305,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "A60A387F424B30CBB72981B7CD6E88FB": [
+    {
+      "Text": "Очутилась ≠ Paddling - плыла, гребла",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 195,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 276,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "Опущено vast",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 209,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено black",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 220,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Сочинении историй ≠ Storytelling - рассказывание историй, хотя учитывая, что есть слово outlet - выход, то и сочинение сюда входит\\",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 556,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 695,
+          "Length": 17
+        }
+      ]
+    },
+    {
+      "Text": "Преодолении трудностей ≠ Daunting danger - пугающая опасность",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 616,
+          "Length": 15
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 745,
+          "Length": 22
+        }
+      ]
+    },
+    {
+      "Text": "Со временем ≠ Over the years - за эти годы",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 953,
+          "Length": 14
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1065,
+          "Length": 11
+        }
+      ]
+    },
+    {
+      "Text": "Из собираемых ≠ Gardened - Выращивать. Скорее всего переводчик перепутал с Gather - собирать",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1092,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1202,
+          "Length": 13
+        }
+      ]
+    },
+    {
+      "Text": "Опущено live in front - в живую, в лицо",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1492,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено Also",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1609,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено for Halloween",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1749,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Неудачным ≠ Rushed, acrid - делалось на скорую руку и было горьким или вовсе попадало не к тому посетителю",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2853,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2994,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "Опущено Leftover - оставшейся",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2982,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено felt - казалась",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3040,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Все ≠ Anything - что-либо",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3172,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3317,
+          "Length": 3
+        }
+      ]
+    },
+    {
+      "Text": "Почему переводчики не футфетешисты, как BHVR???",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3303,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено his",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3528,
+          "Length": 3
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено spidery",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3752,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Оригинал: и не было у двери ничего аномального. Перевод: да и квартира казалась совершенно обычной",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4162,
+          "Length": 42
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4297,
+          "Length": 41
+        }
+      ]
+    },
+    {
+      "Text": "Происшествия ≠ Ordeal - тяжёлое испытание",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4400,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4507,
+          "Length": 12
+        }
+      ]
+    },
+    {
+      "Text": "Отправился учиться ≠ Might be at school - может быть в школе",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4454,
+          "Length": 18
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4569,
+          "Length": 18
+        }
+      ]
+    },
+    {
+      "Text": "Ед. число ≠ Мн. число",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4858,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4983,
+          "Length": 4
+        }
+      ]
+    },
+    {
+      "Text": "Праздник ≠ Festival. В предыдущих предложениях упоминается фестиваль, да и близилась ночь перед праздником, а с ней и праздник звучит очень странно",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5230,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 5324,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "Оригинал: Джулиан принял участие в конкурсе рассказчиков ради неё. Перевод: Джулиан дал ей шанс выступить на состязании рассказчиков.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5240,
+          "Length": 56
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 5334,
+          "Length": 57
+        }
+      ]
+    },
+    {
+      "Text": "Минуты сомнений ≠ Every time - каждый раз. Из лора мы знаем, что она волновалась ВСЁ время из-за фестиваля и из-за кошмаров.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5318,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 5419,
+          "Length": 15
+        }
+      ]
+    },
+    {
+      "Text": "Бессилия ≠ Sleepless - бессонница",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5577,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 5665,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "Полюбила ужастики ≠ Loved to tell horror stories - полюбила рассказывать страшные истории",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5660,
+          "Length": 28
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 5733,
+          "Length": 17
+        }
+      ]
+    },
+    {
+      "Text": "Опущено any",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5730,
+          "Length": 3
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено That evening",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5747,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Легким ≠ Distant - отдалённым",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 6287,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 6318,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Светом ≠ Realm - Измерением, миром. Отсылка на измерение Сущности",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 6393,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 6444,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Опущено around her",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 6600,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено deeply",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 6876,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Мраком ≠ Wings - крылья",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 7242,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 7281,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Хранящих ≠ Sealed with - запечатанных с",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 7282,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 7317,
+          "Length": 8
+        }
+      ]
+    }
+  ],
+  "B5FF888D4F55794E26D2D59EAECB8CEF": [
+    {
+      "Text": "Опущено amidst the trauma - несмотря на травму",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 329,
+          "Length": 17
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "65A217754495C9F1B44350B6B63F662A": [
+    {
+      "Text": "Развили ≠ Honed - отточили",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 7,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3,
+          "Length": 7
+        }
+      ]
+    }
+  ],
+  "5426F2D94C84FEDD5F159AAE76C91B81": [
+    {
+      "Text": "Приглушение ≠ Soft-Spoken - говорящий тихим голосом. Хотя в контексте починки генератора это нормальный перевод",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 10,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 18,
+          "Length": 11
+        }
+      ]
+    }
+  ],
+  "DDDF0F18437CB8AFA0CB0DB6615FAB0B": [
+    {
+      "Text": "Дар ≠ Gifted mind - Одарённый ум",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 49,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 50,
+          "Length": 3
+        }
+      ]
+    },
+    {
+      "Text": "Смысл и суть нашего существования. ≠ Why and how we exist - Почему и как мы существуем",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 325,
+          "Length": 21
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 305,
+          "Length": 34
+        }
+      ]
+    },
+    {
+      "Text": "Садом ≠ Mangrove - мангровые заросли, лес, сад",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 738,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 779,
+          "Length": 5
+        }
+      ]
+    },
+    {
+      "Text": "Ед. число != Мн. число",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 851,
+          "Length": 16
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 911,
+          "Length": 18
+        }
+      ]
+    },
+    {
+      "Text": "Оригинал: и всё же открытка отличалась от обычных задач. Перевод: И все же было в открытке что-то... странное.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1562,
+          "Length": 31
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1678,
+          "Length": 34
+        },
+        {
+          "StartIndex": 1713,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "Опущено to him",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1732,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Оригинал: появилось напряжение с задней стороны шеи. Перевод: Хонас напрягся",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2063,
+          "Length": 46
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2204,
+          "Length": 14
+        }
+      ]
+    },
+    {
+      "Text": "Целью ≠ Capacity - мощность, пропускная способность, нагрузка",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2469,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2631,
+          "Length": 5
+        }
+      ]
+    },
+    {
+      "Text": "Полыхнул ≠ Exploded into flames - взорвался и превратился в пламя",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3992,
+          "Length": 20
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4215,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "Опущено His",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4581,
+          "Length": 3
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Сказках ≠ Stories",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4934,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 5158,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Опущено thrillers",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4954,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено through his spine",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5545,
+          "Length": 17
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Запросил ≠ Searched",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5876,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 6138,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "Как-то забронировал больше подходит, не?",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 6197,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 6475,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Опущено anyone’s",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 6230,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "ХАХАХАХАХАХАХХААХАХААХАХ, ТАК И ЗНАЛ, ЧТО У ПЕРЕВОДЧИКОВ ПРОБЛЕМЫ С ЧИСЛАМИ",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 6351,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 6588,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Саду ≠ Mangrove",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 6655,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 6835,
+          "Length": 4
+        }
+      ]
+    },
+    {
+      "Text": "Бляяять, ну какой Джона??? В ОДНОЙ ИСТОРИИ СМЕНИЛОСЬ ИМЯ, ПЕРЕВОДЧИКИ ХУЙ ЗАБИЛИ???",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 7328,
+          "Length": 5
+        }
+      ]
+    },
+    {
+      "Text": "Опущено ancient",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 7276,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Неожиданным ≠ He wasn’t prepared - он не был готов",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 7579,
+          "Length": 18
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 7712,
+          "Length": 11
+        }
+      ]
+    },
+    {
+      "Text": "Опущено around him",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 7663,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Сад ≠ Mangrove",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 8174,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 8236,
+          "Length": 3
+        }
+      ]
+    },
+    {
+      "Text": "Апельсинами ≠ Citrus. Не обязательно апельсины, просто цитрусовые",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 8277,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 8339,
+          "Length": 11
+        }
+      ]
+    },
+    {
+      "Text": "Ползет ≠ Swirling - клубился",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 8482,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 8491,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Поднимается ≠ Seeping - просачивается",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 8458,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 8477,
+          "Length": 11
+        }
+      ]
+    },
+    {
+      "Text": "Апельсинами ≠ Citrus",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 8664,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 8643,
+          "Length": 11
+        }
+      ]
+    }
+  ],
+  "27D6653143B02A0C1D4252959B60AE47": [
+    {
+      "Text": "Опущено we're",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 334,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "A3A964294CB1D5A9D28BF9A5C6F839DB": [
+    {
+      "Text": "Опущено work",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 49,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "7FF215864128CD5F1715F89FA1107BA7": [
+    {
+      "Text": "Опущено our",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 442,
+          "Length": 3
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "PerkDescriptionsNamespace.PERK_S29P01_FlavorText_DESC": [
+    {
+      "Text": "Такая же ошибка, что в оригинале",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "PerkDescriptionsNamespace.PERK_S29P03_FlavorText_DESC": [
+    {
+      "Text": "Такая же проблема, что в оригинале",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "543A397241F2ACA1CC3DF5BE76543C8B": [
+    {
+      "Text": "Опущено some",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 100,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Всем этим стоял ≠ They were commanded by - им отдавал приказы, их контроллировал и так далее",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 110,
+          "Length": 22
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 123,
+          "Length": 15
+        }
+      ]
+    },
+    {
+      "Text": "Угодившие в беду ≠ Besieged - осаждённые",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 246,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 245,
+          "Length": 16
+        }
+      ]
+    },
+    {
+      "Text": "Бедняки ≠ Citizenry - Граждане",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 494,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 499,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Верный ≠ Mighty - Мощный",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 710,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 766,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Опущено by his ancestors",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 741,
+          "Length": 16
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Поселился ≠ Retired - вышел на пенсию типа",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 819,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 865,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "Опущено common",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 870,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Непроницаемый ≠ Black - Черный",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1192,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1303,
+          "Length": 13
+        }
+      ]
+    },
+    {
+      "Text": "Опущено heard whispers",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1166,
+          "Length": 14
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Пакостит, лол. Туман буквально забирает людей живьём, тот ЗЛО. Интересно, если бы зло переводили, как пакостник, то Чистое зло называлось бы как, лютый пакостник",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1256,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1359,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "Порочный ≠ Dark - темный",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1304,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1392,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "Темным ≠ Black - Чёрный",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1472,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1582,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Оригинал: который поднимался из-под земли. Перевод: окутанной туманом, стелющимся над землёй",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1491,
+          "Length": 23
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1563,
+          "Length": 9
+        },
+        {
+          "StartIndex": 1598,
+          "Length": 22
+        }
+      ]
+    },
+    {
+      "Text": "Властвовала ≠ Endless - бесконечной",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1664,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1773,
+          "Length": 11
+        }
+      ]
+    }
+  ],
+  "8390197640F4B1348C439C9B12D6CA69": [
+    {
+      "Text": "Более правильный вариант перевода: Никогда не теряй надежду на светлое завтрашнее",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 448,
+          "Length": 39
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 458,
+          "Length": 34
+        }
+      ]
+    }
+  ],
+  "PerkDescriptionsNamespace.PERK_S44P03_FlavorText_DESC": [
+    {
+      "Text": "Такой же момент",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "2E72C33F42F7A6C4F8501A952B0F4649": [
+    {
+      "Text": "Опущено ship",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 48,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "В оригинале именно Рипли предприняла следовать карантину. В переводе этот момент упущен",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 162,
+          "Length": 43
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 182,
+          "Length": 49
+        }
+      ]
+    },
+    {
+      "Text": "Двойной пробел",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 433,
+          "Length": 2
+        }
+      ]
+    },
+    {
+      "Text": "Опущено executive - исполнительный",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 339,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Живота ≠ Chest - грудь. Чё за пиздец",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 393,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 463,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Развиваться ≠ Grew - расти",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 460,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 509,
+          "Length": 11
+        }
+      ]
+    },
+    {
+      "Text": "По хорошему эти предложения нужно поменять местами",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 466,
+          "Length": 55
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 522,
+          "Length": 46
+        }
+      ]
+    },
+    {
+      "Text": "Опущено secured - спасла, взяла и так далее. В переводе об этом упоминания нет",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 583,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено managed - смогла, удалось",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 618,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено pushed through space",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 756,
+          "Length": 20
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено orange",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 852,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено the small speck of light that was the Nostromo - малая частица света, которой был Ностромо",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 778,
+          "Length": 46
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено and then there was silence - и тогда наступила тишина",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 900,
+          "Length": 26
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено suddenly",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1064,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено of the shuttle",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1111,
+          "Length": 14
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Домой ≠ Frontier",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1050,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1089,
+          "Length": 5
+        }
+      ]
+    },
+    {
+      "Text": "Со скафандрами ≠ Where she put on her pressure suit - где надела скафандр",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1185,
+          "Length": 34
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1202,
+          "Length": 14
+        }
+      ]
+    },
+    {
+      "Text": "Опущено cold",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1309,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Оригинал: туман сделал её тело тяжёлым и уставшим. Перевод: клубы тумана обволокли ее изможденное тело",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1529,
+          "Length": 31
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1496,
+          "Length": 29
+        }
+      ]
+    },
+    {
+      "Text": "Отсутствуют запятые",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1601,
+          "Length": 1
+        },
+        {
+          "StartIndex": 1611,
+          "Length": 1
+        }
+      ]
+    }
+  ],
+  "941FB8BB43A5B3EAA6FF3D8B15B7D4F7": [
+    {
+      "Text": "Чудовищной ≠ Incomprehensible - непотяной, непостижимой",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 41,
+          "Length": 16
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 51,
+          "Length": 10
+        }
+      ]
+    }
+  ],
+  "EAE7D89D41970F9ED243CF8279BC3FDF": [
+    {
+      "Text": "В ее желании вести интересную жизнь ≠ To have fun and experience life - получать удовольствие от жизни",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 320,
+          "Length": 31
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 291,
+          "Length": 35
+        }
+      ]
+    },
+    {
+      "Text": "Одобрил добавление ≠ Selected her - выбрал их (её)",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 544,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 535,
+          "Length": 18
+        }
+      ]
+    },
+    {
+      "Text": "Опущено of the trip",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 578,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Раскололся ≠ Split in two - раскололся надвое",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 676,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 651,
+          "Length": 10
+        }
+      ]
+    },
+    {
+      "Text": "Опущено with a seemingly marooned inhabitant named -",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 888,
+          "Length": 42
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Столбу ≠ Pyre - погребальный костер",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1238,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1191,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Потеряна игра слов natural - unnatural",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1545,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1526,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "Опущено from the bridge",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1630,
+          "Length": 15
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Рук ≠ Limbs - конечности",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1701,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1694,
+          "Length": 3
+        }
+      ]
+    },
+    {
+      "Text": "Отобрали ≠ Tore away - Оторвать",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1740,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1712,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "Реки ≠ Viscera - внутренности",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1893,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1819,
+          "Length": 4
+        }
+      ]
+    },
+    {
+      "Text": "Опущено kicked - гребла ногами",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1815,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено at last",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1858,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Иного ≠ New - Нового",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1934,
+          "Length": 3
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1861,
+          "Length": 5
+        }
+      ]
+    }
+  ],
+  "D49DFD584952248495183EA20434AA23": [
+    {
+      "Text": "Опущено creature",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 38,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено can motivate",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 21,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "3B87EC5146DE8B27EA48CC8676E96EA9": [
+    {
+      "Text": "Привыкаешь ≠ Will run in your blood - будет в твоей крови",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 31,
+          "Length": 22
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 30,
+          "Length": 10
+        }
+      ]
+    }
+  ],
+  "5D57412F49D7E7DF925A85A06A694B92": [
+    {
+      "Text": "Надо же. Кое-что не меняется ≠ Well, then. Doesn't this feel familiar - Ну что ж. Знакомая ситуация, не правда ли?",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 296,
+          "Length": 38
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 313,
+          "Length": 28
+        }
+      ]
+    }
+  ],
+  "PerkDescriptionsNamespace.PERK_S43P03_FlavorText_DESC": [
+    {
+      "Text": "Такая же ошибка, что в оригинале",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "1DAF58E14BFE3B28085D14885598D0B3": [
+    {
+      "Text": "Уже ничем не удивить ≠ Had done it all and seen it all - Делал всё и видил всё",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 128,
+          "Length": 31
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 125,
+          "Length": 20
+        }
+      ]
+    },
+    {
+      "Text": "Крайне необычным ≠ New entirely - полностью новым",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 229,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 219,
+          "Length": 16
+        }
+      ]
+    },
+    {
+      "Text": "Опущено his senses",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 375,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено on his fingertips",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 498,
+          "Length": 17
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Оригинал: когда рисовал древние символы, пропитанные кровью. Перевод: когда рисовал измазанными кровью пальцами. В истории Мора это Камень Призыва - именно им он выскребал символы на стенах притона, а не пальцами",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 516,
+          "Length": 41
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 486,
+          "Length": 41
+        }
+      ]
+    },
+    {
+      "Text": "Опущено the film",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 871,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено rocky - скалистый",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 963,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Вдоль ≠ Flanked - По обеим сторонам",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1016,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1024,
+          "Length": 5
+        }
+      ]
+    },
+    {
+      "Text": "Выйдя из приземлившегося самолета ≠ Touching down - приземлившись. Вообще эта часть истории противоречит следующей, где он РЕАЛЬНО выходи",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 927,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 937,
+          "Length": 33
+        }
+      ]
+    },
+    {
+      "Text": "Потом вдоль ≠ Along the edge - вдоль края",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1383,
+          "Length": 14
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1463,
+          "Length": 11
+        }
+      ]
+    },
+    {
+      "Text": "Резко спустилась ≠ Switchbacked down - зигзагами спускалась",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1418,
+          "Length": 17
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1486,
+          "Length": 16
+        }
+      ]
+    },
+    {
+      "Text": "В любой момент ≠ Immediately - Прямо сейчас",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1818,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1912,
+          "Length": 14
+        }
+      ]
+    },
+    {
+      "Text": "Что-то пошло не так. ≠ Something was wrong - Что-то было не так.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2485,
+          "Length": 20
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2564,
+          "Length": 20
+        }
+      ]
+    }
+  ],
+  "DDCF099B486AAB073D55A0B55640004A": [
+    {
+      "Text": "Вас приглашают участвовать в проектах за непревзойденное владение магией импровизации. ≠ When people bring you on to their project, they do so because of the unexpected magic you bring to your performance. - Когда вас приглашают в свой проект, это происходит из-за неожиданной магии, которую вы привносите в своё выступление.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 116
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 86
+        }
+      ]
+    }
+  ],
+  "77AA6D644EFEE8B121C81D98A3E363D0": [
+    {
+      "Text": "Вы обретаете связь с другой звездой, взаимодействуя с ней на более высоком уровне. ≠ You lock in with your co-star, engaging with and reacting to each other on a higher level. - Вы переходите в грубокий фокус со своим партнером по фильму, взаимодействуете и реагируете друг на друга на более высоком уровне.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 90
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 82
+        }
+      ]
+    }
+  ],
+  "D73202364E596C0EED9260B52AF9A71E": [
+    {
+      "Text": "Актерская игра важна, но вы-то знаете, что необязательно выкладываться в каждой сцене, чтобы произвести впечатление. ≠ Big moments are vital, but you know that sometimes an understated read can be just as powerful. - Важные моменты критически важны, но вы знаете, что иногда обычное чтиво (игра) может быть также сильна",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 96
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 117
+        }
+      ]
+    }
+  ],
+  "C6124F0B4BBBA3D590CE26BAB150B443": [
+    {
+      "Text": "Практиковалась ≠ Was spreading - распространялась",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 259,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 251,
+          "Length": 14
+        }
+      ]
+    },
+    {
+      "Text": "Отовсюду ≠ From every corner of the land - из каждого уголка Грейхока",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 327,
+          "Length": 29
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 321,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "В оригинале злоконзенные относится к последствиям сил зла. В переводе это слово - гипербола",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 358,
+          "Length": 37
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 290,
+          "Length": 21
+        }
+      ]
+    },
+    {
+      "Text": "Были только рады ≠ Was much rejoicing - царило всеобщее ликование, праздник. В переводе это просто свели к простому подтверждению, мол, сил зла нет? Ну и хорошо, погнали дальше заниматься своими делами",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 403,
+          "Length": 18
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 370,
+          "Length": 16
+        }
+      ]
+    },
+    {
+      "Text": "Врагом ≠ Adversity - невзгоды",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 539,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 492,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Разве что о детских хотелках ≠ World with no new songs to sing - Мир без новых песен для пения. Отсебятина на лютейшем уровне",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 582,
+          "Length": 31
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 529,
+          "Length": 28
+        }
+      ]
+    },
+    {
+      "Text": "Ибо кто сознается, что готов вернуть зло в мир ≠ Why would she want evil to return to the land - Почему она вообще хочет вернуть зло в город? В оригинале люди приходили в ахуй и не понимали её намерений. В переводе они мало того, что понимали, так ещё и хотели помочь и желали сами вернуть зло",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 827,
+          "Length": 45
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 783,
+          "Length": 46
+        }
+      ]
+    },
+    {
+      "Text": "Опущено of adventurers",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1043,
+          "Length": 14
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Оригинал: Их выгоняли из городов те, кто считал, что труппа тайно состоит в сговоре со злом, которое было искоренено. Перевод: Их выгоняли из городов, считая труппу пособниками зла и всячески стараясь избавиться от альтернативно мыслящих героев.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1107,
+          "Length": 125
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1043,
+          "Length": 118
+        }
+      ]
+    },
+    {
+      "Text": "Собранные ≠ Heard - Услышанные",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1394,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1297,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "Новой ≠ Strange - Странной",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1438,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1371,
+          "Length": 5
+        }
+      ]
+    },
+    {
+      "Text": "Которая была разрушена до основания ≠ Emerging from its ruins - Выходящая из своих руин, а затем быстро...",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1529,
+          "Length": 23
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1475,
+          "Length": 35
+        }
+      ]
+    },
+    {
+      "Text": "Опущено bigger",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1578,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "С удивлением ≠ Were shocked - Были потрясены, шокированы",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2025,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1923,
+          "Length": 12
+        }
+      ]
+    },
+    {
+      "Text": "Грязными стеклами ≠ Stained glass - Витраж. Переводчик перепутал и использовал слово stained - как пятно, а затем грязными",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2171,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2038,
+          "Length": 17
+        }
+      ]
+    },
+    {
+      "Text": "Опущено of the tower",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2213,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Оригинал: Баэмар решил продемонстрировать своё мастерство в тайных знаниях. Перевод: ",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2288,
+          "Length": 56
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2138,
+          "Length": 52
+        }
+      ]
+    },
+    {
+      "Text": "Поднялся ≠ Crept in through - Пропозл из-под",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2498,
+          "Length": 16
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2348,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "Пыталась остановить ≠ Stopped - Остановила",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2539,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2383,
+          "Length": 19
+        }
+      ]
+    },
+    {
+      "Text": "Опущено from his recitation - от его чтения",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2555,
+          "Length": 19
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Забрав из привычного им мироздания ≠ And within moments they were gone - и через мгновение они исчезли",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2635,
+          "Length": 33
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2474,
+          "Length": 34
+        }
+      ]
+    }
+  ],
+  "F5A5696144E46AD2AC417F99EF1D86C2": [
+    {
+      "Text": "Опущено the way his brothers did",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 317,
+          "Length": 24
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Отец не знал, что и делать ≠ Frustrated - разозлённый, разочарованный",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 862,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 832,
+          "Length": 26
+        }
+      ]
+    },
+    {
+      "Text": "Редкостей ≠ Rare artifacts - Редких артефактов",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1000,
+          "Length": 14
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 998,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "Добавлено вскоре",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1127,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Религии ≠ Region - Регион, область. Переводчик перепутал со словом Religion",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1377,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1359,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Не с большой буквы",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1752,
+          "Length": 1
+        }
+      ]
+    },
+    {
+      "Text": "Гибели ≠ Self-destruction - самоуничтожениб",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1821,
+          "Length": 16
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1885,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Опущено would",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1914,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено stone",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2495,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Ассирийской ≠ Akkadian - аккадийской",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2521,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2543,
+          "Length": 11
+        }
+      ]
+    },
+    {
+      "Text": "Опущено engraved",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2509,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Вырезанной ≠ Engravings - Выгравированной",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2998,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3072,
+          "Length": 10
+        }
+      ]
+    },
+    {
+      "Text": "Земли ≠ Estate - Поместье",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4240,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4258,
+          "Length": 5
+        }
+      ]
+    },
+    {
+      "Text": "Опущено mercenary - наёмник",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4536,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Как-то странно составлено предложение",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4702,
+          "Length": 13
+        }
+      ]
+    },
+    {
+      "Text": "Поиски ≠ Explorations and discoveries - Исследование и открытия",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4689,
+          "Length": 28
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4687,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Опущено townsfolk",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5262,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Заточении ≠ Solitude - Уединении",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5361,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 5306,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "Опущено menacingly",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5766,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено stone",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5887,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "7984EA6F45845510CD45B3B20046E007": [
+    {
+      "Text": "Опущено the latest - новой",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 174,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Талита с восторгом наблюдала, как между людьми возникает искренняя связь. ≠ Thalita loved seeing people come together to share their passion and form meaningful connections - Талита любила видеть, как люди объединяются, чтобы поделиться своей страстью и установить значимые связи",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 308,
+          "Length": 97
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 314,
+          "Length": 73
+        }
+      ]
+    },
+    {
+      "Text": "Любые разногласия ≠ Petty squabbles - Мелкие ссоры",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 557,
+          "Length": 15
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 545,
+          "Length": 17
+        }
+      ]
+    },
+    {
+      "Text": "Опущено making kites",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 581,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено beachfront",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 738,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено Their antics - их выходки, шалости",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 822,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Желавших научиться у Талиты битвам змеев ≠ And it wasn’t long before Thalita started teaching kite-fighting at the shop - Вскоре Талита начала учить битвам на змеях около магазина",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 882,
+          "Length": 76
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 845,
+          "Length": 40
+        }
+      ]
+    },
+    {
+      "Text": "Это ≠ Her kite-fighting videos",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1123,
+          "Length": 24
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1056,
+          "Length": 3
+        }
+      ]
+    },
+    {
+      "Text": "Ее ролики с комментариями ≠ Videos that featured her and her commentary - Ролики с её участием и её комментариями",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1180,
+          "Length": 43
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1078,
+          "Length": 25
+        }
+      ]
+    },
+    {
+      "Text": "Опущено kite-fighting",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1282,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Вскоре с ней связался ≠ The videos even caught the eye - Видео даже привлекли внимание",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1320,
+          "Length": 30
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1185,
+          "Length": 21
+        }
+      ]
+    },
+    {
+      "Text": "Стала популярной героиней и лицом с билбордов ≠ Thalita was booking photoshoots for print ads - Талита бронировала фотосессии для печатной рекламы (журналов)",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1393,
+          "Length": 45
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1267,
+          "Length": 25
+        },
+        {
+          "StartIndex": 1311,
+          "Length": 19
+        }
+      ]
+    },
+    {
+      "Text": "Мыльных опер ≠ Telenovelas",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1614,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1462,
+          "Length": 12
+        }
+      ]
+    },
+    {
+      "Text": "Тогда она обретет связь со всей Бразилией ≠ Her community would span all of Brazil - Ее сообщество охватывало бы всю Бразилию",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1650,
+          "Length": 38
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1511,
+          "Length": 41
+        }
+      ]
+    },
+    {
+      "Text": "От нитей змеев ее руки покрывались царапинами ≠ To let the nicks on her hands heal - чтобы залечить царапины на руках.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1846,
+          "Length": 34
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1779,
+          "Length": 46
+        }
+      ]
+    },
+    {
+      "Text": "Опущено schmoozing - заигрывание для получения профита или манипуляций",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1926,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Странно звучит: стал отнимать поиск, знакомства и подготовка. Не лучше бы написать стали?",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1847,
+          "Length": 13
+        }
+      ]
+    },
+    {
+      "Text": "Подготовка ≠ Lining up well in advance - Планирование выступлений задолго до их начала.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1942,
+          "Length": 9
+        },
+        {
+          "StartIndex": 1957,
+          "Length": 15
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1915,
+          "Length": 10
+        }
+      ]
+    },
+    {
+      "Text": "Сил ≠ Time",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2086,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2003,
+          "Length": 3
+        }
+      ]
+    },
+    {
+      "Text": "Опущено kite",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2098,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Постоянно устремленных на нее взглядов ≠ Awkward stares and lingering glances from strangers - Неловких взглядов и долгих пристальных взглядов незнакомцев",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2248,
+          "Length": 51
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2199,
+          "Length": 38
+        }
+      ]
+    },
+    {
+      "Text": "Тем ≠ Glamourous - Гламурной",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2329,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2267,
+          "Length": 3
+        }
+      ]
+    },
+    {
+      "Text": "Сообществе ≠ Connection - Связь",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2448,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2390,
+          "Length": 10
+        }
+      ]
+    },
+    {
+      "Text": "А свое сообщество она сплотила вокруг битв на змеях ≠ And kite-fighting was what connected Thalita with others - И битвы на змеях были тем, что соединяло Талиту с другими людьми",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2559,
+          "Length": 56
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2511,
+          "Length": 51
+        }
+      ]
+    },
+    {
+      "Text": "Согласием ≠ Blessing - Благословлением",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2728,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2706,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "Опущено was a success",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3058,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено to watch",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3130,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Десятки ≠ Dozens upon dozens - Десятки и десятки",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3139,
+          "Length": 18
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3109,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Нехотя ≠ Couldn’t help - Не мог не согласиться",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3804,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3695,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Ренато пошел за чадящим и пикирующим куда-то в лес коптером ≠ Renato watched the thing sputter into the forest, leaving a trail of smoke in its wake - Ренато наблюдал, как эта штуковина, еле передвигаясь, скрылась в лесу, оставляя за собой дымный след",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3931,
+          "Length": 86
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3804,
+          "Length": 59
+        }
+      ]
+    },
+    {
+      "Text": "Опущено on his own",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4148,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Потянулся ≠ Grabbed - Схватил",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4384,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4187,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "Что-то острое пропороло его тело ≠ As the man split in two - как человека разделили на две части",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4478,
+          "Length": 23
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4230,
+          "Length": 32
+        }
+      ]
+    },
+    {
+      "Text": "Уголок ≠ Alcove - углубление, ниша в жилом интерьере или другом помещении.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5088,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4895,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Этой дорогой им было уже не выйти ≠ The only way out, blocked off - Единственный выход был заблокирован",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5180,
+          "Length": 29
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 5012,
+          "Length": 33
+        }
+      ]
+    },
+    {
+      "Text": "Мн. число ≠ Ед. число",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5288,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 5131,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Опущено them first - Талита полагает, что так или иначе Торговка найдёт их, рано или поздно, а дроны - всего лишь ускорят процесс",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5272,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Укрытия ≠ Alcove - Альков",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5331,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 5172,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Гнилые ≠ Dingy - Грязный, выцветший",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5378,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 5205,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Опущено warm",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5757,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "DBB1317E4AD550172552CC907358ADA2": [
+    {
+      "Text": "АХХААХА, даже твитч футболки они не смогли нормально перевести",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "E0F686794E8A86C3960A40898D0872D9": [
+    {
+      "Text": "АХХААХА, даже твитч футболки они не смогли нормально перевести",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "66CF32834B070246A40CE88F4B2F15F0": [
+    {
+      "Text": "АХХААХА, даже твитч футболки они не смогли нормально перевести",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "7B88A5834AF021EE7BD351BEB8F5942A": [
+    {
+      "Text": "АХХААХА, даже твитч футболки они не смогли нормально перевести",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "86D918D8446DE6B525A628AACF68C004": [
+    {
+      "Text": "АХАХАХ, в ру переводе заменили текст с VK на VZ, чтобы челики не пытались найти что-то в вк",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 382,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 382,
+          "Length": 13
+        }
+      ]
+    }
+  ],
+  "A431BE504B3E8390AE2148A122D1E858": [
+    {
+      "Text": "Дружеского ≠ Community - Сообщество из истории талиты",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 17,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 23,
+          "Length": 10
+        }
+      ]
+    },
+    {
+      "Text": "Опущено to follow suit - следовать примеру",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 71,
+          "Length": 14
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "50149AE04C4A098B1884B98B1F8C521F": [
+    {
+      "Text": "Быстрая пара ≠ Power of Two - Сила двоих",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 10,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 18,
+          "Length": 12
+        }
+      ]
+    }
+  ],
+  "7E698E5D4BF1047CD0D075A154E7E269": [
+    {
+      "Text": "Ед. число ≠ Мн. число",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 126,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 113,
+          "Length": 13
+        }
+      ]
+    },
+    {
+      "Text": "Щеку ≠ Face - Лицо",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 144,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 137,
+          "Length": 4
+        }
+      ]
+    },
+    {
+      "Text": "Опущено young",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 236,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено on the beach",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 930,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Дуэлей ≠ Art - Искусству",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1181,
+          "Length": 3
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1228,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Надеялся ≠ Expected - Предполагал",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1346,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1378,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "Вечно лезть в его жизнь ≠ Telling him what to do all the time - говорить, что ему вечно делать",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2209,
+          "Length": 35
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2313,
+          "Length": 23
+        }
+      ]
+    },
+    {
+      "Text": "Решение показалось ему идеальным ≠ That was music to his ears. Тут нужно было подобрать такое выражение, которое бы отражало музыкальную наклонность Ренато и обычную идиому",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2250,
+          "Length": 26
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2342,
+          "Length": 32
+        }
+      ]
+    },
+    {
+      "Text": "Опущено other",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2502,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено kite-fighting",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3086,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Узнал каждый ≠ Get the word out - чтобы рассказать. Перевод преувеличивает",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3429,
+          "Length": 16
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3621,
+          "Length": 12
+        }
+      ]
+    },
+    {
+      "Text": "По хорошему тут должна быть запятая, так как в первом предложении мысль незакончена",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3747,
+          "Length": 1
+        }
+      ]
+    },
+    {
+      "Text": "Опущено hard",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3732,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено cleaning",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4099,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Пусть поле за городом и осталось завалено мусором ≠ Out in some remote field picking up garbage - Находился в каком-то поле за городом, подбирая мусор",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4013,
+          "Length": 43
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4167,
+          "Length": 49
+        }
+      ]
+    },
+    {
+      "Text": "Опущено their kites",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4225,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено so on",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4319,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Но та в запале взялась за дело ≠ But she was already cheering - Но она уже праздновала",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4585,
+          "Length": 28
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4741,
+          "Length": 30
+        }
+      ]
+    },
+    {
+      "Text": "Опущено crooked - кривой",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4655,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Ед. число ≠ Мн. число",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4890,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4991,
+          "Length": 10
+        }
+      ]
+    },
+    {
+      "Text": "Зачем добавлено это аж, хотя учитывая его характер, то да, это уместно, но всё равно отсебятина",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 5205,
+          "Length": 2
+        }
+      ]
+    },
+    {
+      "Text": "Распоротый ≠ Cut in half - Разрезанный на половинки",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5401,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 5488,
+          "Length": 10
+        }
+      ]
+    },
+    {
+      "Text": "Опущено As quickly as they stopped - также быстро, как они остановились",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5883,
+          "Length": 26
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено than the forest",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 6072,
+          "Length": 15
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено and suddenly",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 6259,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "78D8138644B2091DBB3A35B4DA5AF3E5": [
+    {
+      "Text": "Выше головы ≠ Blood Rush - Кровавый прилив, но мне нравится выше головы",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 11
+        }
+      ]
+    }
+  ],
+  "137A074C4754371D382BCA8840661191": [
+    {
+      "Text": "Опущено new",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 110,
+          "Length": 3
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено as walkers",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 178,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено innumerable",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 960,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Судьбы ≠ Circumstances - Обстоятельства",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 868,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 830,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Они основали новое сообщество ≠ They settled into a new community - Они поселились в новом сообществе",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1049,
+          "Length": 33
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 995,
+          "Length": 29
+        }
+      ]
+    },
+    {
+      "Text": "Создали ≠ Were able to adapt to - Смогли адаптироваться",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1117,
+          "Length": 21
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1061,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Мн. число ≠ Ед. число",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1589,
+          "Length": 20
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1475,
+          "Length": 26
+        }
+      ]
+    },
+    {
+      "Text": "Воссоединиться с семьей ≠ Reunite her family - Воссоединить её семью",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1648,
+          "Length": 18
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1539,
+          "Length": 23
+        }
+      ]
+    },
+    {
+      "Text": "Лесопосадок ≠ Tree line",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1741,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1629,
+          "Length": 11
+        }
+      ]
+    },
+    {
+      "Text": "Опущено запятые",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1660,
+          "Length": 1
+        },
+        {
+          "StartIndex": 1670,
+          "Length": 1
+        }
+      ]
+    },
+    {
+      "Text": "Опущено Not the sun, though: a campfire - не солнце, как она думала, а костёр",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2078,
+          "Length": 31
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено nefarious - зловещих",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2210,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Вируса ≠ Pathogen. В мире TWD от AMC действительно этим патогеном является вирус, однако в истории Рика патоген переводится как патоген, а не вирус, так что идите нахкй",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 114,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 128,
+          "Length": 6
+        }
+      ]
+    }
+  ],
+  "0394B40B46BC154D99D034B1990A34E4": [
+    {
+      "Text": "Опущено last",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 14,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено Keep fighting",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 363,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Странный перевод, я бы перевел, как: Достаточно просто продолжать двигаться вперёд",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 323,
+          "Length": 25
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 330,
+          "Length": 29
+        }
+      ]
+    }
+  ],
+  "5192053845277DAB8405CBA3862D65FD": [
+    {
+      "Text": "Скромная победа ≠ Throw Down - Бросить вызов. Также это игра слов, так как действие эффекта связано с оглушением убийцы паллеткой",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 10,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 18,
+          "Length": 15
+        }
+      ]
+    }
+  ],
+  "B1D4E2A14558EBCCF132F6882B4E9C32": [
+    {
+      "Text": "Опущено single-mindedly",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 147,
+          "Length": 15
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Охранником ≠ Officer",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 277,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 316,
+          "Length": 10
+        }
+      ]
+    },
+    {
+      "Text": "Опущено over the years",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 730,
+          "Length": 14
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Только в этой истории Мишон нормально называют, как Мишонн. Вы либо оставляете Мишон, либо правильное Мишонн",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1108,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1286,
+          "Length": 6
+        }
+      ]
+    }
+  ],
+  "4484A6EF4A1916BB0924D7B9A78F2047": [
+    {
+      "Text": "Без ограды здесь делать нечего! ≠ Without the fences, this place is worthless - Без забора это место бесполезно",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 297,
+          "Length": 43
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 346,
+          "Length": 31
+        }
+      ]
+    }
+  ],
+  "5D56C6934491155790FCD99A6B6A2338": [
+    {
+      "Text": "Выживем ≠ Live - Живём",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 331,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 331,
+          "Length": 7
+        }
+      ]
+    }
+  ],
+  "752A567B48401FFB85159ABCCD84450A": [
+    {
+      "Text": "Toughen up переводится как «закаляться», «становиться сильнее / жестче» (о характере или теле), а также «ужесточать» (например, правила или законы)",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 10,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 18,
+          "Length": 18
+        }
+      ]
+    }
+  ],
+  "68B5D18944253784E01784AF761AF8EB": [
+    {
+      "Text": "Опущено his",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 372,
+          "Length": 3
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Но его дела покатились под откос ≠ His career began to unravel - Его карьера начала рушиться",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 332,
+          "Length": 27
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 307,
+          "Length": 32
+        }
+      ]
+    },
+    {
+      "Text": "Опущено suddenly",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 650,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Издевалась ≠ Tormenting - Мучала,",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1107,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1042,
+          "Length": 10
+        }
+      ]
+    },
+    {
+      "Text": "Ед. число ≠ Мн. число",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1359,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1286,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "С головой ≠ Frenzy - Лихорадочно",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1653,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1535,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "Опущено into the fringes of - на стыке",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1663,
+          "Length": 28
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено of expertise",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1778,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено ridiculed - смеялись",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1808,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Отдалялись ≠ Ostracized - Предавали остракизму - значит подвергнуть кого-либо полному общественному бойкоту, изгнанию, резкому осуждению или игнорированию",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1822,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1659,
+          "Length": 10
+        }
+      ]
+    },
+    {
+      "Text": "Опущено articles",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2271,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено mysteriously",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2688,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено With a great sense of urgency",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2745,
+          "Length": 29
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Оригинал: слово местный относится к универу. Перевод: местный относится к профессору",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2843,
+          "Length": 16
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2621,
+          "Length": 17
+        }
+      ]
+    },
+    {
+      "Text": "Занимался похожими изысканиями ≠ Had come to many of the same conclusions - пришел во многом к тем же выводам",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2860,
+          "Length": 40
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2639,
+          "Length": 30
+        }
+      ]
+    },
+    {
+      "Text": "Так как ≠ As he had",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2901,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2671,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Мн. число ≠ Ед. число",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3100,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2845,
+          "Length": 15
+        }
+      ]
+    },
+    {
+      "Text": "Нечто живое ≠ Intelligence - интеллект, разму",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3023,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2780,
+          "Length": 11
+        }
+      ]
+    },
+    {
+      "Text": "Опущено suddenly",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3159,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено out of existence",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3468,
+          "Length": 16
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Мн. число ≠ Ед. число",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3566,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3291,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Опущено raged",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3693,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено giant",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3742,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Огромную высоту ≠ High as a house - Высотой с дом",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3772,
+          "Length": 15
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3531,
+          "Length": 15
+        }
+      ]
+    },
+    {
+      "Text": "Опущено to pieces",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3802,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено to the landing where he saw",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3943,
+          "Length": 27
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено staggering through",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4053,
+          "Length": 18
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "BB1D7D764509C68B99E0BAB19F0D7F42": [
+    {
+      "Text": "ТУДА ЭТУ ПОВЕСТОЧКУ, ЕХЕХЕХЕХЕХЕ",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 423,
+          "Length": 26
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 410,
+          "Length": 17
+        }
+      ]
+    },
+    {
+      "Text": "Опущено couldn’t help",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 152,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено in her own way",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 262,
+          "Length": 14
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Изучала ≠ Majored - Получить высшее образование по специальности",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 286,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 259,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Постоянно ≠ Regularly",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 498,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 459,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "Опущено of a horror",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 639,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Книгах ≠ Stories",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 631,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 565,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Опущено costumes",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 839,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Нем ≠ Dining experience",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1132,
+          "Length": 17
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1072,
+          "Length": 3
+        }
+      ]
+    },
+    {
+      "Text": "Заняли ≠ Commandeered - принудительно забрать имущество у владельца для нужд государства (Орела - государство???)",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1439,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1387,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Пришли ≠ Lined up - выстроились в очередь",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1550,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1512,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Опущено padded - мягкие",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1724,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1675,
+          "Length": 10
+        }
+      ]
+    },
+    {
+      "Text": "Оригинал: как Орела, так и другие студенты вызвали скорую и ждали. Перевод: только Орела",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2496,
+          "Length": 4
+        },
+        {
+          "StartIndex": 2532,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2460,
+          "Length": 3
+        }
+      ]
+    },
+    {
+      "Text": "Реанимировала ≠ Performed CPR - cердечно-лёгочная реанимация",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3467,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3480,
+          "Length": 13
+        }
+      ]
+    },
+    {
+      "Text": "Опущено some",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3800,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Предрассудками ≠ Superstitions - Суеверия",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4515,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4652,
+          "Length": 14
+        }
+      ]
+    },
+    {
+      "Text": "Вечером ≠ Night",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4550,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4685,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Окружил ≠ Rose up - Поднялся",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4573,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4699,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Опущено suddenly",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4658,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено merely",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4831,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Пошла ≠ Pushed - Пробиралась",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4865,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4972,
+          "Length": 5
+        }
+      ]
+    },
+    {
+      "Text": "Опущено the one described",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5206,
+          "Length": 17
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено anguished",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5300,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "574BB9F14360E1B0D84EE18A376717A3": [
+    {
+      "Text": "Вы готовы ≠ Comes easily - Помогать легко",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 22,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 9
+        }
+      ]
+    }
+  ],
+  "234DFD4D413444772B9865AFF2DE6398": [
+    {
+      "Text": "Добавлено по своему. Она же врач-фельдшер, алё",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 26,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "Стараясь стать лучше ≠ And are all the better for it - и это идет вам только на пользу",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 54,
+          "Length": 29
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 50,
+          "Length": 20
+        }
+      ]
+    }
+  ],
+  "69193094415F97FABB105AB90212A726": [
+    {
+      "Text": "Хладнокровность ≠ Calm temperament",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 17,
+          "Length": 16
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 11,
+          "Length": 15
+        }
+      ]
+    }
+  ],
+  "E30B2B16452228131238FB8FAF8BF865": [
+    {
+      "Text": "Опущено the one",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 457,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено ever",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 694,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Мистический ≠ Supernatural - Сверхъестественный",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 859,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 813,
+          "Length": 11
+        }
+      ]
+    },
+    {
+      "Text": "Опущено he called",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 881,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено all",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 979,
+          "Length": 3
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Лишала воспоминаний ≠ Thief of time and memories - Воровала время и воспоминания",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1102,
+          "Length": 26
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1056,
+          "Length": 6
+        },
+        {
+          "StartIndex": 1067,
+          "Length": 12
+        }
+      ]
+    },
+    {
+      "Text": "Опущена запятая",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1137,
+          "Length": 1
+        }
+      ]
+    },
+    {
+      "Text": "Опущено episode",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1246,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Бля, я конечно всё понимаю, но почему переводчики так любят восклицательные знаки??????????????????????????????????????????",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2222,
+          "Length": 3
+        }
+      ]
+    },
+    {
+      "Text": "Опущено never",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2398,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "CEACFA3C456534738992DF86261EDA76": [
+    {
+      "Text": "Изо всех сил ≠ Like my life depended on it",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 382,
+          "Length": 27
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 346,
+          "Length": 12
+        }
+      ]
+    }
+  ],
+  "42E1BED6475D4C54FE649C9C20244F3E": [
+    {
+      "Text": "Но ≠ And",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 23,
+          "Length": 3
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 35,
+          "Length": 2
+        }
+      ]
+    }
+  ],
+  "PerkDescriptionsNamespace.PERK_S40P01_FlavorText_DESC": [
+    {
+      "Text": "Такая же ошибкка, что и в оригинале",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "4937E0FE42763E2E99F195B402535F21": [
+    {
+      "Text": "Совсем возрасте ≠ At an early age. Реально, что за херь",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 169,
+          "Length": 15
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 163,
+          "Length": 15
+        }
+      ]
+    },
+    {
+      "Text": "Буквально ≠ Virtually - Практически, то есть не всё",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 308,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 347,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "Клуб ≠ Show - Шоу, концерт",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 402,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 449,
+          "Length": 4
+        }
+      ]
+    },
+    {
+      "Text": "Подолгу ≠ Took ages - Занимало вечность",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 631,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 688,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Сувениры ≠ Merch - Мерч, товары",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 738,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 818,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "Куда бы та ни направилась ≠ Show to show - от концерта к концерту",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 814,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 908,
+          "Length": 25
+        }
+      ]
+    },
+    {
+      "Text": "Душном ≠ Massive - Огромном",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1014,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1091,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Опущено house - барабанная установка в собственности клуба или что-то подобное",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1216,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "«Клещ и Аморалы» ≠ Tik and Krit",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1345,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1426,
+          "Length": 16
+        }
+      ]
+    },
+    {
+      "Text": "Опущено seemed",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1358,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Мощной энергичной подачи ≠ Brash, loud style and boundless energy - Дерзкому, громкому стилю и безграничой энергии",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1384,
+          "Length": 38
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1474,
+          "Length": 24
+        }
+      ]
+    },
+    {
+      "Text": "Добавлено официально",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1522,
+          "Length": 10
+        }
+      ]
+    },
+    {
+      "Text": "Опущено it was time",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1525,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Оригинал: Ви решила оставить слово Kicks без s в новом названии - Axekick. Перевод: из-за того, что Kicks ранее было переведено как Аморалы, то предложение ПОЛНОСТЬЮ неверно. Я сам хз как это обыграть, так что просто без примера",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1553,
+          "Length": 53
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1616,
+          "Length": 53
+        }
+      ]
+    },
+    {
+      "Text": "Весьма неплохой ≠ From around the world - Со всего мира. Нифига уменьшили влияние группы",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1818,
+          "Length": 21
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1907,
+          "Length": 15
+        }
+      ]
+    },
+    {
+      "Text": "Альбом ≠ EP - мини-альбом, расширенное воспроизведение (Extended Play). Он занимает промежуточное положение между обычным синглом и полноценным большим альбомом (LP)",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1918,
+          "Length": 2
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2001,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "ВАТАФАГ??? Все переводы фразы Before long, the three were scraping out a modest living - это то, что они либо мало зарабатывали, либо сводили концы с концами, либо вообще где-то подрабатывали на своё скромное существование. Какая блять жизнь трио существенно улучшилась",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1929,
+          "Length": 57
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2030,
+          "Length": 41
+        }
+      ]
+    },
+    {
+      "Text": "Фишкой века ≠ The gig of the century - концертом века с большой буквы",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2263,
+          "Length": 22
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2373,
+          "Length": 11
+        }
+      ]
+    },
+    {
+      "Text": "Звуки заплясали под сводами ≠ Sounds—voices that seemed to dance around the room - звуки - голоса, которые, казалось, танцуют по всей комнате",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2710,
+          "Length": 50
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2742,
+          "Length": 27
+        }
+      ]
+    },
+    {
+      "Text": "Круто ≠ Tighter - Плотно, отточено",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2882,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2919,
+          "Length": 5
+        }
+      ]
+    },
+    {
+      "Text": "Обливалась потом ≠ Sweat pooled on brow - На лбу выступил пот, но перевод мне нравится",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2935,
+          "Length": 15
+        },
+        {
+          "StartIndex": 2957,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2952,
+          "Length": 16
+        }
+      ]
+    },
+    {
+      "Text": "Но ≠ As",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2962,
+          "Length": 2
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2993,
+          "Length": 2
+        }
+      ]
+    },
+    {
+      "Text": "Бите ≠ Encore - Бис, доп песни",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3213,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3193,
+          "Length": 4
+        }
+      ]
+    },
+    {
+      "Text": "Опущено she opened her eyes, and could barely see",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3239,
+          "Length": 41
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Добавлено яростно",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3228,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Опущено thinking it was the sweat",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3302,
+          "Length": 25
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Но ей не показалось: она оказалась в ослепительно черном тумане ≠ But it was something else: a thick, black fog - Но это было что-то другое - толстый чёрный туман",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3329,
+          "Length": 45
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3252,
+          "Length": 63
+        }
+      ]
+    },
+    {
+      "Text": "Название группы переведено неправильно и не в рифму",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 415,
+          "Length": 17
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 465,
+          "Length": 18
+        }
+      ]
+    }
+  ],
+  "4468B7A54CD907FE04CA7EBFF9D3E6A0": [
+    {
+      "Text": "Опущено your own",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 424,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "EC38E9EC4283A37943C9AA84BCA05CF6": [
+    {
+      "Text": "За самыми болезненными падениями следуют самые мощные взлеты ≠ You know that the best breakdowns precede the biggest build-ups. Брейкдаун в музыке — это элемент композиции, где резко меняется ритм или убирается часть инструментов, чтобы создать сильный контраст, замедлить темп или усилить напряжение перед главным моментом (билд-апом)",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 63
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 60
+        }
+      ]
+    },
+    {
+      "Text": "Пора выложиться на полную! ≠ Let’s take it to the bridge - Давайте дойдём до бриджа, давайте перейдём к бриджу",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 257,
+          "Length": 27
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 284,
+          "Length": 26
+        }
+      ]
+    }
+  ],
+  "987F6B684E3616650EB48397D12BB9CE": [
+    {
+      "Text": "КОНЧЕННЫЙ ПЕРЕВОД, ПЕРСОНАЖ БАРАБАНЩИК, КАК ЭТО МОЖНО БЫЛО ВООБЩЕ ДОПУСТИТЬ!!!!!",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 18
+        }
+      ]
+    }
+  ],
+  "E0D72DFE447BB21BC5B7D082FF527EEA": [
+    {
+      "Text": "Опущено in a household",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 23,
+          "Length": 14
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Ресторан с доставкой не совсем корректный перевод catering business, ведь это ВЫЕЗДНОЙ ресторан или обслуживание",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 246,
+          "Length": 17
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 234,
+          "Length": 20
+        }
+      ]
+    },
+    {
+      "Text": "Лаваша ≠ Naan - Мягкий, воздушный хлеб готовится из дрожжевого теста на йогурте и выпекается в глиняной печи тандури. Часто подается горячим со сливочным маслом, чесноком или сыром",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 407,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 391,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Опущено on her tenth birthday - на её десятый день рождения",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 500,
+          "Length": 21
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено winding - извилистых",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 789,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено gnarled",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 885,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено Despite the enormous loss",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1333,
+          "Length": 25
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Ед. число ≠ Мн. число",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1930,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1992,
+          "Length": 3
+        }
+      ]
+    },
+    {
+      "Text": "Опущено high",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2265,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено document",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2450,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Заброшенной ≠ Haunted - Призрачной",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2509,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2498,
+          "Length": 11
+        }
+      ]
+    },
+    {
+      "Text": "Темных уголков ≠ Haunted places",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2467,
+          "Length": 14
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2464,
+          "Length": 14
+        }
+      ]
+    },
+    {
+      "Text": "Записи ≠ Footage and recordings - видеоматериалы и записи",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3108,
+          "Length": 22
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3074,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Ужасные ≠ Haunted",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3607,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3550,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Ед. число ≠ Мн. число",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3669,
+          "Length": 18
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3597,
+          "Length": 13
+        }
+      ]
+    },
+    {
+      "Text": "Опустевшего ≠ Ghost",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3971,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3862,
+          "Length": 11
+        }
+      ]
+    },
+    {
+      "Text": "Опущено СВОДНИЙ БРАТИК, Я ЗАСТРЯЛА В СТИРАЛЬКЕ",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4306,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено playing tricks on her",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4465,
+          "Length": 21
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Событие ≠ Encounter - Встреча",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4547,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4380,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Опущено personal - личном, ведь она всегда хотела посетить Индию вместе с родителями",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4731,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Под звуки поднявшейся снаружи метели ведущий из бункера тоннель неожиданно вывел ее к заснеженному лесу ≠ Snow flurried in the bunker as a tunnel suddenly opened to a snow-covered forest - В бункере зашуршал снег, и внезапно открылся туннель, ведущий в заснеженный лес.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4969,
+          "Length": 80
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4840,
+          "Length": 103
+        }
+      ]
+    },
+    {
+      "Text": "Опущено and faded away",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5081,
+          "Length": 14
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Стекло ≠ Windshield - Ловобое стекло",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5281,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 5148,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Окруженные ≠ Stuck - Застрявшие",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5326,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 5183,
+          "Length": 10
+        }
+      ]
+    },
+    {
+      "Text": "Бросилась ≠ Rushed around - Металась вокруг",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5492,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 5330,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "Опущено trying her best",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5516,
+          "Length": 15
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "E337C2284374689D059E5A9CB6E9A097": [
+    {
+      "Text": "Жордан - брат Хэдди Каур, тут почему-то переведён, как Джордан",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Учитывая то, что в игре у нас уже есть один Эван - Траппер, то переводить Ewan (Юэн), как Эван очень странно",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено perfectly",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 170,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Ордену ≠ Cult - культ сосредоточен на слепом поклонении лидеру или идее через ритуалы, а орден представляет собой строгую и организованную братскую структуру с уставом",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 345,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 358,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Опущено clandestine - подпольный",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 333,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Оригинал: полное название культа - Ученики или Последователи Чёрного Когтя. В переводе это просто Чёрный Коготь",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 352,
+          "Length": 32
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 255,
+          "Length": 13
+        }
+      ]
+    },
+    {
+      "Text": "Орфографическая ошибка в слове расположениЕ",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 836,
+          "Length": 18
+        }
+      ]
+    },
+    {
+      "Text": "Варили отрубленные головы ≠ Boiled the flesh off decapitated heads - Варили плоть с обезглавленных голов",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 914,
+          "Length": 38
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 929,
+          "Length": 25
+        }
+      ]
+    },
+    {
+      "Text": "Вели ≠ Overlapped - Накладывались, пересекались",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1036,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1048,
+          "Length": 4
+        }
+      ]
+    },
+    {
+      "Text": "Опущено overlaps - пересечения",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1099,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено to be discovered",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1215,
+          "Length": 16
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Мн. число ≠ Ед. число",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1238,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1214,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "Опущено armored",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1343,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Как именно они могут защитить ≠ How much protection they actually provide - Насколько недёждую защиту они могут обеспечивать",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1426,
+          "Length": 41
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1454,
+          "Length": 29
+        }
+      ]
+    },
+    {
+      "Text": "Добавлено перемещения",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1866,
+          "Length": 11
+        }
+      ]
+    },
+    {
+      "Text": "Какой-то ≠ Only one of the original - только один из изначальной серии костюмов",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1927,
+          "Length": 24
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1938,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "Опущено old",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1967,
+          "Length": 3
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено with a connecting air tube - с соединительной воздушной трубкой",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1983,
+          "Length": 26
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "БЛЯТЬ, ЧТО ЭТО ЗА ПЕРЕВОД. В оригинале Тори именно что нашла и увидела все ужасы, которые предоставило Истечение её глазам. Она, блять, не обезумера, рассвирепела и познала ужас и уж тем более не превращалась в комок",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2152,
+          "Length": 34
+        },
+        {
+          "StartIndex": 2187,
+          "Length": 13
+        },
+        {
+          "StartIndex": 2201,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2139,
+          "Length": 27
+        },
+        {
+          "StartIndex": 2167,
+          "Length": 15
+        },
+        {
+          "StartIndex": 2183,
+          "Length": 15
+        }
+      ]
+    },
+    {
+      "Text": "Оригинал: Душераздирающие вопли и свирепые рычания, и что-то, выползающее из тени и появляющееся из неё. Перевод: Она превратилась в комок крика, ползучих теней и боли",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2213,
+          "Length": 94
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2199,
+          "Length": 53
+        }
+      ]
+    },
+    {
+      "Text": "Где время и материя не имели значения ≠ Her in this strange, timeless place where two realities folded into one - В этом странном, существующем вне времени месте, где две реальности сливались в одну",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2361,
+          "Length": 71
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2303,
+          "Length": 37
+        }
+      ]
+    },
+    {
+      "Text": "Опущено as they hunted",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2346,
+          "Length": 14
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено steaming",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2585,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Сотне метров ≠ One hundred feet - 100 футах - 30 метров",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2604,
+          "Length": 16
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2499,
+          "Length": 12
+        }
+      ]
+    },
+    {
+      "Text": "Мн. число ≠ Ед. число",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2539,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2432,
+          "Length": 3
+        }
+      ]
+    },
+    {
+      "Text": "Одновременно отбиваясь от тварей ≠ Even as predators stalked her from the shadows - Даже когда хищники преследовали её из теней",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2717,
+          "Length": 46
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2635,
+          "Length": 32
+        }
+      ]
+    },
+    {
+      "Text": "Когда они в очередной раз бросились в атаку ≠ As they circled closer - Когда они по кругу приближались к ним",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2765,
+          "Length": 22
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2669,
+          "Length": 43
+        }
+      ]
+    },
+    {
+      "Text": "И даже ее разум смог оправиться от потрясений ≠ With her sanity intact - сохранив рассудок",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3042,
+          "Length": 22
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2990,
+          "Length": 45
+        }
+      ]
+    },
+    {
+      "Text": "Опущено from his injuries",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3145,
+          "Length": 17
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "КОНЧЕННЫЙ ПЕРЕВОД: Посылая ей странные видения ≠ And she had many recurring visions of selfless disciples hunting and sacrificing victims to The Black Talon - и она имела много видений об охоте самоотверженных последователей, а также жертвоприношении жертв для Чёрного Когтя",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3328,
+          "Length": 107
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3270,
+          "Length": 27
+        }
+      ]
+    },
+    {
+      "Text": "Опущено in the same way",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3533,
+          "Length": 15
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Ордене ≠ The Black Talon",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3916,
+          "Length": 15
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3812,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "В переводе у глаголов нет аспекта отрицаемости, чуть ленивый перевод",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4076,
+          "Length": 11
+        },
+        {
+          "StartIndex": 4088,
+          "Length": 15
+        },
+        {
+          "StartIndex": 4104,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3957,
+          "Length": 35
+        }
+      ]
+    },
+    {
+      "Text": "Последовательницей ≠ Servant - Служительницей",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4130,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4006,
+          "Length": 18
+        }
+      ]
+    },
+    {
+      "Text": "Служителей ≠ Disciples - Последователей. ДА КАМОН, ЭТО ОФИЦИАЛЬНОЕ НАЗВАНИЕ КЛУБА",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4392,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4252,
+          "Length": 10
+        }
+      ]
+    },
+    {
+      "Text": "Опущено any",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4258,
+          "Length": 3
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "В прошлый раз transcendence была переведена, как бессмертие. Это подходило, поэтому нужно было оставить доктрину бессмертия или в принципе можно было сделать нормальный перевод",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4337,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4190,
+          "Length": 13
+        }
+      ]
+    },
+    {
+      "Text": "Люди ≠ Such doomsayers - Такие пессимисты, фаталисты",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4442,
+          "Length": 15
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4297,
+          "Length": 4
+        }
+      ]
+    },
+    {
+      "Text": "Опущено existence - бытия",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4563,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Если хочешь поднять человечество ≠ If humanity ever hoped to ascend - Если человечество когда-либо надеялось вознестись",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4510,
+          "Length": 32
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4346,
+          "Length": 32
+        }
+      ]
+    },
+    {
+      "Text": "Где-то ≠ High - Высоко",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4795,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4680,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Опущено to the world",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4938,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Всячески ≠ Tirelessly - Неустанно, беспрерывно",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4912,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4772,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "Черного Когтя ≠ Disciples of the Black Talon",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4997,
+          "Length": 28
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4898,
+          "Length": 13
+        }
+      ]
+    },
+    {
+      "Text": "Опущено they appeased The Black Talon - как они умиротворяли Чёрного Когтя - Сущность",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5071,
+          "Length": 29
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Мн. число ≠ Ед. число",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5115,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4937,
+          "Length": 7
+        }
+      ]
+    },
+    {
+      "Text": "Опущено sacred - священном",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5108,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Которые происходили в преддверии Истечений ≠ Before entering The Bleed - Перед тем, как войти ( в переводе погрузиться) в Истечение",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5147,
+          "Length": 25
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4971,
+          "Length": 42
+        }
+      ]
+    },
+    {
+      "Text": "Опущено quantum - квантового",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5257,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Орден ≠ Cult",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5402,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 5244,
+          "Length": 5
+        }
+      ]
+    },
+    {
+      "Text": "Опущено grisly - мерзкое",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5325,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Чем именно занимается ≠ Malignant evil at the heart - Злобное зло в основе",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5367,
+          "Length": 27
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 5222,
+          "Length": 21
+        }
+      ]
+    },
+    {
+      "Text": "Опущено among researchers and scientists - среди исследователей и учёных",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5562,
+          "Length": 32
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено one-man - одиночной",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5651,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Выходкам ≠ Crusade - Крестовый поход, борьбу",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5659,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 5477,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "Опущено if If",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5695,
+          "Length": 2
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Круг приближенных членов ордена ≠ Inner circle of masters - Внутренний круг мастеров, хозяинов",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5745,
+          "Length": 23
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 5542,
+          "Length": 31
+        }
+      ]
+    },
+    {
+      "Text": "Послушницей ≠ Disciple - Последователем, ученицей",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5795,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 5604,
+          "Length": 11
+        }
+      ]
+    },
+    {
+      "Text": "Черного Когтя ≠ In The Black Talon’s domain - Во владениях Чёрного Когтя",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5804,
+          "Length": 27
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 5616,
+          "Length": 13
+        }
+      ]
+    },
+    {
+      "Text": "Подземелье ≠ Underground complex - Подземный комплекс, где Тори встретилась с Истечением впервые",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 6001,
+          "Length": 19
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 5796,
+          "Length": 10
+        }
+      ]
+    },
+    {
+      "Text": "Опущено to say - говорить",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 6183,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено in her dreams",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 6401,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено And try as she did, she could not stop her hands from trembling - и даже пытаясь что-то сделать, она не могла совладать с тряской своих рук",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 6448,
+          "Length": 64
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Теперь мастера переведены как наставники, в этом переводе будет хоть какая-то взаимосвязь???",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 6532,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 6294,
+          "Length": 10
+        }
+      ]
+    },
+    {
+      "Text": "Опущено calming",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 6582,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Поднимет ее на высшую ступень ордена ≠ Would usher her into The Black Talon’s domain - откроет ей путь во владения Чёрного Когтя",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 6627,
+          "Length": 45
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 6392,
+          "Length": 36
+        }
+      ]
+    },
+    {
+      "Text": "Опущено among the other disciples - среди других учеников",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 6713,
+          "Length": 25
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено her sacrifice was gone",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 7116,
+          "Length": 22
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Теперь она была не просто послушницей ≠ Not as a disciple - Только она не стала ученицей",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 7221,
+          "Length": 17
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 6915,
+          "Length": 37
+        }
+      ]
+    }
+  ],
+  "1C13080245EEDFF9FD81EA961A90830A": [
+    {
+      "Text": "Развили ≠ Honed - Отточили",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 9,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3,
+          "Length": 7
+        }
+      ]
+    }
+  ],
+  "66A123B44BF5410F7ACC56800183C6E9": [
+    {
+      "Text": "Оригинал: Внутренняя собранность, фокус, концентрация. Перевод: Собранность",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 11
+        }
+      ]
+    }
+  ],
+  "6EFB2C0C47508A5F404F3E8D0C24E490": [
+    {
+      "Text": "Прошедшее время ≠ Настоящее время",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 309,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 314,
+          "Length": 7
+        }
+      ]
+    }
+  ],
+  "58777B88434375D8EE3EDC8A1DF761E3": [
+    {
+      "Text": "Правильнее было бы перевести как: чрезмерно усердный, но это слишком длинное название",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 7
+        }
+      ]
+    }
+  ],
+  "731ED1AA4F57D57118827084D79BD59B": [
+    {
+      "Text": "УЧИЛСЯ??? ТОРИ КЕЙН ЭТО МАЛЬЧИК???",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 617,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Ты знаешь ≠ They taught you - Они научили тебя",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 659,
+          "Length": 15
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 625,
+          "Length": 9
+        }
+      ]
+    }
+  ],
+  "6B7FFC1E42F1E1071CDB308BA294B784": [
+    {
+      "Text": "Подумайте о себе! ≠ Don't stick your neck out for me - Не рискуй ради меня",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 422,
+          "Length": 32
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 432,
+          "Length": 17
+        }
+      ]
+    }
+  ],
+  "656AF02A43600117F4306D8171DF3DAB": [
+    {
+      "Text": "Послушницей ≠ Disciple - Ученик",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 13,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 8,
+          "Length": 11
+        }
+      ]
+    }
+  ],
+  "PerkDescriptionsNamespace.PERK_S45P01_FlavorText_DESC": [
+    {
+      "Text": "Такая же ошибка, что в оригинале",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "PerkDescriptionsNamespace.PERK_S45P02_FlavorText_DESC": [
+    {
+      "Text": "Такая же ошибка, что в оригинале",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "AF69AFFA40461F77F0A479AA0A9B392D": [
+    {
+      "Text": "Изобретателей ≠ Visionary",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 209,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 234,
+          "Length": 13
+        }
+      ]
+    },
+    {
+      "Text": "Опущено Ltd",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 245,
+          "Length": 3
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Ракет ≠ Rocket science - Ракетостроения",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 392,
+          "Length": 14
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 412,
+          "Length": 5
+        }
+      ]
+    },
+    {
+      "Text": "Опущено C - Проксима Центавра c — более далекая и холодная планета (суперземля или газовый карлик)",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1225,
+          "Length": 1
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено human",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1844,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено mysteriously",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2104,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Сами по себе развалины были старыми ≠ The ruins seemed ancient - Руины казались древними",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2130,
+          "Length": 24
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2120,
+          "Length": 35
+        }
+      ]
+    },
+    {
+      "Text": "Опущено inoperable - неработоспособный",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2257,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено mineral",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2363,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Мог бы ≠ Could imagine - Мог представить себе",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2763,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2828,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Люди утратили осторожность ≠ Lulled the entire team into complacency - Убаюкивала всю команду в состояние самоуспокоения",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2859,
+          "Length": 39
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2921,
+          "Length": 26
+        }
+      ]
+    },
+    {
+      "Text": "Опущено the edges - окраины",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2996,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Так она и спаслась ≠ Jumped to safety - Спрыгнула в безопасность?",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3340,
+          "Length": 16
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3391,
+          "Length": 18
+        }
+      ]
+    },
+    {
+      "Text": "Похоронили ≠ Memorial - Мемориал без человеческих останков",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3682,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3766,
+          "Length": 10
+        }
+      ]
+    },
+    {
+      "Text": "Брел ≠ Stumbled forward - Брёл, спотыкаясь",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3958,
+          "Length": 16
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4039,
+          "Length": 4
+        }
+      ]
+    },
+    {
+      "Text": "Странно, что слово Dmitri (Дмитрий) перевели как Дима, ну лан",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Недостроенным ≠ Half-built - Построенным наполовину",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4547,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4604,
+          "Length": 13
+        }
+      ]
+    },
+    {
+      "Text": "Опущено initial",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4789,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено if",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4756,
+          "Length": 2
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено apparently - по всей видимости",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4873,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено seemed to be",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5217,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Ядро ≠ Code",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5442,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 5493,
+          "Length": 4
+        }
+      ]
+    },
+    {
+      "Text": "Опущено fell",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 6234,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Шорох ≠ Hiss - Свист, шипение",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 6585,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 6598,
+          "Length": 5
+        }
+      ]
+    },
+    {
+      "Text": "Ед. число ≠ Мн. число",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 6579,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 6618,
+          "Length": 5
+        }
+      ]
+    },
+    {
+      "Text": "Кричащий ≠ Shrieking - Визжащий, скрипящий",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 7382,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 7432,
+          "Length": 8
+        }
+      ]
+    }
+  ],
+  "0148EEB94B0E948D3CABB48A54F606C0": [
+    {
+      "Text": "Ничто ≠ No amount of distraction - Никакие отвлекающие факторы",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 24
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 0,
+          "Length": 5
+        }
+      ]
+    },
+    {
+      "Text": "Эта фраза звучит как поговорка из дивного нового мира, так что я бы перевёл так: Если я не буду это делать, здесь ничего не будет сделано",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 336,
+          "Length": 46
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 290,
+          "Length": 28
+        }
+      ]
+    },
+    {
+      "Text": "Не соответствует названию перка",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 100,
+          "Length": 14
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 98,
+          "Length": 8
+        }
+      ]
+    }
+  ],
+  "62C85E2C4D5830AEBFB91E8C32FA4495": [
+    {
+      "Text": "Как бы и отражает перевод, и не отражает одновременно",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "A841A9F64A4E09806730978CCA52C28A": [
+    {
+      "Text": "Опущено around here - здесь, в измерении Сущности",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 518,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "PerkDescriptionsNamespace.PERK_S37P01_FlavorText_DESC": [
+    {
+      "Text": "Та же ошибка",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "PerkDescriptionsNamespace.PERK_S37P03_FlavorText_DESC": [
+    {
+      "Text": "Такая же ошибка",
       "IsEditing": false,
       "EnglishHighlights": [],
       "RussianHighlights": []

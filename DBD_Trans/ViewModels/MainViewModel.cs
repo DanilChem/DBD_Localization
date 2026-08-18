@@ -214,6 +214,36 @@ namespace DBD_Trans.ViewModels
             foreach (var kv in enEntries) enDictRaw[kv.Key] = kv.Value;
 
             var detectedChangeSet = _changeHistoryStorage?.DetectAndRecordChanges(enDictRaw, ruDict);
+
+            // --- НОВОЕ: переносим подсветку замечаний на новый текст, если он изменился ---
+            if (detectedChangeSet != null)
+            {
+                foreach (var change in detectedChangeSet.Changes)
+                {
+                    if (change.Type != ChangeType.Updated) continue;
+
+                    var errors = _errorStorage.GetErrors(change.Key);
+                    if (errors.Count == 0) continue;
+
+                    // Сравниваем на очищенном от HTML тексте — именно в его координатах
+                    // хранятся StartIndex/Length (см. AnalysisViewModel.CleanEnglishText/CleanRussianText)
+                    string oldEnClean = HtmlStripper.StripHtmlTags(change.OldEnglish);
+                    string newEnClean = HtmlStripper.StripHtmlTags(change.NewEnglish);
+                    string oldRuClean = HtmlStripper.StripHtmlTags(change.OldRussian);
+                    string newRuClean = HtmlStripper.StripHtmlTags(change.NewRussian);
+
+                    foreach (var err in errors)
+                    {
+                        if (change.EnglishChanged)
+                            err.EnglishHighlights = HighlightRemapper.Remap(err.EnglishHighlights, oldEnClean, newEnClean);
+                        if (change.RussianChanged)
+                            err.RussianHighlights = HighlightRemapper.Remap(err.RussianHighlights, oldRuClean, newRuClean);
+                    }
+
+                    _errorStorage.UpdateErrors(change.Key, errors);
+                }
+            }
+            // -------------------------------------------------------------------------------
             // ---------------------------------------------------------------------------
 
             int index = 1;
