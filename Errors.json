@@ -2828,6 +2828,28 @@
           "Length": 27
         }
       ]
+    },
+    {
+      "Text": "Опущено Beloved",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 126,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Опущено committing",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 184,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": []
     }
   ],
   "DCCEAA7E4B0FC21421AA40B179F3B445": [
@@ -3315,19 +3337,6 @@
           "Length": 24
         }
       ]
-    }
-  ],
-  "10782AC54733ED32444F3383DFEB3D3F": [
-    {
-      "Text": "Опущено, что метроном искрит только на высоких значениям BPM",
-      "IsEditing": false,
-      "EnglishHighlights": [
-        {
-          "StartIndex": 38,
-          "Length": 13
-        }
-      ],
-      "RussianHighlights": []
     }
   ],
   "F1A1D981450653971202379FD1AA0020": [
@@ -9378,19 +9387,6 @@
       "RussianHighlights": []
     }
   ],
-  "C79E536B471B448F5E596083D55DEC3D": [
-    {
-      "Text": "Лучше бы добавили предлог со, типа содержала",
-      "IsEditing": false,
-      "EnglishHighlights": [],
-      "RussianHighlights": [
-        {
-          "StartIndex": 30,
-          "Length": 7
-        }
-      ]
-    }
-  ],
   "AB165C9A4D2ACFBDC0F0E7ADBAD4B3F0": [
     {
       "Text": "Простой != Bland. Bland - это пресный, безвкусный",
@@ -11840,24 +11836,6 @@
         {
           "StartIndex": 12,
           "Length": 25
-        }
-      ]
-    }
-  ],
-  "D857D6424EB44F454CF4D6B7F1DF800D": [
-    {
-      "Text": "\"taken from\" (взятое/отнятое у) переведено нейтральным \"полученное от\" — теряется оттенок насильственного изъятия",
-      "IsEditing": false,
-      "EnglishHighlights": [
-        {
-          "StartIndex": 29,
-          "Length": 11
-        }
-      ],
-      "RussianHighlights": [
-        {
-          "StartIndex": 26,
-          "Length": 13
         }
       ]
     }

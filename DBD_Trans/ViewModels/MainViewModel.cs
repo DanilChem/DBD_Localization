@@ -39,7 +39,7 @@ namespace DBD_Trans.ViewModels
         public ICollectionView FilteredEntries { get; }
 
         // --- Новые свойства для фильтра ---
-        public string[] FilterOptions { get; } = { "Все", "Выполненные", "С ошибками (по убыванию)" };
+        public string[] FilterOptions { get; } = { "Все", "Выполненные", "С ошибками (по убыванию)", "С ошибками"};
 
         private string _selectedFilter = "Все";
         public string SelectedFilter
@@ -371,6 +371,7 @@ namespace DBD_Trans.ViewModels
             // 1. Быстрый фильтр по статусу
             if (_selectedFilter == "Выполненные" && entry.Status != ItemStatus.Completed) return false;
             if (_selectedFilter == "С ошибками (по убыванию)" && !entry.HasErrors) return false;
+            if (_selectedFilter == "С ошибками" && !entry.HasErrors) return false;
 
             // 2. Оптимизированный фильтр по поисковой строке
             if (!string.IsNullOrWhiteSpace(_searchText))

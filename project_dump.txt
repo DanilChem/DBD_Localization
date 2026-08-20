@@ -5784,7 +5784,7 @@ namespace DBD_Trans.ViewModels
         public ICollectionView FilteredEntries { get; }
 
         // --- РќРѕРІС‹Рµ СЃРІРѕР№СЃС‚РІР° РґР»СЏ С„РёР»СЊС‚СЂР° ---
-        public string[] FilterOptions { get; } = { "Р’СЃРµ", "Р’С‹РїРѕР»РЅРµРЅРЅС‹Рµ", "РЎ РѕС€РёР±РєР°РјРё (РїРѕ СѓР±С‹РІР°РЅРёСЋ)" };
+        public string[] FilterOptions { get; } = { "Р’СЃРµ", "Р’С‹РїРѕР»РЅРµРЅРЅС‹Рµ", "РЎ РѕС€РёР±РєР°РјРё (РїРѕ СѓР±С‹РІР°РЅРёСЋ)", "РЎ РѕС€РёР±РєР°РјРё"};
 
         private string _selectedFilter = "Р’СЃРµ";
         public string SelectedFilter
@@ -6116,6 +6116,7 @@ namespace DBD_Trans.ViewModels
             // 1. Р‘С‹СЃС‚СЂС‹Р№ С„РёР»СЊС‚СЂ РїРѕ СЃС‚Р°С‚СѓСЃСѓ
             if (_selectedFilter == "Р’С‹РїРѕР»РЅРµРЅРЅС‹Рµ" && entry.Status != ItemStatus.Completed) return false;
             if (_selectedFilter == "РЎ РѕС€РёР±РєР°РјРё (РїРѕ СѓР±С‹РІР°РЅРёСЋ)" && !entry.HasErrors) return false;
+            if (_selectedFilter == "РЎ РѕС€РёР±РєР°РјРё" && !entry.HasErrors) return false;
 
             // 2. РћРїС‚РёРјРёР·РёСЂРѕРІР°РЅРЅС‹Р№ С„РёР»СЊС‚СЂ РїРѕ РїРѕРёСЃРєРѕРІРѕР№ СЃС‚СЂРѕРєРµ
             if (!string.IsNullOrWhiteSpace(_searchText))
