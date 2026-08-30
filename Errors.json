@@ -18107,22 +18107,6 @@
       ]
     },
     {
-      "Text": "Опущено cloning hubs on Dvarka",
-      "IsEditing": false,
-      "EnglishHighlights": [
-        {
-          "StartIndex": 1514,
-          "Length": 22
-        }
-      ],
-      "RussianHighlights": [
-        {
-          "StartIndex": 1561,
-          "Length": 12
-        }
-      ]
-    },
-    {
       "Text": "\"seemed ancient\" (казались/выглядели древними — субъективное восприятие) переведено как утвердительное \"были древними\" (were ancient) — потеря оттенка неопределённости/предположения.",
       "IsEditing": false,
       "EnglishHighlights": [
@@ -18209,22 +18193,6 @@
         {
           "StartIndex": 3063,
           "Length": 21
-        }
-      ]
-    },
-    {
-      "Text": "\"could hold no dominion\" (не могли иметь власти/господства — акцент на невозможности) переведено как \"не имели права\" (had no right) — смещение с констатации неспособности на юридическую категорию \"права\", разные оттенки.",
-      "IsEditing": false,
-      "EnglishHighlights": [
-        {
-          "StartIndex": 3564,
-          "Length": 8
-        }
-      ],
-      "RussianHighlights": [
-        {
-          "StartIndex": 3682,
-          "Length": 5
         }
       ]
     },
@@ -18914,22 +18882,6 @@
   ],
   "FA8CB7E64246382BA1D697A74A76627D": [
     {
-      "Text": "\"self-made\" (добившаяся всего сама, своими силами) переведено конкретизированно как \"собственным умом\" (by her own intelligence) — добавляет акцент именно на уме, которого нет явно в нейтральном \"self-made\".",
-      "IsEditing": false,
-      "EnglishHighlights": [
-        {
-          "StartIndex": 4,
-          "Length": 9
-        }
-      ],
-      "RussianHighlights": [
-        {
-          "StartIndex": 41,
-          "Length": 16
-        }
-      ]
-    },
-    {
       "Text": "\"schoolyard games\" (школьные игры в целом, необязательно спортивные) сужено до \"спортивных игр\" — небольшое сужение понятия.",
       "IsEditing": false,
       "EnglishHighlights": [
@@ -18942,22 +18894,6 @@
         {
           "StartIndex": 949,
           "Length": 14
-        }
-      ]
-    },
-    {
-      "Text": "\"keep her on the right track\" (удержать на правильном пути — общее руководство, необязательно про мораль) переведено как \"воспитать... хорошего человека\" (raise a good person) — сужение до морального аспекта.",
-      "IsEditing": false,
-      "EnglishHighlights": [
-        {
-          "StartIndex": 927,
-          "Length": 30
-        }
-      ],
-      "RussianHighlights": [
-        {
-          "StartIndex": 1027,
-          "Length": 47
         }
       ]
     },
@@ -19151,22 +19087,6 @@
       ]
     },
     {
-      "Text": "\"investment wunderkind\" (специфический термин — вундеркинд в инвестициях) переведено описательно как \"гениальном подростке с деловой жилкой\" — теряется лаконичность конкретного термина.",
-      "IsEditing": false,
-      "EnglishHighlights": [
-        {
-          "StartIndex": 3986,
-          "Length": 21
-        }
-      ],
-      "RussianHighlights": [
-        {
-          "StartIndex": 4138,
-          "Length": 37
-        }
-      ]
-    },
-    {
       "Text": "\"gut\" (потрошила) переведено как \"перекупала\" (bought up) — теряется важная тематическая метафора потрошения, перекликающаяся с содержанием манги её отца (\"guts the weak\" из п.23). Разрыв сквозной метафорической линии текста.",
       "IsEditing": false,
       "EnglishHighlights": [
@@ -19318,30 +19238,6 @@
         {
           "StartIndex": 5790,
           "Length": 9
-        }
-      ]
-    },
-    {
-      "Text": "Лично мне экстрим-туры не говорит о чём-то серьёзном. Лучше бы называли турам на выживание",
-      "IsEditing": false,
-      "EnglishHighlights": [
-        {
-          "StartIndex": 5567,
-          "Length": 17
-        },
-        {
-          "StartIndex": 5633,
-          "Length": 15
-        }
-      ],
-      "RussianHighlights": [
-        {
-          "StartIndex": 5933,
-          "Length": 15
-        },
-        {
-          "StartIndex": 5952,
-          "Length": 15
         }
       ]
     },
@@ -19634,7 +19530,7 @@
   ],
   "2C92F3BD49A0D11A614B69A7EDCD3607": [
     {
-      "Text": "Импульсы != Strobes - Мигающий свет",
+      "Text": "Импульсы != Strobes - Мигающий свет. Стробоскобы",
       "IsEditing": false,
       "EnglishHighlights": [
         {
@@ -38507,88 +38403,6 @@
           "Length": 4
         }
       ]
-    }
-  ],
-  "PerkDescriptionsNamespace.PERK_S44P02_FlavorText_DESC": [
-    {
-      "Text": "Саляма маленька тебя меня",
-      "IsEditing": false,
-      "EnglishHighlights": [],
-      "RussianHighlights": [
-        {
-          "StartIndex": 9,
-          "Length": 9
-        }
-      ]
-    }
-  ],
-  "E0AD9C3A493904E6A2DCF4B8D3703E48": [
-    {
-      "Text": "ЗАХОДИТ ТРЕВОР К ДРАКУЛЕ и говорит: Сегодня ТЕБЯ не победить",
-      "IsEditing": false,
-      "EnglishHighlights": [],
-      "RussianHighlights": [
-        {
-          "StartIndex": 234,
-          "Length": 4
-        }
-      ]
-    }
-  ],
-  "PerkDescriptionsNamespace.PERK_S47P01_FlavorText_DESC": [
-    {
-      "Text": "Та же ошибка, что в оригинале",
-      "IsEditing": false,
-      "EnglishHighlights": [],
-      "RussianHighlights": []
-    }
-  ],
-  "PerkDescriptionsNamespace.PERK_S47P02_FlavorText_DESC": [
-    {
-      "Text": "Та же ошибка, что в оргинале",
-      "IsEditing": false,
-      "EnglishHighlights": [],
-      "RussianHighlights": []
-    }
-  ],
-  "PerkDescriptionsNamespace.PERK_S49P01_FlavorText_DESC": [
-    {
-      "Text": "такая же ошибка, что в оригинале",
-      "IsEditing": false,
-      "EnglishHighlights": [],
-      "RussianHighlights": []
-    }
-  ],
-  "PerkDescriptionsNamespace.PERK_S49P03_FlavorText_DESC": [
-    {
-      "Text": "Такая же ошибка, что в оригинале",
-      "IsEditing": false,
-      "EnglishHighlights": [],
-      "RussianHighlights": []
-    }
-  ],
-  "PerkDescriptionsNamespace.PERK_S50P03_FlavorText_DESC": [
-    {
-      "Text": "Такая же ошибка, что в оригинале",
-      "IsEditing": false,
-      "EnglishHighlights": [],
-      "RussianHighlights": []
-    }
-  ],
-  "PerkDescriptionsNamespace.PERK_S50P02_FlavorText_DESC": [
-    {
-      "Text": "оригинальная квота мне нравилась больше",
-      "IsEditing": false,
-      "EnglishHighlights": [],
-      "RussianHighlights": []
-    }
-  ],
-  "8AC697F449D222E2C38C149DCFAD9EBD": [
-    {
-      "Text": "Нахера тут нужен восклицательный знак",
-      "IsEditing": false,
-      "EnglishHighlights": [],
-      "RussianHighlights": []
     }
   ]
 }
