@@ -8673,6 +8673,17 @@
           "Length": 41
         }
       ]
+    },
+    {
+      "Text": "Добавлено Вечный",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3545,
+          "Length": 6
+        }
+      ]
     }
   ],
   "ST_GP_AddOns.ADDON_K43_01_NAME": [
@@ -19778,7 +19789,7 @@
       "RussianHighlights": []
     },
     {
-      "Text": "Тут больше Дуайт хотел принадлежать к какой-либо кампании, ведь он всегда был белой вороной. А кампания крутых детей - самая лучшая",
+      "Text": "Тут больше Дуайт хотел принадлежать к какой-либо компании, ведь он всегда был белой вороной. А компания крутых детей - самая лучшая",
       "IsEditing": false,
       "EnglishHighlights": [
         {
@@ -19810,7 +19821,7 @@
       ]
     },
     {
-      "Text": "Личного приготовления != His memory recipe",
+      "Text": "Личного приготовления != His family recipe",
       "IsEditing": false,
       "EnglishHighlights": [
         {
@@ -20961,40 +20972,6 @@
         }
       ],
       "RussianHighlights": []
-    },
-    {
-      "Text": "Оригинал: никто не знает, что он всё ещё имеет ту вещь, которую всегда хотел: сражения с врагом.",
-      "IsEditing": false,
-      "EnglishHighlights": [
-        {
-          "StartIndex": 745,
-          "Length": 80
-        }
-      ],
-      "RussianHighlights": [
-        {
-          "StartIndex": 730,
-          "Length": 101
-        }
-      ]
-    }
-  ],
-  "0F6DE6F84DFE466E811712B532DA0594": [
-    {
-      "Text": "Оригинал: жалит как ад. Перевод: Дико больно",
-      "IsEditing": false,
-      "EnglishHighlights": [
-        {
-          "StartIndex": 432,
-          "Length": 16
-        }
-      ],
-      "RussianHighlights": [
-        {
-          "StartIndex": 456,
-          "Length": 11
-        }
-      ]
     }
   ],
   "35035A704F9AF0E37BEA7F83B6D37140": [
@@ -25743,34 +25720,6 @@
       "RussianHighlights": []
     },
     {
-      "Text": "В этом моменте в оригинале Феликс всё ещё находится в процессе ступора, что перед ним может потенциально быть отец.",
-      "IsEditing": false,
-      "EnglishHighlights": [
-        {
-          "StartIndex": 6826,
-          "Length": 9
-        },
-        {
-          "StartIndex": 6836,
-          "Length": 13
-        },
-        {
-          "StartIndex": 6850,
-          "Length": 10
-        }
-      ],
-      "RussianHighlights": [
-        {
-          "StartIndex": 7198,
-          "Length": 11
-        },
-        {
-          "StartIndex": 7211,
-          "Length": 20
-        }
-      ]
-    },
-    {
       "Text": "В истории Элоди это не день, а уже вечер, так что можно сказать это ошибка",
       "IsEditing": false,
       "EnglishHighlights": [],
@@ -25895,22 +25844,6 @@
         {
           "StartIndex": 2189,
           "Length": 7
-        }
-      ]
-    },
-    {
-      "Text": "Оригинал: и даже отказывалась ложиться спать. Перевод: заставляли бояться самого сна",
-      "IsEditing": false,
-      "EnglishHighlights": [
-        {
-          "StartIndex": 2225,
-          "Length": 31
-        }
-      ],
-      "RussianHighlights": [
-        {
-          "StartIndex": 2320,
-          "Length": 29
         }
       ]
     },
@@ -27589,22 +27522,6 @@
       ]
     },
     {
-      "Text": "Минуты сомнений ≠ Every time - каждый раз. Из лора мы знаем, что она волновалась ВСЁ время из-за фестиваля и из-за кошмаров.",
-      "IsEditing": false,
-      "EnglishHighlights": [
-        {
-          "StartIndex": 5318,
-          "Length": 10
-        }
-      ],
-      "RussianHighlights": [
-        {
-          "StartIndex": 5419,
-          "Length": 15
-        }
-      ]
-    },
-    {
       "Text": "Бессилия ≠ Sleepless - бессонница",
       "IsEditing": false,
       "EnglishHighlights": [
@@ -28473,32 +28390,6 @@
       ]
     }
   ],
-  "8390197640F4B1348C439C9B12D6CA69": [
-    {
-      "Text": "Более правильный вариант перевода: Никогда не теряй надежду на светлое завтрашнее",
-      "IsEditing": false,
-      "EnglishHighlights": [
-        {
-          "StartIndex": 448,
-          "Length": 39
-        }
-      ],
-      "RussianHighlights": [
-        {
-          "StartIndex": 458,
-          "Length": 34
-        }
-      ]
-    }
-  ],
-  "PerkDescriptionsNamespace.PERK_S44P03_FlavorText_DESC": [
-    {
-      "Text": "Такой же момент",
-      "IsEditing": false,
-      "EnglishHighlights": [],
-      "RussianHighlights": []
-    }
-  ],
   "2E72C33F42F7A6C4F8501A952B0F4649": [
     {
       "Text": "Опущено ship",
@@ -29021,32 +28912,6 @@
       ]
     }
   ],
-  "5D57412F49D7E7DF925A85A06A694B92": [
-    {
-      "Text": "Надо же. Кое-что не меняется ≠ Well, then. Doesn't this feel familiar - Ну что ж. Знакомая ситуация, не правда ли?",
-      "IsEditing": false,
-      "EnglishHighlights": [
-        {
-          "StartIndex": 296,
-          "Length": 38
-        }
-      ],
-      "RussianHighlights": [
-        {
-          "StartIndex": 313,
-          "Length": 28
-        }
-      ]
-    }
-  ],
-  "PerkDescriptionsNamespace.PERK_S43P03_FlavorText_DESC": [
-    {
-      "Text": "Такая же ошибка, что в оригинале",
-      "IsEditing": false,
-      "EnglishHighlights": [],
-      "RussianHighlights": []
-    }
-  ],
   "1DAF58E14BFE3B28085D14885598D0B3": [
     {
       "Text": "Уже ничем не удивить ≠ Had done it all and seen it all - Делал всё и видил всё",
@@ -29117,17 +28982,6 @@
           "Length": 41
         }
       ]
-    },
-    {
-      "Text": "Опущено the film",
-      "IsEditing": false,
-      "EnglishHighlights": [
-        {
-          "StartIndex": 871,
-          "Length": 8
-        }
-      ],
-      "RussianHighlights": []
     },
     {
       "Text": "Опущено rocky - скалистый",
@@ -29237,40 +29091,17 @@
       ]
     }
   ],
-  "DDCF099B486AAB073D55A0B55640004A": [
-    {
-      "Text": "Вас приглашают участвовать в проектах за непревзойденное владение магией импровизации. ≠ When people bring you on to their project, they do so because of the unexpected magic you bring to your performance. - Когда вас приглашают в свой проект, это происходит из-за неожиданной магии, которую вы привносите в своё выступление.",
-      "IsEditing": false,
-      "EnglishHighlights": [
-        {
-          "StartIndex": 0,
-          "Length": 116
-        }
-      ],
-      "RussianHighlights": [
-        {
-          "StartIndex": 0,
-          "Length": 86
-        }
-      ]
-    }
-  ],
   "77AA6D644EFEE8B121C81D98A3E363D0": [
     {
-      "Text": "Вы обретаете связь с другой звездой, взаимодействуя с ней на более высоком уровне. ≠ You lock in with your co-star, engaging with and reacting to each other on a higher level. - Вы переходите в грубокий фокус со своим партнером по фильму, взаимодействуете и реагируете друг на друга на более высоком уровне.",
+      "Text": "Опущено reacting to",
       "IsEditing": false,
       "EnglishHighlights": [
         {
-          "StartIndex": 0,
-          "Length": 90
+          "StartIndex": 49,
+          "Length": 11
         }
       ],
-      "RussianHighlights": [
-        {
-          "StartIndex": 0,
-          "Length": 82
-        }
-      ]
+      "RussianHighlights": []
     }
   ],
   "D73202364E596C0EED9260B52AF9A71E": [
@@ -30077,22 +29908,6 @@
         {
           "StartIndex": 1511,
           "Length": 41
-        }
-      ]
-    },
-    {
-      "Text": "От нитей змеев ее руки покрывались царапинами ≠ To let the nicks on her hands heal - чтобы залечить царапины на руках.",
-      "IsEditing": false,
-      "EnglishHighlights": [
-        {
-          "StartIndex": 1846,
-          "Length": 34
-        }
-      ],
-      "RussianHighlights": [
-        {
-          "StartIndex": 1779,
-          "Length": 46
         }
       ]
     },
@@ -32025,17 +31840,6 @@
     }
   ],
   "E30B2B16452228131238FB8FAF8BF865": [
-    {
-      "Text": "Опущено the one",
-      "IsEditing": false,
-      "EnglishHighlights": [
-        {
-          "StartIndex": 457,
-          "Length": 7
-        }
-      ],
-      "RussianHighlights": []
-    },
     {
       "Text": "Опущено ever",
       "IsEditing": false,
@@ -35600,18 +35404,18 @@
   ],
   "CF5804644FAEB5E2CE40769CD25A728C": [
     {
-      "Text": "Игра слов: как бы глаз наполнен кровью и логично перевести его, как Кровавый. Однако такие глаза бывают у усталых людей, называя их покрасневшими",
+      "Text": "Игра слов: bloodshot eye - как бы и кровавый глаз, но может быть и красным, типа устали глазки и всё такое",
       "IsEditing": false,
       "EnglishHighlights": [
         {
           "StartIndex": 0,
-          "Length": 9
+          "Length": 13
         }
       ],
       "RussianHighlights": [
         {
           "StartIndex": 0,
-          "Length": 8
+          "Length": 13
         }
       ]
     }
@@ -38703,6 +38507,88 @@
           "Length": 4
         }
       ]
+    }
+  ],
+  "PerkDescriptionsNamespace.PERK_S44P02_FlavorText_DESC": [
+    {
+      "Text": "Саляма маленька тебя меня",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 9,
+          "Length": 9
+        }
+      ]
+    }
+  ],
+  "E0AD9C3A493904E6A2DCF4B8D3703E48": [
+    {
+      "Text": "ЗАХОДИТ ТРЕВОР К ДРАКУЛЕ и говорит: Сегодня ТЕБЯ не победить",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 234,
+          "Length": 4
+        }
+      ]
+    }
+  ],
+  "PerkDescriptionsNamespace.PERK_S47P01_FlavorText_DESC": [
+    {
+      "Text": "Та же ошибка, что в оригинале",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "PerkDescriptionsNamespace.PERK_S47P02_FlavorText_DESC": [
+    {
+      "Text": "Та же ошибка, что в оргинале",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "PerkDescriptionsNamespace.PERK_S49P01_FlavorText_DESC": [
+    {
+      "Text": "такая же ошибка, что в оригинале",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "PerkDescriptionsNamespace.PERK_S49P03_FlavorText_DESC": [
+    {
+      "Text": "Такая же ошибка, что в оригинале",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "PerkDescriptionsNamespace.PERK_S50P03_FlavorText_DESC": [
+    {
+      "Text": "Такая же ошибка, что в оригинале",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "PerkDescriptionsNamespace.PERK_S50P02_FlavorText_DESC": [
+    {
+      "Text": "оригинальная квота мне нравилась больше",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "8AC697F449D222E2C38C149DCFAD9EBD": [
+    {
+      "Text": "Нахера тут нужен восклицательный знак",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
     }
   ]
 }
