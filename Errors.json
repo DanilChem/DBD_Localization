@@ -18107,6 +18107,22 @@
       ]
     },
     {
+      "Text": "Опущено cloning hubs on Dvarka",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1514,
+          "Length": 22
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1561,
+          "Length": 12
+        }
+      ]
+    },
+    {
       "Text": "\"seemed ancient\" (казались/выглядели древними — субъективное восприятие) переведено как утвердительное \"были древними\" (were ancient) — потеря оттенка неопределённости/предположения.",
       "IsEditing": false,
       "EnglishHighlights": [
@@ -18193,6 +18209,22 @@
         {
           "StartIndex": 3063,
           "Length": 21
+        }
+      ]
+    },
+    {
+      "Text": "\"could hold no dominion\" (не могли иметь власти/господства — акцент на невозможности) переведено как \"не имели права\" (had no right) — смещение с констатации неспособности на юридическую категорию \"права\", разные оттенки.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3564,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3682,
+          "Length": 5
         }
       ]
     },
@@ -18882,6 +18914,22 @@
   ],
   "FA8CB7E64246382BA1D697A74A76627D": [
     {
+      "Text": "\"self-made\" (добившаяся всего сама, своими силами) переведено конкретизированно как \"собственным умом\" (by her own intelligence) — добавляет акцент именно на уме, которого нет явно в нейтральном \"self-made\".",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4,
+          "Length": 9
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 41,
+          "Length": 16
+        }
+      ]
+    },
+    {
       "Text": "\"schoolyard games\" (школьные игры в целом, необязательно спортивные) сужено до \"спортивных игр\" — небольшое сужение понятия.",
       "IsEditing": false,
       "EnglishHighlights": [
@@ -18894,6 +18942,22 @@
         {
           "StartIndex": 949,
           "Length": 14
+        }
+      ]
+    },
+    {
+      "Text": "\"keep her on the right track\" (удержать на правильном пути — общее руководство, необязательно про мораль) переведено как \"воспитать... хорошего человека\" (raise a good person) — сужение до морального аспекта.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 927,
+          "Length": 30
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1027,
+          "Length": 47
         }
       ]
     },
@@ -19087,6 +19151,22 @@
       ]
     },
     {
+      "Text": "\"investment wunderkind\" (специфический термин — вундеркинд в инвестициях) переведено описательно как \"гениальном подростке с деловой жилкой\" — теряется лаконичность конкретного термина.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3986,
+          "Length": 21
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4138,
+          "Length": 37
+        }
+      ]
+    },
+    {
       "Text": "\"gut\" (потрошила) переведено как \"перекупала\" (bought up) — теряется важная тематическая метафора потрошения, перекликающаяся с содержанием манги её отца (\"guts the weak\" из п.23). Разрыв сквозной метафорической линии текста.",
       "IsEditing": false,
       "EnglishHighlights": [
@@ -19238,6 +19318,30 @@
         {
           "StartIndex": 5790,
           "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "Лично мне экстрим-туры не говорит о чём-то серьёзном. Лучше бы называли турам на выживание",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5567,
+          "Length": 17
+        },
+        {
+          "StartIndex": 5633,
+          "Length": 15
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 5933,
+          "Length": 15
+        },
+        {
+          "StartIndex": 5952,
+          "Length": 15
         }
       ]
     },
@@ -19530,7 +19634,7 @@
   ],
   "2C92F3BD49A0D11A614B69A7EDCD3607": [
     {
-      "Text": "Импульсы != Strobes - Мигающий свет. Стробоскобы",
+      "Text": "Импульсы != Strobes - Мигающий свет",
       "IsEditing": false,
       "EnglishHighlights": [
         {
@@ -38401,6 +38505,663 @@
         {
           "StartIndex": 50,
           "Length": 4
+        }
+      ]
+    }
+  ],
+  "PerkDescriptionsNamespace.PERK_S44P02_FlavorText_DESC": [
+    {
+      "Text": "Саляма маленька тебя меня",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 9,
+          "Length": 9
+        }
+      ]
+    }
+  ],
+  "E0AD9C3A493904E6A2DCF4B8D3703E48": [
+    {
+      "Text": "ЗАХОДИТ ТРЕВОР К ДРАКУЛЕ и говорит: Сегодня ТЕБЯ не победить",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 234,
+          "Length": 4
+        }
+      ]
+    }
+  ],
+  "PerkDescriptionsNamespace.PERK_S47P01_FlavorText_DESC": [
+    {
+      "Text": "Та же ошибка, что в оригинале",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "PerkDescriptionsNamespace.PERK_S47P02_FlavorText_DESC": [
+    {
+      "Text": "Та же ошибка, что в оргинале",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "PerkDescriptionsNamespace.PERK_S49P01_FlavorText_DESC": [
+    {
+      "Text": "такая же ошибка, что в оригинале",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "PerkDescriptionsNamespace.PERK_S49P03_FlavorText_DESC": [
+    {
+      "Text": "Такая же ошибка, что в оригинале",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "PerkDescriptionsNamespace.PERK_S50P03_FlavorText_DESC": [
+    {
+      "Text": "Такая же ошибка, что в оригинале",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "PerkDescriptionsNamespace.PERK_S50P02_FlavorText_DESC": [
+    {
+      "Text": "оригинальная квота мне нравилась больше",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "8AC697F449D222E2C38C149DCFAD9EBD": [
+    {
+      "Text": "Нахера тут нужен восклицательный знак",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "137125CC4888E7874B390394DCD3056F": [
+    {
+      "Text": "Ед. число ≠ Мн. число",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 845,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 894,
+          "Length": 15
+        }
+      ]
+    },
+    {
+      "Text": "Уцелел ≠ Spared - Пощажён",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1656,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1720,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Ничем не подкрепленное ≠ Bare-faced - Наглое, бесстыдное",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2792,
+          "Length": 10
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2869,
+          "Length": 22
+        }
+      ]
+    },
+    {
+      "Text": "Родные ≠ Siblings - Братья и Сестры",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3228,
+          "Length": 8
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3394,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Опущен статус Авроры the Deceiver, хотя не особо страшно",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3308,
+          "Length": 12
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Рагни ≠ Ragnar - Рагнар",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3697,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3919,
+          "Length": 5
+        }
+      ]
+    },
+    {
+      "Text": "Не с большой буквы",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3944,
+          "Length": 3
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4160,
+          "Length": 3
+        }
+      ]
+    },
+    {
+      "Text": "Страдаем ≠ Strive - бьемся не покладая рук, прилагаем последние силы",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3210,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 3345,
+          "Length": 8
+        }
+      ]
+    },
+    {
+      "Text": "Преследуют ≠ Brought us low - повергли нас",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4466,
+          "Length": 14
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4724,
+          "Length": 10
+        }
+      ]
+    },
+    {
+      "Text": "Устраивающий ≠ In image",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4738,
+          "Length": 2
+        },
+        {
+          "StartIndex": 4752,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 5043,
+          "Length": 12
+        }
+      ]
+    },
+    {
+      "Text": "Engaging with означает действие — «взаимодействие с», «внимание к», «вслушивание в». Перевод же превратил это в существительное «слух» (молва/разговоры), что меняет смысл: ересью является не сам факт существования слуха, а именно внимание/реакция на него.",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4153,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4443,
+          "Length": 4
+        }
+      ]
+    }
+  ],
+  "FBD162C040BBE5108BDC72801DFDE5F1": [
+    {
+      "Text": "Будут изгнаны сразу ≠ Never escape ostracization - Никогда не избегут остракизма",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 37,
+          "Length": 26
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 33,
+          "Length": 19
+        }
+      ]
+    }
+  ],
+  "B0721E084A3A1BD22746FEA5633ADFCB": [
+    {
+      "Text": "Молящихся ≠ Prayer - Молитвы",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 20,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 17,
+          "Length": 9
+        }
+      ]
+    },
+    {
+      "Text": "Принимайте ≠ Suffer - Страдайте",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1,
+          "Length": 10
+        }
+      ]
+    }
+  ],
+  "BECD98444B85345223930D98FE83760C": [
+    {
+      "Text": "Ждём до 10.1.1",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "7C4832574584E0C859EE55B80C4839C3": [
+    {
+      "Text": "Ждём до 10.1.1",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "C69B55C541B1BB1B9D3BAAAD125F8CDF": [
+    {
+      "Text": "Ждём 10.1.1",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "11709A26477A133FB3EA0E9B27BCE9A6": [
+    {
+      "Text": "Ждём 10.1.1",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "6579509545B156A44D9791B98FC4FD9C": [
+    {
+      "Text": "Речь идёт о Гергардте, кто выколол глаза ради Правосудия. Поэтому это Повязка Преданного",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 10,
+          "Length": 14
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 8,
+          "Length": 9
+        }
+      ]
+    }
+  ],
+  "B8FA6BDB4B12E74E36F1ADAC2AE5980B": [
+    {
+      "Text": "Ждём 10.1.1",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "E5FA23CE47A19ED125353FA4DB5CDF22": [
+    {
+      "Text": "Ждём 10.1.1",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "387628AA4A612FA186933D9647D66DDE": [
+    {
+      "Text": "Ждём 10.1.1",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "B20818B44DEEE6ADD796A2A8A32CB6AD": [
+    {
+      "Text": "Ждём 10.1.1",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Свет с большой буквы, хотя должен быть с маленько",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 125,
+          "Length": 1
+        }
+      ]
+    }
+  ],
+  "8284AEDA4823FEF781EA36AF4D280573": [
+    {
+      "Text": "Ждём 10.1.1",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "BD3BA69E4760E27444E565B81EA59302": [
+    {
+      "Text": "Опущено rapturously",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Ждём 10.1.1",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "2A51F22844E5FF4F078ECD86F8BE0848": [
+    {
+      "Text": "Ждём 10.1.1",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "674A086F4E6D7E30C9C659AE2E7DA835": [
+    {
+      "Text": "Ждём 10.1.1",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "30BC6EDE48BE9C64BCEA24A79B128244": [
+    {
+      "Text": "Они с маленькой буквы, хотя должно быть с большой",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 5,
+          "Length": 4
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 11,
+          "Length": 3
+        }
+      ]
+    },
+    {
+      "Text": "Ждём 10.1.1",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "600121FF4E32D77894DC09A92EB86768": [
+    {
+      "Text": "Опущено And so",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": []
+    }
+  ],
+  "FAE817C04EAC580328A6B38C52F1C4B7": [
+    {
+      "Text": "Лишняя скобка",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": [
+        {
+          "StartIndex": 438,
+          "Length": 1
+        }
+      ]
+    },
+    {
+      "Text": "Оригинал: с большой буквы. Перевод: с маленькой",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 393,
+          "Length": 14
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 425,
+          "Length": 6
+        }
+      ]
+    },
+    {
+      "Text": "Подчинила своей власти ≠ Beheld - Узрела, увидела",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1041,
+          "Length": 6
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 994,
+          "Length": 22
+        }
+      ]
+    },
+    {
+      "Text": "Исповедание ≠ Declaration - Свидетельство Откровение Провозглашение",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 1245,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 1244,
+          "Length": 11
+        }
+      ]
+    },
+    {
+      "Text": "Животного ужаса ≠ Craven fear - Трусливого страха",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 2228,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 2387,
+          "Length": 15
+        }
+      ]
+    },
+    {
+      "Text": "опущено great hills - крутые холмы",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3195,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "опущено a great cloud",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 3923,
+          "Length": 13
+        }
+      ],
+      "RussianHighlights": []
+    },
+    {
+      "Text": "Исповедание ≠ Declaration - Свидетельство Откровение Провозглашение",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4146,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4426,
+          "Length": 11
+        }
+      ]
+    },
+    {
+      "Text": "Исповедание ≠ Declaration - Свидетельство Откровение Провозглашение",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 4634,
+          "Length": 11
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 4886,
+          "Length": 11
+        }
+      ]
+    },
+    {
+      "Text": "После истории убийцы и сюда добавили гл. однако в последнем предложении это не добавлено",
+      "IsEditing": false,
+      "EnglishHighlights": [],
+      "RussianHighlights": []
+    }
+  ],
+  "CA7BBFD14CD40A7797C052BAE6C98A92": [
+    {
+      "Text": "Судьба ≠ Faith",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 77,
+          "Length": 5
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 60,
+          "Length": 6
+        }
+      ]
+    }
+  ],
+  "24C8E98945AC24E814186F8E5C99C51C": [
+    {
+      "Text": "какая блин вершина холма хоспаде",
+      "IsEditing": false,
+      "EnglishHighlights": [
+        {
+          "StartIndex": 13,
+          "Length": 7
+        }
+      ],
+      "RussianHighlights": [
+        {
+          "StartIndex": 19,
+          "Length": 16
         }
       ]
     }
